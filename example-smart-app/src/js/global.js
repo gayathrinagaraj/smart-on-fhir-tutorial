@@ -21,53 +21,6 @@ function chartOld() {
 	myWindow.document.body.style.height ="800px";
 	myWindow.document.body.style.width ="1200px";
 
-//	myWindow.document.getElementsByTagName('title').innerHTML = "PRO Graph";
-	//console.log(Series1);
-	// Highcharts.chart(myWindow.document.body, {
-	// 	title: {
-	// 		text: 'Patient Reported Outcomes'
-	// 	},
-	// 	subtitle: {
-	// 		text: ''
-	// 	},
-	// 	yAxis: {
-	// 		tickInterval: 10,
-	// 		title: {
-	// 			text:'<p style=\" font-sixe: 16px\;\"><b>t-score</b></p>'
-	// 		},
-	// 		min:0,
-	// 		max:100
-	// 	},
-	// 	legend: {
-	// 		layout: 'vertical',
-	// 		align: 'right',
-	// 		verticalAlign: 'middle'
-	// 	},
-	// 	plotOptions: {
-	// 		series: {
-	// 			label: {
-	// 				connectorAllowed: false
-	// 			},
-	// 			pointStart: 2017
-	// 		}
-	// 	},
-	// 	series: Series1,
-	// 	responsive: {
-	// 		rules: [{
-	// 			condition: {
-	// 				maxWidth: 800,
-	// 				maxHeight: 900,    
-	// 			},
-	// 			chartOptions: {
-	// 				legend: {
-	// 					layout: 'horizontal',
-	// 					align: 'center',
-	// 					verticalAlign: 'bottom'
-	// 				}
-	// 			}
-	// 		}]
-	// 	}
-	// });
 }
 
 function chart() {
@@ -154,27 +107,7 @@ if(el){
 	
 	var prdata = "{\r\n\t\"resourceType\": \"ProcedureRequest\",\r\n\t\"status\": \"active\",\r\n\t\"intent\": \"order\",\r\n\t\"category\": [{\r\n\t\t\"coding\": [{\r\n\t\t\t\"system\": \"http://snomed.info/sct\",\r\n\t\t\t\"code\": \"386053000\",\r\n\t\t\t\"display\": \"Evaluation procedure (procedure)\"\r\n\t\t}],\r\n\t\t\"text\": \"Evaluation\"\r\n\t}],\r\n\t\"code\": {\r\n\t\t\"coding\": [{\r\n\t\t\t\"system\": \"http://loinc.org\",\r\n\t\t\t\"code\":  \""+sformoid+"\",\r\n\t\t\t\"display\":\""+sformname+"\"\r\n\t\t}],\r\n\t\t\"text\": \""+sformname+"\"\r\n\t},\r\n\t\"occurrenceDateTime\": \""+date1+"\",\r\n\t\"subject\": {\r\n\t\t\"display\": \""+pat_fname+" "+pat_lname+"\",\r\n        \"reference\": \"http://hl7.org/fhir/sid/us-ssn/Patient/"+patient_id+"\"\r\n\t},\r\n\t\"context\": {\r\n    \"reference\": \"http://usc.edu/Encounter/"+encounter_id+"\" \r\n  },\r\n\t\"requester\": {\r\n    \"agent\": {\r\n      \"reference\": \"http://usc.edu/Practitioner/"+practitioner_id+"\"\r\n    }\r\n\t}\r\n}";                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
 	console.log("print procedure request input" + prdata);
-	/*
 	
-	var settings301 = {
-  "async": true,
-  "crossDomain": true,
-  "url": "https://omnibus-dev.elimuinformatics.com/omnibus-api/api/v2/elimu/sapphire/fhir-resource-post/patient-doc-for-new-pro",
-  "method": "POST",
-  "headers": {
-    "Content-Type": "application/json",
-    "Accept": "**",
-    "Cache-Control": "no-cache"
-  },
-  "processData": false,
-  "data": prdata
-	}
-
-$.ajax(settings301).done(function (response) {
-  console.log(response);
-	console.log("Posted Doc Ref from Procedure Request");
-});
-	*/
 
 	
 	
@@ -378,95 +311,7 @@ function orderStatus() {
 		document.getElementById('pending_PRO').innerHTML += str;
 	});
 //	Pros completed
-/*
-	var settings32 = {
-			"async": false,
-			"crossDomain": false,
-			"url": baseurl+"ProcedureRequest?subject=https://fhir-open.sandboxcerner.com/dstu2/0b8a0111-e8e6-4c26-a91c-5069cbc6b1ca/Patient/"+patID+"&_count=100&status=completed&intent=order",
-			"cache" : false,
-			"method": "GET",
-			"headers": {
-				"Cache-Control": "no-cache"
-			}
-	}
-	$.ajax(settings32).done(function (response) {
-		//console.log("Completed");
-		//console.log(response);
-		var str="";
-		str = str +"<tr><th>Event Date Time</th><th>PROs Ordered</th><th>Status</th> <th>Results</th> <th>Ref Range</th> </tr>";
 
-		jQuery(response.entry).each(function(i, item){
-			//console.log(item.resource.code.text);
-			//console.log(item.resource.id);
-			//console.log(item.resource.occurrenceDateTime);
-
-			var settings1 = {
-					"async": false,
-					"crossDomain": false,
-					"url": baseurl+"Observation?based-on=ProcedureRequest/"+item.resource.id,
-					"cache" : false,  
-					"method": "GET",
-					"headers": {
-						"Cache-Control": "no-cache"
-					}
-			}
-			$.ajax(settings1).done(function (response) {
-				//console.log(response);
-				jQuery(response.entry).each(function(i, item){
-					//console.log(item.resource.valueQuantity.value);
-					res_score2 = item.resource.valueQuantity.value;
-					res_score1= res_score2.toPrecision(3);
-				});
-			});	
-
-			var msec = Date.parse(item.resource.occurrenceDateTime);
-			var d = new Date(msec);
-			var date1 = d.toLocaleString("en-US"); 
-			//var graphdate = date1.toString();
-			//var displaydate = graphdate.split(',')[0].toUTCString();			
-			
-			var proname1 = item.resource.code.text;
-			var score = parseFloat(res_score1);
-
-			var flag="";
-
-			var value = [msec,score];
-			
-			for(i=0;i<Series1.length;i++)
-			{
-				if (proname1 == Series1[i].key){
-					
-					Series1[i].values.push(value);
-					
-					flag="Y";	
-				}
-			}
-
-			if (flag !="Y" && proname1== "TBI-QOL Bank v1.0 - Anxiety")
-			{
-				let temp ={
-						key  : proname1,
-						values : [value] };
-
-				Series1.push(temp);
-			}
-			
-		
-			flag="";   
-
-			str = str +"<tr><td>" +date1+"</td>";
-			str = str +"<td>"+proname1 +"</td>";
-			str = str +"<td>Completed</td>";
-			str = str +"<td><a href =\'#\' onclick=\'chart();return false;'>"+res_score1+"</a></td><td> 1 - 100</td> </tr>";
-
-		});
-
-		document.getElementById('t02').innerHTML += str;
-	});
-	
-	
-	
-	*/
 	
 	var datatoday = new Date();
 	var datatodays = datatoday.setDate(new Date(datatoday).getDate() + 1);
@@ -590,15 +435,6 @@ console.log("test chart values");
 //Flow for the patient app
 
 
-
-//var global_asmtOID;
-//var datefin;
-//var Server = "https://www.assessmentcenter.net/ac_api";
-//var ItemResponseOID = "";   
-//var Response = "";  
-//var assessmentOID;	
-//var FormOID;		
-//var FormOID ="80C5D4A3-FC1F-4C1B-B07E-10B796CF8105";
 
 var Server = "https://mss.fsm.northwestern.edu/AC_API";
 var formOID;
@@ -743,11 +579,7 @@ function displist()
 
 function assignValues(task_Id,pro_Id,pro_Name,pat_Name,encounterId,practitionerId)
 {
-	//console.log(task_Id);
-	//console.log(pro_Id);
-	//console.log(pro_Name);
-	//console.log(pat_Name);
-	//console.log(patID);					
+					
 
 	taskId = task_Id;
 	proId = pro_Id;
@@ -928,15 +760,7 @@ function nextQuestion(linkId,valueString,system,code,display,text,tempOID)
 		
 		str +='</table>';
 		
-		/*
-		var xhtml_temp1= getxhtml(QRjson);	
-		var ts_temp1 = "t-score : "+ tscore;
-		var d_temp1 ="finishedTime </b> : " + date1 ;
-		var temp1= xhtml_temp1.replace("t-score",ts_temp1);
-		var temp2= temp1.replace("<table></table>", str);
-		var temp3= temp2.replace("finishedTime</b>", d_temp1);
 		
-		*/
 		var temp2= html01.replace("<table></table>", str);
 		
 		
@@ -1010,11 +834,7 @@ function displayQuestionnaire(QR, formOID){
 			screen += "<div style=\'height: 50px; font-style: italic; font-size: 24px; margin-left:3em;\'>" + data.contained[0].item[0].item[0].text+ "</div>";
 			
 			jQuery(data.contained[0].item[0].item[0].answerOption).each(function(i, item){
-			//console.log(item.modifierExtension[0].valueString);
-			//console.log(item.text);
-			//console.log(item.valueCoding.code);
-			//console.log(item.valueCoding.display);
-			//console.log(item.valueCoding.system);
+			
 			
 			var valueString = item.modifierExtension[0].valueString;
 			var text = item.text;
@@ -1033,16 +853,7 @@ function displayQuestionnaire(QR, formOID){
 			//console.log(data.contained[0].item[0].item[1].answerOption);
 			
 			}
-			//var temp1 = JSON.parse(tmp);
-			//var temp = JSON.parse(JSON.stringify(data)); 
-			//var temp = data.toString();
 			
-			//console.log("work");
-			//console.log(temp);
-			//console.log(data.contained[0].item[0].item[0].text);
-			//console.log(data.contained[0].item[0].item[1].text);
-			//console.log("disp question ID");
-			//console.log(data.contained[0].item[0].linkId);
 			
 			else {
 			var linkId = data.contained[0].item[0].linkId;
@@ -1050,11 +861,7 @@ function displayQuestionnaire(QR, formOID){
 			screen += "<div style=\'height: 50px; font-style: italic; font-size: 24px; margin-left:3em;\'>" + data.contained[0].item[0].item[0].text + " "+ data.contained[0].item[0].item[1].text+"</div>";
 			
 			jQuery(data.contained[0].item[0].item[1].answerOption).each(function(i, item){
-			//console.log(item.modifierExtension[0].valueString);
-			//console.log(item.text);
-			//console.log(item.valueCoding.code);
-			//console.log(item.valueCoding.display);
-			//console.log(item.valueCoding.system);
+			
 			
 			var valueString = item.modifierExtension[0].valueString;
 			var text = item.text;
@@ -1120,26 +927,7 @@ displayQuestionnaire (initialQR,formOID);
 //setVariables(formOID,formName,date1);
 
 
-//old code
 
-/*
-function startTask(taskId){
-	var settings = {
-			"async": true,
-			"crossDomain": true,
-			"url": "https://sapphire-demo.meliorix.com/dev/cds-hook-api/api/v1/cds-task/"+taskId+"/start",
-			"method": "POST",
-			"headers": {
-				"userId": patID,
-				"Cache-Control": "no-cache",
-				"Postman-Token": "db0f09f2-afff-45ff-9a20-1d2d05bea38c"
-			}
-	}
-	$.ajax(settings).done(function (response) {
-		console.log(response);
-		console.log("task started");
-	});		
-} */
 
 
 
