@@ -471,7 +471,7 @@ function orderStatus() {
 
 	$.ajax({
 		
-		url: "https://fhir-open.sandboxcerner.com/dstu2/0b8a0111-e8e6-4c26-a91c-5069cbc6b1ca/DocumentReference?patient="+patID+"&created=ge2019-04-10&created=le"+ todayDate,
+		url: "https://fhir-open.sandboxcerner.com/dstu2/0b8a0111-e8e6-4c26-a91c-5069cbc6b1ca/DocumentReference?patient="+patID+"&created=ge2019-06-01&created=le"+ todayDate,
 		cache: false,
 		type: "GET",
 		beforeSend: function(xhr) {
@@ -484,6 +484,8 @@ function orderStatus() {
 		success: function(data) { 
 
 			console.log(data);
+			
+			console.log("Read Doc Ref");
 
 
 			
