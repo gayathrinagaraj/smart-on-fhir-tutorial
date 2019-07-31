@@ -4,7 +4,7 @@ var pat_fname="";
 var pat_lname="";
 var gender2="";
 var dobstr2="";
-var baseurl="https://sapphire-demo.meliorix.com/cipfhir3/baseDstu3/";
+var baseurl="https://fhir3-stage.elimuinformatics.com/baseDstu3/";
 //https://sapphire-demo.meliorix.com/cipfhir3/baseDstu3/  
 //var baseurl ="http://hapi.fhir.org/baseDstu3/";
 var taskId,proId,proName,patId,patName;	
