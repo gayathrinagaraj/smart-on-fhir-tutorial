@@ -104,7 +104,7 @@ function chart() {
 
 		//TODO: Figure out a good way to do this automatically
 		nv.utils.windowResize(chart.update);
-		chart.tooltip.enabled(false);
+	
 		return chart;
 	});
 	
