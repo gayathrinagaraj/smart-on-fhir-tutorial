@@ -86,7 +86,7 @@ function chart() {
 		.y(function(d) { return d[1] }) 
 		.margin({right: 90})
 		.margin({left: 90}) 
-		.margin({bottom: 100}) 
+		.margin({bottom: 80}) 
 		.color(d3.scale.category10().range())
 		.useInteractiveGuideline(true);
 
