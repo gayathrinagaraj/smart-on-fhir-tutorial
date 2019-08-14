@@ -492,8 +492,8 @@ function orderStatus() {
 			jQuery(data.entry).each(function(i, item){
 				console.log(item);
 				
-				
-					//console.log("completed pro list" + item);
+				console.log("completed pro list");
+					console.log( item);
 				
 				console.log (item.resource.type.text);
 				var temp = item.resource.type.text;
