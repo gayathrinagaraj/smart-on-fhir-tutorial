@@ -20,54 +20,6 @@ function chartOld() {
 	var myWindow = window.open("", "MsgWindow", "width=1400,height=1200");
 	myWindow.document.body.style.height ="800px";
 	myWindow.document.body.style.width ="1200px";
-
-//	myWindow.document.getElementsByTagName('title').innerHTML = "PRO Graph";
-	//console.log(Series1);
-	// Highcharts.chart(myWindow.document.body, {
-	// 	title: {
-	// 		text: 'Patient Reported Outcomes'
-	// 	},
-	// 	subtitle: {
-	// 		text: ''
-	// 	},
-	// 	yAxis: {
-	// 		tickInterval: 10,
-	// 		title: {
-	// 			text:'<p style=\" font-sixe: 16px\;\"><b>t-score</b></p>'
-	// 		},
-	// 		min:0,
-	// 		max:100
-	// 	},
-	// 	legend: {
-	// 		layout: 'vertical',
-	// 		align: 'right',
-	// 		verticalAlign: 'middle'
-	// 	},
-	// 	plotOptions: {
-	// 		series: {
-	// 			label: {
-	// 				connectorAllowed: false
-	// 			},
-	// 			pointStart: 2017
-	// 		}
-	// 	},
-	// 	series: Series1,
-	// 	responsive: {
-	// 		rules: [{
-	// 			condition: {
-	// 				maxWidth: 800,
-	// 				maxHeight: 900,    
-	// 			},
-	// 			chartOptions: {
-	// 				legend: {
-	// 					layout: 'horizontal',
-	// 					align: 'center',
-	// 					verticalAlign: 'bottom'
-	// 				}
-	// 			}
-	// 		}]
-	// 	}
-	// });
 }
 
 function chart() {
@@ -484,16 +436,6 @@ console.log("test chart values");
 //Flow for the patient app
 
 
-
-//var global_asmtOID;
-//var datefin;
-//var Server = "https://www.assessmentcenter.net/ac_api";
-//var ItemResponseOID = "";   
-//var Response = "";  
-//var assessmentOID;	
-//var FormOID;		
-//var FormOID ="80C5D4A3-FC1F-4C1B-B07E-10B796CF8105";
-
 var Server = "https://mss.fsm.northwestern.edu/AC_API";
 var formOID;
 var formName;
@@ -855,16 +797,7 @@ function displayQuestionnaire(QR, formOID){
 			//console.log(data.contained[0].item[0].item[1].answerOption);
 			
 			}
-			//var temp1 = JSON.parse(tmp);
-			//var temp = JSON.parse(JSON.stringify(data)); 
-			//var temp = data.toString();
 			
-			//console.log("work");
-			//console.log(temp);
-			//console.log(data.contained[0].item[0].item[0].text);
-			//console.log(data.contained[0].item[0].item[1].text);
-			//console.log("disp question ID");
-			//console.log(data.contained[0].item[0].linkId);
 			
 			else {
 			var linkId = data.contained[0].item[0].linkId;
@@ -872,11 +805,6 @@ function displayQuestionnaire(QR, formOID){
 			screen += "<div style=\'height: 50px; font-style: italic; font-size: 24px; margin-left:3em;\'>" + data.contained[0].item[0].item[0].text + " "+ data.contained[0].item[0].item[1].text+"</div>";
 			
 			jQuery(data.contained[0].item[0].item[1].answerOption).each(function(i, item){
-			//console.log(item.modifierExtension[0].valueString);
-			//console.log(item.text);
-			//console.log(item.valueCoding.code);
-			//console.log(item.valueCoding.display);
-			//console.log(item.valueCoding.system);
 			
 			var valueString = item.modifierExtension[0].valueString;
 			var text = item.text;
@@ -939,29 +867,7 @@ displayQuestionnaire (initialQR,formOID);
 };
 	
 	
-//setVariables(formOID,formName,date1);
 
-
-//old code
-
-/*
-function startTask(taskId){
-	var settings = {
-			"async": true,
-			"crossDomain": true,
-			"url": "https://sapphire-demo.meliorix.com/dev/cds-hook-api/api/v1/cds-task/"+taskId+"/start",
-			"method": "POST",
-			"headers": {
-				"userId": patID,
-				"Cache-Control": "no-cache",
-				"Postman-Token": "db0f09f2-afff-45ff-9a20-1d2d05bea38c"
-			}
-	}
-	$.ajax(settings).done(function (response) {
-		console.log(response);
-		console.log("task started");
-	});		
-} */
 
 
 
