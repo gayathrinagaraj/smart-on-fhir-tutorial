@@ -154,26 +154,7 @@ if(el){
 	
 	var prdata = "{\r\n\t\"resourceType\": \"ProcedureRequest\",\r\n\t\"status\": \"active\",\r\n\t\"intent\": \"order\",\r\n\t\"category\": [{\r\n\t\t\"coding\": [{\r\n\t\t\t\"system\": \"http://snomed.info/sct\",\r\n\t\t\t\"code\": \"386053000\",\r\n\t\t\t\"display\": \"Evaluation procedure (procedure)\"\r\n\t\t}],\r\n\t\t\"text\": \"Evaluation\"\r\n\t}],\r\n\t\"code\": {\r\n\t\t\"coding\": [{\r\n\t\t\t\"system\": \"http://loinc.org\",\r\n\t\t\t\"code\":  \""+sformoid+"\",\r\n\t\t\t\"display\":\""+sformname+"\"\r\n\t\t}],\r\n\t\t\"text\": \""+sformname+"\"\r\n\t},\r\n\t\"occurrenceDateTime\": \""+date1+"\",\r\n\t\"subject\": {\r\n\t\t\"display\": \""+pat_fname+" "+pat_lname+"\",\r\n        \"reference\": \"http://hl7.org/fhir/sid/us-ssn/Patient/"+patient_id+"\"\r\n\t},\r\n\t\"context\": {\r\n    \"reference\": \"http://usc.edu/Encounter/"+encounter_id+"\" \r\n  },\r\n\t\"requester\": {\r\n    \"agent\": {\r\n      \"reference\": \"http://usc.edu/Practitioner/"+practitioner_id+"\"\r\n    }\r\n\t}\r\n}";                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
 	console.log("print procedure request input" + prdata);
-	/*
-	
-	var settings301 = {
-  "async": true,
-  "crossDomain": true,
-  "url": "https://omnibus-dev.elimuinformatics.com/omnibus-api/api/v2/elimu/sapphire/fhir-resource-post/patient-doc-for-new-pro",
-  "method": "POST",
-  "headers": {
-    "Content-Type": "application/json",
-    "Accept": "**",
-    "Cache-Control": "no-cache"
-  },
-  "processData": false,
-  "data": prdata
-	}
-$.ajax(settings301).done(function (response) {
-  console.log(response);
-	console.log("Posted Doc Ref from Procedure Request");
-});
-	*/
+
 
 	
 	
@@ -376,86 +357,7 @@ function orderStatus() {
 		});		
 		document.getElementById('pending_PRO').innerHTML += str;
 	});
-//	Pros completed
-/*
-	var settings32 = {
-			"async": false,
-			"crossDomain": false,
-			"url": baseurl+"ProcedureRequest?subject=https://fhir-open.sandboxcerner.com/dstu2/0b8a0111-e8e6-4c26-a91c-5069cbc6b1ca/Patient/"+patID+"&_count=100&status=completed&intent=order",
-			"cache" : false,
-			"method": "GET",
-			"headers": {
-				"Cache-Control": "no-cache"
-			}
-	}
-	$.ajax(settings32).done(function (response) {
-		//console.log("Completed");
-		//console.log(response);
-		var str="";
-		str = str +"<tr><th>Event Date Time</th><th>PROs Ordered</th><th>Status</th> <th>Results</th> <th>Ref Range</th> </tr>";
-		jQuery(response.entry).each(function(i, item){
-			//console.log(item.resource.code.text);
-			//console.log(item.resource.id);
-			//console.log(item.resource.occurrenceDateTime);
-			var settings1 = {
-					"async": false,
-					"crossDomain": false,
-					"url": baseurl+"Observation?based-on=ProcedureRequest/"+item.resource.id,
-					"cache" : false,  
-					"method": "GET",
-					"headers": {
-						"Cache-Control": "no-cache"
-					}
-			}
-			$.ajax(settings1).done(function (response) {
-				//console.log(response);
-				jQuery(response.entry).each(function(i, item){
-					//console.log(item.resource.valueQuantity.value);
-					res_score2 = item.resource.valueQuantity.value;
-					res_score1= res_score2.toPrecision(3);
-				});
-			});	
-			var msec = Date.parse(item.resource.occurrenceDateTime);
-			var d = new Date(msec);
-			var date1 = d.toLocaleString("en-US"); 
-			//var graphdate = date1.toString();
-			//var displaydate = graphdate.split(',')[0].toUTCString();			
-			
-			var proname1 = item.resource.code.text;
-			var score = parseFloat(res_score1);
-			var flag="";
-			var value = [msec,score];
-			
-			for(i=0;i<Series1.length;i++)
-			{
-				if (proname1 == Series1[i].key){
-					
-					Series1[i].values.push(value);
-					
-					flag="Y";	
-				}
-			}
-			if (flag !="Y" && proname1== "TBI-QOL Bank v1.0 - Anxiety")
-			{
-				let temp ={
-						key  : proname1,
-						values : [value] };
-				Series1.push(temp);
-			}
-			
-		
-			flag="";   
-			str = str +"<tr><td>" +date1+"</td>";
-			str = str +"<td>"+proname1 +"</td>";
-			str = str +"<td>Completed</td>";
-			str = str +"<td><a href =\'#\' onclick=\'chart();return false;'>"+res_score1+"</a></td><td> 1 - 100</td> </tr>";
-		});
-		document.getElementById('t02').innerHTML += str;
-	});
-	
-	
-	
-	*/
+
 	
 	var datatoday = new Date();
 	var datatodays = datatoday.setDate(new Date(datatoday).getDate() + 1);
@@ -471,7 +373,8 @@ function orderStatus() {
 
 	$.ajax({
 		
-		url: "https://fhir-open.sandboxcerner.com/dstu2/0b8a0111-e8e6-4c26-a91c-5069cbc6b1ca/DocumentReference?patient="+patID+"&created=ge2019-04-01&created=le"+ todayDate+"&_count=23&_limit=23",
+		//url: "https://fhir-open.sandboxcerner.com/dstu2/0b8a0111-e8e6-4c26-a91c-5069cbc6b1ca/DocumentReference?patient="+patID+"&created=ge2019-04-01&created=le"+ todayDate+"&_count=23&_limit=23",
+		url: "https://fhir-open.cerner.com/dstu2/e8a84236-c258-4952-98b7-a6ff8a9c587a/DocumentReference?patient="+patID+"&created=ge2019-04-01&created=le"+ todayDate+"&_count=23&_limit=23",
 		cache: false,
 		type: "GET",
 		beforeSend: function(xhr) {
@@ -636,79 +539,7 @@ $.ajax(settings).done(function (response) {
 	
 }
 
-function postDocRef(desc,b64xhtml){
-	
-	
-	var d = new Date();
-	var date1= ISODateString(d); 
 
-	$.ajax({
-		
-		url: "https://authorization.sandboxcerner.com/tenants/0b8a0111-e8e6-4c26-a91c-5069cbc6b1ca/protocols/oauth2/profiles/smart-v1/token",
-		cache: false,
-		type: "POST",
-		data: {
-    "grant_type": "client_credentials",
-    "scope": "system/Patient.read system/DocumentReference.read system/DocumentReference.write"},
-		dataType: "json",
-		beforeSend: function(xhr) {
-			//var username = "2F984419-5008-4E42-8210-68592B418233";
-			//var pass = "21A673E8-9498-4DC2-AAB6-07395029A778";
-			//var Token = "MkY5ODQ0MTktNTAwOC00RTQyLTgyMTAtNjg1OTJCNDE4MjMzOjIxQTY3M0U4LTk0OTgtNERDMi1BQUI2LTA3Mzk1MDI5QTc3OA==";
-
-			//var base64 = btoa(username + ":" + pass);
-			xhr.setRequestHeader("Authorization", "Basic MmZmOTQ0ZWMtNGJjNy00MTc3LWEwYTMtZDJiNTAyNDM1ZWExOnpFdjZ0cGNmZXNza1p2QmZybE9vb2E4U1hicVVPNHdD");
-		},
-		success: function(data) { 
-
-			console.log(data);
-			console.log("dr test");
-			var token = data.access_token;
-			console.log(data.access_token);
-			
-						$.ajax({
-		
-								url: "https://fhir-myrecord.sandboxcerner.com/dstu2/0b8a0111-e8e6-4c26-a91c-5069cbc6b1ca/DocumentReference",
-								cache: false,
-								type: "POST",
-								data: "\t\t\t\t\t\t\t\t\t\t\t\t\t\t{\n  \"resourceType\": \"DocumentReference\",\n  \"subject\": {\n    \"reference\": \"Patient/"+patID+"\"\n  },\n  \"type\": {\n    \"coding\": [\n      {\n        \"system\": \"http://loinc.org\",\n        \"code\": \"34133-9\"\n      }\n    ]\n  },\n  \"author\": [\n    {\n      \"reference\": \"Practitioner/605926\"\n    }\n  ],\n  \"indexed\": \""+date1+"\",\n  \"status\": \"current\",\n  \"docStatus\": {\n    \"coding\": [\n      {\n        \"system\": \"http://hl7.org/fhir/composition-status\",\n        \"code\": \"final\"\n      }\n    ]\n  },\n  \"description\": \""+desc+"\",\n  \"content\": [\n    {\n      \"attachment\": {\n        \"contentType\": \"application/xhtml+xml;charset=utf-8\",\n        \"data\": \""+b64xhtml+"\"\n      }\n    }\n  ],\n  \"context\": {\n    \"encounter\": {\n      \"reference\": \"Encounter/4269906\"\n    },\n    \"period\": {\n      \"end\": \""+date1+"\"\n    }\n  }\n}",
-								dataType: "application/json+fhir",
-								beforeSend: function(xhr) {
-									//var username = "2F984419-5008-4E42-8210-68592B418233";
-									//var pass = "21A673E8-9498-4DC2-AAB6-07395029A778";
-									//var Token = "MkY5ODQ0MTktNTAwOC00RTQyLTgyMTAtNjg1OTJCNDE4MjMzOjIxQTY3M0U4LTk0OTgtNERDMi1BQUI2LTA3Mzk1MDI5QTc3OA==";
-
-									//var base64 = btoa(username + ":" + pass);
-									xhr.setRequestHeader("Authorization", "Bearer " + token);
-									xhr.setRequestHeader("Accept", "application/json+fhir");
-									xhr.setRequestHeader("Content-Type", "application/json+fhir");
-									
-								},
-								success: function(data) { 
-
-									console.log(data);
-									
-								},
-
-								error: function(jqXHR, textStatus, errorThrown) {
-									//document.write(jqXHR.responseText + ':' + textStatus + ':' + errorThrown);
-										//console.log(jqXHR.responseText);
-								}
-							});
-			
-			
-			
-			
-
-		},
-
-		error: function(jqXHR, textStatus, errorThrown) {
-			document.write(jqXHR.responseText + ':' + textStatus + ':' + errorThrown);
-				//console.log(jqXHR.responseText);
-		}
-	});
-
-}
 
 
 function displayQ(){
