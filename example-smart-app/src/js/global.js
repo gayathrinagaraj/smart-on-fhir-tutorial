@@ -99,13 +99,13 @@ if(el){
 	//console.log("patid :  " + window.patient_id);
 	//console.log("fname : " + window.pat_fname);
 	//console.log("lname : " + window.pat_lname);	
-	  console.log("inside prdata ");    
-	console.log(practitioner_id);  
-	console.log(encounter_id)
+	  //console.log("inside prdata ");    
+	//console.log(practitioner_id);  
+	//console.log(encounter_id)
 	//var prdata = "{\n\t\"resourceType\": \"ProcedureRequest\",\n\t\"status\": \"active\",\n\t\"intent\": \"order\",\n\t\"category\": [{\n\t\t\"coding\": [{\n\t\t\t\"system\": \"http://snomed.info/sct\",\n\t\t\t\"code\": \"386053000\",\n\t\t\t\"display\": \"Evaluation procedure (procedure)\"\n\t\t}],\n\t\t\"text\": \"Evaluation\"\n\t}],\n\t\"code\": {\n\t\t\"coding\": [{\n\t\t\t\"system\": \"http://loinc.org\",\n\t\t\t\"code\": \""+sformoid+"\",\n\t\t\t\"display\": \""+sformname+"\"\n\t\t}],\n\t\t\"text\": \""+sformname+"\"\n\t},\n\t\"occurrenceDateTime\": \""+date1+"\",\n\t\"subject\": {\n\t\t\"display\": \""+pat_fname+" "+pat_lname+"\",\n        \"reference\": \"http://hl7.org/fhir/sid/us-ssn/Patient/"+patient_id+"\"\n\t},\r\n\t\"encounter\": {\r\n   \"reference\": \"4269906\"\r\n },\r\n     \"orderer\": {\r\n     \"reference\": \"4464007\"\r\n }\r\n} \r\n"
 	
 	var prdata = "{\r\n\t\"resourceType\": \"ProcedureRequest\",\r\n\t\"status\": \"active\",\r\n\t\"intent\": \"order\",\r\n\t\"category\": [{\r\n\t\t\"coding\": [{\r\n\t\t\t\"system\": \"http://snomed.info/sct\",\r\n\t\t\t\"code\": \"386053000\",\r\n\t\t\t\"display\": \"Evaluation procedure (procedure)\"\r\n\t\t}],\r\n\t\t\"text\": \"Evaluation\"\r\n\t}],\r\n\t\"code\": {\r\n\t\t\"coding\": [{\r\n\t\t\t\"system\": \"http://loinc.org\",\r\n\t\t\t\"code\":  \""+sformoid+"\",\r\n\t\t\t\"display\":\""+sformname+"\"\r\n\t\t}],\r\n\t\t\"text\": \""+sformname+"\"\r\n\t},\r\n\t\"occurrenceDateTime\": \""+date1+"\",\r\n\t\"subject\": {\r\n\t\t\"display\": \""+pat_fname+" "+pat_lname+"\",\r\n        \"reference\": \"http://hl7.org/fhir/sid/us-ssn/Patient/"+patient_id+"\"\r\n\t},\r\n\t\"context\": {\r\n    \"reference\": \"http://usc.edu/Encounter/"+encounter_id+"\" \r\n  },\r\n\t\"requester\": {\r\n    \"agent\": {\r\n      \"reference\": \"http://usc.edu/Practitioner/"+practitioner_id+"\"\r\n    }\r\n\t}\r\n}";                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
-	console.log("print procedure request input" + prdata);
+	//console.log("print procedure request input" + prdata);
 
 
 	
@@ -125,8 +125,8 @@ if(el){
 	}
 	$.ajax(settings).done(function (response) {
 		//console.log("pro-test");
-		console.log(response);
-		console.log("Posted Procedure Request");
+		//console.log(response);
+		//console.log("Posted Procedure Request");
 		orderStatus();
 		document.getElementById('order_unsuccessful').style.display = "none";
 		document.getElementById('order_successful').innerHTML = success_message;		
@@ -274,8 +274,8 @@ function orderStatus() {
 			}
 	}
 	$.ajax(settings31).done(function (response) {
-		console.log(response);
-		console.log("test");
+		//console.log(response);
+		//console.log("test");
 		document.getElementById('pending_PRO').innerHTML="";
 		//console.log(patID);
 		var str="";
@@ -292,8 +292,8 @@ function orderStatus() {
 			var msec = Date.parse(item.resource.occurrenceDateTime);
 			var d = new Date(msec);
 			var date1 = d.toLocaleString("en-US"); 
-			console.log("pending list");
-			console.log(date1);
+			//console.log("pending list");
+			//console.log(date1);
 			
 			var task_id= item.resource.id;
 
@@ -314,11 +314,11 @@ function orderStatus() {
 	var datatoday = new Date();
 	var datatodays = datatoday.setDate(new Date(datatoday).getDate() + 1);
 	var todate = new Date(datatodays);
-	console.log(todate);
+	//console.log(todate);
 	var todayDate = todate.toISOString().slice(0,10);
-	console.log(todayDate);
+	//console.log(todayDate);
 	
-	console.log(patID +"test");
+	//console.log(patID +"test");
 	document.getElementById('t02').innerHTML="";
 	var str="";
 	str = str +"<tr><th>Event Date Time</th><th>PROs Ordered</th><th>Status</th> <th>Results</th> <th>Ref Range</th> </tr>";
@@ -338,22 +338,20 @@ function orderStatus() {
 		},
 		success: function(data) { 
 
-			console.log(data);
+			//console.log(data);
 			
-			console.log("Read Doc Ref");
+			//console.log("Read Doc Ref");
 
 
 			
 			jQuery(data.entry).each(function(i, item){
-				console.log(item);
-				
-				console.log("completed pro list");
-					console.log( item);
-				
-				console.log (item.resource.type.text);
+				//console.log(item);
+				//console.log("completed pro list");
+				//console.log( item);
+				//console.log (item.resource.type.text);
 				var temp = item.resource.type.text;
-			var str3 = item.resource.description;
-				console.log(str3);
+			        var str3 = item.resource.description;
+				//console.log(str3);
 				if (temp == "PROMIS Patient Response"){
 					if (str3.includes("t-score")) {
 						
@@ -368,13 +366,13 @@ function orderStatus() {
 						var str1= item.resource.description;
 						var proname = str1.slice(0,(str1.length-13));
 
-						console.log(score);
-						console.log(proname);
+						//console.log(score);
+						//console.log(proname);
 						var msec = Date.parse(item.resource.meta.lastUpdated);
 						var d = new Date(msec);
 						var date1 = d.toLocaleString("en-US");
-						console.log(msec);
-						console.log(date1);	
+						//console.log(msec);
+						//console.log(date1);	
 				var flag="";
 
 			var value = [msec,score];
@@ -431,8 +429,8 @@ listForms();
 //formDetails(FormOID);
 prorecommend();
 
-console.log(Series1);
-console.log("test chart values");
+//console.log(Series1);
+//console.log("test chart values");
 //Flow for the patient app
 
 
@@ -472,7 +470,7 @@ function patientPostDR (QRjson,desc){
 	}
 
 $.ajax(settings).done(function (response) {
-  console.log("New A2D2 service");
+  //console.log("New A2D2 service");
 	console.log(response);
 	
 	
@@ -612,22 +610,22 @@ function nextQuestion(linkId,valueString,system,code,display,text,tempOID)
 	//console.log(counter);
 	}
 	else {
-	console.log(QRjson);
-	console.log(JSON.stringify(QRjson));
+	//console.log(QRjson);
+	//console.log(JSON.stringify(QRjson));
 	//console.log(QRjson.extension[2].extension[0].valueDecimal);
 	var theta = QRjson.extension[2].extension[0].valueDecimal;
 	var tscore = (theta * 10) + 50;
 	//console.log (tscore);	
-	console.log(QRjson.contained[0].title);
-	console.log(QRjson.extension[1].valueDate);
+	//console.log(QRjson.contained[0].title);
+	//console.log(QRjson.extension[1].valueDate);
 		var desc = QRjson.contained[0].title + ", t-score :"+ tscore;
 		var date01 = QRjson.extension[1].valueDate;
 		
 		var msec = Date.parse(QRjson.extension[1].valueDate);
 		var d = new Date();
 		var date1 = d.toLocaleString("en-US");
-		console.log(msec);
-		console.log(date1);
+		//console.log(msec);
+		//console.log(date1);
 		
 		var questions=[];
 		var answers_temp=[];
@@ -637,7 +635,7 @@ function nextQuestion(linkId,valueString,system,code,display,text,tempOID)
 		 
      
 	jQuery(QRjson.contained[0].item).each(function(i, item){
-		console.log(item);
+		//console.log(item);
 		if  (item.item.length==1){
 			
 			questions[i] = item.item[0].text;
@@ -658,13 +656,13 @@ function nextQuestion(linkId,valueString,system,code,display,text,tempOID)
 	});
 		
 		answers = answers_temp.reverse();
-		console.log(questions);
-		console.log(answers);
-		console.log(linkIds);
+		//console.log(questions);
+		//console.log(answers);
+		//console.log(linkIds);
 		
-		console.log(pat_fname);
-		console.log(pat_lname);
-		console.log(patName);
+		//console.log(pat_fname);
+		//console.log(pat_lname);
+		//console.log(patName);
 		
 
     		var html01 ='';
@@ -709,8 +707,8 @@ function nextQuestion(linkId,valueString,system,code,display,text,tempOID)
 		//console.log(b64xhtml);
 		var myJSON_01 = JSON.stringify(QRjson);
 		//postDocRef(desc,b64xhtml);
-		console.log("Encounter" + patEncounterId);
-		console.log("Practitioner"+ patPractitionerId);
+		//console.log("Encounter" + patEncounterId);
+		//console.log("Practitioner"+ patPractitionerId);
 		 patientPostDR (myJSON_01,desc)
 	document.getElementById("Content").innerHTML = "You have finished the assessment.<br /> Thank you ! <div style=\'height: 50px\' ><button type=\'button\' class='button button6'  onclick=displist() > Back </button></div>";
 	completeProcess(taskId,proId,proName,patId,patName);
@@ -723,10 +721,10 @@ function nextQuestion(linkId,valueString,system,code,display,text,tempOID)
 
 function displayQuestionnaire(QR, formOID){
 	
-	console.log(QR);
+	//console.log(QR);
 	var myjson01 = JSON.stringify(QR);
 	
-	console.log(myjson01);
+	//console.log(myjson01);
 	
 	
 
@@ -887,8 +885,8 @@ function displayList(){
 			"method": "GET"
 	}
 	$.ajax(settings3).done(function (response) {
-		console.log(response);
-		console.log("test");
+		//console.log(response);
+		//console.log("test");
 		// console.log(response.entry);
 
 		var str="";
@@ -920,8 +918,8 @@ function displayList(){
 			var practitionerId = item.resource.requester.agent.reference;
 			practitionerId = practitionerId.substring(practitionerId.lastIndexOf("/") + 1);
 			
-			console.log(encounterId);
-			console.log(practitionerId);
+			//console.log(encounterId);
+			//console.log(practitionerId);
 			//console.log(pro_name);
 			//console.log(task_id);
 			//console.log(pat_name);
@@ -937,8 +935,8 @@ function displayList(){
 			var pat_id= temp.substr(-7); 
 			
 				
-			console.log("pending list");
-			console.log(date);
+			//console.log("pending list");
+			//console.log(date);
 			
 			
 			if(pro_name){
