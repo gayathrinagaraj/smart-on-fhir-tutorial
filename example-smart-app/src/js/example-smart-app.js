@@ -15,10 +15,16 @@
       console.log('Loading error', arguments);
       ret.reject();
     }
-  
 
     function onReady(smart)  {
-      console.log(smart.tokenResponse);
+    	console.log(smart.tokenResponse); 
+    	authenticate(smart.tokenResponse, function(response){
+    		localStorage.setItem("easipro_token", response.result.easipro_token)
+    	}, function(err){
+    		console.log("Error from easipro ========> " + err);
+    	}
+    )
+
 	  if (smart.tokenResponse.patient!=null){
         patID=smart.tokenResponse.patient;
 		MyVars.patid= smart.tokenResponse.patient;
