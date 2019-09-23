@@ -277,6 +277,12 @@ table#pending_PRO td,th {
 		color:white;
 		}
 		
+		#sessionexp-header{
+		max-width: 100%;
+        	height :100px;
+		background: linear-gradient(to bottom, #2F99D5 0%, #1169A8 100%);
+		color:white;
+		}
 		.btn-submit {
 				background-color: #0079BE; 
 				border: none;
