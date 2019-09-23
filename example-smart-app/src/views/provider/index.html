@@ -32,7 +32,7 @@
 	
 	
 </head>
-<body>
+<body onload="pageload();">
 	
 
 <header hidden id = "doctor-view-head">
@@ -273,6 +273,7 @@
 		});
 	</script>
 	<script>
+	function pageload() {
 	function manage(selectinput) {
         var bt = document.getElementById('submitButton');
         if (selectinput.value != '') {
@@ -281,7 +282,8 @@
         else {
             bt.disabled = true;
         }
-    }    
+   	}    
+	}
 	</script>
 
 	<!-- jquery for tab selction and animation -->
