@@ -282,6 +282,9 @@ table#pending_PRO td,th {
         	height :100px;
 		background: linear-gradient(to bottom, #2F99D5 0%, #1169A8 100%);
 		color:white;
+	        margin-left:1em; 
+		text-align: left; 
+		font-size: 28px;
 		}
 		.btn-submit {
 				background-color: #0079BE; 
