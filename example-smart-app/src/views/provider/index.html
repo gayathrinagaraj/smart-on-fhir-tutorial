@@ -276,7 +276,8 @@
 	
 	function manage(selectinput) {
         var bt = document.getElementById('submitButton');
-        if (selectinput.value != '') {
+	var input = document.getElementById('selectinput').value;
+        if (input != '') {
             bt.disabled = false;
         }
         else {
