@@ -124,19 +124,7 @@
       }
     );
     
-    function writeToFile(d1, d2){
-    var fso = new ActiveXObject("Scripting.FileSystemObject");
-    var fh = fso.OpenTextFile("../../../src/log.txt", 8, false, 0);
-    fh.WriteLine(d1 + ',' + d2);
-    fh.Close();
-  }
 
-  var temp1;
-  var temp2;
-  temp1 = "test";
-  temp2 = "write";
-
-  writeToFile(temp1, temp2);
     
     
     
