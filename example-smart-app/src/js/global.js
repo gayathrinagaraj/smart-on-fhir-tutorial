@@ -207,7 +207,7 @@ function prorecommend() {
 	var settings = {
 			"async": true,
 			"crossDomain": true,
-			"url": "https://sapphire-demo.meliorix.com/cds-hook-api/api/v1/cds-services/pro-recommend",
+			"url": "https://sapphire-stage.elimuinformatics.com/omnibus/api/v2/usc/sapphire/cds-services/pro-recommend-usc",
 			"method": "POST",
 			"headers": {
 				"Content-Type": "application/json",
