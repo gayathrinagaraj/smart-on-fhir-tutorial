@@ -427,7 +427,7 @@ function orderStatus() {
 
 listForms();
 //formDetails(FormOID);
-prorecommend();
+//prorecommend();
 
 //console.log(Series1);
 //console.log("test chart values");
