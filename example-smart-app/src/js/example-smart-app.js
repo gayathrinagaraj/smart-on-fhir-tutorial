@@ -5,6 +5,7 @@
     var persona="";
     var patID="";
     var encounter_id="";
+var access_token="";
 
   
  
@@ -33,7 +34,7 @@
 	console.log(practitioner_id);  
 	console.log(encounter_id);  
       var token = smart.tokenResponse.id_token;
-      var access_token= smart.tokenResponse.access_token;
+      access_token= smart.tokenResponse.access_token;
       console.log(patID);
 	   
       //document.getElementById("pract_id").innerHTML="<b>ID: </b>" + practitioner_id;
