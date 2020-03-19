@@ -459,6 +459,8 @@ function ISODateString(d) {
 }
 
 function patientPostDR (QRjson,desc){
+	postQR(QRjson);
+	console.log("posting final QR to Hapi FHIR Server");
 	
 	var settings = {
   "async": true,
@@ -477,6 +479,7 @@ function patientPostDR (QRjson,desc){
 $.ajax(settings).done(function (response) {
   //console.log("New A2D2 service");
 	console.log(response);
+	
 	
 	
 });
@@ -553,6 +556,7 @@ function completeProcess(taskId,proId,proName,patId,patName){
 	}
 	$.ajax(settings).done(function (response) {
 		console.log(response);
+		console.log("complete process response");
 	});
 }
 
@@ -578,6 +582,28 @@ function postScore(taskId,proId,proName,patId,patName,tscore){
 
 }
 
+
+function postQR(QRjson){
+	var date1 =new Date(new Date().toString().split('GMT')[0]+' UTC').toISOString().split('.')[0];
+	var settings = {
+			"async": true,
+			"crossDomain": true,
+			"url": baseurl+"QuestionnaireResponse",
+			"method": "POST",
+			"headers": {
+				"Content-Type": "application/json",
+				"Cache-Control": "no-cache"
+			},
+			"processData": false,
+			"data": QRjson
+	}
+	$.ajax(settings).done(function (response) {
+		console.log(response);
+		console.log("Posting the final QR resource to Hapi");
+	});
+
+
+}
 
 
 
