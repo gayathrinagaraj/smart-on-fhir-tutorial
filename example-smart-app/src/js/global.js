@@ -552,7 +552,10 @@ function completeProcess(taskId,proId,proName,patId,patName){
 			"headers": {
 				"Content-Type": "application/json",
 				"Cache-Control": "no-cache",
-				"Access-Control-Allow-Origin":"*"
+				"Access-Control-Allow-Origin":"*",
+                                "Access-Control-Allow-Methods" :"GET, POST, PUT, OPTIONS",
+                                "Content-Type" :"text/plain; charset=utf-8",
+                                "Access-Control-Allow-Headers":"DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,expires,pragma"
 			},
 			"processData": false,
 			"data": "{\n\t\"resourceType\": \"ProcedureRequest\",\n\t\"id\": \""+taskId+"\",\n\t\"status\": \"completed\",\n\t\"intent\": \"order\",\n\t\"category\": [{\n\t\t\"coding\": [{\n\t\t\t\"system\": \"http://snomed.info/sct\",\n\t\t\t\"code\": \"386053000\",\n\t\t\t\"display\": \"Evaluation procedure (procedure)\"\n\t\t}],\n\t\t\"text\": \"Evaluation\"\n\t}],\n\t\"code\": {\n\t\t\"coding\": [{\n\t\t\t\"system\": \"http://loinc.org\",\n\t\t\t\"code\": \""+proId+"\",\n\t\t\t\"display\": \""+proName+"\"\n\t\t}],\n\t\t\"text\": \""+proName+"\"\n\t},\n\t\"occurrenceDateTime\": \""+date1+"\",\n\t\"subject\": {\n\t\t\"display\": \""+patName+"\",\n        \"reference\": \"https://fhir-open.sandboxcerner.com/dstu2/0b8a0111-e8e6-4c26-a91c-5069cbc6b1ca/Patient/"+patId+"\"\n\t}\n} \n"
@@ -596,7 +599,11 @@ function postQR(QRjson){
 			"headers": {
 				"Content-Type": "application/json",
 				"Cache-Control": "no-cache",
-				"Access-Control-Allow-Origin":"*"
+				"Access-Control-Allow-Origin":"*",
+				       "Access-Control-Allow-Methods" :"GET, POST, PUT, OPTIONS",
+                                "Content-Type" :"text/plain; charset=utf-8",
+                                "Access-Control-Allow-Headers":"DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,expires,pragma"
+			
 			},
 			"processData": false,
 			"data": QRjson
