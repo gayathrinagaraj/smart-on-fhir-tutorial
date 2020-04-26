@@ -116,7 +116,7 @@ if(el){
 			"crossDomain": true,
 			"url": baseurl+"ProcedureRequest",
 			"method": "POST",
-			"contentType" : "application/json"
+			"contentType" : "application/json",
 			//"headers": {
 			//	"Content-Type": "application/json",
 			//	"Cache-Control": "no-cache"
