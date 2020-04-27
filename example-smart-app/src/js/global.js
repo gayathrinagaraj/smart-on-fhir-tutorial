@@ -550,10 +550,11 @@ function completeProcess(taskId,proId,proName,patId,patName){
 			"crossDomain": true,
 			"url": baseurl+"ProcedureRequest/"+taskId,
 			"method": "PUT",
-			"headers": {
-				"Content-Type": "application/json",
-				"Cache-Control": "no-cache"
-			},
+			"contentType" : "application/json",
+			//"headers": {
+			//	"Content-Type": "application/json",
+			//	"Cache-Control": "no-cache"
+			//},
 			"processData": false,
 			"data": "{\n\t\"resourceType\": \"ProcedureRequest\",\n\t\"id\": \""+taskId+"\",\n\t\"status\": \"completed\",\n\t\"intent\": \"order\",\n\t\"category\": [{\n\t\t\"coding\": [{\n\t\t\t\"system\": \"http://snomed.info/sct\",\n\t\t\t\"code\": \"386053000\",\n\t\t\t\"display\": \"Evaluation procedure (procedure)\"\n\t\t}],\n\t\t\"text\": \"Evaluation\"\n\t}],\n\t\"code\": {\n\t\t\"coding\": [{\n\t\t\t\"system\": \"http://loinc.org\",\n\t\t\t\"code\": \""+proId+"\",\n\t\t\t\"display\": \""+proName+"\"\n\t\t}],\n\t\t\"text\": \""+proName+"\"\n\t},\n\t\"occurrenceDateTime\": \""+date1+"\",\n\t\"subject\": {\n\t\t\"display\": \""+patName+"\",\n        \"reference\": \"https://fhir-open.sandboxcerner.com/dstu2/0b8a0111-e8e6-4c26-a91c-5069cbc6b1ca/Patient/"+patId+"\"\n\t}\n} \n"
 	}
@@ -571,10 +572,11 @@ function postScore(taskId,proId,proName,patId,patName,tscore){
 			"crossDomain": true,
 			"url": baseurl+"Observation",
 			"method": "POST",
-			"headers": {
-				"Content-Type": "application/json",
-				"Cache-Control": "no-cache"
-			},
+			"contentType" : "application/json",
+			//"headers": {
+			//	"Content-Type": "application/json",
+			//	"Cache-Control": "no-cache"
+			//},
 			"processData": false,
 			"data": "{\n\t\"resourceType\": \"Observation\",\n\t\"status\": \"final\",\n\t\"code\": {\n    \t\"coding\": [\n    \t\t{\n        \t\t\"system\": \"http://loinc.org\",\n\t\t        \"code\": \"77580-9\",\n\t\t        \"display\": \""+proName+" T-score\"\n    \t\t}\n    \t]\n\t},\n\t\"category\": [{\n    \t\"coding\": [{\n        \t\"system\": \"http://hl7.org/fhir/observation-category\",\n        \t\"code\": \"survey\",\n        \t\"display\": \"Survey\"\n        }]\n    }],\n\t\"subject\": {\n\t\t\"display\": \""+patName+"\",\n        \"reference\": \"https://fhir-open.sandboxcerner.com/dstu2/0b8a0111-e8e6-4c26-a91c-5069cbc6b1ca/Patient/"+patId+"\"\n\t},\n\t\"effectiveDateTime\": \""+date1+"\",\n\t\"issued\": \""+date1+"\",\n\t\"performer\": [\n    \t{\n\t\t\t\"display\": \""+patName+"\",\n        \t\"reference\": \"https://fhir-open.sandboxcerner.com/dstu2/0b8a0111-e8e6-4c26-a91c-5069cbc6b1ca/Patient/"+patId+"\"\n\t    }\n\t],\n\t\"valueQuantity\": {\n    \t\"value\": "+tscore+"\n     \n\t},\n\n\t\"basedOn\":\t{\n\t\t\"reference\": \"ProcedureRequest/"+taskId+"\"\n\t}\n} \n"
 	}
@@ -593,10 +595,11 @@ function postQR(QRjson){
 			"crossDomain": true,
 			"url": baseurl+"QuestionnaireResponse",
 			"method": "POST",
-			"headers": {
-				"Content-Type": "application/json",
-				"Cache-Control": "no-cache"
-			},
+			"contentType" : "application/json",
+			//"headers": {
+			//	"Content-Type": "application/json",
+			//	"Cache-Control": "no-cache"
+			//},
 			"processData": false,
 			"data": QRjson
 	}
