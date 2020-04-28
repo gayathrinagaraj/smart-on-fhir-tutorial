@@ -93,7 +93,7 @@ if(el){
 	return;
 	}
 	
-	document.getElementById('selectinput').value = '';
+	
 	  
 	var date1 =new Date(new Date().toString().split('GMT')[0]+' UTC').toISOString().split('.')[0];
 	//console.log(date1);
@@ -134,6 +134,7 @@ if(el){
 		document.getElementById('order_successful').innerHTML = success_message;		
 	});
 	  });
+	document.getElementById('selectinput').value = '';
 }
 
 
