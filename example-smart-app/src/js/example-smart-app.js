@@ -5,7 +5,8 @@
     var persona="";
     var patID="";
     var encounter_id="";
-var access_token="";
+    var access_token="";
+    var smartObject="";
 
   
  
@@ -20,6 +21,8 @@ var access_token="";
   
 
     function onReady(smart)  {
+      smartObject=smart;
+      getKeycloakToken();
       console.log(smart.tokenResponse);
 	  if (smart.tokenResponse.patient!=null){
         patID=smart.tokenResponse.patient;
