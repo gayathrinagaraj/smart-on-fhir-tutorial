@@ -27,7 +27,7 @@ var proPostObjectDemo= {
 
 function getformData(formID){
 	$.ajax({
-		url: "https://mss.fsm.northwestern.edu/AC_API/2018-10/Questionnaire/"+formID,
+		url: baseurl_AC_API+"2018-10/Questionnaire/"+formID,
 
 		cache: false,
 		type: "GET",
@@ -58,7 +58,7 @@ function getformData(formID){
 function postformData(){
 	
 	$.ajax({
-		url: "https://mss.fsm.northwestern.edu/AC_API/2018-10/Questionnaire/"+globalFormId+"/next-q",
+		url: baseurl_AC_API+"2018-10/Questionnaire/"+globalFormId+"/next-q",
 
 		cache: false,
 		type: "POST",

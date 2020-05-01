@@ -159,7 +159,7 @@ if(el){
 var form_oid=[];
 var form_name=[];
 
-var Server = "https://mss.fsm.northwestern.edu/AC_API";
+//var server="https://calv-easiprox.med.usc.edu/ac";
 var FormOID = "96FE494D-F176-4EFB-A473-2AB406610626";  // Sample form -- replace with your FormOID
 var promisUID="001";
 
@@ -170,7 +170,7 @@ function callback1(data){
 function listForms() {
 	$.ajax({
 		//url: Server + "/2014-01/Forms/.json",
-		url: Server + "/2018-10/Questionnaire?_Summary",
+		url: baseurl_AC_API + "2018-10/Questionnaire?_Summary",
 		cache: false,
 		type: "GET",
 		// data: "",
@@ -462,7 +462,7 @@ listForms();
 //Flow for the patient app
 
 
-var Server = "https://mss.fsm.northwestern.edu/AC_API";
+//var Server = "https://calv-easiprox.med.usc.edu/ac";
 var formOID;
 var formName;
 var answer_item =[];
@@ -792,7 +792,7 @@ function displayQuestionnaire(QR, formOID){
 	var temp =null;
 	$.ajax({
 		
-		url: "https://mss.fsm.northwestern.edu/AC_API/2018-10/Questionnaire/"+formOID+"/next-q",
+		url: baseurl_AC_API+"2018-10/Questionnaire/"+formOID+"/next-q",
 		cache: false,
 		async:false,
 		type: "POST",
@@ -909,7 +909,7 @@ var initialQR = {
 "resourceType": "Questionnaire",
 "id": formOID, 
 "meta": {"versionId": "1","lastUpdated": "2014-11-14T10:03:25","profile": ["http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-adapt"]},
-"url":"https://mss.fsm.northwestern.edu/ac_api/2018-10/Questionnaire/"+formOID,
+"url":baseurl_AC_API+"2018-10/Questionnaire/"+formOID,
 "title":formName,
 "status": "active",
 "date": date,
