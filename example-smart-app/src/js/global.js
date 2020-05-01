@@ -909,7 +909,7 @@ var initialQR = {
 "resourceType": "Questionnaire",
 "id": formOID, 
 "meta": {"versionId": "1","lastUpdated": "2014-11-14T10:03:25","profile": ["http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-adapt"]},
-"url":baseurl_AC_API+"2018-10/Questionnaire/"+formOID,
+"url":"https://mss.fsm.northwestern.edu/ac_api/2018-10/Questionnaire/"+formOID,
 "title":formName,
 "status": "active",
 "date": date,
