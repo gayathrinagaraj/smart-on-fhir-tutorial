@@ -177,7 +177,7 @@ function listForms() {
 		dataType: "json",
 		beforeSend: function(xhr) {
 			var username = "08B2BC59-54F7-4A8A-8FC8-28B20D04B909";
-			var pass = "2B794E66E-287E-44BF-9C82-31E3703B502C";
+			var pass = "B794E66E-287E-44BF-9C82-31E3703B502C";
 			//var Token = "MkY5ODQ0MTktNTAwOC00RTQyLTgyMTAtNjg1OTJCNDE4MjMzOjIxQTY3M0U4LTk0OTgtNERDMi1BQUI2LTA3Mzk1MDI5QTc3OA==";
 
 			var base64 = btoa(username + ":" + pass);
