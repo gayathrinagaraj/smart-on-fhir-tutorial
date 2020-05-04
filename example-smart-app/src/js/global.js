@@ -135,7 +135,6 @@ if(el){
 	});
 	  });
 	document.getElementById('selectinput').value = '';
-	location.reload();
 	
 	
 }
