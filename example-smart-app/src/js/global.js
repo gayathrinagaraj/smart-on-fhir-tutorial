@@ -924,9 +924,9 @@ function displayList(){
 			"method": "GET"
 	}
 	$.ajax(settings3).done(function (response) {
-		//console.log(response);
-		//console.log("test");
-		// console.log(response.entry);
+		console.log(response);
+		console.log("test");
+		 console.log(response.entry);
 
 		var str="";
 
