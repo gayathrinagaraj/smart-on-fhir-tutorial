@@ -270,7 +270,7 @@ function orderStatus() {
 			"crossDomain": true,
 			"url": baseurl+"ProcedureRequest?subject=http://hl7.org/fhir/sid/us-ssn/Patient/"+patID+"&_count=20&intent=order&status=active&_lastUpdated%3E=2019-06-15T00:00:00&_sort:desc=_lastUpdated",
 			"contentType" : "application/json",                                                                           
-			//"cache" : false,
+			"cache" : false,
 			"method": "GET",
 			//"headers": {
 			//	"Content-Type": "application/json",
@@ -920,7 +920,7 @@ function displayList(){
 			"async": false,
 			"crossDomain": true,
 			"url": baseurl+"ProcedureRequest?subject=http://hl7.org/fhir/sid/us-ssn/Patient/"+patID+"&_count=20&intent=order&status=active",
-		
+			"cache":false,
 			"method": "GET"
 	}
 	$.ajax(settings3).done(function (response) {
