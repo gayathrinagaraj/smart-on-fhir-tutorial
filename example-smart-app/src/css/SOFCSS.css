@@ -193,10 +193,10 @@ table#pending_PRO td,th {
 	text-align: center;
 	text-decoration: none;
 	display: inline-block;
-	font-size: 16px;
+	font-size: 18px;
 	margin: 8px 2px;
 	cursor: pointer;
-	width: 900px;
+	width: 500px;
 	height: 60px;
 	white-space: normal;
 	word-wrap: break-word;
@@ -288,12 +288,23 @@ table#pending_PRO td,th {
 		text-align: left; 
 		font-size: 28px;
 		}
-		
-			
+		.btn-submit {
+				background-color: #0079BE; 
+				border: none;
+				color: white;
+				padding: 5px;
+				text-align: center;
+				text-decoration: none;
+				display: inline-block;
+				font-size: 20px;
+				margin: 8px 2px;
+				cursor: pointer;
+				
+				height: 40px;
+				}
+				
 		
 			
 
 					
 				
-	
-
