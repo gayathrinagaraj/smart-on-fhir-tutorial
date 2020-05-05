@@ -193,11 +193,13 @@ table#pending_PRO td,th {
 	text-align: center;
 	text-decoration: none;
 	display: inline-block;
-	font-size: 20px;
+	font-size: 18px;
 	margin: 8px 2px;
 	cursor: pointer;
 	width: 500px;
-	height: 40px;
+	height: 60px;
+	white-space: normal;
+	word-wrap: break-word;
 }
 
 .button6 {border-radius: 4px;width: 200px; }
