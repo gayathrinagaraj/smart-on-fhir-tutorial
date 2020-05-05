@@ -926,6 +926,7 @@ function displayList(){
 	$.ajax(settings3).done(function (response) {
 		console.log(response);
 		console.log("test");
+		console.log(response.total);
 		 console.log(response.entry);
 
 		var str="";
@@ -933,7 +934,7 @@ function displayList(){
 		str = str+ "<div class=\'row\'>	<div id=\'new\' class=\'col-12 col-lg-12 col-md-12 col-sm-12 col-xs-12\'></br>";
 		
 		
-		if(response.entry.length!=0){
+		if(response.total!=0){
 		str = str+ "<P style=\'margin-left:1em; text-align: left; padding: 10px; \'><b>List of Questionnaires available for you</b></P>	</div></div>";
                 
 		str = str+ "<div id=\'tabhead\' class=\'row\' style=\'text-align: left; font-weight: bold; padding-top: 20px; \'>";
