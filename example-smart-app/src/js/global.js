@@ -135,8 +135,6 @@ if(el){
 	});
 	  });
 	document.getElementById('selectinput').value = '';
-	
-	
 }
 
 
@@ -270,7 +268,7 @@ function orderStatus() {
 	var settings31 = {
 			"async": false,
 			"crossDomain": true,
-			"url": baseurl+"ProcedureRequest?subject=http://hl7.org/fhir/sid/us-ssn/Patient/"+patID+"&_count=20&intent=order&status=active&_lastUpdated%3E=2020-03-01T00:00:00&_sort:desc=_lastUpdated",
+			"url": baseurl+"ProcedureRequest?subject=http://hl7.org/fhir/sid/us-ssn/Patient/"+patID+"&_count=20&intent=order&status=active&_lastUpdated%3E=2019-06-15T00:00:00&_sort:desc=_lastUpdated",
 			"contentType" : "application/json",                                                                           
 			//"cache" : false,
 			"method": "GET",
@@ -335,8 +333,7 @@ function orderStatus() {
 		//url: "https://fhir-open.sandboxcerner.com/dstu2/0b8a0111-e8e6-4c26-a91c-5069cbc6b1ca/DocumentReference?patient="+patID+"&created=ge2019-04-01&created=le"+ todayDate+"&_count=23&_limit=23",
 		//https://fhir-ehr.cerner.com/dstu2/e8a84236-c258-4952-98b7-a6ff8a9c587a/DocumentReference?patient=4342008&created=ge2019-04-01&created=le2019-12-02
 		//https://fhir-myrecord.cerner.com/dstu2/e8a84236-c258-4952-98b7-a6ff8a9c587a/DocumentReference?patient=12668019&created=ge2020-01-01&created=le2020-02-11
-		//url: "https://fhir-myrecord.cerner.com/dstu2/e8a84236-c258-4952-98b7-a6ff8a9c587a/DocumentReference?patient="+patID+"&created=ge2019-04-01&created=le"+ todayDate+"&_count=23&_limit=23",
-		url: "https://fhir-ehr.sandboxcerner.com/dstu2/724d00f8-4a37-487d-82a6-822a906b86c2/DocumentReference?patient="+patID+"&created=ge2019-04-01&created=le"+ todayDate+"&_count=23&_limit=23",
+		url: "https://fhir-myrecord.cerner.com/dstu2/e8a84236-c258-4952-98b7-a6ff8a9c587a/DocumentReference?patient="+patID+"&created=ge2019-04-01&created=le"+ todayDate+"&_count=23&_limit=23",
 		cache: false,
 		type: "GET",
 		beforeSend: function(xhr) {
@@ -927,7 +924,7 @@ function displayList(){
 			"method": "GET"
 	}
 	$.ajax(settings3).done(function (response) {
-		console.log(response);
+		//console.log(response);
 		//console.log("test");
 		// console.log(response.entry);
 
@@ -1000,8 +997,6 @@ function displayList(){
 	});
 
 }
-
-
 
 
 
