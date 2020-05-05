@@ -26,6 +26,7 @@ var access_token="";
 		MyVars.patid= smart.tokenResponse.patient;
 	  	  console.log(patID);
 		    displayList();
+		  console.log("test from ex-sm-app");
       }
       
       practitioner_id = smart.tokenResponse.user;
