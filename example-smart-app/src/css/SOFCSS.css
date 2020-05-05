@@ -196,7 +196,7 @@ table#pending_PRO td,th {
 	font-size: 18px;
 	margin: 8px 2px;
 	cursor: pointer;
-	width: 900px;
+	width: 500px;
 	height: 60px;
 	white-space: normal;
 	word-wrap: break-word;
@@ -216,7 +216,7 @@ table#pending_PRO td,th {
 				font-size: 24px;
 			  }
 			  .btn-submit {
-			  width:900px;
+			  width:500px;
 			  }
 			  
 			  #tabhead {
@@ -242,7 +242,7 @@ table#pending_PRO td,th {
 			width : 100%;
 				}
 			  .btn-submit {
-			  width:900px;
+			  width:500px;
 			  }
 			  
 			  #tabhead {
@@ -299,7 +299,7 @@ table#pending_PRO td,th {
 	font-size: 18px;
 	margin: 8px 2px;
 	cursor: pointer;
-	width: 900px;
+	width: 500px;
 	height: 60px;
 	white-space: normal;
 	word-wrap: break-word;
