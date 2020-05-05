@@ -196,8 +196,7 @@ table#pending_PRO td,th {
 	font-size: 18px;
 	margin: 8px 2px;
 	cursor: pointer;
-	width: 500px;
-	height: 60px;
+	
 	white-space: normal;
 	word-wrap: break-word;
 }
@@ -215,9 +214,7 @@ table#pending_PRO td,th {
 			  #header1 {
 				font-size: 24px;
 			  }
-			  .btn-submit {
-			  width:500px;
-			  }
+			  
 			  
 			  #tabhead {
 				font-size: 24px;
@@ -241,9 +238,7 @@ table#pending_PRO td,th {
 			  #pat-header{
 			width : 100%;
 				}
-			  .btn-submit {
-			  width:500px;
-			  }
+			 
 			  
 			  #tabhead {
 				font-size: 16px;
@@ -299,8 +294,7 @@ table#pending_PRO td,th {
 	font-size: 18px;
 	margin: 8px 2px;
 	cursor: pointer;
-	width: 500px;
-	height: 60px;
+	
 	white-space: normal;
 	word-wrap: break-word;
 				}
