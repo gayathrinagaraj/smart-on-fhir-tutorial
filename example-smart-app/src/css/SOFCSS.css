@@ -290,17 +290,19 @@ table#pending_PRO td,th {
 		}
 		.btn-submit {
 				background-color: #0079BE; 
-				border: none;
-				color: white;
-				padding: 5px;
-				text-align: center;
-				text-decoration: none;
-				display: inline-block;
-				font-size: 20px;
-				margin: 8px 2px;
-				cursor: pointer;
-				
-				height: 40px;
+	border: none;
+	color: white;
+	padding: 5px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 18px;
+	margin: 8px 2px;
+	cursor: pointer;
+	width: 500px;
+	height: 60px;
+	white-space: normal;
+	word-wrap: break-word;
 				}
 				
 		
