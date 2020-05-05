@@ -268,11 +268,11 @@ function orderStatus() {
 	
 	
 	var settings31 = {
-			"async": true,
+			"async": false,
 			"crossDomain": true,
 			"url": baseurl+"ProcedureRequest?subject=http://hl7.org/fhir/sid/us-ssn/Patient/"+patID+"&_count=20&intent=order&status=active&_lastUpdated%3E=2020-03-01T00:00:00&_sort:desc=_lastUpdated",
 			"contentType" : "application/json",                                                                           
-			"cache" : false,
+			//"cache" : false,
 			"method": "GET",
 			//"headers": {
 			//	"Content-Type": "application/json",
