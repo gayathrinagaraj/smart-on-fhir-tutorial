@@ -808,7 +808,7 @@ function displayQuestionnaire(QR, formOID){
 			if (temp.length==1){
 			var linkId = data.contained[0].item[0].linkId;
 			
-			screen += "<div style=\'height: 50px; font-style: italic; font-size: 24px; margin-left:3em;\'>" + data.contained[0].item[0].item[0].text+ "</div>";
+			screen += "<div style=\'height: 50px; font-style: italic; font-size: 24px; margin-top: 1em; margin-left:3em;\'>" + data.contained[0].item[0].item[0].text+ "</div>";
 			
 			jQuery(data.contained[0].item[0].item[0].answerOption).each(function(i, item){
 			//console.log(item.modifierExtension[0].valueString);
@@ -827,7 +827,7 @@ function displayQuestionnaire(QR, formOID){
 			
 			var temp2 = JSON.parse(tmp);
 					
-					screen += "<div style=\'height: 50px\'><input type=\'button\' class=\'btn-submit\' id=\'" + item.modifierExtension[0].valueString + "\' name=\'" + item.text + "\' value=\'" + item.text + "\' onclick= \'nextQuestion( \"" +linkId+ "\",\"" +valueString+ "\",\"" +system+ "\",\"" +code+ "\", \"" +display+ "\",\"" +text+ "\",\"" +tempOID+ "\");  \' />" + "</div>";
+					screen += "<div style=\'height: 50px; margin-top: 3em;\'><input type=\'button\' class=\'btn-submit\' id=\'" + item.modifierExtension[0].valueString + "\' name=\'" + item.text + "\' value=\'" + item.text + "\' onclick= \'nextQuestion( \"" +linkId+ "\",\"" +valueString+ "\",\"" +system+ "\",\"" +code+ "\", \"" +display+ "\",\"" +text+ "\",\"" +tempOID+ "\");  \' />" + "</div>";
 				
 			});
 			document.getElementById("Content").innerHTML = screen;
@@ -839,7 +839,7 @@ function displayQuestionnaire(QR, formOID){
 			else {
 			var linkId = data.contained[0].item[0].linkId;
 			
-			screen += "<div style=\'height: 50px; font-style: italic; font-size: 24px; margin-left:3em;\'>" + data.contained[0].item[0].item[0].text + " "+ data.contained[0].item[0].item[1].text+"</div>";
+			screen += "<div style=\'height: 50px; font-style: italic; font-size: 24px; margin-top: 1em; margin-left:3em;\'>" + data.contained[0].item[0].item[0].text + " "+ data.contained[0].item[0].item[1].text+"</div>";
 			
 			jQuery(data.contained[0].item[0].item[1].answerOption).each(function(i, item){
 			
@@ -853,7 +853,7 @@ function displayQuestionnaire(QR, formOID){
 			
 			var temp2 = JSON.parse(tmp);
 					
-					screen += "<div style=\'height: 50px\'><input type=\'button\' class=\'btn-submit\' id=\'" + item.modifierExtension[0].valueString + "\' name=\'" + item.text + "\' value=\'" + item.text + "\' onclick= \'nextQuestion( \"" +linkId+ "\",\"" +valueString+ "\",\"" +system+ "\",\"" +code+ "\", \"" +display+ "\",\"" +text+ "\",\"" +tempOID+ "\");  \' />" + "</div>";
+					screen += "<div style=\'height: 50px; margin-top: 3em;\'><input type=\'button\' class=\'btn-submit\' id=\'" + item.modifierExtension[0].valueString + "\' name=\'" + item.text + "\' value=\'" + item.text + "\' onclick= \'nextQuestion( \"" +linkId+ "\",\"" +valueString+ "\",\"" +system+ "\",\"" +code+ "\", \"" +display+ "\",\"" +text+ "\",\"" +tempOID+ "\");  \' />" + "</div>";
 				
 			});
 			document.getElementById("Content").innerHTML = screen;
