@@ -931,13 +931,23 @@ function displayList(){
 		var str="";
 
 		str = str+ "<div class=\'row\'>	<div id=\'new\' class=\'col-12 col-lg-12 col-md-12 col-sm-12 col-xs-12\'></br>";
+		
+		
+		if(response.entry.length!=0){
 		str = str+ "<P style=\'margin-left:1em; text-align: left; padding: 10px; \'><b>List of Questionnaires available for you</b></P>	</div></div>";
-
+                
 		str = str+ "<div id=\'tabhead\' class=\'row\' style=\'text-align: left; font-weight: bold; padding-top: 20px; \'>";
 		str = str+ "<div class=\'col-4 col-lg-4 col-md-4 col-sm-4 col-sm-offset-1 col-xs-4 \'>Questionnaire</div>";
 		str = str+ "<div class=\'col-2 col-lg-2 col-md-2 col-sm-2 col-sm-offset-1 col-xs-4 \'>Due Date</div>";
 		str = str+"<div class=\'col-4 col-lg-4 col-md-4 col-sm-4 col-xs-4 \'>Status</div></div>";	
-
+		}
+		
+		else{
+			str=str+ "<P style=\'margin-left:1em; text-align: left; padding: 10px; \'><b>At this time, there are no PROs that your physician has requested you complete</b></P>	</div></div>";
+		}
+		
+			
+			
 		jQuery(response.entry).each(function(i, item){
 			
 			var check = item.resource;
