@@ -808,7 +808,7 @@ function displayQuestionnaire(QR, formOID){
 			if (temp.length==1){
 			var linkId = data.contained[0].item[0].linkId;
 			
-			screen += "<div style=\'height: 50px; font-style: italic; font-size: 24px; margin-top: 1em; margin-bottom: 3em; margin-left:3em;\'>" + data.contained[0].item[0].item[0].text+ "</div>";
+			screen += "<div style=\'height: 50px; font-style: italic; font-size: 24px; margin-bottom: 3em; margin-left:3em;\'>" + data.contained[0].item[0].item[0].text+ "</div>";
 			
 			jQuery(data.contained[0].item[0].item[0].answerOption).each(function(i, item){
 			//console.log(item.modifierExtension[0].valueString);
@@ -839,7 +839,7 @@ function displayQuestionnaire(QR, formOID){
 			else {
 			var linkId = data.contained[0].item[0].linkId;
 			
-			screen += "<div style=\'height: 50px; font-style: italic; font-size: 24px; margin-top: 1em; margin-bottom: 3em; margin-left:3em;\'>" + data.contained[0].item[0].item[0].text + " "+ data.contained[0].item[0].item[1].text+"</div>";
+			screen += "<div style=\'height: 50px; font-style: italic; font-size: 24px; margin-bottom: 3em; margin-left:3em;\'>" + data.contained[0].item[0].item[0].text + " "+ data.contained[0].item[0].item[1].text+"</div>";
 			
 			jQuery(data.contained[0].item[0].item[1].answerOption).each(function(i, item){
 			
