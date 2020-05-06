@@ -827,7 +827,7 @@ function displayQuestionnaire(QR, formOID){
 			
 			var temp2 = JSON.parse(tmp);
 					
-					screen += "<div style=\'height: 50px; display: block; width: 100%; margin-top: 0.5em;\'><input type=\'button\' class=\'btn-submit\' id=\'" + item.modifierExtension[0].valueString + "\' name=\'" + item.text + "\' value=\'" + item.text + "\' onclick= \'nextQuestion( \"" +linkId+ "\",\"" +valueString+ "\",\"" +system+ "\",\"" +code+ "\", \"" +display+ "\",\"" +text+ "\",\"" +tempOID+ "\");  \' />" + "</div>";
+					screen += "<div style=\' margin-top: 0.5em;\'><input type=\'button\' class=\'block\' id=\'" + item.modifierExtension[0].valueString + "\' name=\'" + item.text + "\' value=\'" + item.text + "\' onclick= \'nextQuestion( \"" +linkId+ "\",\"" +valueString+ "\",\"" +system+ "\",\"" +code+ "\", \"" +display+ "\",\"" +text+ "\",\"" +tempOID+ "\");  \' />" + "</div>";
 				
 			});
 			document.getElementById("Content").innerHTML = screen;
@@ -853,7 +853,7 @@ function displayQuestionnaire(QR, formOID){
 			
 			var temp2 = JSON.parse(tmp);
 					
-					screen += "<div style=\'height: 50px; display: block; width: 100%;  margin-top: 0.5em;\'><input type=\'button\' class=\'btn-submit\' id=\'" + item.modifierExtension[0].valueString + "\' name=\'" + item.text + "\' value=\'" + item.text + "\' onclick= \'nextQuestion( \"" +linkId+ "\",\"" +valueString+ "\",\"" +system+ "\",\"" +code+ "\", \"" +display+ "\",\"" +text+ "\",\"" +tempOID+ "\");  \' />" + "</div>";
+					screen += "<div style=\' margin-top: 0.5em;\'><input type=\'button\' class=\'block\' id=\'" + item.modifierExtension[0].valueString + "\' name=\'" + item.text + "\' value=\'" + item.text + "\' onclick= \'nextQuestion( \"" +linkId+ "\",\"" +valueString+ "\",\"" +system+ "\",\"" +code+ "\", \"" +display+ "\",\"" +text+ "\",\"" +tempOID+ "\");  \' />" + "</div>";
 				
 			});
 			document.getElementById("Content").innerHTML = screen;
