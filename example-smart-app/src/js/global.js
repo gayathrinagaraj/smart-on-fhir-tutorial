@@ -131,10 +131,11 @@ if(el){
 		//console.log("Posted Procedure Request");
 		orderStatus();
 		document.getElementById('order_unsuccessful').style.display = "none";
-		document.getElementById('order_successful').innerHTML = success_message;		
+		document.getElementById('order_successful').innerHTML = success_message;
+		document.getElementById('selectinput').value = '';
 	});
 	  });
-	document.getElementById('selectinput').value = '';
+	
 }
 
 
