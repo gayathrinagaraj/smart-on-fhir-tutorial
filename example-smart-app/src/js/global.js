@@ -111,7 +111,8 @@ if(el){
 	return;
 	}
 	
-
+	
+	  
 	var date1 =new Date(new Date().toString().split('GMT')[0]+' UTC').toISOString().split('.')[0];
 	//console.log(date1);
 	//console.log("patid :  " + window.patient_id);
@@ -150,9 +151,11 @@ if(el){
 		//console.log("Posted Procedure Request");
 		orderStatus();
 		document.getElementById('order_unsuccessful').style.display = "none";
-		document.getElementById('order_successful').innerHTML = success_message;		
+		document.getElementById('order_successful').innerHTML = success_message;
+		document.getElementById('selectinput').value = '';
 	});
 	  });
+	
 }
 
 
@@ -287,8 +290,8 @@ function orderStatus() {
 			"async": false,
 			"crossDomain": true,
 			"url": baseurl+"ProcedureRequest?subject=http://hl7.org/fhir/sid/us-ssn/Patient/"+patID+"&_count=20&intent=order&status=active&_lastUpdated%3E=2019-06-15T00:00:00&_sort:desc=_lastUpdated",
-		                                                                                     
-			//"cache" : false,
+			"contentType" : "application/json",                                                                           
+			"cache" : false,
 			"method": "GET",
 			"contentType" : "application/json",
 			"headers": {
@@ -830,7 +833,7 @@ function displayQuestionnaire(QR, formOID){
 			if (temp.length==1){
 			var linkId = data.contained[0].item[0].linkId;
 			
-			screen += "<div style=\'height: 50px; font-style: italic; font-size: 24px; margin-left:3em;\'>" + data.contained[0].item[0].item[0].text+ "</div>";
+			screen += "<div style=\'height: 50px; font-style: italic; font-size: 20px; margin-bottom: 5em; margin-left:3em;\'>" + data.contained[0].item[0].item[0].text+ "</div>";
 			
 			jQuery(data.contained[0].item[0].item[0].answerOption).each(function(i, item){
 			//console.log(item.modifierExtension[0].valueString);
@@ -849,7 +852,7 @@ function displayQuestionnaire(QR, formOID){
 			
 			var temp2 = JSON.parse(tmp);
 					
-					screen += "<div style=\'height: 50px\'><input type=\'button\' class=\'btn-submit\' id=\'" + item.modifierExtension[0].valueString + "\' name=\'" + item.text + "\' value=\'" + item.text + "\' onclick= \'nextQuestion( \"" +linkId+ "\",\"" +valueString+ "\",\"" +system+ "\",\"" +code+ "\", \"" +display+ "\",\"" +text+ "\",\"" +tempOID+ "\");  \' />" + "</div>";
+					screen += "<div style=\' margin-top: 0.5em;\'><input type=\'button\' class=\'block\' id=\'" + item.modifierExtension[0].valueString + "\' name=\'" + item.text + "\' value=\'" + item.text + "\' onclick= \'nextQuestion( \"" +linkId+ "\",\"" +valueString+ "\",\"" +system+ "\",\"" +code+ "\", \"" +display+ "\",\"" +text+ "\",\"" +tempOID+ "\");  \' />" + "</div>";
 				
 			});
 			document.getElementById("Content").innerHTML = screen;
@@ -861,7 +864,7 @@ function displayQuestionnaire(QR, formOID){
 			else {
 			var linkId = data.contained[0].item[0].linkId;
 			
-			screen += "<div style=\'height: 50px; font-style: italic; font-size: 24px; margin-left:3em;\'>" + data.contained[0].item[0].item[0].text + " "+ data.contained[0].item[0].item[1].text+"</div>";
+			screen += "<div style=\'height: 50px; font-style: italic; font-size: 20px; margin-bottom: 5em; margin-left:3em;\'>" + data.contained[0].item[0].item[0].text + " "+ data.contained[0].item[0].item[1].text+"</div>";
 			
 			jQuery(data.contained[0].item[0].item[1].answerOption).each(function(i, item){
 			
@@ -875,7 +878,7 @@ function displayQuestionnaire(QR, formOID){
 			
 			var temp2 = JSON.parse(tmp);
 					
-					screen += "<div style=\'height: 50px\'><input type=\'button\' class=\'btn-submit\' id=\'" + item.modifierExtension[0].valueString + "\' name=\'" + item.text + "\' value=\'" + item.text + "\' onclick= \'nextQuestion( \"" +linkId+ "\",\"" +valueString+ "\",\"" +system+ "\",\"" +code+ "\", \"" +display+ "\",\"" +text+ "\",\"" +tempOID+ "\");  \' />" + "</div>";
+					screen += "<div style=\' margin-top: 0.5em;\'><input type=\'button\' class=\'block\' id=\'" + item.modifierExtension[0].valueString + "\' name=\'" + item.text + "\' value=\'" + item.text + "\' onclick= \'nextQuestion( \"" +linkId+ "\",\"" +valueString+ "\",\"" +system+ "\",\"" +code+ "\", \"" +display+ "\",\"" +text+ "\",\"" +tempOID+ "\");  \' />" + "</div>";
 				
 			});
 			document.getElementById("Content").innerHTML = screen;
@@ -950,20 +953,31 @@ function displayList(){
 			"method": "GET"
 	}
 	$.ajax(settings3).done(function (response) {
-		//console.log(response);
-		//console.log("test");
-		// console.log(response.entry);
+		console.log(response);
+		console.log("test");
+		console.log(response.total);
+		 console.log(response.entry);
 
 		var str="";
 
 		str = str+ "<div class=\'row\'>	<div id=\'new\' class=\'col-12 col-lg-12 col-md-12 col-sm-12 col-xs-12\'></br>";
+		
+		
+		if(response.total!=0){
 		str = str+ "<P style=\'margin-left:1em; text-align: left; padding: 10px; \'><b>List of Questionnaires available for you</b></P>	</div></div>";
-
+                
 		str = str+ "<div id=\'tabhead\' class=\'row\' style=\'text-align: left; font-weight: bold; padding-top: 20px; \'>";
 		str = str+ "<div class=\'col-4 col-lg-4 col-md-4 col-sm-4 col-sm-offset-1 col-xs-4 \'>Questionnaire</div>";
 		str = str+ "<div class=\'col-2 col-lg-2 col-md-2 col-sm-2 col-sm-offset-1 col-xs-4 \'>Due Date</div>";
 		str = str+"<div class=\'col-4 col-lg-4 col-md-4 col-sm-4 col-xs-4 \'>Status</div></div>";	
-
+		}
+		
+		else{
+			str=str+ "<P style=\'margin-left:1em; text-align: left; padding: 10px; \'><b>At this time, there are no PROs that your physician has requested you complete</b></P>	</div></div>";
+		}
+		
+			
+			
 		jQuery(response.entry).each(function(i, item){
 			
 			var check = item.resource;
@@ -1023,8 +1037,6 @@ function displayList(){
 	});
 
 }
-
-
 
 
 

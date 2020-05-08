@@ -192,12 +192,13 @@ table#pending_PRO td,th {
 	padding: 5px;
 	text-align: center;
 	text-decoration: none;
-	display: inline-block;
-	font-size: 20px;
+	display: block;
+	font-size: 18px;
 	margin: 8px 2px;
 	cursor: pointer;
-	width: 500px;
-	height: 40px;
+	
+	white-space: normal;
+	word-wrap: break-word;
 }
 
 .button6 {border-radius: 4px;width: 200px; }
@@ -213,9 +214,7 @@ table#pending_PRO td,th {
 			  #header1 {
 				font-size: 24px;
 			  }
-			  .btn-submit {
-			  width:500px;
-			  }
+			  
 			  
 			  #tabhead {
 				font-size: 24px;
@@ -239,9 +238,7 @@ table#pending_PRO td,th {
 			  #pat-header{
 			width : 100%;
 				}
-			  .btn-submit {
-			  width:300px;
-			  }
+			 
 			  
 			  #tabhead {
 				font-size: 16px;
@@ -288,23 +285,39 @@ table#pending_PRO td,th {
 		}
 		.btn-submit {
 				background-color: #0079BE; 
-				border: none;
-				color: white;
-				padding: 5px;
-				text-align: center;
-				text-decoration: none;
-				display: inline-block;
-				font-size: 20px;
-				margin: 8px 2px;
-				cursor: pointer;
-				
-				height: 40px;
+	border: none;
+	color: white;
+	padding: 5px;
+	text-align: center;
+	text-decoration: none;
+	display: block;
+	font-size: 18px;
+	margin: 8px 2px;
+	cursor: pointer;
+	
+	white-space: normal;
+	word-wrap: break-word;
 				}
+
+.block {
+  display: block;
+  width: 100%;
+  border: none;
+  background-color: #0079BE;
+  color: white;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.block:hover {
+  background-color: #ddd;
+  color: black;
+}
 				
 		
 			
 
 					
 				
-	
-
