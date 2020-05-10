@@ -280,8 +280,8 @@ function orderStatus() {
 			//}
 	}
 	$.ajax(settings31).done(function (response) {
-		//console.log(response);
-		//console.log("test");
+		console.log(response);
+		console.log("pending pro");
 		document.getElementById('pending_PRO').innerHTML="";
 		//console.log(patID);
 		var str="";
