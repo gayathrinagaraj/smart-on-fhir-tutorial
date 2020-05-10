@@ -286,7 +286,7 @@ function orderStatus() {
 		//console.log(patID);
 		var str="";
 
-		str = str +"<tr><th>Event Date Time</th><th>PROs Ordered</th><th>Status</th>";
+		str = str +"<tr><th>Event Date Time</th><th>PROs Ordered</th><th></th><th>Status</th>";
 
 
 
@@ -308,7 +308,8 @@ function orderStatus() {
 			if (proname1.match(/Please/g)!="Please" && task_id >= "1122" )
 			{
 				str = str +"<tr><td>" +date1+"</td>";
-				str = str +"<td>"+proname1 +"<button class='cancelbtn'>Cancel Order</button></td>";
+				str = str +"<td>"+proname1 +"</td>";
+				str = str +"<td><button class='cancelbtn'>Cancel Order</button></td";
 				str = str +"<td>Ordered</td>";	
 			}
 		}
