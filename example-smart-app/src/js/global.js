@@ -118,6 +118,7 @@ if(el){
 			"url": baseurl+"ProcedureRequest",
 			"method": "POST",
 			"contentType" : "application/json",
+		        "cache" : false,
 			//"headers": {
 			//	"Content-Type": "application/json",
 			//	"Cache-Control": "no-cache"
@@ -570,6 +571,7 @@ function completeProcess(taskId,proId,proName,patId,patName){
 			"url": baseurl+"ProcedureRequest/"+taskId,
 			"method": "PUT",
 			"contentType" : "application/json",
+			"cache" : false,
 			//"headers": {
 			//	"Content-Type": "application/json",
 			//	"Cache-Control": "no-cache"
@@ -594,6 +596,7 @@ function postScore(taskId,proId,proName,patId,patName,tscore){
 			"url": baseurl+"Observation",
 			"method": "POST",
 			"contentType" : "application/json",
+			"cache" : false,
 			//"headers": {
 			//	"Content-Type": "application/json",
 			//	"Cache-Control": "no-cache"
@@ -617,6 +620,7 @@ function postQR(QRjson){
 			"url": baseurl+"QuestionnaireResponse",
 			"method": "POST",
 			"contentType" : "application/json",
+			"cache" : false,
 			//"headers": {
 			//	"Content-Type": "application/json",
 			//	"Cache-Control": "no-cache"
