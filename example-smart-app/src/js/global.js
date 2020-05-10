@@ -583,6 +583,7 @@ function completeProcess(taskId,proId,proName,patId,patName){
 	$.ajax(settings).done(function (response) {
 		console.log(response);
 		console.log("complete process response");
+		window.location.reload(false);
 	});
 	
 	
