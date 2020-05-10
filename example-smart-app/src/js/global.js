@@ -308,7 +308,7 @@ function orderStatus() {
 			if (proname1.match(/Please/g)!="Please" && task_id >= "1122" )
 			{
 				str = str +"<tr><td>" +date1+"</td>";
-				str = str +"<td>"+proname1 +"</td>";
+				str = str +"<td>"+proname1 +"&emsp<button class='cancelbtn'>Cancel Order</button></td>";
 				str = str +"<td>Ordered</td>";	
 			}
 		}
