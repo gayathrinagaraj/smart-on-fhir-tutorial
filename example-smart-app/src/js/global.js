@@ -332,6 +332,7 @@ function orderStatus() {
 		});		
 		document.getElementById('pending_PRO').innerHTML += str;
 	});
+	
 
 	
 	var datatoday = new Date();
