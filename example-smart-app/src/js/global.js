@@ -582,7 +582,7 @@ function completeProcess(taskId,proId,proName,patId,patName){
 		console.log("complete process response");
 	});
 	
-	window.location.reload(false);
+	
 }
 
 
