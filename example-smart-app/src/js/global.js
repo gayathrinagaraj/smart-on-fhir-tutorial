@@ -294,6 +294,21 @@ function orderStatus() {
 			//console.log(item.resource.code.text);
 			//console.log(item.resource.id);
 			//console.log(item.resource.occurrenceDateTime);
+			
+			var pro_id= item.resource.code.coding[0].code;
+			var pro_name= item.resource.code.coding[0].display;
+			var task_id= item.resource.id;
+			var pat_name= item.resource.subject.display;	
+			var temp = item.resource.subject.reference;
+			var pat_id= temp.substr(-7); 
+			
+			console.log(task_id);
+			console.log(pro_id);
+			console.log(pro_name);
+			console.log(pat_id);
+			console.log(pat_name);
+						
+			
 
 			var msec = Date.parse(item.resource.occurrenceDateTime);
 			var d = new Date(msec);
@@ -309,7 +324,7 @@ function orderStatus() {
 			{
 				str = str +"<tr><td>" +date1+"</td>";
 				str = str +"<td>"+proname1 +"</td>";
-				str = str +"<td><button class='cancelbtn'>Cancel Order</button></td>";
+				str = str +"<td><button class='cancelbtn'onclick=\' completeProcess(\"" +task_id+ "\",\"" +pro_id+ "\",\"" +pro_name+ "\", \"" +pat_id+ "\",\"" +pat_name+ "\");>Cancel Order</button></td>";
 				str = str +"<td>Ordered</td>";	
 			}
 		}
