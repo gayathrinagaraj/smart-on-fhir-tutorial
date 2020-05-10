@@ -567,7 +567,7 @@ function completeProcess(taskId,proId,proName,patId,patName){
 
 	var date1 =new Date(new Date().toString().split('GMT')[0]+' UTC').toISOString().split('.')[0];
 	var settings = {
-			"async": true,
+			"async": false,
 			"crossDomain": true,
 			"url": baseurl+"ProcedureRequest/"+taskId,
 			"method": "PUT",
