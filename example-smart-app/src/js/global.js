@@ -309,7 +309,7 @@ function orderStatus() {
 			{
 				str = str +"<tr><td>" +date1+"</td>";
 				str = str +"<td>"+proname1 +"</td>";
-				str = str +"<td><button class='cancelbtn'>Cancel Order</button></td";
+				str = str +"<td><button class='cancelbtn'>Cancel Order</button></td>";
 				str = str +"<td>Ordered</td>";	
 			}
 		}
