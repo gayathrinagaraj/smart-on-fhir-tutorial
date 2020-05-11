@@ -134,6 +134,8 @@ if(el){
 		document.getElementById('order_unsuccessful').style.display = "none";
 		document.getElementById('order_successful').innerHTML = success_message;
 		document.getElementById('selectinput').value = '';
+		$("#order_successful").show();
+		setTimeout(function() { $("#order_successful").hide(); }, 5000);
 	});
 	  });
 	
