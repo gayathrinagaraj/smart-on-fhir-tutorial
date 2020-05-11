@@ -290,8 +290,8 @@ function orderStatus() {
 		document.getElementById('pending_PRO').innerHTML="";
 		//console.log(patID);
 		var str="";
-		str = str +"<tr><th>Event Date Time</th><th>PROs Ordered</th><th>Status</th>";
-		//str = str +"<tr><th>Event Date Time</th><th>PROs Ordered</th><th></th><th>Status</th>";
+		//str = str +"<tr><th>Event Date Time</th><th>PROs Ordered</th><th>Status</th>";
+		str = str +"<tr><th>Event Date Time</th><th>PROs Ordered</th><th></th><th>Status</th>";
 
 
 
@@ -329,7 +329,7 @@ function orderStatus() {
 			{
 				str = str +"<tr><td>" +date1+"</td>";
 				str = str +"<td>"+proname1 +"</td>";
-				//str = str +"<td><button class='cancelbtn'; onclick='completeProcess(\""+task_id+"\",\"" +pro_id+"\",\"" +pro_name+"\",\"" +pat_id+"\",\"" +pat_name+ "\")'; >Cancel Order</button></td>";
+				str = str +"<td><button class='cancelbtn'; onclick='completeProcess(\""+task_id+"\",\"" +pro_id+"\",\"" +pro_name+"\",\"" +pat_id+"\",\"" +pat_name+ "\")'; >Cancel Order</button></td>";
 				str = str +"<td>Ordered</td>";	
 			}
 		}
@@ -587,6 +587,7 @@ function completeProcess(taskId,proId,proName,patId,patName){
 	$.ajax(settings).done(function (response) {
 		console.log(response);
 		console.log("complete process response");
+		orderStatus();
 		
 	});
 	
