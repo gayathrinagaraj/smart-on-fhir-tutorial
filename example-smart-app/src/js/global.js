@@ -273,6 +273,9 @@ function orderStatus() {
 			"url": baseurl+"ProcedureRequest?subject=http://hl7.org/fhir/sid/us-ssn/Patient/"+patID+"&_count=20&intent=order&status=active&_sort:desc=_lastUpdated",
 			"contentType" : "application/json",                                                                           
 			"cache" : false,
+		"headers": {
+				"Cache-Control": "no-cache"
+			},
 			"method": "GET"
 			//"headers": {
 			//	"Content-Type": "application/json",
