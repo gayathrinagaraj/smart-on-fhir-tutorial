@@ -617,9 +617,9 @@ function cancelOrder(taskId,proId,proName,patId,patName){
 		console.log(response);
 		console.log("complete process response");
 		orderStatus();
-		document.getElementById('order_successful').innerHTML = "The PRO request for "+ proName + "was cancelled";
-		$("#order_successful").show();
-		setTimeout(function() { $("#order_successful").hide(); }, 10000);
+		document.getElementById('order_cancel').innerHTML = "The PRO request for "+ proName + " was cancelled";
+		$("#order_cancel").show();
+		setTimeout(function() { $("#order_cancel").hide(); }, 10000);
 		
 	});
 	
