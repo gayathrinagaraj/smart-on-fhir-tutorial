@@ -1001,7 +1001,7 @@ function displayList(){
 			"headers": {
 				"Authorization" : "Bearer "+ KeycloakToken,
 			//	"Content-Type": "application/json",
-			//	"Cache-Control": "no-cache"
+				"Cache-Control": "no-cache"
 			},
 			"method": "GET"
 	}
