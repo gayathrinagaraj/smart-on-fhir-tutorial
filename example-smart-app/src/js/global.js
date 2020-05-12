@@ -343,7 +343,7 @@ function orderStatus() {
 
 			var proname1 = item.resource.code.text;
 			if(proname1){
-			if (proname1.match(/Please/g)!="Please" && task_id >= "1122" )
+			if (proname1.match(/Please/g)!="Please")
 			{
 				str = str +"<tr><td>" +date1+"</td>";
 				str = str +"<td>"+proname1 +"</td>";
