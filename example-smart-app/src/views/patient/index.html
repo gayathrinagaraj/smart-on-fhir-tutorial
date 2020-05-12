@@ -166,8 +166,9 @@ function timerIncrement() {
   {
         if (idleTime < 1)
          {
-           alert("get new easipro token");
+           //alert("get new easipro token");
             //idleTime = 0; //reset timers
+           console.log("get new easipro token");
          }
   
         else
@@ -175,7 +176,8 @@ function timerIncrement() {
        //ask user if session should be kept active;
         var r = confirm("Your session is about to expire!\n Please click OK to continue your session or Cancel to end the session.");
          if (r == true) {
-         alert("get new easipro token");
+         //alert("get new easipro token");
+           console.log("get new easipro token");
          //idleTime = 0; //reset timers
          } 
          else {
