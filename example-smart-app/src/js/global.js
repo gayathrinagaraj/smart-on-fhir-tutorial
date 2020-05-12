@@ -982,6 +982,10 @@ function displayList(){
 			"crossDomain": true,
 			"url": baseurl+"ProcedureRequest?subject=http://hl7.org/fhir/sid/us-ssn/Patient/"+patID+"&_count=20&intent=order&status=active",
 			"cache":false,
+		"headers": {
+			
+				"Cache-Control": "no-cache"
+			},
 			"method": "GET"
 	}
 	$.ajax(settings3).done(function (response) {
