@@ -153,6 +153,8 @@ if(el){
 		document.getElementById('order_unsuccessful').style.display = "none";
 		document.getElementById('order_successful').innerHTML = success_message;
 		document.getElementById('selectinput').value = '';
+		$("#order_successful").show();
+		setTimeout(function() { $("#order_successful").hide(); }, 10000);
 	});
 	  });
 	
@@ -289,7 +291,7 @@ function orderStatus() {
 	var settings31 = {
 			"async": false,
 			"crossDomain": true,
-			"url": baseurl+"ProcedureRequest?subject=http://hl7.org/fhir/sid/us-ssn/Patient/"+patID+"&_count=20&intent=order&status=active&_lastUpdated%3E=2019-06-15T00:00:00&_sort:desc=_lastUpdated",
+			"url": baseurl+"ProcedureRequest?subject=http://hl7.org/fhir/sid/us-ssn/Patient/"+patID+"&_count=20&intent=order&status=active&_sort:desc=_lastUpdated",
 			"contentType" : "application/json",                                                                           
 			"cache" : false,
 			"method": "GET",
@@ -301,13 +303,13 @@ function orderStatus() {
 			},
 	}
 	$.ajax(settings31).done(function (response) {
-		//console.log(response);
-		//console.log("test");
+		console.log(response);
+		console.log("pending pro");
 		document.getElementById('pending_PRO').innerHTML="";
 		//console.log(patID);
 		var str="";
-
-		str = str +"<tr><th>Event Date Time</th><th>PROs Ordered</th><th>Status</th>";
+		//str = str +"<tr><th>Event Date Time</th><th>PROs Ordered</th><th>Status</th>";
+		str = str +"<tr><th>Event Date Time</th><th>PROs Ordered</th><th></th><th>Status</th>";
 
 
 
@@ -315,6 +317,21 @@ function orderStatus() {
 			//console.log(item.resource.code.text);
 			//console.log(item.resource.id);
 			//console.log(item.resource.occurrenceDateTime);
+			
+			var pro_id= item.resource.code.coding[0].code;
+			var pro_name= item.resource.code.coding[0].display;
+			var task_id= item.resource.id;
+			var pat_name= item.resource.subject.display;	
+			var temp = item.resource.subject.reference;
+			var pat_id= temp.substr(-7); 
+			
+			console.log(task_id);
+			console.log(pro_id);
+			console.log(pro_name);
+			console.log(pat_id);
+			console.log(pat_name);
+						
+			
 
 			var msec = Date.parse(item.resource.occurrenceDateTime);
 			var d = new Date(msec);
@@ -330,12 +347,14 @@ function orderStatus() {
 			{
 				str = str +"<tr><td>" +date1+"</td>";
 				str = str +"<td>"+proname1 +"</td>";
+				str = str +"<td><button class='cancelbtn'; onclick='cancelOrder(\""+task_id+"\",\"" +pro_id+"\",\"" +pro_name+"\",\"" +pat_id+"\",\"" +pat_name+ "\")'; >Cancel Order</button></td>";
 				str = str +"<td>Ordered</td>";	
 			}
 		}
 		});		
 		document.getElementById('pending_PRO').innerHTML += str;
 	});
+	
 
 	
 	var datatoday = new Date();
@@ -570,7 +589,7 @@ function completeProcess(taskId,proId,proName,patId,patName){
 
 	var date1 =new Date(new Date().toString().split('GMT')[0]+' UTC').toISOString().split('.')[0];
 	var settings = {
-			"async": true,
+			"async": false,
 			"crossDomain": true,
 			"url": baseurl+"ProcedureRequest/"+taskId,
 			"method": "PUT",
@@ -586,9 +605,42 @@ function completeProcess(taskId,proId,proName,patId,patName){
 	$.ajax(settings).done(function (response) {
 		console.log(response);
 		console.log("complete process response");
+
+		
 	});
+	
+	
 }
 
+function cancelOrder(taskId,proId,proName,patId,patName){
+
+	var date1 =new Date(new Date().toString().split('GMT')[0]+' UTC').toISOString().split('.')[0];
+	var settings = {
+			"async": false,
+			"crossDomain": true,
+			"url": baseurl+"ProcedureRequest/"+taskId,
+			"method": "PUT",
+			"contentType" : "application/json",
+			"cache" : false,
+			//"headers": {
+			//	"Content-Type": "application/json",
+			//	"Cache-Control": "no-cache"
+			//},
+			"processData": false,
+			"data": "{\n\t\"resourceType\": \"ProcedureRequest\",\n\t\"id\": \""+taskId+"\",\n\t\"status\": \"completed\",\n\t\"intent\": \"order\",\n\t\"category\": [{\n\t\t\"coding\": [{\n\t\t\t\"system\": \"http://snomed.info/sct\",\n\t\t\t\"code\": \"386053000\",\n\t\t\t\"display\": \"Evaluation procedure (procedure)\"\n\t\t}],\n\t\t\"text\": \"Evaluation\"\n\t}],\n\t\"code\": {\n\t\t\"coding\": [{\n\t\t\t\"system\": \"http://loinc.org\",\n\t\t\t\"code\": \""+proId+"\",\n\t\t\t\"display\": \""+proName+"\"\n\t\t}],\n\t\t\"text\": \""+proName+"\"\n\t},\n\t\"occurrenceDateTime\": \""+date1+"\",\n\t\"subject\": {\n\t\t\"display\": \""+patName+"\",\n        \"reference\": \"https://fhir-open.sandboxcerner.com/dstu2/0b8a0111-e8e6-4c26-a91c-5069cbc6b1ca/Patient/"+patId+"\"\n\t}\n} \n"
+	}
+	$.ajax(settings).done(function (response) {
+		console.log(response);
+		console.log("complete process response");
+		orderStatus();
+		document.getElementById('order_cancel').innerHTML = "The PRO request for "+ proName + " was cancelled";
+		$("#order_cancel").show();
+		setTimeout(function() { $("#order_cancel").hide(); }, 10000);
+		
+	});
+	
+	
+}
 
 function postScore(taskId,proId,proName,patId,patName,tscore){
 	var date1 =new Date(new Date().toString().split('GMT')[0]+' UTC').toISOString().split('.')[0];
