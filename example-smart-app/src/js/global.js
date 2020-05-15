@@ -358,7 +358,7 @@ function orderStatus() {
 
 	
 	var datatoday = new Date();
-	var datatodays = datatoday.setDate(new Date(datatoday).getDate() + 1);
+	var datatodays = datatoday.setDate(new Date(datatoday).getDate() + 2);
 	var todate = new Date(datatodays);
 	//console.log(todate);
 	var todayDate = todate.toISOString().slice(0,10);
