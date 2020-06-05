@@ -150,10 +150,12 @@ function timerIncrement() {
   
    // First condition - after 3 mins idle time ask the user whether they want to keep the session active
   
-  if (idleTime > 2){  // 3 minutes
+  if (idleTime > 9){  // 10 minutes
          var r = confirm("Your session is about to expire!\n Please click OK to continue your session or Cancel to end the session.");
          if (r == true) {
-         alert("get new easipro token");
+         //alert("get new easipro token");
+           
+           console.log("get new easipro token");
          } 
          else {
          window.location.href='../../../src/logout.html';
@@ -188,7 +190,7 @@ function timerIncrement() {
   }
   //third condition - if the idle timer is greater than 5 mins end session
   
-    if (idleTime > 9) { // 5 minutes
+    if (idleTime > 9) { // 10 minutes
         window.location.href='../../../src/logout.html';
     }
   
