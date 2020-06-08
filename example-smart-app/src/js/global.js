@@ -979,19 +979,18 @@ function addDays(date, days) {
 function displayList(){
 	var settings3 = {
 		
-		
-		
-		
-			"async": false,
+		"async": false,
 			"crossDomain": true,
-			"url": baseurl+"ProcedureRequest?subject=http://hl7.org/fhir/sid/us-ssn/Patient/"+patID+"&_count=20&intent=order&status=active",
-			"contentType" : "application/json",  
-		"cache":false,
+			"url": baseurl+"ProcedureRequest?subject=http://hl7.org/fhir/sid/us-ssn/Patient/"+patID+"&_count=20&intent=order&status=active&_sort:desc=_lastUpdated",
+			"contentType" : "application/json",                                                                           
+			"cache" : false,
 		"headers": {
-			
 				"Cache-Control": "no-cache"
 			},
 			"method": "GET"
+		
+		
+			
 	}
 	$.ajax(settings3).done(function (response) {
 		console.log(response);
