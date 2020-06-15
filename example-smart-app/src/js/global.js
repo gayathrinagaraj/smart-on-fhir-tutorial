@@ -119,6 +119,9 @@ if(el){
 			"method": "POST",
 			"contentType" : "application/json",
 		        "cache" : false,
+			"headers": {
+				"Cache-Control": "no-cache"
+			},
 			//"headers": {
 			//	"Content-Type": "application/json",
 			//	"Cache-Control": "no-cache"
