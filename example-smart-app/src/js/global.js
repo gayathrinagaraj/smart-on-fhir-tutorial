@@ -936,11 +936,11 @@ function displayQuestionnaire(QR, formOID){
 				console.log(Ques02);
 				
 				var str3 = data.contained[0].item[0].item[1].text;
-				
+				console.log(str3);
 			 var Ques03 = decodeHtml(str3);
 				console.log(Ques03);
 			
-			screen += "<div style=\'height: 50px; font-style: italic; font-size: 20px; margin-bottom: 5em; margin-left:3em;\'>" + Ques02 + " "+ Ques03 +"</div>";
+			screen += "<div style=\'height: 50px; font-style: italic; font-size: 20px; margin-bottom: 5em; margin-left:3em;\'>" + Ques02 + " " + Ques03 +"</div>";
 			
 			jQuery(data.contained[0].item[0].item[1].answerOption).each(function(i, item){
 			
