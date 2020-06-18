@@ -937,7 +937,9 @@ function displayQuestionnaire(QR, formOID){
 					screen += "<div style=\' margin-top: 0.5em;\'><input type=\'button\' class=\'block\' id=\'" + item.modifierExtension[0].valueString + "\' name=\'" + item.text + "\' value=\'" + item.text + "\' onclick= \'nextQuestion( \"" +linkId+ "\",\"" +valueString+ "\",\"" +system+ "\",\"" +code+ "\", \"" +display+ "\",\"" +text+ "\",\"" +tempOID+ "\");  \' />" + "</div>";
 				
 			});
+			
 			document.getElementById("Content").innerHTML = screen;
+				console.log(screen);
 			//console.log(data.contained[0].item[0].item[1].answerOption);
 			
 			}
