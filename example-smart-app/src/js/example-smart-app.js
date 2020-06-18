@@ -65,7 +65,7 @@
 
     BrowserDetect.init();
     console.log("You are using " + BrowserDetect.browser + " with version " + BrowserDetect.version + "");
- alert("You are using " + BrowserDetect.browser + " with version " + BrowserDetect.version + "");
+ // alert("You are using " + BrowserDetect.browser + " with version " + BrowserDetect.version + "");
 
       if(persona === 'provider') {
 	      orderStatus();
