@@ -692,6 +692,12 @@ function postQR(QRjson){
 }
 
 
+function decodeHtml(html) {
+    var txt = document.createElement("textarea");
+    txt.innerHTML = html;
+    return txt.value;
+}
+
 
 function nextQuestion(linkId,valueString,system,code,display,text,tempOID)
 	{
@@ -886,7 +892,14 @@ function displayQuestionnaire(QR, formOID){
 			if (temp.length==1){
 			var linkId = data.contained[0].item[0].linkId;
 			
-			screen += "<div style=\'height: 50px; font-style: italic; font-size: 20px; margin-bottom: 5em; margin-left:3em;\'>" + data.contained[0].item[0].item[0].text+ "</div>";
+				var str = data.contained[0].item[0].item[0].text;
+				
+			 var Ques01 = decodeHtml(str);
+				console.log(Ques01);
+
+				
+			
+			screen += "<div style=\'height: 50px; font-style: italic; font-size: 20px; margin-bottom: 5em; margin-left:3em;\'>" + Ques01 + "</div>";
 			
 			jQuery(data.contained[0].item[0].item[0].answerOption).each(function(i, item){
 			//console.log(item.modifierExtension[0].valueString);
@@ -916,8 +929,18 @@ function displayQuestionnaire(QR, formOID){
 			
 			else {
 			var linkId = data.contained[0].item[0].linkId;
+				
+				var str2 = data.contained[0].item[0].item[0].text;
+				
+			 var Ques02 = decodeHtml(str2);
+				console.log(Ques02);
+				
+				var str3 = data.contained[0].item[0].item[1].text;
+				
+			 var Ques03 = decodeHtml(str3);
+				console.log(Ques03);
 			
-			screen += "<div style=\'height: 50px; font-style: italic; font-size: 20px; margin-bottom: 5em; margin-left:3em;\'>" + data.contained[0].item[0].item[0].text + " "+ data.contained[0].item[0].item[1].text+"</div>";
+			screen += "<div style=\'height: 50px; font-style: italic; font-size: 20px; margin-bottom: 5em; margin-left:3em;\'>" + Ques02 + " "+ Ques03 +"</div>";
 			
 			jQuery(data.contained[0].item[0].item[1].answerOption).each(function(i, item){
 			
