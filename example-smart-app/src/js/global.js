@@ -872,11 +872,14 @@ function displayQuestionnaire(QR, formOID){
 			if (temp.length==1){
 			var linkId = data.contained[0].item[0].linkId;
 				
-			var str_esc=unescape(data.contained[0].item[0].item[0].text);
+			var str = data.contained[0].item[0].item[0].text;
+			var str_esc = escape(str);
 			console.log(str_esc);
-			//console.log(unescape(str_esc));
+			console.log(unescape(str_esc));
+				
 			
-			screen += "<div style=\'height: 50px; font-style: italic; font-size: 20px; margin-bottom: 5em; margin-left:3em;\'>" + str_esc + "</div>";
+			
+			screen += "<div style=\'height: 50px; font-style: italic; font-size: 20px; margin-bottom: 5em; margin-left:3em;\'>" + unescape(str_esc) + "</div>";
 			
 			jQuery(data.contained[0].item[0].item[0].answerOption).each(function(i, item){
 			//console.log(item.modifierExtension[0].valueString);
@@ -907,15 +910,17 @@ function displayQuestionnaire(QR, formOID){
 			else {
 			var linkId = data.contained[0].item[0].linkId;
 				
-			var str_esc_02=unescape(data.contained[0].item[0].item[0].text);
-			console.log(str_esc_02);
-			//console.log(unescape(str_esc_02));
+			var str2 = data.contained[0].item[0].item[0].text;
+			var str_esc2 = escape(str2);
+			console.log(str_esc2);
+			console.log(unescape(str_esc2));
 				
-			var str_esc_03=unescape(data.contained[0].item[0].item[1].text);
-			console.log(str_esc_03);
-			//console.log(unescape(str_esc_03));
+			var str3 = data.contained[0].item[0].item[1].text;
+			var str_esc3 = escape(str3);
+			console.log(str_esc3);
+			console.log(unescape(str_esc3));
 			
-			screen += "<div style=\'height: 50px; font-style: italic; font-size: 20px; margin-bottom: 5em; margin-left:3em;\'>" + str_esc_02 + " " + str_esc_03+"</div>";
+			screen += "<div style=\'height: 50px; font-style: italic; font-size: 20px; margin-bottom: 5em; margin-left:3em;\'>" + unescape(str_esc2) + " " + unescape(str_esc3)+"</div>";
 			
 			jQuery(data.contained[0].item[0].item[1].answerOption).each(function(i, item){
 			
