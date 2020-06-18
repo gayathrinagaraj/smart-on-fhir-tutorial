@@ -876,7 +876,7 @@ function displayQuestionnaire(QR, formOID){
 			console.log(str_esc);
 			console.log(unescape(str_esc));
 			
-			screen += "<div style=\'height: 50px; font-style: italic; font-size: 20px; margin-bottom: 5em; margin-left:3em;\'>" + (unescape(str_esc)) + "</div>";
+			screen += "<div style=\'height: 50px; font-style: italic; font-size: 20px; margin-bottom: 5em; margin-left:3em;\'>" + unescape(str_esc) + "</div>";
 			
 			jQuery(data.contained[0].item[0].item[0].answerOption).each(function(i, item){
 			//console.log(item.modifierExtension[0].valueString);
@@ -906,8 +906,16 @@ function displayQuestionnaire(QR, formOID){
 			
 			else {
 			var linkId = data.contained[0].item[0].linkId;
+				
+			var str_esc_02=escape(data.contained[0].item[0].item[0].text);
+			console.log(str_esc_02);
+			console.log(unescape(str_esc_02));
+				
+			var str_esc_03=escape(data.contained[0].item[0].item[1].text);
+			console.log(str_esc_03);
+			console.log(unescape(str_esc_03));
 			
-			screen += "<div style=\'height: 50px; font-style: italic; font-size: 20px; margin-bottom: 5em; margin-left:3em;\'>" + data.contained[0].item[0].item[0].text + " "+ data.contained[0].item[0].item[1].text+"</div>";
+			screen += "<div style=\'height: 50px; font-style: italic; font-size: 20px; margin-bottom: 5em; margin-left:3em;\'>" + unescape(str_esc_02) + " " + unescape(str_esc_03)+"</div>";
 			
 			jQuery(data.contained[0].item[0].item[1].answerOption).each(function(i, item){
 			
