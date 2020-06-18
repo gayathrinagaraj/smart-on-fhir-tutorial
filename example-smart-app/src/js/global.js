@@ -677,7 +677,11 @@ function postQR(QRjson){
 
 }
 
-
+function decodeHtml(html) {
+    var txt = document.createElement("textarea");
+    txt.innerHTML = html;
+    return txt.value;
+}
 
 function nextQuestion(linkId,valueString,system,code,display,text,tempOID)
 	{
@@ -874,9 +878,8 @@ function displayQuestionnaire(QR, formOID){
 				
 			var str = data.contained[0].item[0].item[0].text;
 				
-			  var txt = document.createElement("textarea");
-			   txt.innerHTML = str;
-			   console.log( txt.value);
+			 var output = decodeHtml(str);
+				console.log(output);
 				
 			//var str_esc = escape(str);
 			//console.log(str_esc);
