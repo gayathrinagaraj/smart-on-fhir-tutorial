@@ -873,9 +873,14 @@ function displayQuestionnaire(QR, formOID){
 			var linkId = data.contained[0].item[0].linkId;
 				
 			var str = data.contained[0].item[0].item[0].text;
-			var str_esc = escape(str);
-			console.log(str_esc);
-			console.log(unescape(str_esc));
+				
+			  var txt = document.createElement("textarea");
+			   txt.innerHTML = str;
+			   console.log( txt.value);
+				
+			//var str_esc = escape(str);
+			//console.log(str_esc);
+			//console.log(unescape(str_esc));
 				
 			
 			
@@ -911,14 +916,18 @@ function displayQuestionnaire(QR, formOID){
 			var linkId = data.contained[0].item[0].linkId;
 				
 			var str2 = data.contained[0].item[0].item[0].text;
-			var str_esc2 = escape(str2);
-			console.log(str_esc2);
-			console.log(unescape(str_esc2));
+			 var txt2 = document.createElement("textarea2");
+			   txt2.innerHTML = str2;
+			   console.log( txt2.value);	
+				
+			//var str_esc2 = escape(str2);
+			//console.log(str_esc2);
+			//console.log(unescape(str_esc2));
 				
 			var str3 = data.contained[0].item[0].item[1].text;
-			var str_esc3 = escape(str3);
-			console.log(str_esc3);
-			console.log(unescape(str_esc3));
+			 var txt3 = document.createElement("textarea3");
+			   txt3.innerHTML = str3;
+			   console.log( txt3.value);
 			
 			screen += "<div style=\'height: 50px; font-style: italic; font-size: 20px; margin-bottom: 5em; margin-left:3em;\'>" + str2+ " " + str3+"</div>";
 			
