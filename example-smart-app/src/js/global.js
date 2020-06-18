@@ -919,18 +919,16 @@ function displayQuestionnaire(QR, formOID){
 			var linkId = data.contained[0].item[0].linkId;
 				
 			var str2 = data.contained[0].item[0].item[0].text;
-			 var txt2 = document.createElement("textarea2");
-			   txt2.innerHTML = str2;
-			   console.log( txt2.value);	
+			var output2 = decodeHtml(str2);
+				console.log(output2);	
 				
 			//var str_esc2 = escape(str2);
 			//console.log(str_esc2);
 			//console.log(unescape(str_esc2));
 				
 			var str3 = data.contained[0].item[0].item[1].text;
-			 var txt3 = document.createElement("textarea3");
-			   txt3.innerHTML = str3;
-			   console.log( txt3.value);
+			 var output3 = decodeHtml(str3);
+				console.log(output3);
 			
 			screen += "<div style=\'height: 50px; font-style: italic; font-size: 20px; margin-bottom: 5em; margin-left:3em;\'>" + str2+ " " + str3+"</div>";
 			
