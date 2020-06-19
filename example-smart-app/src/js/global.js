@@ -879,6 +879,7 @@ function displayQuestionnaire(QR, formOID){
 			var res = data.contained[0].item[0].item[0].text;
 				var str = res.replace("amp;", "");	
 			 var output = decodeHtml(str);
+				
 				console.log(output);
 				
 			//var str_esc = escape(str);
@@ -930,9 +931,12 @@ function displayQuestionnaire(QR, formOID){
 			var res3 = data.contained[0].item[0].item[1].text;
 			var str3 = res3.replace("amp;", "");
 			 var output3 = decodeHtml(str3);
+				var ot3 = decodeHtml(output3);
+				console.log(str3);
 				console.log(output3);
+				console.log(ot3);
 			
-			screen += "<div style=\'height: 50px; font-style: italic; font-size: 20px; margin-bottom: 5em; margin-left:3em;\'>" + output2 + " " + output3 +"</div>";
+			screen += "<div style=\'height: 50px; font-style: italic; font-size: 20px; margin-bottom: 5em; margin-left:3em;\'>" + output2 + " " + ot3 +"</div>";
 			
 			jQuery(data.contained[0].item[0].item[1].answerOption).each(function(i, item){
 			
