@@ -876,8 +876,8 @@ function displayQuestionnaire(QR, formOID){
 			if (temp.length==1){
 			var linkId = data.contained[0].item[0].linkId;
 				
-			var str = data.contained[0].item[0].item[0].text;
-				
+			var res = data.contained[0].item[0].item[0].text;
+				var str = res.replace("amp;", "");	
 			 var output = decodeHtml(str);
 				console.log(output);
 				
@@ -918,7 +918,8 @@ function displayQuestionnaire(QR, formOID){
 			else {
 			var linkId = data.contained[0].item[0].linkId;
 				
-			var str2 = data.contained[0].item[0].item[0].text;
+			var res2 = data.contained[0].item[0].item[0].text;
+			var str2 = res2.replace("amp;", "");	
 			var output2 = decodeHtml(str2);
 				console.log(output2);	
 				
@@ -926,7 +927,8 @@ function displayQuestionnaire(QR, formOID){
 			//console.log(str_esc2);
 			//console.log(unescape(str_esc2));
 				
-			var str3 = data.contained[0].item[0].item[1].text;
+			var res3 = data.contained[0].item[0].item[1].text;
+			var str3 = res3.replace("amp;", "");
 			 var output3 = decodeHtml(str3);
 				console.log(output3);
 			
