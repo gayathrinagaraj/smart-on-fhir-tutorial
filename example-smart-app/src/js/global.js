@@ -892,10 +892,11 @@ function displayQuestionnaire(QR, formOID){
 			if (temp.length==1){
 			var linkId = data.contained[0].item[0].linkId;
 			
-				var str = data.contained[0].item[0].item[0].text;
-				
-			 var Ques01 = decodeHtml(str);
+				var res = data.contained[0].item[0].item[0].text;
+				var str = res.replace("amp;", "");	
+				var Ques01 = decodeHtml(str);
 				console.log(Ques01);
+				
 
 				
 			
@@ -930,17 +931,20 @@ function displayQuestionnaire(QR, formOID){
 			else {
 			var linkId = data.contained[0].item[0].linkId;
 				
-				var str2 = data.contained[0].item[0].item[0].text;
-				
-			 var Ques02 = decodeHtml(str2);
+				var res2 = data.contained[0].item[0].item[0].text;
+				var str2 = res2.replace("amp;", "");	
+				var Ques02 = decodeHtml(str2);
 				console.log(Ques02);
 				
-				var str3 = data.contained[0].item[0].item[1].text;
+				var res3 = data.contained[0].item[0].item[1].text;
+				var str3 = res3.replace("amp;", "");
 				console.log(str3);
-			 var Ques03 = decodeHtml(str3);
+				var Ques03 = decodeHtml(str3);
 				console.log(Ques03);
+				var Q3 = decodeHtml(Ques03 );
+				console.log(Q3);
 			
-			screen += "<div style=\'height: 50px; font-style: italic; font-size: 20px; margin-bottom: 5em; margin-left:3em;\'>" + Ques02 + " " + Ques03 +"</div>";
+			screen += "<div style=\'height: 50px; font-style: italic; font-size: 20px; margin-bottom: 5em; margin-left:3em;\'>" + Ques02 + " " + Q3 +"</div>";
 			
 			jQuery(data.contained[0].item[0].item[1].answerOption).each(function(i, item){
 			
