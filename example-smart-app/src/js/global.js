@@ -571,9 +571,9 @@ function assignValues(task_Id,pro_Id,pro_Name,pat_Name,encounterId,practitionerI
 	patId = patID;					
 	patName = pat_Name;
 	
-	//patEncounterId =encounterId ;
+	patEncounterId =encounterId ;
 	
-	patEncounterId = "54280423";
+	//patEncounterId = "54280423";
 	
 	
 	patPractitionerId = practitionerId;
