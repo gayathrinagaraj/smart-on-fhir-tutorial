@@ -178,6 +178,7 @@ function listForms() {
 			var container = document.getElementById("Content");
 			var forms = data.entry;
 			//console.log(data.entry);
+			document.createElement('datalist');
 			var datalist = document.getElementById("selectform"); 
 
 			//console.log("all forms"+forms);
@@ -187,7 +188,7 @@ function listForms() {
 				var opt = forms[i].resource.title;
 				var val = forms[i].resource.id;
 				var el = document.createElement("option");
-
+                                  
 				//Taken extra attribute to support datalist in IE7
 				el.textContent = opt;
 				el.value = opt;
