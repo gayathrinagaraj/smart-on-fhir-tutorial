@@ -178,7 +178,7 @@ function listForms() {
 			var container = document.getElementById("Content");
 			var forms = data.entry;
 			//console.log(data.entry);
-			document.createElement('datalist');
+			
 			var datalist = document.getElementById("selectform"); 
 
 			//console.log("all forms"+forms);
