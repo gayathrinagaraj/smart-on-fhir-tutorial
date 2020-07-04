@@ -138,7 +138,7 @@ $(document).ready(function(){
 		setTimeout(function() { $("#order_successful").hide(); }, 10000);
 	});  
 	  
-		  location.reload();
+		  //location.reload();
   } 
 	  
 	  
