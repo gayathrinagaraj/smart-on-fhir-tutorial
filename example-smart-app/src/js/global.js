@@ -82,8 +82,8 @@ $(document).ready(function(){
 	//var sformoid = $('#selectform option[value="'+idOfSelect+'"]').attr("id")
 	var success_message = 'Order for '+formname+' is placed.';
 	var error_message = 'Order is not valid, please select from the list.'
-	var data_inlist = document.getElementById('selectform');
-	  
+	//var data_inlist = document.getElementById('selectform');
+	/*  
 	  console.log(data_inlist);
 	var flag = 'unset';
 	var i;
@@ -101,6 +101,7 @@ $(document).ready(function(){
 	document.getElementById('order_successful').style.display = "inline";
 	return;
 	}
+	*/
 	
 	
 	  
@@ -128,7 +129,7 @@ $(document).ready(function(){
 		orderStatus();
 		document.getElementById('order_unsuccessful').style.display = "none";
 		document.getElementById('order_successful').innerHTML = success_message;
-		document.getElementById('selectinput').value = '';
+		document.getElementById('selectform').value = '';
 		$("#order_successful").show();
 		setTimeout(function() { $("#order_successful").hide(); }, 10000);
 	});  
