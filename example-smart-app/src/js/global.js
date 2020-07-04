@@ -634,6 +634,47 @@ function refreshSmartToken(){
     
 		console.log(refresh_token);
 		console.log("refresh token function");
+	
+	$.ajax({
+		
+		url: "https://authorization.cerner.com/tenants/e8a84236-c258-4952-98b7-a6ff8a9c587a/protocols/oauth2/profiles/smart-v1/token",
+		cache: false,
+		type: "POST",
+		beforeSend: function(xhr) {
+			
+			console.log(access_token);
+			//xhr.setRequestHeader("Authorization", "Bearer "+access_token);
+			xhr.setRequestHeader("Accept", "application/json+fhir");
+			xhr.setRequestHeader("Content-Type", "application/json+fhir");
+			xhr.setRequestHeader("grant_type=refresh_token&refresh_token", refresh_token);
+
+		},
+		success: function(data) { 
+
+			console.log(data);
+			
+
+		
+	},
+
+		error: function(jqXHR, textStatus, errorThrown) {
+			//document.write(jqXHR.responseText + ':' + textStatus + ':' + errorThrown);
+				console.log(jqXHR.responseText);
+		}
+	});
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
     setTimeout(refreshSmartToken, 480000);
 }
 
