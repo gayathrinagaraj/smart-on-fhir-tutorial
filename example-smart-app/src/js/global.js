@@ -646,7 +646,9 @@ function refreshSmartToken(){
 			//xhr.setRequestHeader("Authorization", "Bearer "+access_token);
 			xhr.setRequestHeader("Accept", "application/json+fhir");
 			xhr.setRequestHeader("Content-Type", "application/json+fhir");
-			xhr.setRequestHeader("grant_type=refresh_token&refresh_token", refresh_token);
+			xhr.setRequestHeader("grant_type", "refresh_token");
+			xhr.setRequestHeader("refresh_token", refresh_token);
+
 
 		},
 		success: function(data) { 
