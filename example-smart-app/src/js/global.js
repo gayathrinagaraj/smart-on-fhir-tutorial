@@ -132,7 +132,7 @@ $(document).ready(function(){
 		orderStatus();
 		document.getElementById('order_unsuccessful').style.display = "none";
 		document.getElementById('order_successful').innerHTML = success_message;
-		document.getElementById('selectform').value = '';
+		$("#selectform").select2("val", "");
 		$("#order_successful").show();
 		setTimeout(function() { $("#order_successful").hide(); }, 10000);
 	});  
