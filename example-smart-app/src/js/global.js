@@ -132,13 +132,12 @@ $(document).ready(function(){
 		orderStatus();
 		document.getElementById('order_unsuccessful').style.display = "none";
 		document.getElementById('order_successful').innerHTML = success_message;
-	
-		//$("#selectform").empty().trigger('change')
-		$("#selectform").val('').trigger('change');
-		//$("#selectform").text('').trigger('change');
-		
 		$("#order_successful").show();
 		setTimeout(function() { $("#order_successful").hide(); }, 5000);
+	
+		
+		$("#selectform").val('').trigger('change');
+		//$("#selectform").text('').trigger('change');
 		 $('#selectform option:selected').text('').trigger('change');
 		//setTimeout(function(){location.reload()},5200);
 	});  
@@ -153,6 +152,7 @@ $(document).ready(function(){
 	
 	formname ='';
 	flag ='unset';
+	$('#selectform option:selected').text('').trigger('change');
 });
 
 
