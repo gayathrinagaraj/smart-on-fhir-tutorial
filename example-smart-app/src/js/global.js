@@ -134,7 +134,8 @@ $(document).ready(function(){
 		document.getElementById('order_successful').innerHTML = success_message;
 	
 		//$("#selectform").empty().trigger('change')
-		$("#selectform").val('').trigger('change')
+		$("#selectform").val('').trigger('change');
+		$("#selectform").text('').trigger('change');
 		
 		$("#order_successful").show();
 		setTimeout(function() { $("#order_successful").hide(); }, 10000);
