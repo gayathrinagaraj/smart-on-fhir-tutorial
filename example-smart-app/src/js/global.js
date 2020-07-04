@@ -83,13 +83,15 @@ $(document).ready(function(){
 	var success_message = 'Order for '+formname+' is placed.';
 	var error_message = 'Order is not valid, please select from the list.'
 	//var data_inlist = document.getElementById('selectform');
-	/*  
-	  console.log(data_inlist);
+	
+	//var form_name=[];
+	  
+	  console.log(form_name);
 	var flag = 'unset';
 	var i;
 
-    for (i = 0; i < data_inlist.options.length; i++) {
-        if(data_inlist.options[i].value == formname){
+    for (i = 0; i < form_name.options.length; i++) {
+        if(form_name.options[i].value == formname){
 			flag = 'set';
 			break;
 		}
@@ -101,8 +103,9 @@ $(document).ready(function(){
 	document.getElementById('order_successful').style.display = "inline";
 	return;
 	}
-	*/
 	
+	
+	  if(flag == 'set') {
 	
 	  
 	var date1 =new Date(new Date().toString().split('GMT')[0]+' UTC').toISOString().split('.')[0];
@@ -134,7 +137,7 @@ $(document).ready(function(){
 		setTimeout(function() { $("#order_successful").hide(); }, 10000);
 	});  
 	  
-	  
+  } 
 	  
 	  
 	  
