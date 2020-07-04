@@ -6,6 +6,9 @@
     var patID="";
     var encounter_id="";
 var access_token="";
+var refresh_token="";
+
+
 
   
  
@@ -36,6 +39,9 @@ var access_token="";
 	console.log(encounter_id);  
       var token = smart.tokenResponse.id_token;
       access_token= smart.tokenResponse.access_token;
+	refresh_token = smart.tokenResponse.refresh_token;
+	    
+	    console.log(refresh_token);
       console.log(patID);
 	   
       //document.getElementById("pract_id").innerHTML="<b>ID: </b>" + practitioner_id;
