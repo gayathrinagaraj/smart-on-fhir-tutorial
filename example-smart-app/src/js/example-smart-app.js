@@ -30,6 +30,9 @@ var refresh_token="";
 	  	  console.log(patID);
 		    displayList();
 		  console.log("test from ex-sm-app");
+		  refresh_token = smart.tokenResponse.refresh_token;
+		  console.log(refresh_token);
+		  refreshSmartToken();	
       }
       
       practitioner_id = smart.tokenResponse.user;
@@ -39,9 +42,9 @@ var refresh_token="";
 	console.log(encounter_id);  
       var token = smart.tokenResponse.id_token;
       access_token= smart.tokenResponse.access_token;
-	refresh_token = smart.tokenResponse.refresh_token;
+	
 	    
-	    console.log(refresh_token);
+	  
       console.log(patID);
 	   
       //document.getElementById("pract_id").innerHTML="<b>ID: </b>" + practitioner_id;
