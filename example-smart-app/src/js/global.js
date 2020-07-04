@@ -72,25 +72,15 @@ $(document).ready(function(){
     var formname = $('#selectform option:selected').text();
     var formid = $('#selectform').val();
      
-
-  //  $('#result').html("id : " + formid + ", name : " + formname);
-	  
-	  
-	//var e = document.getElementById("selectform");		
-	//var idOfSelect = $("#selectinput").val();
-	//var sformname = $('#selectform option[value="'+idOfSelect+'"]').text();
-	//var sformoid = $('#selectform option[value="'+idOfSelect+'"]').attr("id")
 	var success_message = 'Order for '+formname+' is placed.';
 	var error_message = 'Order is not valid, please select from the list.'
-	//var data_inlist = document.getElementById('selectform');
 	
-	//var form_name=[];
 	  
-	  console.log(form_name);
+	 console.log(form_name);
 	var flag = 'unset';
 	var i;
 
-    for (i = 0; i < form_name.length; i++) {
+   	 for (i = 0; i < form_name.length; i++) {
         if(form_name[i] == formname){
 			flag = 'set';
 			break;
@@ -160,7 +150,7 @@ $(document).ready(function(){
 
 
 
-	var el = document.getElementById("myBtn");
+/*	var el = document.getElementById("myBtn");
 
 if(el){
   el.addEventListener("click", function(){
@@ -322,7 +312,7 @@ function listForms() {
 	});
 }
 
-
+*/
 
 
 
