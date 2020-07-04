@@ -150,7 +150,7 @@ $(document).ready(function(){
 
 
 
-/*	var el = document.getElementById("myBtn");
+	var el = document.getElementById("myBtn");
 
 if(el){
   el.addEventListener("click", function(){
@@ -312,7 +312,7 @@ function listForms() {
 	});
 }
 
-*/
+
 
 
 
