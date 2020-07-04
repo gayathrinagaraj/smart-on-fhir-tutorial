@@ -73,7 +73,74 @@ $(document).ready(function(){
     var formid = $('#selectform').val();
      
 
-    $('#result').html("id : " + formid + ", name : " + formname);
+  //  $('#result').html("id : " + formid + ", name : " + formname);
+	  
+	  
+	//var e = document.getElementById("selectform");		
+	//var idOfSelect = $("#selectinput").val();
+	//var sformname = $('#selectform option[value="'+idOfSelect+'"]').text();
+	//var sformoid = $('#selectform option[value="'+idOfSelect+'"]').attr("id")
+	var success_message = 'Order for '+formname+' is placed.';
+	var error_message = 'Order is not valid, please select from the list.'
+	var data_inlist = document.getElementById('selectform');
+	var flag = 'unset';
+	var i;
+
+    for (i = 0; i < data_inlist.options.length; i++) {
+        if(data_inlist.options[i].value == formname){
+			flag = 'set';
+			break;
+		}
+	}
+
+	if(flag == 'unset'){
+	document.getElementById('order_successful').style.display = "none";
+	document.getElementById('order_unsuccessful').innerHTML = error_message;
+	document.getElementById('order_successful').style.display = "inline";
+	return;
+	}
+	
+	
+	  
+	var date1 =new Date(new Date().toString().split('GMT')[0]+' UTC').toISOString().split('.')[0];
+
+	var prdata = "{\r\n\t\"resourceType\": \"ProcedureRequest\",\r\n\t\"status\": \"active\",\r\n\t\"intent\": \"order\",\r\n\t\"category\": [{\r\n\t\t\"coding\": [{\r\n\t\t\t\"system\": \"http://snomed.info/sct\",\r\n\t\t\t\"code\": \"386053000\",\r\n\t\t\t\"display\": \"Evaluation procedure (procedure)\"\r\n\t\t}],\r\n\t\t\"text\": \"Evaluation\"\r\n\t}],\r\n\t\"code\": {\r\n\t\t\"coding\": [{\r\n\t\t\t\"system\": \"http://loinc.org\",\r\n\t\t\t\"code\":  \""+formid+"\",\r\n\t\t\t\"display\":\""+formname+"\"\r\n\t\t}],\r\n\t\t\"text\": \""+formname+"\"\r\n\t},\r\n\t\"occurrenceDateTime\": \""+date1+"\",\r\n\t\"subject\": {\r\n\t\t\"display\": \""+pat_fname+" "+pat_lname+"\",\r\n        \"reference\": \"http://hl7.org/fhir/sid/us-ssn/Patient/"+patient_id+"\"\r\n\t},\r\n\t\"context\": {\r\n    \"reference\": \"http://usc.edu/Encounter/"+encounter_id+"\" \r\n  },\r\n\t\"requester\": {\r\n    \"agent\": {\r\n      \"reference\": \"http://usc.edu/Practitioner/"+practitioner_id+"\"\r\n    }\r\n\t}\r\n}";                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+	
+	var settings = {
+			"async": true,
+			"crossDomain": true,
+			"url": baseurl+"ProcedureRequest",
+			"method": "POST",
+			"contentType" : "application/json",
+		        "cache" : false,
+			"headers": {
+				"Cache-Control": "no-cache"
+			},
+			"processData": false,
+			"data": prdata
+	}
+	$.ajax(settings).done(function (response) {
+		//console.log("pro-test");
+		//console.log(response);
+		//console.log("Posted Procedure Request");
+		orderStatus();
+		document.getElementById('order_unsuccessful').style.display = "none";
+		document.getElementById('order_successful').innerHTML = success_message;
+		document.getElementById('selectinput').value = '';
+		$("#order_successful").show();
+		setTimeout(function() { $("#order_successful").hide(); }, 10000);
+	});  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
 
   });
 });
