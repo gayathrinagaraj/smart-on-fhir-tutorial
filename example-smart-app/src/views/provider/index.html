@@ -29,6 +29,9 @@
 	
 	<script src='../../js/bootstrap_min.js'></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css">     
+   	<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>     
+	
 	
 	
 </head>
@@ -148,7 +151,7 @@
 		<!-- for creating combo-box with datalist.. -->
 		<div style="position:relative;width:200px;height:25px;border:0;padding:0;margin:0;">
 			
-			
+				<!--
 		    	<input id="selectinput" type="text" list="selectform"  style="width: 260%;">
   				<datalist id="selectform">
 					
@@ -156,6 +159,15 @@
 					
 				</datalist> 
 			<button id="myBtn" class="button button3"  type="button" >Order</button>
+			 -->
+			
+			<select id="selectform">
+    			<option>Choose a form</option>
+			</select>
+        
+   			<input type='button' value='Seleted option' id='but_read'>
+			
+			
 		</div>
 		<!-- End of creation combo-box with datalist.. -->
 
