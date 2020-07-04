@@ -637,7 +637,7 @@ function refreshSmartToken(){
     setTimeout(refreshSmartToken, 480000);
 }
 
-	refreshSmartToken();	
+	
 
 
 function displayQ(){
