@@ -139,6 +139,7 @@ $(document).ready(function(){
 		
 		$("#order_successful").show();
 		setTimeout(function() { $("#order_successful").hide(); }, 5000);
+		 $('#selectform option:selected').text('').trigger('change');
 		//setTimeout(function(){location.reload()},5200);
 	});  
 	  
