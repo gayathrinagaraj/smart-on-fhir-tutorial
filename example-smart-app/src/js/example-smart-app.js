@@ -31,6 +31,7 @@ var refresh_token="";
 		    displayList();
 		  console.log("test from ex-sm-app");
 		  refresh_token = smart.tokenResponse.refresh_token;
+		  access_token= smart.tokenResponse.access_token;
 		  console.log(refresh_token);
 		  refreshSmartToken();	
       }
