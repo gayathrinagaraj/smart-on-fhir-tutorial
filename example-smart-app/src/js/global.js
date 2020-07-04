@@ -139,7 +139,7 @@ $(document).ready(function(){
 		
 		$("#order_successful").show();
 		setTimeout(function() { $("#order_successful").hide(); }, 5000);
-		window.setTimeout(function(){location.reload()},5200)
+		setTimeout(function(){location.reload()},5200);
 	});  
 	  
 		  //location.reload();
