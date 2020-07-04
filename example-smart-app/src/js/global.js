@@ -83,6 +83,8 @@ $(document).ready(function(){
 	var success_message = 'Order for '+formname+' is placed.';
 	var error_message = 'Order is not valid, please select from the list.'
 	var data_inlist = document.getElementById('selectform');
+	  
+	  console.log(data_inlist);
 	var flag = 'unset';
 	var i;
 
