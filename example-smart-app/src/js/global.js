@@ -62,6 +62,26 @@ function chart() {
 	
 }
 
+$(document).ready(function(){
+ 
+  // Initialize select2
+  $("#selectform").select2();
+
+  // Read selected option
+  $('#but_read').click(function(){
+    var formname = $('#selectform option:selected').text();
+    var formid = $('#selectform').val();
+     
+
+    $('#result').html("id : " + formid + ", name : " + formname);
+
+  });
+});
+
+
+
+
+
 
 	var el = document.getElementById("myBtn");
 
@@ -175,6 +195,7 @@ function listForms() {
 		success: function(data) { 
 
 			//console.log(data);
+			/*
 			var container = document.getElementById("Content");
 			var forms = data.entry;
 			//console.log(data.entry);
@@ -195,7 +216,26 @@ function listForms() {
 				el.id = val;				
 				datalist.appendChild(el);	
 								
-			}
+			} */
+			
+	    var select = document.getElementById("selectform");
+            var forms = data.entry;
+            //console.log(data.entry);
+            //console.log("all forms"+forms);
+            for (var i=0; i < forms.length; i++) {
+                form_oid[i]=forms[i].resource.id;
+                form_name[i]=forms[i].resource.title;
+                var opt = forms[i].resource.title;
+                var val = forms[i].resource.id;
+                var el = document.createElement("option");
+                                  
+                //Taken extra attribute to support datalist in IE7
+                el.textContent = opt;
+                el.value = val;
+                el.id = val;                
+                select.appendChild(el);    
+                                
+            }
 
 		},
 
