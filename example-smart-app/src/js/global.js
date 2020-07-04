@@ -90,8 +90,8 @@ $(document).ready(function(){
 	var flag = 'unset';
 	var i;
 
-    for (i = 0; i < form_name.options.length; i++) {
-        if(form_name.options[i].value == formname){
+    for (i = 0; i < form_name.length; i++) {
+        if(form_name[i] == formname){
 			flag = 'set';
 			break;
 		}
