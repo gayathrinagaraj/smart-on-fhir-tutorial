@@ -135,7 +135,7 @@ $(document).ready(function(){
 	
 		//$("#selectform").empty().trigger('change')
 		$("#selectform").val('').trigger('change');
-		$("#selectform").text('').trigger('change');
+		//$("#selectform").text('').trigger('change');
 		
 		$("#order_successful").show();
 		setTimeout(function() { $("#order_successful").hide(); }, 5000);
