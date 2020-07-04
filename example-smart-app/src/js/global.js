@@ -138,7 +138,8 @@ $(document).ready(function(){
 		$("#selectform").text('').trigger('change');
 		
 		$("#order_successful").show();
-		setTimeout(function() { $("#order_successful").hide(); }, 10000);
+		setTimeout(function() { $("#order_successful").hide(); }, 5000);
+		window.setTimeout(function(){location.reload()},5200)
 	});  
 	  
 		  //location.reload();
