@@ -142,16 +142,11 @@ $(document).ready(function(){
 		  //location.reload();
   } 
 	  
+	  formname ='';
 	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-
+	   
   });
+	
 });
 
 
