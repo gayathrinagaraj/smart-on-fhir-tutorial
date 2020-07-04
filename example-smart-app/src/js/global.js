@@ -630,6 +630,14 @@ $.ajax(settings).done(function (response) {
 }
 
 
+function refreshSmartToken(){
+    
+		console.log(refresh_token);
+		console.log("refresh token function");
+    setTimeout(refreshSmartToken, 480000);
+}
+
+	refreshSmartToken();	
 
 
 function displayQ(){
