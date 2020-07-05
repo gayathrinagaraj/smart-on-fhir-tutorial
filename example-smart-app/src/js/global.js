@@ -655,10 +655,12 @@ function refreshSmartToken(){
 
 $.ajax(settings200).done(function (response) {
   console.log(response);
+	access_token = response.access_token;
 	console.log("RF resp");
+	console.log(access_token);
 	
 });	
-	
+	console.log(access_token);
     setTimeout(refreshSmartToken, 480000);
 }
 
