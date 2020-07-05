@@ -33,7 +33,8 @@ var refresh_token="";
 		  refresh_token = smart.tokenResponse.refresh_token;
 		  access_token= smart.tokenResponse.access_token;
 		  console.log(refresh_token);
-		  refreshSmartToken();	
+		   setTimeout(refreshSmartToken, 480000);
+		  //refreshSmartToken();	
       }
       
       practitioner_id = smart.tokenResponse.user;
