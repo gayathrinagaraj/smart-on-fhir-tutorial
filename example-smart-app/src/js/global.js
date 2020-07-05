@@ -633,49 +633,29 @@ $.ajax(settings).done(function (response) {
 function refreshSmartToken(){
     
 		console.log(refresh_token);
+		console.log(access_token);
 		console.log("refresh token function");
 	
-	$.ajax({
-		
-		url: "https://authorization.cerner.com/tenants/e8a84236-c258-4952-98b7-a6ff8a9c587a/protocols/oauth2/profiles/smart-v1/token",
-		cache: false,
-		type: "POST",
-		beforeSend: function(xhr) {
-			
-			console.log(access_token);
-			xhr.setRequestHeader("Authorization", "Bearer "+access_token);
-			xhr.setRequestHeader("Accept", "application/json+fhir");
-			xhr.setRequestHeader("Content-Type", "application/json+fhir");
-			xhr.setRequestHeader("grant_type", "refresh_token");
-			xhr.setRequestHeader("refresh_token", refresh_token);
+	
+	var settings200 = {
+  "url": "https://authorization.cerner.com/tenants/e8a84236-c258-4952-98b7-a6ff8a9c587a/protocols/oauth2/profiles/smart-v1/token",
+  "method": "POST",
+  "headers": {
+    "Authorization":  "Bearer "+access_token,
+    "Content-Type": "application/x-www-form-urlencoded",
+	  "Accept": "application/json"
+  },
+  "data": {
+    "grant_type": "refresh_token",
+    "refresh_token": refresh_token
+  }
+};
 
-
-		},
-		success: function(data) { 
-
-			console.log(data);
-			
-
-		
-	},
-
-		error: function(jqXHR, textStatus, errorThrown) {
-			//document.write(jqXHR.responseText + ':' + textStatus + ':' + errorThrown);
-				console.log(jqXHR.responseText);
-		}
-	});
+$.ajax(settings200).done(function (response) {
+  console.log(response);
+	console.log("RF resp");
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+});	
 	
     setTimeout(refreshSmartToken, 480000);
 }
