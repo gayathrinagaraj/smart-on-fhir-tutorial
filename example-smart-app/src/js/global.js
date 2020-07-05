@@ -638,17 +638,19 @@ function refreshSmartToken(){
 	
 	
 	var settings200 = {
-  "url": "https://authorization.cerner.com/tenants/e8a84236-c258-4952-98b7-a6ff8a9c587a/protocols/oauth2/profiles/smart-v1/token",
-  "method": "POST",
-  "headers": {
-    "Authorization":  "Bearer "+access_token,
-    "Content-Type": "application/x-www-form-urlencoded",
-	  "Accept": "application/json"
-  },
-  "data": {
-    "grant_type": "refresh_token",
-    "refresh_token": refresh_token
-  }
+		"async": true,
+		"crossDomain": true,	
+  		"url": "https://authorization.cerner.com/tenants/e8a84236-c258-4952-98b7-a6ff8a9c587a/protocols/oauth2/profiles/smart-v1/token",
+ 		"method": "POST",
+  		"headers": {
+    		
+   		 "Content-Type": "application/x-www-form-urlencoded",
+		  "Accept": "application/json"
+  			},
+  		"data": {
+    		"grant_type": "refresh_token",
+   	 	"refresh_token": refresh_token
+  		}
 };
 
 $.ajax(settings200).done(function (response) {
