@@ -22,13 +22,16 @@
 	<link rel="stylesheet" href="../../../src/css/nv.d3.css">
 	<link rel='stylesheet' type='text/css' href='../../css/tab.css'>
 
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	  
 	<script src='../../js/example-smart-app.js'></script>
 	<script src='../../js/d3.v3.min.js'></script>
 	<script src='../../js/nv.d3.js'></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	
 	<script src='../../js/bootstrap_min.js'></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
 	
 	
 </head>
@@ -147,11 +150,27 @@
 		<h3>Order a new PRO</h3>
 		<!-- for creating combo-box with datalist.. -->
 		<div style="position:relative;width:200px;height:25px;border:0;padding:0;margin:0;">
-		    	<input id="selectinput" type="text" list="selectform"  style="width: 260%;">
+			
+				<!--
+		    	<input id="selectinput" type="text" list="selectform"  style="width: 300%;">
   				<datalist id="selectform">
+					
     			<option value=""  disabled selected ></option>
+					
 				</datalist> 
 			<button id="myBtn" class="button button3"  type="button" >Order</button>
+			 -->
+			
+			<select id="selectform"  style="width: 260%;">
+    			<option>Please select an instrument from the list</option>
+			</select>
+        
+   			<input type='button' class='button button3'  value='Order' id='but_read'>
+			
+			<br/>
+			<div id='result'></div>
+			
+			
 		</div>
 		<!-- End of creation combo-box with datalist.. -->
 
@@ -243,6 +262,8 @@
 	<script src='../../../src/js/ajax_jquery.js'></script>
   	<script src='../../../src/js/jQuery.XDomainRequest.js'></script>
 	<script src='../../../src/js/jquery.xdomainrequest.min.js'></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css">     
+   	<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script> 
 	<script>
 	//When the user clicks on <span> (x), close the modal
 	var btn = document.getElementById("myBtn");
@@ -275,6 +296,9 @@
 		});
 	</script>
 	<script>
+		
+	
+		
 	
 	function manage(selectinput) {
         

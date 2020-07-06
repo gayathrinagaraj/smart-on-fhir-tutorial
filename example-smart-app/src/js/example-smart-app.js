@@ -5,8 +5,11 @@
     var persona="";
     var patID="";
     var encounter_id="";
-    var access_token="";
-    var smartObject="";
+
+var access_token="";
+var refresh_token="";
+var smartObject="";
+
 
   
  
@@ -30,6 +33,11 @@
 	  	  console.log(patID);
 		    displayList();
 		  console.log("test from ex-sm-app");
+		  refresh_token = smart.tokenResponse.refresh_token;
+		  access_token= smart.tokenResponse.access_token;
+		  console.log(refresh_token);
+		   setTimeout(refreshSmartToken, 480000);
+		  //refreshSmartToken();	
       }
       
       practitioner_id = smart.tokenResponse.user;
@@ -39,6 +47,9 @@
 	console.log(encounter_id);  
       var token = smart.tokenResponse.id_token;
       access_token= smart.tokenResponse.access_token;
+	
+	    
+	  
       console.log(patID);
 	   
       //document.getElementById("pract_id").innerHTML="<b>ID: </b>" + practitioner_id;

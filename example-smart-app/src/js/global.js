@@ -80,6 +80,93 @@ function chart() {
 	
 }
 
+$(document).ready(function(){
+ 
+  // Initialize select2
+  $("#selectform").select2();
+
+  // Read selected option
+  $('#but_read').click(function(){
+    var formname = $('#selectform option:selected').text();
+    var formid = $('#selectform').val();
+     
+	var success_message = 'Order for '+formname+' is placed.';
+	var error_message = 'Order is not valid, please select from the list.'
+	
+	  
+	 console.log(form_name);
+	var flag = 'unset';
+	var i;
+
+   	 for (i = 0; i < form_name.length; i++) {
+        if(form_name[i] == formname){
+			flag = 'set';
+			break;
+		}
+	}
+
+	if(flag == 'unset'){
+	document.getElementById('order_successful').style.display = "none";
+	document.getElementById('order_unsuccessful').innerHTML = error_message;
+	document.getElementById('order_successful').style.display = "inline";
+	return;
+	}
+	
+	
+	  if(flag == 'set') {
+	
+	  
+	var date1 =new Date(new Date().toString().split('GMT')[0]+' UTC').toISOString().split('.')[0];
+
+	var prdata = "{\r\n\t\"resourceType\": \"ProcedureRequest\",\r\n\t\"status\": \"active\",\r\n\t\"intent\": \"order\",\r\n\t\"category\": [{\r\n\t\t\"coding\": [{\r\n\t\t\t\"system\": \"http://snomed.info/sct\",\r\n\t\t\t\"code\": \"386053000\",\r\n\t\t\t\"display\": \"Evaluation procedure (procedure)\"\r\n\t\t}],\r\n\t\t\"text\": \"Evaluation\"\r\n\t}],\r\n\t\"code\": {\r\n\t\t\"coding\": [{\r\n\t\t\t\"system\": \"http://loinc.org\",\r\n\t\t\t\"code\":  \""+formid+"\",\r\n\t\t\t\"display\":\""+formname+"\"\r\n\t\t}],\r\n\t\t\"text\": \""+formname+"\"\r\n\t},\r\n\t\"occurrenceDateTime\": \""+date1+"\",\r\n\t\"subject\": {\r\n\t\t\"display\": \""+pat_fname+" "+pat_lname+"\",\r\n        \"reference\": \"http://hl7.org/fhir/sid/us-ssn/Patient/"+patient_id+"\"\r\n\t},\r\n\t\"context\": {\r\n    \"reference\": \"http://usc.edu/Encounter/"+encounter_id+"\" \r\n  },\r\n\t\"requester\": {\r\n    \"agent\": {\r\n      \"reference\": \"http://usc.edu/Practitioner/"+practitioner_id+"\"\r\n    }\r\n\t}\r\n}";                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+	
+	var settings = {
+			"async": true,
+			"crossDomain": true,
+			"url": baseurl+"ProcedureRequest",
+			"method": "POST",
+			"contentType" : "application/json",
+		        "cache" : false,
+			"headers": {
+				"Cache-Control": "no-cache"
+			},
+			"processData": false,
+			"data": prdata
+	}
+	$.ajax(settings).done(function (response) {
+		//console.log("pro-test");
+		//console.log(response);
+		//console.log("Posted Procedure Request");
+		orderStatus();
+		document.getElementById('order_unsuccessful').style.display = "none";
+		document.getElementById('order_successful').innerHTML = success_message;
+		$("#order_successful").show();
+		setTimeout(function() { $("#order_successful").hide(); }, 5000);
+	
+		
+		$("#selectform").val('').trigger('change');
+		//$("#selectform").text('').trigger('change');
+		 $('#selectform option:selected').text('').trigger('change');
+		//setTimeout(function(){location.reload()},5200);
+	});  
+	  
+		  //location.reload();
+  } 
+	  
+	  
+	  
+	   
+  });
+	
+	formname ='';
+	flag ='unset';
+	//$('#selectform option:selected').text('').trigger('change');
+});
+
+
+
+
+
 
 var el = document.getElementById("myBtn");
 
@@ -139,6 +226,9 @@ if(el){
 			"headers": {
 				"Authorization" : "Bearer "+ KeycloakToken,
 				"Access-Control-Allow-Headers": "x-requested-with",
+				"cache" : false,
+				"Cache-Control": "no-cache"
+			//"headers": {
 			//	"Content-Type": "application/json",
 			//	"Cache-Control": "no-cache"
 			},
@@ -191,9 +281,11 @@ function listForms() {
 		success: function(data) { 
 
 			//console.log(data);
+			/*
 			var container = document.getElementById("Content");
 			var forms = data.entry;
 			//console.log(data.entry);
+			
 			var datalist = document.getElementById("selectform"); 
 
 			//console.log("all forms"+forms);
@@ -203,14 +295,33 @@ function listForms() {
 				var opt = forms[i].resource.title;
 				var val = forms[i].resource.id;
 				var el = document.createElement("option");
-
+                                  
 				//Taken extra attribute to support datalist in IE7
 				el.textContent = opt;
 				el.value = opt;
 				el.id = val;				
 				datalist.appendChild(el);	
 								
-			}
+			} */
+			
+	    var select = document.getElementById("selectform");
+            var forms = data.entry;
+            //console.log(data.entry);
+            //console.log("all forms"+forms);
+            for (var i=0; i < forms.length; i++) {
+                form_oid[i]=forms[i].resource.id;
+                form_name[i]=forms[i].resource.title;
+                var opt = forms[i].resource.title;
+                var val = forms[i].resource.id;
+                var el = document.createElement("option");
+                                  
+                //Taken extra attribute to support datalist in IE7
+                el.textContent = opt;
+                el.value = val;
+                el.id = val;                
+                select.appendChild(el);    
+                                
+            }
 
 		},
 
@@ -515,6 +626,7 @@ function patientPostDR (QRjson,desc){
   "url": "https://calv-easiprox.med.usc.edu/a2d2/api/v2/services/questionnaire-resp-2-xhtml?patientId="+patID+"&docRefDescription="+desc+"&encounterId="+patEncounterId+"&practitionerId="+patPractitionerId,
   "method": "POST",
   "headers": {
+	  "x-api-key" : "CK9SLO4L18W2O3L3D7JN8Z447I2982X5F5ZM1J30",
     "Content-Type": "application/json",
     //"Accept": "*/*",
     "Cache-Control": "no-cache"
@@ -534,6 +646,43 @@ $.ajax(settings).done(function (response) {
 }
 
 
+function refreshSmartToken(){
+    
+		console.log(refresh_token);
+		console.log(access_token);
+		console.log("refresh token function");
+	
+	
+	var settings200 = {
+		"async": true,
+		"crossDomain": true,	
+  		"url": "https://authorization.cerner.com/tenants/e8a84236-c258-4952-98b7-a6ff8a9c587a/protocols/oauth2/profiles/smart-v1/token",
+ 		"method": "POST",
+  		"headers": {
+    		
+   		 "Content-Type": "application/x-www-form-urlencoded",
+		  "Accept": "application/json"
+  			},
+  		"data": {
+    		"grant_type": "refresh_token",
+   	 	"refresh_token": refresh_token
+  		}
+};
+
+$.ajax(settings200).done(function (response) {
+  console.log(response);
+	access_token = response.access_token;
+	console.log("RF resp");
+	console.log(access_token);
+	
+});	
+	console.log(access_token);
+    setTimeout(refreshSmartToken, 480000);
+	location.reload();
+	
+}
+
+	
 
 
 function displayQ(){
@@ -895,7 +1044,20 @@ function displayQuestionnaire(QR, formOID){
 			
 			if (temp.length==1){
 			var linkId = data.contained[0].item[0].linkId;
+				
+			var res = data.contained[0].item[0].item[0].text;
+				var str = res.replace("amp;", "");	
+			 var output = decodeHtml(str);
+				
+				console.log(output);
+				
+			//var str_esc = escape(str);
+			//console.log(str_esc);
+			//console.log(unescape(str_esc));
+				
 			
+			
+
 				var res = data.contained[0].item[0].item[0].text;
 				var str = res.replace("amp;", "");	
 				var Ques01 = decodeHtml(str);
@@ -965,7 +1127,9 @@ function displayQuestionnaire(QR, formOID){
 					screen += "<div style=\' margin-top: 0.5em;\'><input type=\'button\' class=\'block\' id=\'" + item.modifierExtension[0].valueString + "\' name=\'" + item.text + "\' value=\'" + item.text + "\' onclick= \'nextQuestion( \"" +linkId+ "\",\"" +valueString+ "\",\"" +system+ "\",\"" +code+ "\", \"" +display+ "\",\"" +text+ "\",\"" +tempOID+ "\");  \' />" + "</div>";
 				
 			});
+			
 			document.getElementById("Content").innerHTML = screen;
+				console.log(screen);
 			//console.log(data.contained[0].item[0].item[1].answerOption);
 			
 			}
@@ -1026,6 +1190,7 @@ function addDays(date, days) {
 
 function displayList(){
 	var settings3 = {
+		
 			"async": false,
 			"crossDomain": true,
 			"url": baseurl+"ProcedureRequest?subject=http://hl7.org/fhir/sid/us-ssn/Patient/"+patID+"&_count=20&intent=order&status=active&_sort:desc=_lastUpdated",
@@ -1034,8 +1199,13 @@ function displayList(){
 			//	"Content-Type": "application/json",
 				"Cache-Control": "no-cache"
 			},
+			"contentType" : "application/json",                                                                           
+
 			"cache" : false,
 			"method": "GET"
+		
+		
+			
 	}
 	$.ajax(settings3).done(function (response) {
 		console.log(response);
