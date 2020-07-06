@@ -656,7 +656,7 @@ function refreshSmartToken(){
 	var settings200 = {
 		"async": true,
 		"crossDomain": true,	
-  		"url": "https://authorization.cerner.com/tenants/e8a84236-c258-4952-98b7-a6ff8a9c587a/protocols/oauth2/profiles/smart-v1/token",
+  		"url": "https://authorization.sandboxcerner.com/tenants/724d00f8-4a37-487d-82a6-822a906b86c2/protocols/oauth2/profiles/smart-v1/token",
  		"method": "POST",
   		"headers": {
     		
