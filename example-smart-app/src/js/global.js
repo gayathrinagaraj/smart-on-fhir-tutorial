@@ -157,7 +157,7 @@ $(document).ready(function(){
     var formname = $('#selectform option:selected').text();
     var formid = $('#selectform').val();
      
-	//alert(formname + "and" + formid);  
+	alert(formname + "and" + formid);  
 	  var date1 =new Date(new Date().toString().split('GMT')[0]+' UTC').toISOString().split('.')[0];
 	  var favdata =" {\r\n  \"resourceType\": \"List\",\r\n  \"status\": \"current\",\r\n  \"code\": {\r\n    \"coding\": [\r\n      {\r\n        \"system\": \"http:\/\/loinc.org\",\r\n        \"code\": \"\"+formid+\"\",\r\n        \"display\": \"\"+formname+\"\"\r\n      }\r\n    ],\r\n    \"text\": \"\"+formname+\"\"\r\n  },\r\n  \"occurrenceDateTime\": \"\"+date1+\"\",\r\n  \"subject\": {\r\n    \"display\": \"\"+pat_fname+\"  \"+pat_lname+\"\",\r\n    \"reference\": \"http:\/\/hl7.org\/fhir\/sid\/us-ssn\/Patient\/\"+patient_id+\"\"\r\n  },\r\n  \"context\": {\r\n    \"reference\": \"http:\/\/usc.edu\/Encounter\/\"+encounter_id+\"\"\r\n  },\r\n  \"requester\": {\r\n    \"agent\": {\r\n      \"reference\": \"http:\/\/usc.edu\/Practitioner\/\"+practitioner_id+\"\"\r\n    }\r\n  }\r\n}\r\n";
 	  var settings = {
@@ -177,7 +177,7 @@ $(document).ready(function(){
 
 $.ajax(settings).done(function (response) {
   console.log(response);
-	
+	alert(response);
 	console.log("fav added");
 });
 	  
@@ -633,6 +633,8 @@ function orderStatus() {
 	$.ajax(settings301).done(function (response) {
 		console.log(response);
 		console.log("fav pro");
+		alert(response);
+		alert("fav pro");
 		document.getElementById('fav_PRO').innerHTML="";
 		//console.log(patID);
 		var str="";
