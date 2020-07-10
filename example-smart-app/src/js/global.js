@@ -147,6 +147,26 @@ $(document).ready(function(){
 
 
 
+$(document).ready(function(){
+ 
+  // Initialize select2
+  $("#selectform").select2();
+
+  // Read selected option
+  $('#test_func').click(function(){
+    var formname = $('#selectform option:selected').text();
+    var formid = $('#selectform').val();
+     
+	alert(formname + "and" + formid);  
+	   
+  });
+	
+	
+});
+
+
+
+
 
 
 
