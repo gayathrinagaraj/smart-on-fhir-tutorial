@@ -333,13 +333,8 @@ table#pending_PRO td,th {
 	margin-left: 1em;
 	
 }
-#outer{
-    width:100%;
-    text-align: center;
-}
-.inner{
-    display: inline-block;
-}	
+#element1 {display:inline-block;margin-right:10px; width:200px; } 
+#element2 {display:inline-block; width:200px; } 	
 			
 
 					
