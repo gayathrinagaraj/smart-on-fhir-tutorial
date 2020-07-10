@@ -171,7 +171,7 @@ $(document).ready(function(){
 				"Cache-Control": "no-cache"
 			},
 			"processData": false,  
-		  data : favdata
+		  "data" : favdata
 
 };
 
