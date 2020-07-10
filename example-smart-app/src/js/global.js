@@ -642,7 +642,8 @@ function orderStatus() {
 
 
 		jQuery(response.entry).each(function(i, item){
-			//console.log(item.resource.code.text);
+			
+			console.log(item.resource.code.text);
 			//console.log(item.resource.id);
 			//console.log(item.resource.occurrenceDateTime);
 			
@@ -658,7 +659,7 @@ function orderStatus() {
 			
 		
 		});		
-		document.getElementById('pending_PRO').innerHTML += str;
+		document.getElementById('fav_PRO').innerHTML += str;
 	});
 	
 }
