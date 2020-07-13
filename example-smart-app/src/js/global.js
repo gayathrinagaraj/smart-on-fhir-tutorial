@@ -279,8 +279,7 @@ if(el){
 var form_oid=[];
 var form_name=[];
 
-//var Server = "https://mss.fsm.northwestern.edu/AC_API";
-var Server = "https://calv-easiprox.med.usc.edu/AC_API_Test";
+var Server = "https://mss.fsm.northwestern.edu/AC_API";
 var FormOID = "96FE494D-F176-4EFB-A473-2AB406610626";  // Sample form -- replace with your FormOID
 var promisUID="001";
 
@@ -297,12 +296,8 @@ function listForms() {
 		// data: "",
 		dataType: "json",
 		beforeSend: function(xhr) {
-			//var username = "2F984419-5008-4E42-8210-68592B418233";
-			//var pass = "21A673E8-9498-4DC2-AAB6-07395029A778";
-			
-			
-			var username =  ="08B2BC59-54F7-4A8A-8FC8-28B20D04B909";
-			var pass = "B794E66E-287E-44BF-9C82-31E3703B502C";
+			var username = "2F984419-5008-4E42-8210-68592B418233";
+			var pass = "21A673E8-9498-4DC2-AAB6-07395029A778";
 			//var Token = "MkY5ODQ0MTktNTAwOC00RTQyLTgyMTAtNjg1OTJCNDE4MjMzOjIxQTY3M0U4LTk0OTgtNERDMi1BQUI2LTA3Mzk1MDI5QTc3OA==";
 
 			var base64 = btoa(username + ":" + pass);
@@ -317,7 +312,6 @@ function listForms() {
 			//console.log(data.entry);
 			
 			var datalist = document.getElementById("selectform"); 
-
 			//console.log("all forms"+forms);
 			for (var i=0; i < forms.length; i++) {
 				form_oid[i]=forms[i].resource.id;
@@ -681,7 +675,7 @@ listForms();
 //Flow for the patient app
 
 
-//var Server = "https://mss.fsm.northwestern.edu/AC_API";
+var Server = "https://mss.fsm.northwestern.edu/AC_API";
 var formOID;
 var formName;
 var answer_item =[];
@@ -1086,9 +1080,7 @@ function displayQuestionnaire(QR, formOID){
 	var temp =null;
 	$.ajax({
 		
-		//url: "https://mss.fsm.northwestern.edu/AC_API/2018-10/Questionnaire/"+formOID+"/next-q",
-		
-		url: "https://calv-easiprox.med.usc.edu/AC_API_Test/2018-10/Questionnaire/"+formOID+"/next-q",
+		url: "https://mss.fsm.northwestern.edu/AC_API/2018-10/Questionnaire/"+formOID+"/next-q",
 		cache: false,
 		async:false,
 		type: "POST",
@@ -1096,11 +1088,8 @@ function displayQuestionnaire(QR, formOID){
 		data : JSON.stringify(QR) ,
 		dataType: "json",
 		beforeSend: function(xhr) {
-			//var username = "2F984419-5008-4E42-8210-68592B418233";
-			//var pass = "21A673E8-9498-4DC2-AAB6-07395029A778";
-			
-			var username =  ="08B2BC59-54F7-4A8A-8FC8-28B20D04B909";
-			var pass = "B794E66E-287E-44BF-9C82-31E3703B502C";
+			var username = "2F984419-5008-4E42-8210-68592B418233";
+			var pass = "21A673E8-9498-4DC2-AAB6-07395029A778";
 			//var Token = "MkY5ODQ0MTktNTAwOC00RTQyLTgyMTAtNjg1OTJCNDE4MjMzOjIxQTY3M0U4LTk0OTgtNERDMi1BQUI2LTA3Mzk1MDI5QTc3OA==";
 
 			var base64 = btoa(username + ":" + pass);
@@ -1239,7 +1228,7 @@ var initialQR = {
 "resourceType": "Questionnaire",
 "id": formOID, 
 "meta": {"versionId": "1","lastUpdated": "2014-11-14T10:03:25","profile": ["http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-adapt"]},
-"url":"https://calv-easiprox.med.usc.edu/AC_API_Test/2018-10/Questionnaire/"+formOID,
+"url":"https://mss.fsm.northwestern.edu/ac_api/2018-10/Questionnaire/"+formOID,
 "title":formName,
 "status": "active",
 "date": date,
@@ -1365,6 +1354,3 @@ function displayList(){
 	});
 
 }
-
-
-
