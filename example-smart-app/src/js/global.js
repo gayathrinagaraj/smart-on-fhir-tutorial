@@ -685,6 +685,7 @@ $.ajax(settings200).done(function (response) {
 });	
 	console.log(access_token);
     setTimeout(refreshSmartToken, 480000);
+	setTimeout(getKeycloakToken, 480000); 
 	location.reload();
 	
 }
