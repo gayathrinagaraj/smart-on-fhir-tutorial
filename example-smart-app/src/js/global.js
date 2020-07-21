@@ -1076,7 +1076,7 @@ function displayQuestionnaire(QR, formOID){
 
 				
 			
-			screen += "<div style=\'height: 50px; font-style: italic; font-size: 20px; margin-bottom: 5em; margin-left:3em;\'>" + Ques01 + "</div>";
+			screen += "<div style=\'height: 50px; font-style: normal; font-size: 20px; margin-bottom: 5em; margin-left:3em;\'>" + Ques01 + "</div>";
 			
 			jQuery(data.contained[0].item[0].item[0].answerOption).each(function(i, item){
 			//console.log(item.modifierExtension[0].valueString);
@@ -1120,7 +1120,7 @@ function displayQuestionnaire(QR, formOID){
 				var Q3 = decodeHtml(Ques03 );
 				console.log(Q3);
 			
-			screen += "<div style=\'height: 50px; font-style: italic; font-size: 20px; margin-bottom: 5em; margin-left:3em;\'>" + Ques02 + " " + Q3 +"</div>";
+			screen += "<div style=\'height: 50px; font-style: normal; font-size: 20px; margin-bottom: 5em; margin-left:3em;\'>" + Ques02 + " " + Q3 +"</div>";
 			
 			jQuery(data.contained[0].item[0].item[1].answerOption).each(function(i, item){
 			
