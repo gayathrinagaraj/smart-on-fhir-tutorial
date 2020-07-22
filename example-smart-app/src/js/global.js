@@ -414,11 +414,12 @@ function prorecommend() {
 
 
 function freqOrder(){
+	console.log(patPractitionerId);
 	
 	var settings31 = {
 			"async": false,
 			"crossDomain": true,
-			"url": baseurl+"ProcedureRequest?requester=http://usc.edu/Practitioner/"+practitioner_id+"&_count=100&intent=order&_sort:desc=_lastUpdated",
+			"url": baseurl+"ProcedureRequest?requester=http://usc.edu/Practitioner/"+patPractitionerId+"&_count=100&intent=order&_sort:desc=_lastUpdated",
 			"contentType" : "application/json",                                                                           
 			"cache" : false,
 		"headers": {
