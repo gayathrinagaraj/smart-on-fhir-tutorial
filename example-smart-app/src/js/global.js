@@ -1128,9 +1128,9 @@ function displayQuestionnaire(QR, formOID){
 			//console.log(str_esc);
 			//console.log(unescape(str_esc));
 				
-			screen+= "<div class=\'container-fluid\'>";
 			
-			screen += "<div class=\'row\'> <div class=\'col-sm-12\' style=\'height: 50px; font-style: normal; font-size: 20px; margin-bottom: 5em; margin-left:3em;\'>" + output + "</div></div>";
+			
+			screen += " <div class=\'col-sm-12\' style=\'height: 50px; font-style: normal; font-size: 20px; margin-bottom: 5em; margin-left:3em;\'>" + output + "</div>";
 			
 			jQuery(data.contained[0].item[0].item[0].answerOption).each(function(i, item){
 			//console.log(item.modifierExtension[0].valueString);
@@ -1149,10 +1149,10 @@ function displayQuestionnaire(QR, formOID){
 			
 			var temp2 = JSON.parse(tmp);
 					
-					screen += "<div class=\'row\'> <div class=\'col-sm-12\' style=\' margin-top: 0.5em;\'><input type=\'button\' class=\'block\' id=\'" + item.modifierExtension[0].valueString + "\' name=\'" + item.text + "\' value=\'" + item.text + "\' onclick= \'nextQuestion( \"" +linkId+ "\",\"" +valueString+ "\",\"" +system+ "\",\"" +code+ "\", \"" +display+ "\",\"" +text+ "\",\"" +tempOID+ "\");  \' />" + "</div></div>";
+					screen += "<div class=\'col-sm-12\' style=\' margin-top: 0.5em;\'><input type=\'button\' class=\'block\' id=\'" + item.modifierExtension[0].valueString + "\' name=\'" + item.text + "\' value=\'" + item.text + "\' onclick= \'nextQuestion( \"" +linkId+ "\",\"" +valueString+ "\",\"" +system+ "\",\"" +code+ "\", \"" +display+ "\",\"" +text+ "\",\"" +tempOID+ "\");  \' />" + "</div>";
 				
 			});
-				screen+= "<\div>";
+				
 			document.getElementById("Content").innerHTML = screen;
 			//console.log(data.contained[0].item[0].item[1].answerOption);
 			
@@ -1160,7 +1160,7 @@ function displayQuestionnaire(QR, formOID){
 			
 			
 			else {
-				screen+= "<div class=\'container-fluid\'>";
+				
 			var linkId = data.contained[0].item[0].linkId;
 				
 			var res2 = data.contained[0].item[0].item[0].text;
@@ -1180,7 +1180,7 @@ function displayQuestionnaire(QR, formOID){
 				console.log(output3);
 				console.log(ot3);
 			
-			screen += "<div class=\'row\'> <div class=\'col-sm-12\' style=\'height: 50px; font-style: normal; font-size: 20px; margin-bottom: 5em; margin-left:3em;\'>" + output2 + " " + ot3 +"</div></div>";
+			screen += "<div class=\'col-sm-12\' style=\'height: 50px; font-style: normal; font-size: 20px; margin-bottom: 5em; margin-left:3em;\'>" + output2 + " " + ot3 +"</div>";
 			
 			jQuery(data.contained[0].item[0].item[1].answerOption).each(function(i, item){
 			
@@ -1194,11 +1194,10 @@ function displayQuestionnaire(QR, formOID){
 			
 			var temp2 = JSON.parse(tmp);
 					
-					screen += "<div class=\'row\'> <div class=\'col-sm-12\' style=\' margin-top: 0.5em;\'><input type=\'button\' class=\'block\' id=\'" + item.modifierExtension[0].valueString + "\' name=\'" + item.text + "\' value=\'" + item.text + "\' onclick= \'nextQuestion( \"" +linkId+ "\",\"" +valueString+ "\",\"" +system+ "\",\"" +code+ "\", \"" +display+ "\",\"" +text+ "\",\"" +tempOID+ "\");  \' />" + "</div></div>";
+					screen += "<div class=\'col-sm-12\' style=\' margin-top: 0.5em;\'><input type=\'button\' class=\'block\' id=\'" + item.modifierExtension[0].valueString + "\' name=\'" + item.text + "\' value=\'" + item.text + "\' onclick= \'nextQuestion( \"" +linkId+ "\",\"" +valueString+ "\",\"" +system+ "\",\"" +code+ "\", \"" +display+ "\",\"" +text+ "\",\"" +tempOID+ "\");  \' />" + "</div>";
 				
 			});
 			
-				screen+= "<\div>";
 			document.getElementById("Content").innerHTML = screen;
 				console.log(screen);
 			//console.log(data.contained[0].item[0].item[1].answerOption);
