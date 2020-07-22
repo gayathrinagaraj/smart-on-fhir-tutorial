@@ -514,11 +514,11 @@ function freqOrder(){
 	console.log(freqpname);
 	
 	jQuery(freqpname).each(function(i, item1){
-			console.log(item1);
+			//console.log(item1);
 		
 		jQuery(proNameList).each(function(j, item2){
-			console.log(item2);
-			console.log(item1);
+			//console.log(item2);
+			//console.log(item1);
 			
 			if (item2 == item1){
 				if (freqpid.includes(proIdList[j]))
