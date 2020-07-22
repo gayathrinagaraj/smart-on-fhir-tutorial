@@ -528,7 +528,7 @@ function freqOrder(){
 				else{
 				freqpid.push(proIdList[j]);
 				}
-				continue;
+				return true;
 			}
 			
 		});
