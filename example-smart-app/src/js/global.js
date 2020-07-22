@@ -475,7 +475,8 @@ Array.prototype.byCount= function(){
 
 var proNameList =[];
 var proIdList= [];
- var freq=[];
+ var freqpname=[];
+var freqpid=[];
 
 function freqOrder(){
 	console.log(practitioner_id);
@@ -508,9 +509,40 @@ function freqOrder(){
 	
 	console.log(proNameList);
 	console.log(proIdList);
-	freq= proNameList.byCount();
+	freqpname= proNameList.byCount();
 
-	console.log(freq);
+	console.log(freqpname);
+	
+	jQuery(freqpname).each(function(i, item1){
+			console.log(item1);
+		
+		jQuery(proNameList).each(function(j, item2){
+			console.log(item2);
+			console.log(item1);
+			
+			if (item2 == item1){
+				if (freqpid.includes(proIdList[j]))
+				{
+					console.log("already there");
+				}
+				else{
+				freqpid.push(proIdList[j]);
+				}
+				continue;
+			}
+			
+		});
+		
+	});
+	
+	console.log(freqpid);
+	
+	
+	
+	
+	
+	
+	
 	
 }
 
