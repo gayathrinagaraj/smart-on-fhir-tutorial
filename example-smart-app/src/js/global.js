@@ -414,7 +414,7 @@ function prorecommend() {
 
 
 function freqOrder(){
-	console.log(patPractitionerId);
+	console.log(practitioner_id);
 	
 	var settings31 = {
 			"async": false,
@@ -433,7 +433,7 @@ function freqOrder(){
 	});
 }
 
-freqOrder();
+
 
 
 
