@@ -50,6 +50,8 @@ var smartObject="";
 	console.log(encounter_id);  
       var token = smart.tokenResponse.id_token;
       access_token= smart.tokenResponse.access_token;
+	    
+	    freqOrder();
 	
 	    
 	  
