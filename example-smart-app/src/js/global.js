@@ -456,7 +456,8 @@ function prorecommend() {
 
 }
 
-
+var proNameList =[];
+var proIdList= [];
 
 
 function freqOrder(){
@@ -480,12 +481,17 @@ function freqOrder(){
 		jQuery(response.entry).each(function(i, item){
 			console.log(item);
 			console.log(item.resource.code.coding[0].code);
+			proIdList.push(item.resource.code.coding[0].code)); 
 			console.log(item.resource.code.coding[0].display);
-			
+			proNameList.push(item.resource.code.coding[0].display);
 		});
 		
 		
 	});
+	
+	console.log(proNameList);
+	console.log(proIdList);
+	
 }
 
 var res_score1;	
