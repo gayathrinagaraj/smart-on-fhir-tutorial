@@ -457,6 +457,29 @@ function prorecommend() {
 }
 
 
+
+
+function freqOrder(){
+	console.log(practitioner_id);
+	
+	var settings31 = {
+			"async": false,
+			"crossDomain": true,
+			"url": baseurl+"ProcedureRequest?requester=http://usc.edu/Practitioner/"+practitioner_id+"&_count=100&intent=order&_sort:desc=_lastUpdated",
+			"contentType" : "application/json",                                                                           
+			"cache" : false,
+		"headers": {
+			"Authorization" : "Bearer "+ KeycloakToken,
+				"Cache-Control": "no-cache"
+			},
+			"method": "GET"
+		
+	}
+	$.ajax(settings31).done(function (response) {
+		console.log(response);		
+	});
+}
+
 var res_score1;	
 var res_score2;			
 function orderStatus() {
