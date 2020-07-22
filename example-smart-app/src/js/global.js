@@ -413,7 +413,7 @@ function prorecommend() {
 }
 
 
-function freqOrder{
+function freqOrder(){
 	
 	var settings31 = {
 			"async": false,
