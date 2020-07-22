@@ -481,7 +481,7 @@ function freqOrder(){
 		jQuery(response.entry).each(function(i, item){
 			console.log(item);
 			console.log(item.resource.code.coding[0].code);
-			proIdList.push(item.resource.code.coding[0].code)); 
+			proIdList.push(item.resource.code.coding[0].code); 
 			console.log(item.resource.code.coding[0].display);
 			proNameList.push(item.resource.code.coding[0].display);
 		});
