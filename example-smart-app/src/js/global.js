@@ -476,7 +476,15 @@ function freqOrder(){
 		
 	}
 	$.ajax(settings31).done(function (response) {
-		console.log(response);		
+		console.log(response);	
+		jQuery(response.entry).each(function(i, item){
+			console.log(item);
+			console.log(item.resource.code.coding[0].code);
+			console.log(item.resource.code.coding[0].display);
+			
+		});
+		
+		
 	});
 }
 
