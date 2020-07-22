@@ -1130,7 +1130,7 @@ function displayQuestionnaire(QR, formOID){
 				
 			
 			
-			screen += " <div class=\'col-sm-12\' style=\'height: 50px; font-style: normal; font-size: 20px; margin-bottom: 5em; margin-left:3em;\'>" + output + "</div>";
+			screen += " <div class=\'col-sm-12\' style=\'height: 50px; font-style: normal; font-size: 20px; margin-bottom: 5em; margin-left:3em;\'>" + output + "</div></br></br>";
 			
 			jQuery(data.contained[0].item[0].item[0].answerOption).each(function(i, item){
 			//console.log(item.modifierExtension[0].valueString);
@@ -1180,7 +1180,7 @@ function displayQuestionnaire(QR, formOID){
 				console.log(output3);
 				console.log(ot3);
 			
-			screen += "<div class=\'col-sm-12\' style=\'height: 50px; font-style: normal; font-size: 20px; margin-bottom: 5em; margin-left:3em;\'>" + output2 + " " + ot3 +"</div>";
+			screen += "<div class=\'col-sm-12\' style=\'height: 50px; font-style: normal; font-size: 20px; margin-bottom: 5em; margin-left:3em;\'>" + output2 + " " + ot3 +"</div></br></br>";
 			
 			jQuery(data.contained[0].item[0].item[1].answerOption).each(function(i, item){
 			
