@@ -1128,7 +1128,7 @@ function displayQuestionnaire(QR, formOID){
 			//console.log(str_esc);
 			//console.log(unescape(str_esc));
 				
-			screen += "</div><div class = \'row\'>"
+			screen += "<div class = \'row\'>"
 			
 			screen += " <div class=\'col-12 col-lg-12 col-md-12 col-sm-12 col-xs-12' style=\'height: 50px; font-style: normal; font-size: 20px; margin-bottom: 5em; margin-left:3em;\'>" + output + "</div></div></br>";
 			
@@ -1153,7 +1153,7 @@ function displayQuestionnaire(QR, formOID){
 				
 			});
 				
-			document.getElementById("Content").innerHTML = screen;
+			document.getElementById("Ques").innerHTML = screen;
 			//console.log(data.contained[0].item[0].item[1].answerOption);
 			
 			}
@@ -1180,7 +1180,7 @@ function displayQuestionnaire(QR, formOID){
 				console.log(output3);
 				console.log(ot3);
 			
-				screen += "</div><div class = \'row\'>"
+				screen += "<div class = \'row\'>"
 			screen += "<div class=\'col-12 col-lg-12 col-md-12 col-sm-12 col-xs-12\' style=\'height: 50px; font-style: normal; font-size: 20px; margin-bottom: 5em; margin-left:3em;\'>" + output2 + " " + ot3 +"</div></div></br>";
 			
 			jQuery(data.contained[0].item[0].item[1].answerOption).each(function(i, item){
@@ -1199,7 +1199,7 @@ function displayQuestionnaire(QR, formOID){
 				
 			});
 			
-			document.getElementById("Content").innerHTML = screen;
+			document.getElementById("Ques").innerHTML = screen;
 				console.log(screen);
 			//console.log(data.contained[0].item[0].item[1].answerOption);
 			
