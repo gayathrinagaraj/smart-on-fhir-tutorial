@@ -87,6 +87,9 @@ $(document).ready(function(){
   // Initialize select2
   $("#selectform").select2();
 
+  $("#freqlist").select2();
+	
+	
   // Read selected option
   $('#but_read').click(function(){
     var formname = $('#selectform option:selected').text();
@@ -537,7 +540,21 @@ function freqOrder(){
 	
 	console.log(freqpid);
 	
-	
+	 var select = document.getElementById("freqlist");
+           
+            for (var i=0; i < freqpname.length; i++) {
+               
+                var opt = freqpname[i];
+                var val = freqpid[i];
+                var el = document.createElement("option");
+                                  
+                //Taken extra attribute to support datalist in IE7
+                el.textContent = opt;
+                el.value = val;
+                el.id = val;                
+                select.appendChild(el);    
+                                
+            }
 	
 	
 	
