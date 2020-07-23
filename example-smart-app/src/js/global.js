@@ -242,7 +242,7 @@ var fdata = JSON.stringify(favdata);
 $(document).ready(function(){
  
   // Initialize select2
-  $("#selectform").select2();
+  $("#freqlist").select2();
 
   
 	
