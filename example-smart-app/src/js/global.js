@@ -30,7 +30,7 @@ function getKeycloakToken(){
 $.ajax(callEasipro).done(function (response) {
 	console.log(response);
 	KeycloakToken=response.result.keyCloak_token;
-	setTimeout(getKeycloakToken, 480000); 
+	setTimeout(getKeycloakToken, 270000); 
 	
 })
 
@@ -851,7 +851,7 @@ $.ajax(settings200).done(function (response) {
 	
 });	
 	console.log(access_token);
-    setTimeout(refreshSmartToken, 480000);
+    setTimeout(refreshSmartToken, 270000);
 	
 	location.reload();
 	
