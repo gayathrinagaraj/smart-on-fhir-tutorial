@@ -1330,8 +1330,8 @@ var initialQR = {
 "subject": "TestPatient",
 "authored": date
 };
-
-displayQuestionnaire (initialQR,formOID);
+var count = 0;
+displayQuestionnaire (initialQR,formOID,count);
 };
 	
 	
