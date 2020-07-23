@@ -1177,7 +1177,7 @@ function displayQuestionnaire(QR, formOID){
 				
 			});
 				
-			document.getElementById("Ques").innerHTML = screen;
+			document.getElementById("Content").innerHTML = screen;
 			//console.log(data.contained[0].item[0].item[1].answerOption);
 			
 			}
@@ -1223,7 +1223,7 @@ function displayQuestionnaire(QR, formOID){
 				
 			});
 			
-			document.getElementById("Ques").innerHTML = screen;
+			document.getElementById("Content").innerHTML = screen;
 				console.log(screen);
 			//console.log(data.contained[0].item[0].item[1].answerOption);
 			
