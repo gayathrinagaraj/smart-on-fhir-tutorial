@@ -1010,146 +1010,76 @@ function decodeHtml(html) {
 }
 
 
-function nextQuestion(linkId,valueString,system,code,display,text,tempOID)
+function nextQuestion(linkId,linkId2,valueString,text,tempOID)
 	{
 	 console.log(QRjson);
-	 //console.log(QRjson.status);
-	 //console.log("here");
+		
+	 console.log(QRjson.status);
 	
 	if (QRjson.status != "completed") {
+        
 	
-	var ansItem1 =  {"extension":[{"url":"http://hl7.org/fhir/StructureDefinition/questionnaire-displayOrder","valueInteger":counter}],
-	"linkId":linkId,
-			 "answer": [
-                {
-                    "valueString": valueString,
-                    "valueCoding": {
-                        "system": system ,
-                        "code": code,
-                        "display": display,
-                    },
-                    "text": text
-                }
-            ]
+	var ansItem1 =  {"extension":[{"url":"http://hl7.org/fhir/StructureDefinition/questionnaire-displayOrder","valueInteger": counter}],
+			"linkId":linkId,
+			  "item": [{
+                     "linkId": linkId2,
+                    "text":text,
+                    "answer": [ {"valueString" : valueString}]
+                   }]
 	};
 	
 	answer_item.push(ansItem1);
-	//console.log(JSON.stringify(answer_item));
-	QRjson["item"]=answer_item;
-	//QRjson.contained[0].subjectType = "Patient";
-	//console.log(tempOID);
-	//console.log("new test");	
-	displayQuestionnaire(QRjson,tempOID);
+	QRjson["item"]=answer_item;	
+        count =count+1;
+	displayQuestionnaire(QRjson,tempOID,count);
 	counter = counter + 1 ;
-	//console.log(counter);
+	
 	}
+	
 	else {
-	//console.log(QRjson);
-	//console.log(JSON.stringify(QRjson));
-	//console.log(QRjson.extension[2].extension[0].valueDecimal);
+	console.log(QRjson);
 	var theta = QRjson.extension[2].extension[0].valueDecimal;
-	var tscore = (theta * 10) + 50;
-	//console.log (tscore);	
-	//console.log(QRjson.contained[0].title);
-	//console.log(QRjson.extension[1].valueDate);
-		var desc = QRjson.contained[0].title + ", t-score :"+ tscore;
-		var date01 = QRjson.extension[1].valueDate;
 		
-		var msec = Date.parse(QRjson.extension[1].valueDate);
-		var d = new Date();
-		var date1 = d.toLocaleString("en-US");
-		//console.log(msec);
-		//console.log(date1);
+	var proID = QRjson.id;
+		var tscore;
+		var sum = 0;
+		var cnt = 0;
 		
-		var questions=[];
-		var answers_temp=[];
-		var linkIds=[];
-		var answers=[];
-		
-		 
-     
-	jQuery(QRjson.contained[0].item).each(function(i, item){
-		//console.log(item);
-		if  (item.item.length==1){
-			
-			questions[i] = item.item[0].text;
-			linkIds[i] = item.linkId;	
-		}
-		else {
-			questions[i] = item.item[0].text + ", "+ item.item[1].text;
-			linkIds[i] = item.linkId;
-		}
-		
-		
-	});
-		
-	jQuery(QRjson.item).each(function(i, item){
-		
-		answers_temp[i] = item.answer[0].text;
-		
-	});
-		
-		answers = answers_temp.reverse();
-		//console.log(questions);
-		//console.log(answers);
-		//console.log(linkIds);
-		
-		//console.log(pat_fname);
-		//console.log(pat_lname);
-		//console.log(patName);
-		
+		var num;
+	 if ( proID == "7DACCFC4-87F9-4C25-A8AA-53B9B677B1A7"  ||   proID == "1DC83612-CBFE-4310-A713-5802E29DFE64" )
+	 {
+		var QAlist =  QRjson.item ;
 
-    		var html01 ='';
-		    
-		html01 +='<html>';
-		html01 += '<head><title>QuestionnaireResponse</title></head>';
-		html01 += '<body><h2>PRO Result Complete</h2><p><b>Patient Name: Wilma Smart </b> </p>';
-                html01 += '<p><b>PRO Name</b>:'+ QRjson.contained[0].title +'</p>';
-		html01 += '<p><b>finishedTime</b> '+ date1 +'</p>';
-		html01 += '<p><b>theta</b>: '+ QRjson.extension[2].extension[0].valueDecimal+'</p>';
-		html01 += '<p><b>standardError</b>: '+QRjson.extension[2].extension[1].valueDecimal+' </p>';
-		html01 += '<p><b>t-score</b>'+ tscore +'</p>';
-		html01 += '<h3>Questionnaire and Responses</h3>';
-		html01 += '<table></table></body></html>';
+		jQuery(QAlist).each(function(i, item){
+		      num = parseInt(item.item[0].answer[0].valueString)
+		      sum = sum + num ;
+		      cnt = cnt+1;
+		 });
+
+		console.log(sum);
+		console.log(cnt);
+		tscore =(sum * 25)/cnt;
+		console.log(tscore);
+
+	 }
+	 else {
+		tscore = (theta * 10) + 50;
+		 console.log(tscore);
+	 }
+
 		
-		
-		var str='';
-			str +='<table><tr> <th>Question</th> <th style="visibility:hidden;"> space</th>  <th>Answer</th>  </tr>';
-		
-		var i;
-		for (i = 0; i < questions.length; i++) { 
-			
-		  str += '<tr> <td>' + questions[i] + '</td> <td style="visibility:hidden;"> space</td> <td>'+ answers[i] +'</td></tr>';
-		}
-		
-		str +='</table>';
-		
-		/*
-		var xhtml_temp1= getxhtml(QRjson);	
-		var ts_temp1 = "t-score : "+ tscore;
-		var d_temp1 ="finishedTime </b> : " + date1 ;
-		var temp1= xhtml_temp1.replace("t-score",ts_temp1);
-		var temp2= temp1.replace("<table></table>", str);
-		var temp3= temp2.replace("finishedTime</b>", d_temp1);
-		
-		*/
-		var temp2= html01.replace("<table></table>", str);
-		
-		
-		//var b64xhtml = btoa(temp2);
-				
-		//console.log(b64xhtml);
+		var desc = QRjson.contained[0].title + ", t-score :"+ tscore;
+	
 		var myJSON_01 = JSON.stringify(QRjson);
-		//postDocRef(desc,b64xhtml);
 		console.log("Encounter" + patEncounterId);
-		console.log("Practitioner"+ patPractitionerId);
-		 patientPostDR (myJSON_01,desc)
+	console.log("Practitioner"+ patPractitionerId);
+	patientPostDR (myJSON_01,desc)
 	document.getElementById("Content").innerHTML = "You have finished the assessment.<br /> Thank you ! <div style=\'height: 50px\' ><button type=\'button\' class='button button6'  onclick=displist() > Back </button></div>";
 	completeProcess(taskId,proId,proName,patId,patName);
 	}
 	
 	
-	}
+}
 	
 
 
