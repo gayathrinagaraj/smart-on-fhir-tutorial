@@ -30,7 +30,7 @@ function getKeycloakToken(){
 $.ajax(callEasipro).done(function (response) {
 	console.log(response);
 	KeycloakToken=response.result.keyCloak_token;
-	setTimeout(getKeycloakToken, 480000); 
+	setTimeout(getKeycloakToken, 270000); 
 	
 })
 
@@ -82,11 +82,16 @@ function chart() {
 	
 }
 
+
+
 $(document).ready(function(){
  
   // Initialize select2
   $("#selectform").select2();
 
+  
+	
+	
   // Read selected option
   $('#but_read').click(function(){
     var formname = $('#selectform option:selected').text();
@@ -161,7 +166,7 @@ $(document).ready(function(){
 	  
 		  //location.reload();
 		  
-		  
+	/*	  
 		  
 	  var favdata = {
  "resourceType": "List",
@@ -217,7 +222,162 @@ var fdata = JSON.stringify(favdata);
 		
 		console.log(response);
 		
+	});   */
+	  
+  } 
+	  
+	  
+	  
+	   
+  });
+	
+	formname ='';
+	flag ='unset';
+	//$('#selectform option:selected').text('').trigger('change');
+});
+
+
+
+
+$(document).ready(function(){
+ 
+  // Initialize select2
+  $("#freqlist").select2();
+
+  
+	
+	
+  // Read selected option
+  $('#f_order').click(function(){
+    var formname = $('#freqlist option:selected').text();
+    var formid = $('#freqlist').val();
+     
+	var success_message = 'Order for '+formname+' is placed.';
+	var error_message = 'Order is not valid, please select from the list.'
+	
+	  
+	 console.log(form_name);
+	var flag = 'unset';
+	var i;
+
+   	 for (i = 0; i < form_name.length; i++) {
+        if(form_name[i] == formname){
+			flag = 'set';
+			break;
+		}
+	}
+
+	if(flag == 'unset'){
+	document.getElementById('order_successful').style.display = "none";
+	document.getElementById('order_unsuccessful').innerHTML = error_message;
+	document.getElementById('order_successful').style.display = "inline";
+	return;
+	}
+	
+	
+	  if(flag == 'set') {
+	
+	  
+	var date1 =new Date(new Date().toString().split('GMT')[0]+' UTC').toISOString().split('.')[0];
+
+	var prdata = "{\r\n\t\"resourceType\": \"ProcedureRequest\",\r\n\t\"status\": \"active\",\r\n\t\"intent\": \"order\",\r\n\t\"category\": [{\r\n\t\t\"coding\": [{\r\n\t\t\t\"system\": \"http://snomed.info/sct\",\r\n\t\t\t\"code\": \"386053000\",\r\n\t\t\t\"display\": \"Evaluation procedure (procedure)\"\r\n\t\t}],\r\n\t\t\"text\": \"Evaluation\"\r\n\t}],\r\n\t\"code\": {\r\n\t\t\"coding\": [{\r\n\t\t\t\"system\": \"http://loinc.org\",\r\n\t\t\t\"code\":  \""+formid+"\",\r\n\t\t\t\"display\":\""+formname+"\"\r\n\t\t}],\r\n\t\t\"text\": \""+formname+"\"\r\n\t},\r\n\t\"occurrenceDateTime\": \""+date1+"\",\r\n\t\"subject\": {\r\n\t\t\"display\": \""+pat_fname+" "+pat_lname+"\",\r\n        \"reference\": \"http://hl7.org/fhir/sid/us-ssn/Patient/"+patient_id+"\"\r\n\t},\r\n\t\"context\": {\r\n    \"reference\": \"http://usc.edu/Encounter/"+encounter_id+"\" \r\n  },\r\n\t\"requester\": {\r\n    \"agent\": {\r\n      \"reference\": \"http://usc.edu/Practitioner/"+practitioner_id+"\"\r\n    }\r\n\t}\r\n}";                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+	
+	var settings = {
+		"async": true,
+			"crossDomain": true,
+			"url": baseurl+"ProcedureRequest",
+			"method": "POST",
+			"contentType" : "application/json",
+			"headers": {
+				"Authorization" : "Bearer "+ KeycloakToken,
+				"Access-Control-Allow-Headers": "x-requested-with",
+				"cache" : false,
+				"Cache-Control": "no-cache"
+			//"headers": {
+			//	"Content-Type": "application/json",
+			//	"Cache-Control": "no-cache"
+			},
+			"processData": false,
+			"data": prdata
+		
+			
+	}
+	$.ajax(settings).done(function (response) {
+		//console.log("pro-test");
+		//console.log(response);
+		//console.log("Posted Procedure Request");
+		orderStatus();
+		document.getElementById('order_unsuccessful').style.display = "none";
+		document.getElementById('order_successful').innerHTML = success_message;
+		$("#order_successful").show();
+		setTimeout(function() { $("#order_successful").hide(); }, 5000);
+	
+		
+		$("#freqlist").val('').trigger('change');
+		//$("#selectform").text('').trigger('change');
+		 $('#freqlist option:selected').text('').trigger('change');
+		//setTimeout(function(){location.reload()},5200);
 	});  
+	  
+		  //location.reload();
+		  
+	/*	  
+		  
+	  var favdata = {
+ "resourceType": "List",
+ "status": "current",
+ "code": {
+ "coding": [
+ {
+ "system": "http://loinc.org",
+ "code": formid,
+ "display": formname
+ }
+ ],
+ "text":formname
+ },
+ "occurrenceDateTime": date1,
+ "subject": {
+ "display": "Besos Trojanmed",
+ "reference": "http://hl7.org/fhir/sid/us-ssn/Patient/" + patient_id
+ },
+ "context": {
+ "reference": "http://usc.edu/Encounter/" + encounter_id
+ },
+ "requester": {
+ "agent": {
+ "reference": "http://usc.edu/Practitioner/" + practitioner_id
+ }
+ }
+};
+
+var fdata = JSON.stringify(favdata);
+		  
+	var settings102 = {
+		"async": true,
+			"crossDomain": true,
+			"url": baseurl+"List",
+			"method": "POST",
+			"contentType" : "application/json",
+			"headers": {
+				"Authorization" : "Bearer "+ KeycloakToken,
+				"Access-Control-Allow-Headers": "x-requested-with",
+				"cache" : false,
+				"Cache-Control": "no-cache"
+			//"headers": {
+			//	"Content-Type": "application/json",
+			//	"Cache-Control": "no-cache"
+			},
+			"processData": false,
+			"data": fdata
+		
+			
+	}
+	$.ajax(settings102).done(function (response) {
+		
+		console.log(response);
+		
+	});   */
 	  
   } 
 	  
@@ -537,7 +697,21 @@ function freqOrder(){
 	
 	console.log(freqpid);
 	
-	
+	 var select = document.getElementById("freqlist");
+           
+            for (var i=0; i < freqpname.length; i++) {
+               
+                var opt = freqpname[i];
+                var val = freqpid[i];
+                var el = document.createElement("option");
+                                  
+                //Taken extra attribute to support datalist in IE7
+                el.textContent = opt;
+                el.value = val;
+                el.id = val;                
+                select.appendChild(el);    
+                                
+            }
 	
 	
 	
@@ -834,7 +1008,7 @@ $.ajax(settings200).done(function (response) {
 	
 });	
 	console.log(access_token);
-    setTimeout(refreshSmartToken, 480000);
+    setTimeout(refreshSmartToken, 270000);
 	
 	location.reload();
 	
