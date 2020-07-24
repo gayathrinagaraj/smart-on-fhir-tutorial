@@ -1083,7 +1083,7 @@ function nextQuestion(linkId,linkId2,valueString,text,tempOID)
 	
 
 
-function displayQuestionnaire(QR, formOID){
+function displayQuestionnaire(QR, formOID,count){
 	
 	//console.log(QR);
 	var myjson01 = JSON.stringify(QR);
@@ -1120,20 +1120,75 @@ function displayQuestionnaire(QR, formOID){
 			var tempOID = data.id;
 			QRjson = data;
 			
+			var temp = data.contained[0].item[0].item;
+			
+			if(data.status == 'completed') {
+	console.log(QR);
+	var theta = QR.extension[2].extension[0].valueDecimal;
+		
+	var proID = QR.id;
+		var tscore;
+		var sum = 0;
+		var cnt = 0;
+		
+		var num;
+	 if ( proID == "7DACCFC4-87F9-4C25-A8AA-53B9B677B1A7"  ||   proID == "1DC83612-CBFE-4310-A713-5802E29DFE64" )
+	 {
+		var QAlist =  QR.item ;
+
+		jQuery(QAlist).each(function(i, item){
+		      num = parseInt(item.item[0].answer[0].valueString)
+		      sum = sum + num ;
+		      cnt = cnt+1;
+		 });
+
+		console.log(sum);
+		console.log(cnt);
+		tscore =(sum * 25)/cnt;
+		console.log(tscore);
+
+	 }
+	 else {
+		tscore = (theta * 10) + 50;
+		 console.log(tscore);
+	 }
+
+		
+		var desc = QR.contained[0].title + ", t-score :"+ tscore;
+	
+		var myJSON_01 = JSON.stringify(QR);
+		console.log("Encounter" + patEncounterId);
+	console.log("Practitioner"+ patPractitionerId);
+	patientPostDR (myJSON_01,desc)
+	document.getElementById("Content").innerHTML = "You have finished the assessment.<br /> Thank you ! <div style=\'height: 50px\' ><button type=\'button\' class='button button6'  onclick=displist() > Back </button></div>";
+	completeProcess(taskId,proId,proName,patId,patName);
+	}
+	
+		
+		
+			            else 
+{
+             console.log(count);
+			var tempOID = data.id;
+			QRjson = data;
+			
 			
 			var tmp = JSON.stringify(data);
 			//console.log(tmp);
 			
-			var temp = data.contained[0].item[0].item;
+			var temp = data.contained[0].item[count].item;
 			//console.log(temp.length);
 			
 			
-			//console.log(data.contained[0].item[0].item[0].text);
+			//console.log(data.contained[0].item[count].item[0].text);
 			
 			if (temp.length==1){
-			var linkId = data.contained[0].item[0].linkId;
+			var linkId = data.contained[0].item[count].linkId;
+                
+               var linkId2 = data.contained[0].item[count].item[0].linkId;
+                
 				
-			var res = data.contained[0].item[0].item[0].text;
+			var res = data.contained[0].item[count].item[0].text;
 				var str = res.replace("amp;", "");	
 			 var output = decodeHtml(str);
 				
@@ -1146,7 +1201,7 @@ function displayQuestionnaire(QR, formOID){
 			
 			
 
-				var res = data.contained[0].item[0].item[0].text;
+				var res = data.contained[0].item[count].item[0].text;
 				var str = res.replace("amp;", "");	
 				var Ques01 = decodeHtml(str);
 				console.log(Ques01);
@@ -1156,7 +1211,7 @@ function displayQuestionnaire(QR, formOID){
 			
 			screen += "<div style=\'height: 50px; font-style: normal; font-size: 20px; margin-bottom: 5em; margin-left:3em;\'>" + Ques01 + "</div>";
 			
-			jQuery(data.contained[0].item[0].item[0].answerOption).each(function(i, item){
+			jQuery(data.contained[0].item[count].item[0].answerOption).each(function(i, item){
 			//console.log(item.modifierExtension[0].valueString);
 			//console.log(item.text);
 			//console.log(item.valueCoding.code);
@@ -1164,33 +1219,46 @@ function displayQuestionnaire(QR, formOID){
 			//console.log(item.valueCoding.system);
 			
 			var valueString = item.modifierExtension[0].valueString;
-			var text = item.text;
-			
+                
+                if (item.valueString){
+			         var text = item.valueString;
+                    console.log(valueString);
+                    console.log(text);
+                }
+                
+			else {
 			var code = item.valueCoding.code;
-			var display = item.valueCoding.display;
+			var text = item.valueCoding.display;
 			var system = item.valueCoding.system;
-			
+                
+                
+                console.log(valueString);
+                console.log(text);
+            }
 			
 			var temp2 = JSON.parse(tmp);
 					
-					screen += "<div style=\' margin-top: 0.5em;\'><input type=\'button\' class=\'block\' id=\'" + item.modifierExtension[0].valueString + "\' name=\'" + item.text + "\' value=\'" + item.text + "\' onclick= \'nextQuestion( \"" +linkId+ "\",\"" +valueString+ "\",\"" +system+ "\",\"" +code+ "\", \"" +display+ "\",\"" +text+ "\",\"" +tempOID+ "\");  \' />" + "</div>";
+					screen += "<div style=\' margin-top: 0.5em;\'><input type=\'button\' class=\'block\' id=\'" + text + "\' name=\'" + text + "\' value=\'" + text + "\' onclick= \'nextQuestion( \"" +linkId+ "\", \"" +linkId2+ "\", \"" +valueString+ "\",\"" +text+ "\",\"" +tempOID+ "\");  \' />" + "</div>";
 				
 			});
 			document.getElementById("Content").innerHTML = screen;
-			//console.log(data.contained[0].item[0].item[1].answerOption);
+			//console.log(data.contained[0].item[count].item[1].answerOption);
 			
 			}
 			
 			
 			else {
-			var linkId = data.contained[0].item[0].linkId;
+			var linkId = data.contained[0].item[count].linkId;
+                
+                 var linkId2 = data.contained[0].item[count].item[0].linkId;
+                
 				
-				var res2 = data.contained[0].item[0].item[0].text;
+				var res2 = data.contained[0].item[count].item[0].text;
 				var str2 = res2.replace("amp;", "");	
 				var Ques02 = decodeHtml(str2);
 				console.log(Ques02);
 				
-				var res3 = data.contained[0].item[0].item[1].text;
+				var res3 = data.contained[0].item[count].item[1].text;
 				var str3 = res3.replace("amp;", "");
 				console.log(str3);
 				var Ques03 = decodeHtml(str3);
@@ -1200,27 +1268,43 @@ function displayQuestionnaire(QR, formOID){
 			
 			screen += "<div style=\'height: 50px; font-style: normal; font-size: 20px; margin-bottom: 5em; margin-left:3em;\'>" + Ques02 + " " + Q3 +"</div>";
 			
-			jQuery(data.contained[0].item[0].item[1].answerOption).each(function(i, item){
+			jQuery(data.contained[0].item[count].item[1].answerOption).each(function(i, item){
 			
 			var valueString = item.modifierExtension[0].valueString;
-			var text = item.text;
-			
+			if (item.valueString){
+			         var text = item.valueString;
+                    console.log(valueString);
+                    console.log(text);
+                }
+                
+			else {
 			var code = item.valueCoding.code;
-			var display = item.valueCoding.display;
+			var text = item.valueCoding.display;
 			var system = item.valueCoding.system;
+                
+                
+                console.log(valueString);
+                console.log(text);
+            }
 			
 			
 			var temp2 = JSON.parse(tmp);
 					
-					screen += "<div style=\' margin-top: 0.5em;\'><input type=\'button\' class=\'block\' id=\'" + item.modifierExtension[0].valueString + "\' name=\'" + item.text + "\' value=\'" + item.text + "\' onclick= \'nextQuestion( \"" +linkId+ "\",\"" +valueString+ "\",\"" +system+ "\",\"" +code+ "\", \"" +display+ "\",\"" +text+ "\",\"" +tempOID+ "\");  \' />" + "</div>";
+					screen += "<div style=\' margin-top: 0.5em;\'><input type=\'button\' class=\'block\' id=\'" + text+ "\' name=\'" + text + "\' value=\'" + text + "\' onclick= \'nextQuestion( \"" +linkId+ "\", \"" +linkId2+ "\", \"" +valueString+ "\",\"" +text+ "\",\"" +tempOID+ "\");  \' />" + "</div>";
 				
 			});
 			
 			document.getElementById("Content").innerHTML = screen;
-				console.log(screen);
-			//console.log(data.contained[0].item[0].item[1].answerOption);
+				//console.log(screen);
+			//console.log(data.contained[0].item[count].item[1].answerOption);
 			
 			}
+            
+            
+        }		
+			
+			
+			
 		},
 
 		error: function(jqXHR, textStatus, errorThrown) {
