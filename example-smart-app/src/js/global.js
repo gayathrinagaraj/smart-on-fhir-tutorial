@@ -819,7 +819,7 @@ function orderStatus() {
 		//url: "https://fhir-open.sandboxcerner.com/dstu2/0b8a0111-e8e6-4c26-a91c-5069cbc6b1ca/DocumentReference?patient="+patID+"&created=ge2019-04-01&created=le"+ todayDate+"&_count=23&_limit=23",
 		//https://fhir-ehr.cerner.com/dstu2/e8a84236-c258-4952-98b7-a6ff8a9c587a/DocumentReference?patient=4342008&created=ge2019-04-01&created=le2019-12-02
 		//https://fhir-myrecord.cerner.com/dstu2/e8a84236-c258-4952-98b7-a6ff8a9c587a/DocumentReference?patient=12668019&created=ge2020-01-01&created=le2020-02-11
-		url: "https://fhir-ehr.sandboxcerner.com/dstu2/724d00f8-4a37-487d-82a6-822a906b86c2/DocumentReference?patient="+patID+"&created=ge2019-04-01&created=le"+ todayDate",
+		url: "https://fhir-ehr.sandboxcerner.com/dstu2/724d00f8-4a37-487d-82a6-822a906b86c2/DocumentReference?patient="+patID+"&created=ge2019-04-01&created=le"+ todayDate,
 		cache: false,
 		type: "GET",
 		beforeSend: function(xhr) {
