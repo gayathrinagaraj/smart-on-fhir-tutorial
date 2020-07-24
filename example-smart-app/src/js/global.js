@@ -1488,8 +1488,11 @@ function displayQuestionnaire(QR, formOID,count){
 	
 }
 
+var count = 0;
 
 function setVariables(formOID,formName,date) {
+
+	
 
 
 var initialQR = {
@@ -1518,7 +1521,7 @@ var initialQR = {
 "subject": "TestPatient",
 "authored": date
 };
-var count = 0;
+
 displayQuestionnaire (initialQR,formOID,count);
 };
 	
