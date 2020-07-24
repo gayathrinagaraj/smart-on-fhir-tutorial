@@ -697,19 +697,19 @@ function freqOrder(){
 	
 	console.log(freqpid);
 	
-	 var select = document.getElementById("freqlist");
+	 var freqSelect = document.getElementById("freqlist");
            
             for (var i=0; i < freqpname.length; i++) {
                
                 var opt = freqpname[i];
                 var val = freqpid[i];
-                var el = document.createElement("option");
+                var freqel = document.createElement("foption");
                                   
                 //Taken extra attribute to support datalist in IE7
-                el.textContent = opt;
-                el.value = val;
-                el.id = val;                
-                select.appendChild(el);    
+                freqel.textContent = opt;
+                freqel.value = val;
+                freqel.id = val;                
+                freqSelect.appendChild(freqel);    
                                 
             }
 	
