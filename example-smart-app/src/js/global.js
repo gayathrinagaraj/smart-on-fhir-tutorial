@@ -720,6 +720,9 @@ function freqOrder(){
 	
 }
 
+
+freqOrder();
+
 var res_score1;	
 var res_score2;			
 function orderStatus() {
