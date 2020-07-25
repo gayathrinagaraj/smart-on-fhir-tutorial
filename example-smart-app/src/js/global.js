@@ -195,7 +195,6 @@ $(document).ready(function(){
  }
  }
 };
-
 var fdata = JSON.stringify(favdata);
 		  
 	var settings102 = {
@@ -350,7 +349,6 @@ $(document).ready(function(){
  }
  }
 };
-
 var fdata = JSON.stringify(favdata);
 		  
 	var settings102 = {
@@ -394,6 +392,91 @@ var fdata = JSON.stringify(favdata);
 
 
 
+
+
+var el = document.getElementById("myBtn");
+
+if(el){
+  el.addEventListener("click", function(){
+	 
+
+	var e = document.getElementById("selectform");		
+	var idOfSelect = $("#selectinput").val();
+	var sformname = $('#selectform option[value="'+idOfSelect+'"]').text();
+	var sformoid = $('#selectform option[value="'+idOfSelect+'"]').attr("id")
+	var success_message = 'Order for '+sformname+' is placed.';
+	var error_message = 'Order is not valid, please select from the list.'
+	var data_inlist = document.getElementById('selectform');
+	var flag = 'unset';
+	var i;
+
+    for (i = 0; i < data_inlist.options.length; i++) {
+        if(data_inlist.options[i].value == idOfSelect){
+			flag = 'set';
+			break;
+		}
+	}
+
+	if(flag == 'unset'){
+	document.getElementById('order_successful').style.display = "none";
+	document.getElementById('order_unsuccessful').innerHTML = error_message;
+	document.getElementById('order_successful').style.display = "inline";
+	return;
+	}
+	
+	
+	  
+	var date1 =new Date(new Date().toString().split('GMT')[0]+' UTC').toISOString().split('.')[0];
+	//console.log(date1);
+	//console.log("patid :  " + window.patient_id);
+	//console.log("fname : " + window.pat_fname);
+	//console.log("lname : " + window.pat_lname);	
+	  //console.log("inside prdata ");    
+	//console.log(practitioner_id);  
+	//console.log(encounter_id)
+	//var prdata = "{\n\t\"resourceType\": \"ProcedureRequest\",\n\t\"status\": \"active\",\n\t\"intent\": \"order\",\n\t\"category\": [{\n\t\t\"coding\": [{\n\t\t\t\"system\": \"http://snomed.info/sct\",\n\t\t\t\"code\": \"386053000\",\n\t\t\t\"display\": \"Evaluation procedure (procedure)\"\n\t\t}],\n\t\t\"text\": \"Evaluation\"\n\t}],\n\t\"code\": {\n\t\t\"coding\": [{\n\t\t\t\"system\": \"http://loinc.org\",\n\t\t\t\"code\": \""+sformoid+"\",\n\t\t\t\"display\": \""+sformname+"\"\n\t\t}],\n\t\t\"text\": \""+sformname+"\"\n\t},\n\t\"occurrenceDateTime\": \""+date1+"\",\n\t\"subject\": {\n\t\t\"display\": \""+pat_fname+" "+pat_lname+"\",\n        \"reference\": \"http://hl7.org/fhir/sid/us-ssn/Patient/"+patient_id+"\"\n\t},\r\n\t\"encounter\": {\r\n   \"reference\": \"4269906\"\r\n },\r\n     \"orderer\": {\r\n     \"reference\": \"4464007\"\r\n }\r\n} \r\n"
+	
+	var prdata = "{\r\n\t\"resourceType\": \"ProcedureRequest\",\r\n\t\"status\": \"active\",\r\n\t\"intent\": \"order\",\r\n\t\"category\": [{\r\n\t\t\"coding\": [{\r\n\t\t\t\"system\": \"http://snomed.info/sct\",\r\n\t\t\t\"code\": \"386053000\",\r\n\t\t\t\"display\": \"Evaluation procedure (procedure)\"\r\n\t\t}],\r\n\t\t\"text\": \"Evaluation\"\r\n\t}],\r\n\t\"code\": {\r\n\t\t\"coding\": [{\r\n\t\t\t\"system\": \"http://loinc.org\",\r\n\t\t\t\"code\":  \""+sformoid+"\",\r\n\t\t\t\"display\":\""+sformname+"\"\r\n\t\t}],\r\n\t\t\"text\": \""+sformname+"\"\r\n\t},\r\n\t\"occurrenceDateTime\": \""+date1+"\",\r\n\t\"subject\": {\r\n\t\t\"display\": \""+pat_fname+" "+pat_lname+"\",\r\n        \"reference\": \"http://hl7.org/fhir/sid/us-ssn/Patient/"+patient_id+"\"\r\n\t},\r\n\t\"context\": {\r\n    \"reference\": \"http://usc.edu/Encounter/"+encounter_id+"\" \r\n  },\r\n\t\"requester\": {\r\n    \"agent\": {\r\n      \"reference\": \"http://usc.edu/Practitioner/"+practitioner_id+"\"\r\n    }\r\n\t}\r\n}";                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+	//console.log("print procedure request input" + prdata);
+
+
+	
+	
+	
+	var settings = {
+			"async": true,
+			"crossDomain": true,
+			"url": baseurl+"ProcedureRequest",
+			"method": "POST",
+			"contentType" : "application/json",
+			"headers": {
+				"Authorization" : "Bearer "+ KeycloakToken,
+				"Access-Control-Allow-Headers": "x-requested-with",
+				"cache" : false,
+				"Cache-Control": "no-cache"
+			//"headers": {
+			//	"Content-Type": "application/json",
+			//	"Cache-Control": "no-cache"
+			},
+			"processData": false,
+			"data": prdata
+	}
+	$.ajax(settings).done(function (response) {
+		//console.log("pro-test");
+		//console.log(response);
+		//console.log("Posted Procedure Request");
+		orderStatus();
+		document.getElementById('order_unsuccessful').style.display = "none";
+		document.getElementById('order_successful').innerHTML = success_message;
+		document.getElementById('selectinput').value = '';
+		$("#order_successful").show();
+		setTimeout(function() { $("#order_successful").hide(); }, 10000);
+	});
+	  });
+	
+}
+
+
 var form_oid=[];
 var form_name=[];
 
@@ -405,6 +488,132 @@ function callback1(data){
 	//console.log(data);
 
 }
+function listForms() {
+	$.ajax({
+		//url: Server + "/2014-01/Forms/.json",
+		url: baseurl_AC_API + "2018-10/Questionnaire?_Summary",
+		cache: false,
+		type: "GET",
+		// data: "",
+		dataType: "json",
+		beforeSend: function(xhr) {
+			var username = "08B2BC59-54F7-4A8A-8FC8-28B20D04B909";
+			var pass = "B794E66E-287E-44BF-9C82-31E3703B502C";
+			//var Token = "MkY5ODQ0MTktNTAwOC00RTQyLTgyMTAtNjg1OTJCNDE4MjMzOjIxQTY3M0U4LTk0OTgtNERDMi1BQUI2LTA3Mzk1MDI5QTc3OA==";
+
+			var base64 = btoa(username + ":" + pass);
+			xhr.setRequestHeader("Authorization", "Basic " + base64);
+		},
+		success: function(data) { 
+
+			//console.log(data);
+			/*
+			var container = document.getElementById("Content");
+			var forms = data.entry;
+			//console.log(data.entry);
+			
+			var datalist = document.getElementById("selectform"); 
+			//console.log("all forms"+forms);
+			for (var i=0; i < forms.length; i++) {
+				form_oid[i]=forms[i].resource.id;
+				form_name[i]=forms[i].resource.title;
+				var opt = forms[i].resource.title;
+				var val = forms[i].resource.id;
+				var el = document.createElement("option");
+                                  
+				//Taken extra attribute to support datalist in IE7
+				el.textContent = opt;
+				el.value = opt;
+				el.id = val;				
+				datalist.appendChild(el);	
+								
+			} */
+			
+	    var select = document.getElementById("selectform");
+            var forms = data.entry;
+            //console.log(data.entry);
+            //console.log("all forms"+forms);
+            for (var i=0; i < forms.length; i++) {
+                form_oid[i]=forms[i].resource.id;
+                form_name[i]=forms[i].resource.title;
+                var opt = forms[i].resource.title;
+                var val = forms[i].resource.id;
+                var el = document.createElement("option");
+                                  
+                //Taken extra attribute to support datalist in IE7
+                el.textContent = opt;
+                el.value = val;
+                el.id = val;                
+                select.appendChild(el);    
+                                
+            }
+
+		},
+
+		error: function(jqXHR, textStatus, errorThrown) {
+			document.write(jqXHR.responseText + ':' + textStatus + ':' + errorThrown);
+		}
+	});
+}
+
+
+
+
+
+function prorecommend() {	
+	patient_id="";
+	gender2="";
+	dobstr2="";
+	var recdata= "{\n   \"hook\" : \"patient-view\",\n   \"hookInstance\" : \"d1577c69-dfbe-44ad-ba6d-3e05e953b2ea\",\n   \"fhirServer\" : \"https://54.202.74.232:80/cip-fhir3/baseDstu3\",\n   \"user\" : \"Practitioner/"+practitioner_id+"\",\n   \"patient\": \""+patient_id+"\",\n   \"context\" : {\n       \"patientId\" : \""+patient_id+"\"\n   },\n   \"prefetch\" : {\n      \"patient\" : {\n         \"resourceType\" : \"Patient\",\n         \"gender\" : \""+gender2+"\",\n         \"birthDate\" : \""+dobstr2+"\",\n         \"id\" : \""+patient_id+"\",\n         \"active\" : true\n      }\n   }\n}";			
+
+	var settings = {
+			"async": true,
+			"crossDomain": true,
+			"url": "https://calv-easiprox.med.usc.edu/a2d2/api/v2/services/pro-recommend-usc",
+			"method": "POST",
+			"headers": {
+				"Content-Type": "application/json",
+				"Cache-Control": "no-cache"
+			},
+			"processData": false,
+			"data": recdata
+	}
+	$.ajax(settings).done(function (response) {
+		//console.log(response);
+
+		jQuery(response).each(function(i, item){
+
+			//console.log(item.cards)
+			jQuery(item.cards).each(function(j, item){
+				var $t1 = item.summary;
+				var $t2 = item.detail;
+				var $t3 = item.source.label;
+				var $t4;
+				jQuery(item.suggestions).each(function(k, item){
+					$t4 = item.label;
+
+				})
+				jQuery(item.links).each(function(l, item){
+					$t5 = item.label;
+					$t6 = item.url;
+
+				})
+
+				$("#tab3").append("<div class='panel panel-default'>	<div id='rec' class='panel-body'><b style='color:#0079BE;font-size: 16px;'>"+$t1 + "</b></br>"+ "<I style='font-size: 12px;'>Source: <span style='color:blue;font-size: 12px;'>"+$t3 + "</span></I></br></br>"+$t2+"</br><button class='button button4' type='button' onclick='alert('Test!')'>"+ $t4+"</button></br><a href='"+$t6+"'>"+$t5+"</a></div> </div>")
+
+				$("rec").append("<b>"+$t1+"</b>");
+				$("rec").append("</br>");$("rec").append("</br>");
+				$("rec").append($t2);
+				$("rec").append("</br>");$("rec").append("</br>");$("rec").append("</br>");
+
+			})
+
+		})
+	});
+
+}
+
+
 
 Array.prototype.byCount= function(){
     var itm, a= [], L= this.length, o= {};
@@ -507,139 +716,6 @@ function freqOrder(){
 	
 	
 }
-
-
-
-
-
-
-function listForms() {
-	$.ajax({
-		//url: Server + "/2014-01/Forms/.json",
-		url: baseurl_AC_API + "2018-10/Questionnaire?_Summary",
-		cache: false,
-		type: "GET",
-		// data: "",
-		dataType: "json",
-		beforeSend: function(xhr) {
-			var username = "08B2BC59-54F7-4A8A-8FC8-28B20D04B909";
-			var pass = "B794E66E-287E-44BF-9C82-31E3703B502C";
-			//var Token = "MkY5ODQ0MTktNTAwOC00RTQyLTgyMTAtNjg1OTJCNDE4MjMzOjIxQTY3M0U4LTk0OTgtNERDMi1BQUI2LTA3Mzk1MDI5QTc3OA==";
-
-			var base64 = btoa(username + ":" + pass);
-			xhr.setRequestHeader("Authorization", "Basic " + base64);
-		},
-		success: function(data) { 
-
-			//console.log(data);
-			/*
-			var container = document.getElementById("Content");
-			var forms = data.entry;
-			//console.log(data.entry);
-			
-			var datalist = document.getElementById("selectform"); 
-
-			//console.log("all forms"+forms);
-			for (var i=0; i < forms.length; i++) {
-				form_oid[i]=forms[i].resource.id;
-				form_name[i]=forms[i].resource.title;
-				var opt = forms[i].resource.title;
-				var val = forms[i].resource.id;
-				var el = document.createElement("option");
-                                  
-				//Taken extra attribute to support datalist in IE7
-				el.textContent = opt;
-				el.value = opt;
-				el.id = val;				
-				datalist.appendChild(el);	
-								
-			} */
-			
-	    var select = document.getElementById("selectform");
-            var forms = data.entry;
-            //console.log(data.entry);
-            //console.log("all forms"+forms);
-            for (var i=0; i < forms.length; i++) {
-                form_oid[i]=forms[i].resource.id;
-                form_name[i]=forms[i].resource.title;
-                var opt = forms[i].resource.title;
-                var val = forms[i].resource.id;
-                var el = document.createElement("option");
-                                  
-                //Taken extra attribute to support datalist in IE7
-                el.textContent = opt;
-                el.value = val;
-                el.id = val;                
-                select.appendChild(el);    
-                                
-            }
-
-		},
-
-		error: function(jqXHR, textStatus, errorThrown) {
-			document.write(jqXHR.responseText + ':' + textStatus + ':' + errorThrown);
-		}
-	});
-}
-
-
-
-
-
-function prorecommend() {	
-	patient_id="";
-	gender2="";
-	dobstr2="";
-	var recdata= "{\n   \"hook\" : \"patient-view\",\n   \"hookInstance\" : \"d1577c69-dfbe-44ad-ba6d-3e05e953b2ea\",\n   \"fhirServer\" : \"https://54.202.74.232:80/cip-fhir3/baseDstu3\",\n   \"user\" : \"Practitioner/"+practitioner_id+"\",\n   \"patient\": \""+patient_id+"\",\n   \"context\" : {\n       \"patientId\" : \""+patient_id+"\"\n   },\n   \"prefetch\" : {\n      \"patient\" : {\n         \"resourceType\" : \"Patient\",\n         \"gender\" : \""+gender2+"\",\n         \"birthDate\" : \""+dobstr2+"\",\n         \"id\" : \""+patient_id+"\",\n         \"active\" : true\n      }\n   }\n}";			
-
-	var settings = {
-			"async": true,
-			"crossDomain": true,
-			"url": "https://calv-easiprox.med.usc.edu/a2d2/api/v2/services/pro-recommend-usc",
-			"method": "POST",
-			"headers": {
-				"Content-Type": "application/json",
-				"Cache-Control": "no-cache"
-			},
-			"processData": false,
-			"data": recdata
-	}
-	$.ajax(settings).done(function (response) {
-		//console.log(response);
-
-		jQuery(response).each(function(i, item){
-
-			//console.log(item.cards)
-			jQuery(item.cards).each(function(j, item){
-				var $t1 = item.summary;
-				var $t2 = item.detail;
-				var $t3 = item.source.label;
-				var $t4;
-				jQuery(item.suggestions).each(function(k, item){
-					$t4 = item.label;
-
-				})
-				jQuery(item.links).each(function(l, item){
-					$t5 = item.label;
-					$t6 = item.url;
-
-				})
-
-				$("#tab3").append("<div class='panel panel-default'>	<div id='rec' class='panel-body'><b style='color:#0079BE;font-size: 16px;'>"+$t1 + "</b></br>"+ "<I style='font-size: 12px;'>Source: <span style='color:blue;font-size: 12px;'>"+$t3 + "</span></I></br></br>"+$t2+"</br><button class='button button4' type='button' onclick='alert('Test!')'>"+ $t4+"</button></br><a href='"+$t6+"'>"+$t5+"</a></div> </div>")
-
-				$("rec").append("<b>"+$t1+"</b>");
-				$("rec").append("</br>");$("rec").append("</br>");
-				$("rec").append($t2);
-				$("rec").append("</br>");$("rec").append("</br>");$("rec").append("</br>");
-
-			})
-
-		})
-	});
-
-}
-
-
 
 
 
@@ -1549,6 +1625,3 @@ function displayList(){
 	});
 
 }
-
-
-
