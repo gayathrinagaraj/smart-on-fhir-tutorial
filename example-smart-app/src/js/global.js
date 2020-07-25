@@ -394,91 +394,6 @@ var fdata = JSON.stringify(favdata);
 
 
 
-
-
-var el = document.getElementById("myBtn");
-
-if(el){
-  el.addEventListener("click", function(){
-	 
-
-	var e = document.getElementById("selectform");		
-	var idOfSelect = $("#selectinput").val();
-	var sformname = $('#selectform option[value="'+idOfSelect+'"]').text();
-	var sformoid = $('#selectform option[value="'+idOfSelect+'"]').attr("id")
-	var success_message = 'Order for '+sformname+' is placed.';
-	var error_message = 'Order is not valid, please select from the list.'
-	var data_inlist = document.getElementById('selectform');
-	var flag = 'unset';
-	var i;
-
-    for (i = 0; i < data_inlist.options.length; i++) {
-        if(data_inlist.options[i].value == idOfSelect){
-			flag = 'set';
-			break;
-		}
-	}
-
-	if(flag == 'unset'){
-	document.getElementById('order_successful').style.display = "none";
-	document.getElementById('order_unsuccessful').innerHTML = error_message;
-	document.getElementById('order_successful').style.display = "inline";
-	return;
-	}
-	
-	
-	  
-	var date1 =new Date(new Date().toString().split('GMT')[0]+' UTC').toISOString().split('.')[0];
-	//console.log(date1);
-	//console.log("patid :  " + window.patient_id);
-	//console.log("fname : " + window.pat_fname);
-	//console.log("lname : " + window.pat_lname);	
-	  //console.log("inside prdata ");    
-	//console.log(practitioner_id);  
-	//console.log(encounter_id)
-	//var prdata = "{\n\t\"resourceType\": \"ProcedureRequest\",\n\t\"status\": \"active\",\n\t\"intent\": \"order\",\n\t\"category\": [{\n\t\t\"coding\": [{\n\t\t\t\"system\": \"http://snomed.info/sct\",\n\t\t\t\"code\": \"386053000\",\n\t\t\t\"display\": \"Evaluation procedure (procedure)\"\n\t\t}],\n\t\t\"text\": \"Evaluation\"\n\t}],\n\t\"code\": {\n\t\t\"coding\": [{\n\t\t\t\"system\": \"http://loinc.org\",\n\t\t\t\"code\": \""+sformoid+"\",\n\t\t\t\"display\": \""+sformname+"\"\n\t\t}],\n\t\t\"text\": \""+sformname+"\"\n\t},\n\t\"occurrenceDateTime\": \""+date1+"\",\n\t\"subject\": {\n\t\t\"display\": \""+pat_fname+" "+pat_lname+"\",\n        \"reference\": \"http://hl7.org/fhir/sid/us-ssn/Patient/"+patient_id+"\"\n\t},\r\n\t\"encounter\": {\r\n   \"reference\": \"4269906\"\r\n },\r\n     \"orderer\": {\r\n     \"reference\": \"4464007\"\r\n }\r\n} \r\n"
-	
-	var prdata = "{\r\n\t\"resourceType\": \"ProcedureRequest\",\r\n\t\"status\": \"active\",\r\n\t\"intent\": \"order\",\r\n\t\"category\": [{\r\n\t\t\"coding\": [{\r\n\t\t\t\"system\": \"http://snomed.info/sct\",\r\n\t\t\t\"code\": \"386053000\",\r\n\t\t\t\"display\": \"Evaluation procedure (procedure)\"\r\n\t\t}],\r\n\t\t\"text\": \"Evaluation\"\r\n\t}],\r\n\t\"code\": {\r\n\t\t\"coding\": [{\r\n\t\t\t\"system\": \"http://loinc.org\",\r\n\t\t\t\"code\":  \""+sformoid+"\",\r\n\t\t\t\"display\":\""+sformname+"\"\r\n\t\t}],\r\n\t\t\"text\": \""+sformname+"\"\r\n\t},\r\n\t\"occurrenceDateTime\": \""+date1+"\",\r\n\t\"subject\": {\r\n\t\t\"display\": \""+pat_fname+" "+pat_lname+"\",\r\n        \"reference\": \"http://hl7.org/fhir/sid/us-ssn/Patient/"+patient_id+"\"\r\n\t},\r\n\t\"context\": {\r\n    \"reference\": \"http://usc.edu/Encounter/"+encounter_id+"\" \r\n  },\r\n\t\"requester\": {\r\n    \"agent\": {\r\n      \"reference\": \"http://usc.edu/Practitioner/"+practitioner_id+"\"\r\n    }\r\n\t}\r\n}";                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
-	//console.log("print procedure request input" + prdata);
-
-
-	
-	
-	
-	var settings = {
-			"async": true,
-			"crossDomain": true,
-			"url": baseurl+"ProcedureRequest",
-			"method": "POST",
-			"contentType" : "application/json",
-			"headers": {
-				"Authorization" : "Bearer "+ KeycloakToken,
-				"Access-Control-Allow-Headers": "x-requested-with",
-				"cache" : false,
-				"Cache-Control": "no-cache"
-			//"headers": {
-			//	"Content-Type": "application/json",
-			//	"Cache-Control": "no-cache"
-			},
-			"processData": false,
-			"data": prdata
-	}
-	$.ajax(settings).done(function (response) {
-		//console.log("pro-test");
-		//console.log(response);
-		//console.log("Posted Procedure Request");
-		orderStatus();
-		document.getElementById('order_unsuccessful').style.display = "none";
-		document.getElementById('order_successful').innerHTML = success_message;
-		document.getElementById('selectinput').value = '';
-		$("#order_successful").show();
-		setTimeout(function() { $("#order_successful").hide(); }, 10000);
-	});
-	  });
-	
-}
-
-
 var form_oid=[];
 var form_name=[];
 
@@ -490,6 +405,114 @@ function callback1(data){
 	//console.log(data);
 
 }
+
+Array.prototype.byCount= function(){
+    var itm, a= [], L= this.length, o= {};
+    for(var i= 0; i<L; i++){
+        itm= this[i];
+        if(!itm) continue;
+        if(o[itm]== undefined) o[itm]= 1;
+        else ++o[itm];
+    }
+    for(var p in o) a[a.length]= p;
+    return a.sort(function(a, b){
+        return o[b]-o[a];
+    });
+}
+
+
+var proNameList =[];
+var proIdList= [];
+ var freqpname=[];
+var freqpid=[];
+
+function freqOrder(){
+	console.log(practitioner_id);
+	
+	var settings31 = {
+			"async": false,
+			"crossDomain": true,
+			"url": baseurl+"ProcedureRequest?requester=http://usc.edu/Practitioner/"+practitioner_id+"&_count=100&intent=order&_sort:desc=_lastUpdated",
+			"contentType" : "application/json",                                                                           
+			"cache" : false,
+		"headers": {
+			"Authorization" : "Bearer "+ KeycloakToken,
+				"Cache-Control": "no-cache"
+			},
+			"method": "GET"
+		
+	}
+	$.ajax(settings31).done(function (response) {
+		console.log(response);	
+		jQuery(response.entry).each(function(i, item){
+			console.log(item);
+			console.log(item.resource.code.coding[0].code);
+			proIdList.push(item.resource.code.coding[0].code); 
+			console.log(item.resource.code.coding[0].display);
+			proNameList.push(item.resource.code.coding[0].display);
+		});
+		
+		
+	});
+	
+	console.log(proNameList);
+	console.log(proIdList);
+	freqpname= proNameList.byCount();
+
+	console.log(freqpname);
+	
+	jQuery(freqpname).each(function(i, item1){
+			//console.log(item1);
+		
+		jQuery(proNameList).each(function(j, item2){
+			//console.log(item2);
+			//console.log(item1);
+			
+			if (item2 == item1){
+				if (freqpid.includes(proIdList[j]))
+				{
+					console.log("already there");
+				}
+				else{
+				freqpid.push(proIdList[j]);
+				}
+				return true;
+			}
+			
+		});
+		
+	});
+	
+	console.log(freqpid);
+	
+	 var freqSelect = document.getElementById("freqlist");
+           
+            for (var i=0; i < freqpname.length; i++) {
+               
+                var opt = freqpname[i];
+                var val = freqpid[i];
+                var freqel = document.createElement("option");
+                                  
+                //Taken extra attribute to support datalist in IE7
+                freqel.textContent = opt;
+                freqel.value = val;
+                freqel.id = val;                
+                freqSelect.appendChild(freqel);    
+                                
+            }
+	
+	
+	
+	
+	
+	
+}
+
+
+
+
+
+
 function listForms() {
 	$.ajax({
 		//url: Server + "/2014-01/Forms/.json",
@@ -617,108 +640,6 @@ function prorecommend() {
 }
 
 
-
-Array.prototype.byCount= function(){
-    var itm, a= [], L= this.length, o= {};
-    for(var i= 0; i<L; i++){
-        itm= this[i];
-        if(!itm) continue;
-        if(o[itm]== undefined) o[itm]= 1;
-        else ++o[itm];
-    }
-    for(var p in o) a[a.length]= p;
-    return a.sort(function(a, b){
-        return o[b]-o[a];
-    });
-}
-
-
-var proNameList =[];
-var proIdList= [];
- var freqpname=[];
-var freqpid=[];
-
-function freqOrder(){
-	console.log(practitioner_id);
-	
-	var settings31 = {
-			"async": false,
-			"crossDomain": true,
-			"url": baseurl+"ProcedureRequest?requester=http://usc.edu/Practitioner/"+practitioner_id+"&_count=100&intent=order&_sort:desc=_lastUpdated",
-			"contentType" : "application/json",                                                                           
-			"cache" : false,
-		"headers": {
-			"Authorization" : "Bearer "+ KeycloakToken,
-				"Cache-Control": "no-cache"
-			},
-			"method": "GET"
-		
-	}
-	$.ajax(settings31).done(function (response) {
-		console.log(response);	
-		jQuery(response.entry).each(function(i, item){
-			console.log(item);
-			console.log(item.resource.code.coding[0].code);
-			proIdList.push(item.resource.code.coding[0].code); 
-			console.log(item.resource.code.coding[0].display);
-			proNameList.push(item.resource.code.coding[0].display);
-		});
-		
-		
-	});
-	
-	console.log(proNameList);
-	console.log(proIdList);
-	freqpname= proNameList.byCount();
-
-	console.log(freqpname);
-	
-	jQuery(freqpname).each(function(i, item1){
-			//console.log(item1);
-		
-		jQuery(proNameList).each(function(j, item2){
-			//console.log(item2);
-			//console.log(item1);
-			
-			if (item2 == item1){
-				if (freqpid.includes(proIdList[j]))
-				{
-					console.log("already there");
-				}
-				else{
-				freqpid.push(proIdList[j]);
-				}
-				return true;
-			}
-			
-		});
-		
-	});
-	
-	console.log(freqpid);
-	
-	 var freqSelect = document.getElementById("freqlist");
-           
-            for (var i=0; i < freqpname.length; i++) {
-               
-                var opt = freqpname[i];
-                var val = freqpid[i];
-                var freqel = document.createElement("option");
-                                  
-                //Taken extra attribute to support datalist in IE7
-                freqel.textContent = opt;
-                freqel.value = val;
-                freqel.id = val;                
-                freqSelect.appendChild(freqel);    
-                                
-            }
-	
-	
-	
-	
-	
-	
-}
 
 
 
