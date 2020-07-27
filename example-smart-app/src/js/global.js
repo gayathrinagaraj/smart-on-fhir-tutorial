@@ -248,25 +248,25 @@ $(document).ready(function(){
 	
   // Read selected option
   $('#f_order').click(function(){
-    var formname = $('#freqlist option:selected').text();
-    var formid = $('#freqlist').val();
+    var formname1 = $('#freqlist option:selected').text();
+    var formid1 = $('#freqlist').val();
      
-	var success_message = 'Order for '+formname+' is placed.';
+	var success_message = 'Order for '+formname1+' is placed.';
 	var error_message = 'Order is not valid, please select from the list.'
 	
 	  
-	 console.log(form_name);
-	var flag = 'unset';
+	 console.log(freqpname);
+	var flag1 = 'unset';
 	var i;
 
-   	 for (i = 0; i < form_name.length; i++) {
-        if(form_name[i] == formname){
+   	 for (i = 0; i < freqpname.length; i++) {
+        if(freqpname[i] == formname1){
 			flag = 'set';
 			break;
 		}
 	}
 
-	if(flag == 'unset'){
+	if(flag1 == 'unset'){
 	document.getElementById('order_successful').style.display = "none";
 	document.getElementById('order_unsuccessful').innerHTML = error_message;
 	document.getElementById('order_successful').style.display = "inline";
@@ -274,12 +274,12 @@ $(document).ready(function(){
 	}
 	
 	
-	  if(flag == 'set') {
+	  if(flag1 == 'set') {
 	
 	  
 	var date1 =new Date(new Date().toString().split('GMT')[0]+' UTC').toISOString().split('.')[0];
 
-	var prdata = "{\r\n\t\"resourceType\": \"ProcedureRequest\",\r\n\t\"status\": \"active\",\r\n\t\"intent\": \"order\",\r\n\t\"category\": [{\r\n\t\t\"coding\": [{\r\n\t\t\t\"system\": \"http://snomed.info/sct\",\r\n\t\t\t\"code\": \"386053000\",\r\n\t\t\t\"display\": \"Evaluation procedure (procedure)\"\r\n\t\t}],\r\n\t\t\"text\": \"Evaluation\"\r\n\t}],\r\n\t\"code\": {\r\n\t\t\"coding\": [{\r\n\t\t\t\"system\": \"http://loinc.org\",\r\n\t\t\t\"code\":  \""+formid+"\",\r\n\t\t\t\"display\":\""+formname+"\"\r\n\t\t}],\r\n\t\t\"text\": \""+formname+"\"\r\n\t},\r\n\t\"occurrenceDateTime\": \""+date1+"\",\r\n\t\"subject\": {\r\n\t\t\"display\": \""+pat_fname+" "+pat_lname+"\",\r\n        \"reference\": \"http://hl7.org/fhir/sid/us-ssn/Patient/"+patient_id+"\"\r\n\t},\r\n\t\"context\": {\r\n    \"reference\": \"http://usc.edu/Encounter/"+encounter_id+"\" \r\n  },\r\n\t\"requester\": {\r\n    \"agent\": {\r\n      \"reference\": \"http://usc.edu/Practitioner/"+practitioner_id+"\"\r\n    }\r\n\t}\r\n}";                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+	var prdata = "{\r\n\t\"resourceType\": \"ProcedureRequest\",\r\n\t\"status\": \"active\",\r\n\t\"intent\": \"order\",\r\n\t\"category\": [{\r\n\t\t\"coding\": [{\r\n\t\t\t\"system\": \"http://snomed.info/sct\",\r\n\t\t\t\"code\": \"386053000\",\r\n\t\t\t\"display\": \"Evaluation procedure (procedure)\"\r\n\t\t}],\r\n\t\t\"text\": \"Evaluation\"\r\n\t}],\r\n\t\"code\": {\r\n\t\t\"coding\": [{\r\n\t\t\t\"system\": \"http://loinc.org\",\r\n\t\t\t\"code\":  \""+formid1+"\",\r\n\t\t\t\"display\":\""+formname1+"\"\r\n\t\t}],\r\n\t\t\"text\": \""+formname1+"\"\r\n\t},\r\n\t\"occurrenceDateTime\": \""+date1+"\",\r\n\t\"subject\": {\r\n\t\t\"display\": \""+pat_fname+" "+pat_lname+"\",\r\n        \"reference\": \"http://hl7.org/fhir/sid/us-ssn/Patient/"+patient_id+"\"\r\n\t},\r\n\t\"context\": {\r\n    \"reference\": \"http://usc.edu/Encounter/"+encounter_id+"\" \r\n  },\r\n\t\"requester\": {\r\n    \"agent\": {\r\n      \"reference\": \"http://usc.edu/Practitioner/"+practitioner_id+"\"\r\n    }\r\n\t}\r\n}";                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
 	
 	var settings = {
 		"async": true,
@@ -384,8 +384,8 @@ var fdata = JSON.stringify(favdata);
 	   
   });
 	
-	formname ='';
-	flag ='unset';
+	formname1 ='';
+	flag1 ='unset';
 	//$('#selectform option:selected').text('').trigger('change');
 });
 
