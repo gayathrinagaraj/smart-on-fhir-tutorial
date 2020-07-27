@@ -236,7 +236,7 @@ var fdata = JSON.stringify(favdata);
 });
 
 
-
+/*
 
 $(document).ready(function(){
  
@@ -377,20 +377,7 @@ var fdata = JSON.stringify(favdata);
 		
 	});   */
 	  
-  } 
-	  
-	  
-	  
-	   
-  });
-	
-	formname1 ='';
-	flag1 ='unset';
-	//$('#selectform option:selected').text('').trigger('change');
-});
-
-
-
+  
 
 
 
@@ -918,7 +905,7 @@ function orderStatus() {
 
 
 listForms();
-freqOrder();
+//freqOrder();
 //formDetails(FormOID);
 //prorecommend();
 
