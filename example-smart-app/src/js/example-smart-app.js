@@ -52,7 +52,7 @@ var smartObject="";
       access_token= smart.tokenResponse.access_token;
 	    
 	   
-	freqOrder();
+	//freqOrder();
 	    
 	  
       console.log(patID);
