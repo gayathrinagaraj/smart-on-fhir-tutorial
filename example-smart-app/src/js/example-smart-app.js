@@ -1,4 +1,4 @@
-  //Global variables  
+//Global variables  
     var MyVars = {};
     var practitioner_id="";
     var pract_name="";
@@ -84,7 +84,6 @@ var smartObject="";
  // alert("You are using " + BrowserDetect.browser + " with version " + BrowserDetect.version + "");
 
       if(persona === 'provider') {
-	     // freqOrder();
 	      orderStatus();
         $('#doctor-view').show();
         if (BrowserDetect.browser.toString()!="Explorer") {
