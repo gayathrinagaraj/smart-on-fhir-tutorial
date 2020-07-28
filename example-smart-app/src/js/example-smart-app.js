@@ -78,6 +78,7 @@ var refresh_token="";
 
       if(persona === 'provider') {
 	      orderStatus();
+	       freqOrder();
         $('#doctor-view').show();
         if (BrowserDetect.browser.toString()!="Explorer") {
           //if (window.location == window.parent.location ) {
