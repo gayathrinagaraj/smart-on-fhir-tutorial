@@ -91,9 +91,10 @@ $(document).ready(function(){
 
   
 	
-	
+	 freqOrder();
   // Read selected option
   $('#but_read').click(function(){
+	 
     var formname = $('#selectform option:selected').text();
     var formid = $('#selectform').val();
      
@@ -151,6 +152,7 @@ $(document).ready(function(){
 		//console.log("pro-test");
 		//console.log(response);
 		//console.log("Posted Procedure Request");
+		 freqOrder();
 		orderStatus();
 		document.getElementById('order_unsuccessful').style.display = "none";
 		document.getElementById('order_successful').innerHTML = success_message;
@@ -236,7 +238,6 @@ var fdata = JSON.stringify(favdata);
 });
 
 
-/*
 
 $(document).ready(function(){
  
@@ -244,7 +245,7 @@ $(document).ready(function(){
   $("#freqlist").select2();
 
   
-	
+	freqOrder();
 	
   // Read selected option
   $('#f_order').click(function(){
@@ -305,6 +306,7 @@ $(document).ready(function(){
 		//console.log("pro-test");
 		//console.log(response);
 		//console.log("Posted Procedure Request");
+		freqOrder();
 		orderStatus();
 		document.getElementById('order_unsuccessful').style.display = "none";
 		document.getElementById('order_successful').innerHTML = success_message;
@@ -320,63 +322,19 @@ $(document).ready(function(){
 	  
 		  //location.reload();
 		  
-	/*	  
+	
 		  
-	  var favdata = {
- "resourceType": "List",
- "status": "current",
- "code": {
- "coding": [
- {
- "system": "http://loinc.org",
- "code": formid,
- "display": formname
- }
- ],
- "text":formname
- },
- "occurrenceDateTime": date1,
- "subject": {
- "display": "Besos Trojanmed",
- "reference": "http://hl7.org/fhir/sid/us-ssn/Patient/" + patient_id
- },
- "context": {
- "reference": "http://usc.edu/Encounter/" + encounter_id
- },
- "requester": {
- "agent": {
- "reference": "http://usc.edu/Practitioner/" + practitioner_id
- }
- }
-};
-var fdata = JSON.stringify(favdata);
-		  
-	var settings102 = {
-		"async": true,
-			"crossDomain": true,
-			"url": baseurl+"List",
-			"method": "POST",
-			"contentType" : "application/json",
-			"headers": {
-				"Authorization" : "Bearer "+ KeycloakToken,
-				"Access-Control-Allow-Headers": "x-requested-with",
-				"cache" : false,
-				"Cache-Control": "no-cache"
-			//"headers": {
-			//	"Content-Type": "application/json",
-			//	"Cache-Control": "no-cache"
-			},
-			"processData": false,
-			"data": fdata
-		
-			
-	}
-	$.ajax(settings102).done(function (response) {
-		
-		console.log(response);
-		
-	});   */
+	 } 
 	  
+	  
+	  
+	   
+  });
+	
+	
+	flag1 ='unset';
+	//$('#selectform option:selected').text('').trigger('change');
+});	  
   
 
 
@@ -461,7 +419,7 @@ if(el){
 	});
 	  });
 	
-}
+
 
 
 var form_oid=[];
