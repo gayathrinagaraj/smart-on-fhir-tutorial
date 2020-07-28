@@ -91,7 +91,7 @@ $(document).ready(function(){
 
   
 	
-	 freqOrder();
+	
   // Read selected option
   $('#but_read').click(function(){
 	 
