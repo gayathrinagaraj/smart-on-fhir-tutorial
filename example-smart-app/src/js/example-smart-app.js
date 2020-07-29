@@ -85,7 +85,7 @@ var smartObject="";
 
       if(persona === 'provider') {
 	      listForms();
-	      freqOrder();
+	      //freqOrder();
 	      orderStatus();
 	      
         $('#doctor-view').show();
