@@ -567,6 +567,9 @@ function callback1(data){
 function listForms() {
 	
 	var fpnlistforms = freqOrder_test();
+	var acforms=[];
+	var formoid=[];
+	var formname=[];
 	
 	console.log (fpnlistforms);
 	
@@ -612,6 +615,7 @@ function listForms() {
 			
 	    var select = document.getElementById("selectform");
             var forms = data.entry;
+			acforms= data.entry;
             //console.log(data.entry);
             //console.log("all forms"+forms);
             for (var i=0; i < forms.length; i++) {
@@ -635,6 +639,21 @@ function listForms() {
 			document.write(jqXHR.responseText + ':' + textStatus + ':' + errorThrown);
 		}
 	});
+	
+	for (var i=0;i < fpnlistforms.length; i++)
+	{
+	    for (var j=0; j < acforms.length; j++) {
+		    var temp = acforms[j].resource.title;
+		
+                 if (fpnlistforms[i]== temp)
+		 {
+			 console.log(temp);
+                         console.log(acforms[j].resource.id);
+		 }
+            }
+	
+
+	}
 }
 
 
