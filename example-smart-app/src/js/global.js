@@ -315,7 +315,7 @@ $(document).ready(function(){
 	  
 		  //location.reload();
 		  
-	/*	  
+		  
 		  
 	  var favdata = {
  "resourceType": "List",
@@ -372,7 +372,7 @@ var fdata = JSON.stringify(favdata);
 		
 	});   
 	  
-  
+	    
 
 
 
