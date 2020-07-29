@@ -658,8 +658,11 @@ function listForms() {
 		for (var i=0; i < forms.length; i++) {
                 form_oid[i]=forms[i].resource.id;
                 form_name[i]=forms[i].resource.title;
-                var opt = forms[i].resource.title;
-                var val = forms[i].resource.id;
+                //var opt = forms[i].resource.title;
+               // var val = forms[i].resource.id;
+		var opt = form_name_test[i];
+                var val = form_oid_test[i];
+			
                 var el = document.createElement("option");
                                   
                 //Taken extra attribute to support datalist in IE7
