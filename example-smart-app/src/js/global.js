@@ -651,6 +651,9 @@ function listForms() {
 		var form_oid_test = formoid.concat(temp_formoid);	
 		var form_name_test = formname.concat(temp_formname);
 			
+			console.log(form_oid_test);
+			console.log(form_name_test);
+			
 			
 		for (var i=0; i < forms.length; i++) {
                 form_oid[i]=forms[i].resource.id;
