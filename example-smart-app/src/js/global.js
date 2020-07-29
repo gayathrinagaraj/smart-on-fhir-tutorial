@@ -314,65 +314,10 @@ $(document).ready(function(){
 	});  
 	  
 		  //location.reload();
+	  }
+   });
 		  
-		  
-		  
-	  var favdata = {
- "resourceType": "List",
- "status": "current",
- "code": {
- "coding": [
- {
- "system": "http://loinc.org",
- "code": formid,
- "display": formname
- }
- ],
- "text":formname
- },
- "occurrenceDateTime": date1,
- "subject": {
- "display": "Besos Trojanmed",
- "reference": "http://hl7.org/fhir/sid/us-ssn/Patient/" + patient_id
- },
- "context": {
- "reference": "http://usc.edu/Encounter/" + encounter_id
- },
- "requester": {
- "agent": {
- "reference": "http://usc.edu/Practitioner/" + practitioner_id
- }
- }
-};
-var fdata = JSON.stringify(favdata);
-		  
-	var settings102 = {
-		"async": true,
-			"crossDomain": true,
-			"url": baseurl+"List",
-			"method": "POST",
-			"contentType" : "application/json",
-			"headers": {
-				"Authorization" : "Bearer "+ KeycloakToken,
-				"Access-Control-Allow-Headers": "x-requested-with",
-				"cache" : false,
-				"Cache-Control": "no-cache"
-			//"headers": {
-			//	"Content-Type": "application/json",
-			//	"Cache-Control": "no-cache"
-			},
-			"processData": false,
-			"data": fdata
-		
-			
-	}
-	$.ajax(settings102).done(function (response) {
-		
-		console.log(response);
-		
-	});   
-	  
-	    
+ });	    
 
 
 
