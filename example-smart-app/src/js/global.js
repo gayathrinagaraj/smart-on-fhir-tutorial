@@ -83,6 +83,155 @@ function chart() {
 }
 
 
+Array.prototype.byCount= function(){
+    var itm, a= [], L= this.length, o= {};
+    for(var i= 0; i<L; i++){
+        itm= this[i];
+        if(!itm) continue;
+        if(o[itm]== undefined) o[itm]= 1;
+        else ++o[itm];
+    }
+    for(var p in o) a[a.length]= p;
+    return a.sort(function(a, b){
+        return o[b]-o[a];
+    });
+}
+
+
+var proNameList =[];
+var proIdList= [];
+ var freqpname=[];
+var freqpid=[];
+
+function freqOrder(){
+	console.log(practitioner_id);
+	
+	var settings31 = {
+			"async": false,
+			"crossDomain": true,
+			"url": baseurl+"ProcedureRequest?requester=http://usc.edu/Practitioner/"+practitioner_id+"&_count=100&intent=order&_sort:desc=_lastUpdated",
+			"contentType" : "application/json",                                                                           
+			"cache" : false,
+		"headers": {
+			"Authorization" : "Bearer "+ KeycloakToken,
+				"Cache-Control": "no-cache"
+			},
+			"method": "GET"
+		
+	}
+	$.ajax(settings31).done(function (response) {
+		console.log(response);	
+		jQuery(response.entry).each(function(i, item){
+			console.log(item);
+			console.log(item.resource.code.coding[0].code);
+			proIdList.push(item.resource.code.coding[0].code); 
+			console.log(item.resource.code.coding[0].display);
+			proNameList.push(item.resource.code.coding[0].display);
+		});
+		
+		
+	});
+	
+	console.log(proNameList);
+	console.log(proIdList);
+	freqpname= proNameList.byCount();
+
+	console.log(freqpname);
+	
+	jQuery(freqpname).each(function(i, item1){
+			//console.log(item1);
+		
+		jQuery(proNameList).each(function(j, item2){
+			//console.log(item2);
+			//console.log(item1);
+			
+			if (item2 == item1){
+				if (freqpid.includes(proIdList[j]))
+				{
+					console.log("already there");
+				}
+				else{
+				freqpid.push(proIdList[j]);
+				}
+				return true;
+			}
+			
+		});
+		
+	});
+	
+	console.log(freqpid);
+	
+	 var freqSelect = document.getElementById("freqlist");
+           
+            for (var i=0; i < freqpname.length; i++) {
+               
+                var opt = freqpname[i];
+                var val = freqpid[i];
+                var freqel = document.createElement("option");
+                                  
+                //Taken extra attribute to support datalist in IE7
+                freqel.textContent = opt;
+                freqel.value = val;
+                freqel.id = val;                
+                freqSelect.appendChild(freqel);    
+                                
+            }
+	
+	
+	
+	
+	
+	
+}
+
+
+
+function freqOrder_test(){
+	var pnlist=[];
+	var fpnlist =[];
+	console.log(practitioner_id);
+	
+	var settings31 = {
+			"async": false,
+			"crossDomain": true,
+			"url": baseurl+"ProcedureRequest?requester=http://usc.edu/Practitioner/"+practitioner_id+"&_count=100&intent=order&_sort:desc=_lastUpdated",
+			"contentType" : "application/json",                                                                           
+			"cache" : false,
+		"headers": {
+			"Authorization" : "Bearer "+ KeycloakToken,
+				"Cache-Control": "no-cache"
+			},
+			"method": "GET"
+		
+	}
+	$.ajax(settings31).done(function (response) {
+		console.log(response);	
+		jQuery(response.entry).each(function(i, item){
+			console.log(item);
+			console.log(item.resource.code.coding[0].display);
+			pnlist.push(item.resource.code.coding[0].display);
+		});
+		
+		
+	});
+	
+	console.log(pnlist);
+	
+	fpnlist= pnlist.byCount();
+
+	console.log(fpnlist);
+	
+	
+	return fpnlist;
+	
+}
+
+
+
+
+
+
 
 $(document).ready(function(){
  
@@ -416,6 +565,11 @@ function callback1(data){
 
 }
 function listForms() {
+	
+	var fpnlistforms = freqOrder_test();
+	
+	console.log (fpnlistforms);
+	
 	$.ajax({
 		//url: Server + "/2014-01/Forms/.json",
 		url: baseurl_AC_API + "2018-10/Questionnaire?_Summary",
@@ -542,107 +696,6 @@ function prorecommend() {
 
 
 
-Array.prototype.byCount= function(){
-    var itm, a= [], L= this.length, o= {};
-    for(var i= 0; i<L; i++){
-        itm= this[i];
-        if(!itm) continue;
-        if(o[itm]== undefined) o[itm]= 1;
-        else ++o[itm];
-    }
-    for(var p in o) a[a.length]= p;
-    return a.sort(function(a, b){
-        return o[b]-o[a];
-    });
-}
-
-
-var proNameList =[];
-var proIdList= [];
- var freqpname=[];
-var freqpid=[];
-
-function freqOrder(){
-	console.log(practitioner_id);
-	
-	var settings31 = {
-			"async": false,
-			"crossDomain": true,
-			"url": baseurl+"ProcedureRequest?requester=http://usc.edu/Practitioner/"+practitioner_id+"&_count=100&intent=order&_sort:desc=_lastUpdated",
-			"contentType" : "application/json",                                                                           
-			"cache" : false,
-		"headers": {
-			"Authorization" : "Bearer "+ KeycloakToken,
-				"Cache-Control": "no-cache"
-			},
-			"method": "GET"
-		
-	}
-	$.ajax(settings31).done(function (response) {
-		console.log(response);	
-		jQuery(response.entry).each(function(i, item){
-			console.log(item);
-			console.log(item.resource.code.coding[0].code);
-			proIdList.push(item.resource.code.coding[0].code); 
-			console.log(item.resource.code.coding[0].display);
-			proNameList.push(item.resource.code.coding[0].display);
-		});
-		
-		
-	});
-	
-	console.log(proNameList);
-	console.log(proIdList);
-	freqpname= proNameList.byCount();
-
-	console.log(freqpname);
-	
-	jQuery(freqpname).each(function(i, item1){
-			//console.log(item1);
-		
-		jQuery(proNameList).each(function(j, item2){
-			//console.log(item2);
-			//console.log(item1);
-			
-			if (item2 == item1){
-				if (freqpid.includes(proIdList[j]))
-				{
-					console.log("already there");
-				}
-				else{
-				freqpid.push(proIdList[j]);
-				}
-				return true;
-			}
-			
-		});
-		
-	});
-	
-	console.log(freqpid);
-	
-	 var freqSelect = document.getElementById("freqlist");
-           
-            for (var i=0; i < freqpname.length; i++) {
-               
-                var opt = freqpname[i];
-                var val = freqpid[i];
-                var freqel = document.createElement("option");
-                                  
-                //Taken extra attribute to support datalist in IE7
-                freqel.textContent = opt;
-                freqel.value = val;
-                freqel.id = val;                
-                freqSelect.appendChild(freqel);    
-                                
-            }
-	
-	
-	
-	
-	
-	
-}
 
 
 
