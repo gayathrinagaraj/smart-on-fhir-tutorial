@@ -236,11 +236,11 @@ var fdata = JSON.stringify(favdata);
 });
 
 
-/*
+
 $(document).ready(function(){
  
   // Initialize select2
-  $("#freqlist").select2();
+   $("#freqlist").select2();
   
 	
 	
@@ -370,7 +370,7 @@ var fdata = JSON.stringify(favdata);
 		
 		console.log(response);
 		
-	});   */
+	});   
 	  
   
 
