@@ -632,6 +632,23 @@ function listForms() {
                 select.appendChild(el);    
                                 
             }
+			
+	for (var x=0;x < fpnlistforms.length; x++)
+	{
+	    for (var j=0; j < acforms.length; j++) {
+		    var temp = acforms[j].resource.title;
+		
+                 if (fpnlistforms[x]== temp)
+		 {
+			 console.log(temp);
+                         console.log(acforms[j].resource.id);
+		 }
+            }
+	
+	}
+			
+			
+			
 
 		},
 
@@ -640,20 +657,7 @@ function listForms() {
 		}
 	});
 	
-	for (var i=0;i < fpnlistforms.length; i++)
-	{
-	    for (var j=0; j < acforms.length; j++) {
-		    var temp = acforms[j].resource.title;
-		
-                 if (fpnlistforms[i]== temp)
-		 {
-			 console.log(temp);
-                         console.log(acforms[j].resource.id);
-		 }
-            }
 	
-
-	}
 }
 
 
