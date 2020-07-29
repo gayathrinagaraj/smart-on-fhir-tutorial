@@ -556,6 +556,8 @@ if(el){
 var form_oid=[];
 var form_name=[];
 
+
+
 //var server="https://calv-easiprox.med.usc.edu/ac";
 var FormOID = "96FE494D-F176-4EFB-A473-2AB406610626";  // Sample form -- replace with your FormOID
 var promisUID="001";
@@ -570,6 +572,8 @@ function listForms() {
 	var acforms=[];
 	var formoid=[];
 	var formname=[];
+	var temp_formoid=[];
+        var temp_formname=[];
 	
 	console.log (fpnlistforms);
 	
@@ -618,7 +622,37 @@ function listForms() {
 			acforms= data.entry;
             //console.log(data.entry);
             //console.log("all forms"+forms);
-            for (var i=0; i < forms.length; i++) {
+           
+			
+	for (var x=0;x < fpnlistforms.length; x++)
+	{
+	    for (var j=0; j < acforms.length; j++) {
+		    var temp = acforms[j].resource.title;
+		
+                 if (fpnlistforms[x]== temp)
+		 {
+			 console.log(temp);
+                         console.log(acforms[j].resource.id);
+			 
+			 formoid.push(forms[j].resource.id);
+                	formname.push(forms[j].resource.title);
+		 }
+		    else{
+			    temp_formoid.push(forms[j].resource.id);
+                	   temp_formname.push(forms[j].resource.title);
+			    
+		    }
+		    
+            }
+	
+	}
+			
+			
+		var form_oid_test = formoid.concat(temp_formoid);	
+		var form_name_test = formname.concat(temp_formname);
+			
+			
+		for (var i=0; i < forms.length; i++) {
                 form_oid[i]=forms[i].resource.id;
                 form_name[i]=forms[i].resource.title;
                 var opt = forms[i].resource.title;
@@ -632,20 +666,6 @@ function listForms() {
                 select.appendChild(el);    
                                 
             }
-			
-	for (var x=0;x < fpnlistforms.length; x++)
-	{
-	    for (var j=0; j < acforms.length; j++) {
-		    var temp = acforms[j].resource.title;
-		
-                 if (fpnlistforms[x]== temp)
-		 {
-			 console.log(temp);
-                         console.log(acforms[j].resource.id);
-		 }
-            }
-	
-	}
 			
 			
 			
