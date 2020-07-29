@@ -97,7 +97,7 @@ Array.prototype.byCount= function(){
     });
 }
 
-
+/*
 var proNameList =[];
 var proIdList= [];
  var freqpname=[];
@@ -185,7 +185,7 @@ function freqOrder(){
 	
 }
 
-
+*/
 
 function freqOrder_test(){
 	var pnlist=[];
