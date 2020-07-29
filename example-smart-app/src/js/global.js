@@ -946,8 +946,8 @@ function orderStatus() {
 }
 
 
-listForms();
-freqOrder();
+//listForms();
+//freqOrder();
 //formDetails(FormOID);
 //prorecommend();
 
