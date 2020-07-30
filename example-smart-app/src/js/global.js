@@ -387,7 +387,7 @@ var fdata = JSON.stringify(favdata);
 });
 
 
-
+/*
 $(document).ready(function(){
  
   // Initialize select2
@@ -470,7 +470,7 @@ $(document).ready(function(){
 		  
  });	    
 
-
+*/
 
 $(document).ready(function(){
  
@@ -484,28 +484,60 @@ $(document).ready(function(){
      
 	alert(formname + "and" + formid);  
 	  var date1 =new Date(new Date().toString().split('GMT')[0]+' UTC').toISOString().split('.')[0];
-	  var favdata =" {\r\n  \"resourceType\": \"List\",\r\n  \"status\": \"current\",\r\n  \"code\": {\r\n    \"coding\": [\r\n      {\r\n        \"system\": \"http:\/\/loinc.org\",\r\n        \"code\": \"\"+formid+\"\",\r\n        \"display\": \"\"+formname+\"\"\r\n      }\r\n    ],\r\n    \"text\": \"\"+formname+\"\"\r\n  },\r\n  \"occurrenceDateTime\": \"\"+date1+\"\",\r\n  \"subject\": {\r\n    \"display\": \"\"+pat_fname+\"  \"+pat_lname+\"\",\r\n    \"reference\": \"http:\/\/hl7.org\/fhir\/sid\/us-ssn\/Patient\/\"+patient_id+\"\"\r\n  },\r\n  \"context\": {\r\n    \"reference\": \"http:\/\/usc.edu\/Encounter\/\"+encounter_id+\"\"\r\n  },\r\n  \"requester\": {\r\n    \"agent\": {\r\n      \"reference\": \"http:\/\/usc.edu\/Practitioner\/\"+practitioner_id+\"\"\r\n    }\r\n  }\r\n}";
-	  var settings = {
+	  var favdata = {
+ "resourceType": "List",
+ "status": "current",
+ "code": {
+ "coding": [
+ {
+ "system": "http://loinc.org",
+ "code": formid,
+ "display": formname
+ }
+ ],
+ "text":formname
+ },
+ "occurrenceDateTime": date1,
+ "subject": {
+ "display": "Besos Trojanmed",
+ "reference": "http://hl7.org/fhir/sid/us-ssn/Patient/" + patient_id
+ },
+ "context": {
+ "reference": "http://usc.edu/Encounter/" + encounter_id
+ },
+ "requester": {
+ "agent": {
+ "reference": "http://usc.edu/Practitioner/" + practitioner_id
+ }
+ }
+};
+var fdata = JSON.stringify(favdata);
+		  
+	var settings102 = {
 		"async": true,
 			"crossDomain": true,
 			"url": baseurl+"List",
 			"method": "POST",
 			"contentType" : "application/json",
-		        "cache" : false,
 			"headers": {
 				"Authorization" : "Bearer "+ KeycloakToken,
+				"Access-Control-Allow-Headers": "x-requested-with",
+				"cache" : false,
 				"Cache-Control": "no-cache"
+			//"headers": {
+			//	"Content-Type": "application/json",
+			//	"Cache-Control": "no-cache"
 			},
-			"processData": false,  
-		  "data" : favdata
-
-          	 };
-
-			$.ajax(settings).done(function (response) {
-			  console.log(response);
-				alert(response);
-				console.log("fav added");
-			});
+			"processData": false,
+			"data": fdata
+		
+			
+	}
+	$.ajax(settings102).done(function (response) {
+		
+		console.log(response);
+		
+	});
 	  
 	  
  });
