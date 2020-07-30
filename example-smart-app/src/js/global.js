@@ -673,7 +673,7 @@ function listForms() {
 				el.textContent = opt;
 				el.value = opt;
 				el.id = val;				
-				acOption.appendChild(el);	
+				freqOption.appendChild(el);	
 								
 			}
 			
