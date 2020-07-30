@@ -964,6 +964,64 @@ function orderStatus() {
 	});
 
 	
+	
+	var settings301 = {
+			"async": false,
+			"crossDomain": true,
+			"url": baseurl+"List?reference=http://usc.edu/Practitioner/"+practitioner_id+"&status=current&_sort:desc=_lastUpdated",
+			"contentType" : "application/json",                                                                           
+			"cache" : false,
+			"headers": {
+			"Authorization" : "Bearer "+ KeycloakToken,
+				"Cache-Control": "no-cache"
+			},
+			"method": "GET"
+			//"headers": {
+			//	"Content-Type": "application/json",
+			//	"Cache-Control": "no-cache"
+			//	
+			//}"async": false,
+			
+	}
+	$.ajax(settings301).done(function (response) {
+		console.log(response);
+		console.log("fav pro");
+		//alert(response);
+		//alert("fav pro");
+		document.getElementById('fav_PRO').innerHTML="";
+		//console.log(patID);
+		var str="";
+		//str = str +"<tr><th>Event Date Time</th><th>PROs Ordered</th><th>Status</th>";
+		str = str +"<tr><th>PRO Name</th><th>Order</th><th>Remove from fav</th></tr>";
+
+
+
+		jQuery(response.entry).each(function(i, item){
+			
+			console.log(item.resource.code.text);
+			//console.log(item.resource.id);
+			//console.log(item.resource.occurrenceDateTime);
+			
+			var pro_id= item.resource.code.coding[0].code;
+			var pro_name= item.resource.code.coding[0].display;
+			
+			
+
+			
+				str = str +"<tr><td>" +pro_name+"</td>";
+				str = str +"<td>Order</td>";
+				str = str +"<td>remove fav</td></tr>";	
+			
+		
+		});		
+		document.getElementById('fav_PRO').innerHTML += str;
+	});
+	
+	
+	
+	
+	
+	
 }
 
 
