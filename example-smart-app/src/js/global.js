@@ -656,8 +656,8 @@ function orderStatus() {
 	$.ajax(settings301).done(function (response) {
 		console.log(response);
 		console.log("fav pro");
-		alert(response);
-		alert("fav pro");
+		//alert(response);
+		//alert("fav pro");
 		document.getElementById('fav_PRO').innerHTML="";
 		//console.log(patID);
 		var str="";
