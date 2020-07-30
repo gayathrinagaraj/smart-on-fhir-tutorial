@@ -328,7 +328,8 @@ function listForms() {
 								
 			} */
 			
-	    var select = document.getElementById("selectform");
+	   // var select = document.getElementById("selectform");
+	 var grp1 = document.getElementById("grptest");
             var forms = data.entry;
             //console.log(data.entry);
             //console.log("all forms"+forms);
@@ -343,7 +344,7 @@ function listForms() {
                 el.textContent = opt;
                 el.value = val;
                 el.id = val;                
-                select.appendChild(el);    
+                grp1.appendChild(el);    
                                 
             }
 
