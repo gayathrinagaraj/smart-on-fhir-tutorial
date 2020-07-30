@@ -236,7 +236,9 @@ function freqOrder_test(){
 $(document).ready(function(){
  
   // Initialize select2
-  $("#selectform").select2();
+  $("#selectform").select2({
+	  placeholder: :"Please select an instrument from the list"
+  });
 
   
 	
@@ -617,9 +619,9 @@ function listForms() {
 								
 			} */
 			
-	    var select = document.getElementById("selectform");
+	    
             var forms = data.entry;
-			acforms= data.entry;
+	  acforms= data.entry;
             //console.log(data.entry);
             //console.log("all forms"+forms);
            
@@ -652,9 +654,9 @@ function listForms() {
 		var form_name_test = formname.concat(temp_formname);
 			
 			console.log(form_oid_test);
-			console.log(form_name_test);
+	/*		console.log(form_name_test);
 			
-			
+	var select = document.getElementById("selectform");	
 		for (var i=0; i < forms.length; i++) {
                 form_oid[i]=forms[i].resource.id;
                 form_name[i]=forms[i].resource.title;
@@ -670,6 +672,44 @@ function listForms() {
                 el.value = val;
                 el.id = val;                
                 select.appendChild(el);    
+                                
+            } */
+			
+		var freqOption = document.getElementById("freqList");	
+		for (var i=0; i < formname.length; i++) {
+                //form_oid[i]=forms[i].resource.id;
+                //form_name[i]=forms[i].resource.title;
+                //var opt = forms[i].resource.title;
+                //var val = forms[i].resource.id;
+		var opt = formname[i];
+                var val = formoid[i];
+			
+                var el = document.createElement("option");
+                                  
+                //Taken extra attribute to support datalist in IE7
+                el.textContent = opt;
+                el.value = val;
+                el.id = val;                
+                freqOption.appendChild(el);    
+                                
+            }
+			
+		var acOption = document.getElementById("allList");	
+		for (var i=0; i < temp_formname.length; i++) {
+                //form_oid[i]=forms[i].resource.id;
+                //form_name[i]=forms[i].resource.title;
+                //var opt = forms[i].resource.title;
+                //var val = forms[i].resource.id;
+		var opt = temp_formname[i];
+                var val = temp_formoid[i];
+			
+                var el = document.createElement("option");
+                                  
+                //Taken extra attribute to support datalist in IE7
+                el.textContent = opt;
+                el.value = val;
+                el.id = val;                
+                acOption.appendChild(el);    
                                 
             }
 			
