@@ -968,7 +968,7 @@ function orderStatus() {
 	var settings301 = {
 			"async": false,
 			"crossDomain": true,
-			"url": baseurl+"List?requester=http://usc.edu/Practitioner/"+practitioner_id+"&status=current&_sort:desc=_lastUpdated",
+			"url": baseurl+"List?subject=http://hl7.org/fhir/sid/us-ssn/Patient/"+patID+"&status=current&_sort:desc=_lastUpdated",
 			"contentType" : "application/json",                                                                           
 			"cache" : false,
 			"headers": {
