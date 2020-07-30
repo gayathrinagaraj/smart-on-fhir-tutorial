@@ -237,7 +237,7 @@ $(document).ready(function(){
  
   // Initialize select2
   $("#selectform").select2({
-	  placeholder: :"Please select an instrument from the list"
+	  placeholder :"Please select an instrument from the list"
   });
 
   
