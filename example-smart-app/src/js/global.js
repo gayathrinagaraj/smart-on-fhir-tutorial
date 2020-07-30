@@ -499,17 +499,19 @@ $(document).ready(function(){
 			"processData": false,  
 		  "data" : favdata
 
-};
+          	 };
 
-$.ajax(settings).done(function (response) {
-  console.log(response);
-	alert(response);
-	console.log("fav added");
+			$.ajax(settings).done(function (response) {
+			  console.log(response);
+				alert(response);
+				console.log("fav added");
+			});
+	  
+	  
+ });
+	
+	
 });
-	  
-	  
-	   
-  });
 
 
 var el = document.getElementById("myBtn");
