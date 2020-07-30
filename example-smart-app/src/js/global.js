@@ -641,36 +641,12 @@ function listForms() {
 			 formoid.push(forms[j].resource.id);
                 	formname.push(forms[j].resource.title);
 			 
-			 var opt = forms[j].resource.title
-                	var val = forms[j].resource.id;
-			
-                var el = document.createElement("option");
-                                  
-                //Taken extra attribute to support datalist in IE7
-                el.textContent = opt;
-                el.value = val;
-                el.id = val;                
-                freqOption.appendChild(el);    
-			 
 			 
 		 }
 		    else{
 			    temp_formoid.push(forms[j].resource.id);
                 	   temp_formname.push(forms[j].resource.title);
-			    
-			     var opt = forms[j].resource.title
-                	var val = forms[j].resource.id;
-			
-                var el = document.createElement("option");
-                                  
-                //Taken extra attribute to support datalist in IE7
-                el.textContent = opt;
-                el.value = val;
-                el.id = val;                
-                acOption.appendChild(el);    
-			 
-			    
-			    
+			    	    
 		    }
 		    
             }
@@ -682,7 +658,24 @@ function listForms() {
 		var form_name_test = formname.concat(temp_formname);
 			
 		
-			
+			var select = document.getElementById("selectform"); 
+			//console.log("all forms"+forms);
+			for (var i=0; i < forms.length; i++) {
+				form_oid[i]=forms[i].resource.id;
+				form_name[i]=forms[i].resource.title;
+				//var opt = forms[i].resource.title;
+				//var val = forms[i].resource.id;
+				var opt = form_name_test[i];
+				var val = form_oid_test[i];
+				var el = document.createElement("option");
+                                  
+				//Taken extra attribute to support datalist in IE7
+				el.textContent = opt;
+				el.value = opt;
+				el.id = val;				
+				select.appendChild(el);	
+								
+			}
 			
 
 		},
