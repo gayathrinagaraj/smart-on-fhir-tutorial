@@ -309,9 +309,9 @@ $(document).ready(function(){
 		setTimeout(function() { $("#order_successful").hide(); }, 5000);
 	
 		
-		$("#selectform").val('').trigger('change');
+		//$("#selectform").val('').trigger('change');
 		//$("#selectform").text('').trigger('change');
-		 $('#selectform option:selected').text('').trigger('change');
+		// $('#selectform option:selected').text('').trigger('change');
 		//setTimeout(function(){location.reload()},5200);
 	});  
 	  
@@ -482,7 +482,35 @@ $(document).ready(function(){
     var formname = $('#selectform option:selected').text();
     var formid = $('#selectform').val();
      
-	alert(formname + "and" + formid);  
+	//alert(formname + "and" + formid); 
+	  
+	  var success_message = formname+' is added to favorites';
+	var error_message = 'Instrument is not valid, please select from the list.'
+	
+	  
+	 console.log(form_name);
+	var flag = 'unset';
+	var i;
+
+   	 for (i = 0; i < form_name.length; i++) {
+        if(form_name[i] == formname){
+			flag = 'set';
+			break;
+		}
+	}
+
+	if(flag == 'unset'){
+	document.getElementById('order_successful').style.display = "none";
+	document.getElementById('order_unsuccessful').innerHTML = error_message;
+	document.getElementById('order_successful').style.display = "inline";
+	return;
+	}
+	
+	
+	  if(flag == 'set') {
+	  
+	  
+	  
 	  var date1 =new Date(new Date().toString().split('GMT')[0]+' UTC').toISOString().split('.')[0];
 	  var favdata = {
  "resourceType": "List",
@@ -539,10 +567,17 @@ var fdata = JSON.stringify(favdata);
 		orderStatus();
 		
 	});
+		  
+		  
+	  }
+	  
+	  
 	  
 	  
  });
 	
+	formname ='';
+	flag ='unset';
 	
 });
 
