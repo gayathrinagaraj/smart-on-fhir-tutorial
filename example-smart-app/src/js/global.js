@@ -536,6 +536,7 @@ var fdata = JSON.stringify(favdata);
 	$.ajax(settings102).done(function (response) {
 		
 		console.log(response);
+		orderStatus();
 		
 	});
 	  
