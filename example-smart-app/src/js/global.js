@@ -589,7 +589,8 @@ var fdata = JSON.stringify(favdata);
 
 
 function orderPRO(formname,formoid){
-  
+	console.log(formname);
+  	console.log(formoid);
 	var sformname = formname;
 	var sformoid = formoid;
 	var success_message = 'Order for '+sformname+' is placed.';
