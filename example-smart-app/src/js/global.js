@@ -247,7 +247,8 @@ $(document).ready(function(){
   $('#but_read').click(function(){
     var formname = $('#selectform option:selected').text();
     var formid = $('#selectform').val();
-     
+	  
+     console.log(formname + "and" + formid); 
 	var success_message = 'Order for '+formname+' is placed.';
 	var error_message = 'Order is not valid, please select from the list.'
 	
@@ -482,7 +483,7 @@ $(document).ready(function(){
     var formname = $('#selectform option:selected').text();
     var formid = $('#selectform').val();
      
-	alert(formname + "and" + formid); 
+	console.log(formname + "and" + formid); 
 	  
 	  var success_message = formname+' is added to favorites';
 	var error_message = 'Instrument is not valid, please select from the list.'
