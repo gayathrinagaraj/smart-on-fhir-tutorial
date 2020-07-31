@@ -1089,6 +1089,7 @@ function orderStatus() {
 			var pro_name= item.resource.code.coding[0].display;
 			var task_id= item.resource.id;
 			var pat_name= item.resource.subject.display;	
+			var temp = item.resource.subject.reference;
 			var pat_id= temp.substr(-7); 
 			
 			console.log(task_id);
