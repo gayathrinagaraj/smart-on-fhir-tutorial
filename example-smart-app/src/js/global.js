@@ -565,6 +565,10 @@ var fdata = JSON.stringify(favdata);
 		
 		console.log(response);
 		orderStatus();
+		document.getElementById('order_unsuccessful').style.display = "none";
+		document.getElementById('order_successful').innerHTML = success_message;
+		$("#order_successful").show();
+		setTimeout(function() { $("#order_successful").hide(); }, 5000);
 		
 	});
 		  
