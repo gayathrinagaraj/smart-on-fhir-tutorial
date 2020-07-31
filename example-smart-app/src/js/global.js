@@ -1074,7 +1074,7 @@ function orderStatus() {
 		//console.log(patID);
 		var str="";
 		//str = str +"<tr><th>Event Date Time</th><th>PROs Ordered</th><th>Status</th>";
-		str = str +"<tr><th>PRO Name</th><th>Order</th><th>Remove from fav</th></tr>";
+		str = str +"<tr><th>PRO Name</th><th>Order</th><th>Remove from favorites</th></tr>";
 
 
 
