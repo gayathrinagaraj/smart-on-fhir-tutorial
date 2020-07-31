@@ -527,7 +527,7 @@ $(document).ready(function(){
  },
  "occurrenceDateTime": date1,
  "subject": {
- "display": "Besos Trojanmed",
+ "display": pat_fname+" "+pat_lname,
  "reference": "http://hl7.org/fhir/sid/us-ssn/Patient/" + patient_id
  },
  "context": {
@@ -1084,15 +1084,27 @@ function orderStatus() {
 			//console.log(item.resource.id);
 			//console.log(item.resource.occurrenceDateTime);
 			
+			
 			var pro_id= item.resource.code.coding[0].code;
 			var pro_name= item.resource.code.coding[0].display;
+			var task_id= item.resource.id;
+			var pat_name= item.resource.subject.display;	
+			var pat_id= temp.substr(-7); 
+			
+			console.log(task_id);
+			console.log(pro_id);
+			console.log(pro_name);
+			console.log(pat_id);
+			console.log(pat_name);
+			
+			
 			
 			
 
 			
 				str = str +"<tr><td>" +pro_name+"</td>";
 				str = str +"<td><button class='cancelbtn'; onclick='orderPRO(\"" +pro_name+"\",\"" +pro_id+"\")'; >Order</button></td>";
-				str = str +"<td>remove fav</td></tr>";	
+				str = str +"<td><button class='cancelbtn'; onclick='removeFav(\""+task_id+"\",\"" +pro_id+"\",\"" +pro_name+"\",\"" +pat_id+"\",\"" +pat_name+ "\")'; >Remove</button></td></tr>";	
 			
 		
 		});		
