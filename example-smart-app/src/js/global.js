@@ -482,7 +482,7 @@ $(document).ready(function(){
     var formname = $('#selectform option:selected').text();
     var formid = $('#selectform').val();
      
-	//alert(formname + "and" + formid); 
+	alert(formname + "and" + formid); 
 	  
 	  var success_message = formname+' is added to favorites';
 	var error_message = 'Instrument is not valid, please select from the list.'
