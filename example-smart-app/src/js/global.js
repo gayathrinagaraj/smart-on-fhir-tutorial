@@ -1288,6 +1288,66 @@ function completeProcess(taskId,proId,proName,patId,patName){
 	
 }
 
+
+function removeFav(taskId,proId,proName,patId,patName){
+
+	var payload ={
+        "resourceType": "List",
+        "id": taskId,
+        "status": "retired",
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": proName,
+              "display": proId
+            }
+          ],
+          "text": proName
+        },
+        "subject": {
+          "reference": "http://hl7.org/fhir/sid/us-ssn/Patient/"+patId,
+          "display": patName
+        }
+}
+	
+	
+	var fdata = JSON.stringify(payload);
+	
+	
+	var date1 =new Date(new Date().toString().split('GMT')[0]+' UTC').toISOString().split('.')[0];
+	var settings = {
+			"async": false,
+			"crossDomain": true,
+			"url": baseurl+"List/"+taskId,
+			"method": "PUT",
+			"contentType" : "application/json",
+			"headers": {
+				"Authorization" : "Bearer "+ KeycloakToken,
+			//	"Content-Type": "application/json",
+			//	"Cache-Control": "no-cache"
+			},
+			"processData": false,
+			"data": fdata
+	
+	}
+	
+	$.ajax(settings).done(function (response) {
+		console.log(response);
+		console.log("Removed from fav");
+		orderStatus();
+		document.getElementById('remove_fav').innerHTML = proName + "is removed from favorites";
+		$("#remove_fav").show();
+		setTimeout(function() { $("#remove_fav").hide(); }, 10000);
+
+		
+	});
+	
+	
+}
+
+
+
 function cancelOrder(taskId,proId,proName,patId,patName){
 
 	var date1 =new Date(new Date().toString().split('GMT')[0]+' UTC').toISOString().split('.')[0];
