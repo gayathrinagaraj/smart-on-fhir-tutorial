@@ -756,7 +756,7 @@ function listForms() {
                                   
 				//Taken extra attribute to support datalist in IE7
 				el.textContent = opt;
-				el.value = opt;
+				el.value = val;
 				el.id = val;				
 				freqOption.appendChild(el);	
 								
@@ -773,7 +773,7 @@ function listForms() {
                                   
 				//Taken extra attribute to support datalist in IE7
 				el.textContent = opt;
-				el.value = opt;
+				el.value = val;
 				el.id = val;				
 				acOption.appendChild(el);	
 								
