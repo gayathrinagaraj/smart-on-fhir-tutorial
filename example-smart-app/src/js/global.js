@@ -190,7 +190,7 @@ function freqOrder(){
 function freqOrder_test(){
 	var pnlist=[];
 	var fpnlist =[];
-	console.log(practitioner_id);
+	//console.log(practitioner_id);
 	
 	var settings31 = {
 			"async": false,
@@ -208,19 +208,19 @@ function freqOrder_test(){
 	$.ajax(settings31).done(function (response) {
 		console.log(response);	
 		jQuery(response.entry).each(function(i, item){
-			console.log(item);
-			console.log(item.resource.code.coding[0].display);
+			//console.log(item);
+			//console.log(item.resource.code.coding[0].display);
 			pnlist.push(item.resource.code.coding[0].display);
 		});
 		
 		
 	});
 	
-	console.log(pnlist);
+	//console.log(pnlist);
 	
 	fpnlist= pnlist.byCount();
 
-	console.log(fpnlist);
+	//console.log(fpnlist);
 	
 	
 	return fpnlist;
@@ -248,12 +248,12 @@ $(document).ready(function(){
     var formname = $('#selectform option:selected').text();
     var formid = $('#selectform').val();
 	  
-     console.log(formname + "and" + formid); 
+     //console.log(formname + "and" + formid); 
 	var success_message = 'Order for '+formname+' is placed.';
 	var error_message = 'Order is not valid, please select from the list.'
 	
 	  
-	 console.log(form_name);
+	 //console.log(form_name);
 	var flag = 'unset';
 	var i;
 
@@ -483,13 +483,13 @@ $(document).ready(function(){
     var formname = $('#selectform option:selected').text();
     var formid = $('#selectform').val();
      
-	console.log(formname + "and" + formid); 
+	//console.log(formname + "and" + formid); 
 	  
 	  var success_message = formname+' is added to favorites';
 	var error_message = 'Instrument is not valid, please select from the list.'
 	
 	  
-	 console.log(form_name);
+	 //console.log(form_name);
 	var flag = 'unset';
 	var i;
 
@@ -564,7 +564,7 @@ var fdata = JSON.stringify(favdata);
 	}
 	$.ajax(settings102).done(function (response) {
 		
-		console.log(response);
+		//console.log(response);
 		orderStatus();
 		document.getElementById('order_unsuccessful').style.display = "none";
 		document.getElementById('order_successful').innerHTML = success_message;
@@ -590,8 +590,8 @@ var fdata = JSON.stringify(favdata);
 
 
 function orderPRO(formname,formoid){
-	console.log(formname);
-  	console.log(formoid);
+	//console.log(formname);
+  	//console.log(formoid);
 	var sformname = formname;
 	var sformoid = formoid;
 	var success_message = 'Order for '+sformname+' is placed.';
@@ -661,7 +661,7 @@ function listForms() {
 	var temp_formoid=[];
         var temp_formname=[];
 	
-	console.log (fpnlistforms);
+	//console.log (fpnlistforms);
 	
 	$.ajax({
 		//url: Server + "/2014-01/Forms/.json",
@@ -719,8 +719,8 @@ function listForms() {
 		
                  if (fpnlistforms[x]== temp)
 		 {
-			 console.log(temp);
-                         console.log(acforms[j].resource.id);
+			 //console.log(temp);
+                         //console.log(acforms[j].resource.id);
 			 
 			 formoid.push(forms[j].resource.id);
                 	formname.push(forms[j].resource.title);
@@ -879,8 +879,8 @@ function orderStatus() {
 			},
 	}
 	$.ajax(settings31).done(function (response) {
-		console.log(response);
-		console.log("pending pro");
+		//console.log(response);
+		//console.log("pending pro");
 		document.getElementById('pending_PRO').innerHTML="";
 		//console.log(patID);
 		var str="";
@@ -901,11 +901,11 @@ function orderStatus() {
 			var temp = item.resource.subject.reference;
 			var pat_id= temp.substr(-7); 
 			
-			console.log(task_id);
-			console.log(pro_id);
-			console.log(pro_name);
-			console.log(pat_id);
-			console.log(pat_name);
+			//console.log(task_id);
+			//console.log(pro_id);
+			//console.log(pro_name);
+			//console.log(pat_id);
+			//console.log(pat_name);
 						
 			
 
@@ -939,7 +939,7 @@ function orderStatus() {
 	//console.log(todate);
 	var todayDate = todate.toISOString().slice(0,10);
 	//console.log(todayDate);
-	console.log(access_token);
+	//console.log(access_token);
 	//console.log(patID +"test");
 	document.getElementById('t02').innerHTML="";
 	var str="";
@@ -1068,8 +1068,8 @@ function orderStatus() {
 			
 	}
 	$.ajax(settings301).done(function (response) {
-		console.log(response);
-		console.log("fav pro");
+		//console.log(response);
+		//console.log("fav pro");
 		//alert(response);
 		//alert("fav pro");
 		document.getElementById('fav_PRO').innerHTML="";
@@ -1082,7 +1082,7 @@ function orderStatus() {
 
 		jQuery(response.entry).each(function(i, item){
 			
-			console.log(item.resource.code.text);
+			//console.log(item.resource.code.text);
 			//console.log(item.resource.id);
 			//console.log(item.resource.occurrenceDateTime);
 			
@@ -1094,11 +1094,11 @@ function orderStatus() {
 			var temp = item.resource.subject.reference;
 			var pat_id= temp.substr(-7); 
 			
-			console.log(task_id);
-			console.log(pro_id);
-			console.log(pro_name);
-			console.log(pat_id);
-			console.log(pat_name);
+			//console.log(task_id);
+			//console.log(pro_id);
+			//console.log(pro_name);
+			//console.log(pat_id);
+			//console.log(pat_name);
 			
 			
 			
@@ -1154,6 +1154,7 @@ function ISODateString(d) {
 
 function patientPostDR (QRjson,desc){
 	postQR(QRjson);
+	console.log(QRjson);
 	console.log("posting final QR to Hapi FHIR Server");
 	
 	var settings = {
@@ -1185,9 +1186,9 @@ $.ajax(settings).done(function (response) {
 
 function refreshSmartToken(){
     
-		console.log(refresh_token);
-		console.log(access_token);
-		console.log("refresh token function");
+		//console.log(refresh_token);
+		//console.log(access_token);
+		//console.log("refresh token function");
 	
 	
 	var settings200 = {
@@ -1209,11 +1210,11 @@ function refreshSmartToken(){
 $.ajax(settings200).done(function (response) {
   console.log(response);
 	access_token = response.access_token;
-	console.log("RF resp");
-	console.log(access_token);
+	//console.log("RF resp");
+	//console.log(access_token);
 	
 });	
-	console.log(access_token);
+	//console.log(access_token);
     setTimeout(refreshSmartToken, 270000);
 	
 	location.reload();
@@ -1294,7 +1295,7 @@ function completeProcess(taskId,proId,proName,patId,patName){
 			"data": "{\n\t\"resourceType\": \"ProcedureRequest\",\n\t\"id\": \""+taskId+"\",\n\t\"status\": \"completed\",\n\t\"intent\": \"order\",\n\t\"category\": [{\n\t\t\"coding\": [{\n\t\t\t\"system\": \"http://snomed.info/sct\",\n\t\t\t\"code\": \"386053000\",\n\t\t\t\"display\": \"Evaluation procedure (procedure)\"\n\t\t}],\n\t\t\"text\": \"Evaluation\"\n\t}],\n\t\"code\": {\n\t\t\"coding\": [{\n\t\t\t\"system\": \"http://loinc.org\",\n\t\t\t\"code\": \""+proId+"\",\n\t\t\t\"display\": \""+proName+"\"\n\t\t}],\n\t\t\"text\": \""+proName+"\"\n\t},\n\t\"occurrenceDateTime\": \""+date1+"\",\n\t\"subject\": {\n\t\t\"display\": \""+patName+"\",\n        \"reference\": \"https://fhir-open.sandboxcerner.com/dstu2/0b8a0111-e8e6-4c26-a91c-5069cbc6b1ca/Patient/"+patId+"\"\n\t}\n} \n"
 	}
 	$.ajax(settings).done(function (response) {
-		console.log(response);
+		//console.log(response);
 		console.log("complete process response");
 
 		
