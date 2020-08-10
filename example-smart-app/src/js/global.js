@@ -1564,10 +1564,11 @@ function displayQuestionnaire(QR, formOID,count){
 			var temp = data.contained[0].item[0].item;
 			
 			if(data.status == 'completed') {
-	console.log(QR);
-	var theta = QR.extension[2].extension[0].valueDecimal;
+	console.log(data);
+	console.log("status completed");			
+	var theta = QRjson.extension[2].extension[0].valueDecimal;
 		
-	var proID = QR.id;
+	var proID = QRjson.id;
 		var tscore;
 		var sum = 0;
 		var cnt = 0;
@@ -1575,7 +1576,7 @@ function displayQuestionnaire(QR, formOID,count){
 		var num;
 	 if ( proID == "7DACCFC4-87F9-4C25-A8AA-53B9B677B1A7"  ||   proID == "1DC83612-CBFE-4310-A713-5802E29DFE64" )
 	 {
-		var QAlist =  QR.item ;
+		var QAlist =  QRjson.item ;
 
 		jQuery(QAlist).each(function(i, item){
 		      num = parseInt(item.item[0].answer[0].valueString)
@@ -1595,9 +1596,9 @@ function displayQuestionnaire(QR, formOID,count){
 	 }
 
 		
-		var desc = QR.contained[0].title + ", t-score :"+ tscore;
+		var desc = QRjson.contained[0].title + ", t-score :"+ tscore;
 	
-		var myJSON_01 = JSON.stringify(QR);
+		var myJSON_01 = JSON.stringify(QRjson);
 		console.log("Encounter" + patEncounterId);
 	console.log("Practitioner"+ patPractitionerId);
 	patientPostDR (myJSON_01,desc)
