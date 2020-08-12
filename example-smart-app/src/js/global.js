@@ -6,6 +6,8 @@ var gender2="";
 var dobstr2="";
 var KeycloakToken="";
 
+var getThetaForm = new FormData();
+
 //https://sapphire-demo.meliorix.com/cipfhir3/baseDstu3/  
 //var baseurl ="http://hapi.fhir.org/baseDstu3/";
 var taskId,proId,proName,patId,patName;	
@@ -1444,6 +1446,34 @@ function postQR(QRjson){
 }
 
 
+function getThetaScore{
+
+getThetaForm.append("09VS_New", "A little bit difficult");
+getThetaForm.append("21VS_New", "Good");
+getThetaForm.append("22VS_New", "A little bit of a problem");
+getThetaForm.append("23VS_New", "Somewhat of a problem");
+
+var settings = {
+  "url": "https://calv-easiprox.med.usc.edu/AC_API_Test/2013-01/Scores/9BF6893C-8373-47A5-964A-9A65499E1E74.json",
+  "method": "POST",
+  "timeout": 0,
+  "headers": {
+    "Authorization": "Basic MDhCMkJDNTktNTRGNy00QThBLThGQzgtMjhCMjBEMDRCOTA5OkI3OTRFNjZFLTI4N0UtNDRCRi05QzgyLTMxRTM3MDNCNTAyQw=="
+  },
+  "processData": false,
+  "mimeType": "multipart/form-data",
+  "contentType": false,
+  "data": getThetaForm
+};
+
+$.ajax(settings).done(function (response) {
+  console.log(response);
+});
+	
+	
+}
+
+
 function decodeHtml(html) {
     var txt = document.createElement("textarea");
     txt.innerHTML = html;
@@ -1529,10 +1559,6 @@ function displayQuestionnaire(QR, formOID,count){
 	//console.log(QR);
 	var myjson01 = JSON.stringify(QR);
 	
-	//console.log(myjson01);
-	
-	
-
 	var temp =null;
 	$.ajax({
 		
@@ -1625,9 +1651,16 @@ function displayQuestionnaire(QR, formOID,count){
 			//console.log(data.contained[0].item[count].item[0].text);
 			
 			if (temp.length==1){
+				
+				
+			var itemId = data.contained[0].item[count].Id;
+				
+				console.log(itemId);
+				
+				
 			var linkId = data.contained[0].item[count].linkId;
                 
-               var linkId2 = data.contained[0].item[count].item[0].linkId;
+                        var linkId2 = data.contained[0].item[count].item[0].linkId;
                 
 				
 			var res = data.contained[0].item[count].item[0].text;
@@ -1690,6 +1723,10 @@ function displayQuestionnaire(QR, formOID,count){
 			
 			
 			else {
+			var itemId = data.contained[0].item[count].Id;
+				
+				console.log(itemId);	
+				
 			var linkId = data.contained[0].item[count].linkId;
                 
                  var linkId2 = data.contained[0].item[count].item[0].linkId;
