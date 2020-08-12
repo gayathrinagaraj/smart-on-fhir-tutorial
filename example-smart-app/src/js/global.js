@@ -1653,7 +1653,7 @@ function displayQuestionnaire(QR, formOID,count){
 			if (temp.length==1){
 				
 				
-			var itemId = data.contained[0].item[count].Id;
+			var itemId = data.contained[0].item[count].id;
 				
 				console.log(itemId);
 				
@@ -1723,7 +1723,7 @@ function displayQuestionnaire(QR, formOID,count){
 			
 			
 			else {
-			var itemId = data.contained[0].item[count].Id;
+			var itemId = data.contained[0].item[count].id;
 				
 				console.log(itemId);	
 				
