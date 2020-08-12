@@ -1446,7 +1446,7 @@ function postQR(QRjson){
 }
 
 
-function getThetaScore{
+function getThetaScore(){
 
 getThetaForm.append("09VS_New", "A little bit difficult");
 getThetaForm.append("21VS_New", "Good");
