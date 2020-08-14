@@ -1593,6 +1593,8 @@ function displayQuestionnaire(QR, formOID,count){
 			var temp = data.contained[0].item[0].item;
 			
 			if(data.status == 'completed') {
+				
+				console.log(getThetaForm);
 	console.log(data);
 	console.log("status completed");			
 	var theta = QRjson.extension[2].extension[0].valueDecimal;
