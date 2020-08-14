@@ -1448,10 +1448,10 @@ function postQR(QRjson){
 
 function getThetaScore(){
 
-getThetaForm.append("09VS_New", "A little bit difficult");
-getThetaForm.append("21VS_New", "Good");
-getThetaForm.append("22VS_New", "A little bit of a problem");
-getThetaForm.append("23VS_New", "Somewhat of a problem");
+//getThetaForm.append("09VS_New", "A little bit difficult");
+//getThetaForm.append("21VS_New", "Good");
+//getThetaForm.append("22VS_New", "A little bit of a problem");
+//getThetaForm.append("23VS_New", "Somewhat of a problem");
 
 var settings = {
   "url": "https://calv-easiprox.med.usc.edu/AC_API_Test/2013-01/Scores/9BF6893C-8373-47A5-964A-9A65499E1E74.json",
@@ -1481,14 +1481,16 @@ function decodeHtml(html) {
 }
 
 
-function nextQuestion(linkId,linkId2,valueString,text,tempOID)
+function nextQuestion(linkId,linkId2,valueString,text,tempOID,itemId)
 	{
 	 console.log(QRjson);
 		
 	 console.log(QRjson.status);
+		
 	
 	if (QRjson.status != "completed") {
         
+		getThetaForm.append(itemId, text);
 	
 	var ansItem1 =  {"extension":[{"url":"http://hl7.org/fhir/StructureDefinition/questionnaire-displayOrder","valueInteger": counter}],
 			"linkId":linkId,
@@ -1508,6 +1510,7 @@ function nextQuestion(linkId,linkId2,valueString,text,tempOID)
 	}
 	
 	else {
+		console.log(getThetaForm);
 	console.log(QRjson);
 	var theta = QRjson.extension[2].extension[0].valueDecimal;
 		
@@ -1713,7 +1716,7 @@ function displayQuestionnaire(QR, formOID,count){
 			
 			var temp2 = JSON.parse(tmp);
 					
-					screen += "<div style=\' margin-top: 0.5em;\'><input type=\'button\' class=\'block\' id=\'" + text + "\' name=\'" + text + "\' value=\'" + text + "\' onclick= \'nextQuestion( \"" +linkId+ "\", \"" +linkId2+ "\", \"" +valueString+ "\",\"" +text+ "\",\"" +tempOID+ "\");  \' />" + "</div>";
+					screen += "<div style=\' margin-top: 0.5em;\'><input type=\'button\' class=\'block\' id=\'" + text + "\' name=\'" + text + "\' value=\'" + text + "\' onclick= \'nextQuestion( \"" +linkId+ "\", \"" +linkId2+ "\", \"" +valueString+ "\",\"" +text+ "\",\"" +tempOID+ "\",\"" +itemId+ "\");  \' />" + "</div>";
 				
 			});
 			document.getElementById("Content").innerHTML = screen;
@@ -1769,7 +1772,7 @@ function displayQuestionnaire(QR, formOID,count){
 			
 			var temp2 = JSON.parse(tmp);
 					
-					screen += "<div style=\' margin-top: 0.5em;\'><input type=\'button\' class=\'block\' id=\'" + text+ "\' name=\'" + text + "\' value=\'" + text + "\' onclick= \'nextQuestion( \"" +linkId+ "\", \"" +linkId2+ "\", \"" +valueString+ "\",\"" +text+ "\",\"" +tempOID+ "\");  \' />" + "</div>";
+					screen += "<div style=\' margin-top: 0.5em;\'><input type=\'button\' class=\'block\' id=\'" + text+ "\' name=\'" + text + "\' value=\'" + text + "\' onclick= \'nextQuestion( \"" +linkId+ "\", \"" +linkId2+ "\", \"" +valueString+ "\",\"" +text+ "\",\"" +tempOID+ "\",\"" +itemId+ "\");  \' />" + "</div>";
 				
 			});
 			
