@@ -1516,7 +1516,11 @@ function nextQuestion(linkId,linkId2,valueString,text,tempOID,itemId)
 	}
 	
 	else {
-		console.log(getThetaForm);
+		//console.log(getThetaForm);
+		
+		for (var key of getThetaForm.entries()) {
+        console.log(key[0] + ', ' + key[1]);
+    }
 	console.log(QRjson);
 	var theta = QRjson.extension[2].extension[0].valueDecimal;
 		
@@ -1600,7 +1604,12 @@ function displayQuestionnaire(QR, formOID,count){
 			
 			if(data.status == 'completed') {
 				
-				console.log(getThetaForm);
+				for (var key of getThetaForm.entries()) {
+        console.log(key[0] + ', ' + key[1]);
+    }
+				
+				
+				
 	console.log(data);
 	console.log("status completed");			
 	var theta = QRjson.extension[2].extension[0].valueDecimal;
