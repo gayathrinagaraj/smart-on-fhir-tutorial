@@ -9,10 +9,10 @@ var KeycloakToken="";
 var getThetaForm = new FormData();
 
 
-getThetaForm.append("09VS_New", "A little bit difficult");
-getThetaForm.append("21VS_New", "Good");
-getThetaForm.append("22VS_New", "A little bit of a problem");
-getThetaForm.append("23VS_New", "Somewhat of a problem");
+//getThetaForm.append("09VS_New", "A little bit difficult");
+//getThetaForm.append("21VS_New", "Good");
+//getThetaForm.append("22VS_New", "A little bit of a problem");
+//getThetaForm.append("23VS_New", "Somewhat of a problem");
 
 //https://sapphire-demo.meliorix.com/cipfhir3/baseDstu3/  
 //var baseurl ="http://hapi.fhir.org/baseDstu3/";
