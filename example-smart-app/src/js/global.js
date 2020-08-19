@@ -10,7 +10,7 @@ var getThetaForm = new FormData();
 
 var currentFormId = "";
 
-var thetaResult="";
+var thetaResult;
 
 
 //getThetaForm.append("09VS_New", "A little bit difficult");
