@@ -1468,6 +1468,7 @@ function getThetaScore(){
 var settings = {
   "url": "https://calv-easiprox.med.usc.edu/AC_API_Test/2013-01/Scores/"+ currentFormId + ".json",
   "method": "POST",
+"async": false,
   "timeout": 0,
   "headers": {
     "Authorization": "Basic MDhCMkJDNTktNTRGNy00QThBLThGQzgtMjhCMjBEMDRCOTA5OkI3OTRFNjZFLTI4N0UtNDRCRi05QzgyLTMxRTM3MDNCNTAyQw=="
