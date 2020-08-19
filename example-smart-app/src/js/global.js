@@ -1616,7 +1616,7 @@ function displayQuestionnaire(QR, formOID,count){
 			
 				
 				
-				
+			getThetaScore();	
 				
 	console.log(data);
 	console.log("status completed");			
