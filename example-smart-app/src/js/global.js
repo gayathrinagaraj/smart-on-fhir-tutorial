@@ -8,6 +8,8 @@ var KeycloakToken="";
 
 var getThetaForm = new FormData();
 
+var currentFormId = "";
+
 
 //getThetaForm.append("09VS_New", "A little bit difficult");
 //getThetaForm.append("21VS_New", "Good");
@@ -1460,7 +1462,7 @@ function getThetaScore(){
 //getThetaForm.append("23VS_New", "Somewhat of a problem");
 
 var settings = {
-  "url": "https://calv-easiprox.med.usc.edu/AC_API_Test/2013-01/Scores/9BF6893C-8373-47A5-964A-9A65499E1E74.json",
+  "url": "https://calv-easiprox.med.usc.edu/AC_API_Test/2013-01/Scores/"+ currentFormId + ".json",
   "method": "POST",
   "timeout": 0,
   "headers": {
@@ -1520,7 +1522,11 @@ function nextQuestion(linkId,linkId2,valueString,text,tempOID,itemId)
 		
 		for (var key of getThetaForm.entries()) {
         console.log(key[0] + ', ' + key[1]);
-    }
+       }
+		
+		
+		getThetaScore();
+		
 	console.log(QRjson);
 	var theta = QRjson.extension[2].extension[0].valueDecimal;
 		
@@ -1599,7 +1605,7 @@ function displayQuestionnaire(QR, formOID,count){
 			//console.log(data);
 			var tempOID = data.id;
 			QRjson = data;
-			
+			currentFormId = data.id;
 			var temp = data.contained[0].item[0].item;
 			
 			if(data.status == 'completed') {
@@ -1607,6 +1613,8 @@ function displayQuestionnaire(QR, formOID,count){
 				for (var key of getThetaForm.entries()) {
         console.log(key[0] + ', ' + key[1]);
     }
+			
+				
 				
 				
 				
