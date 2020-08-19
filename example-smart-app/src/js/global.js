@@ -1640,19 +1640,23 @@ function displayQuestionnaire(QR, formOID,count){
 	var theta = QRjson.extension[2].extension[0].valueDecimal;
 		if (theta == 0) {
 			
+			
+			var form1 = {"Form":[{"Theta":"-1.91366212237115","StdError":"0.264347197084311"}]}
+			var temp1 = form1["Form"];
+			console.log(temp1[0].Theta);
+			
 			getThetaScore();
 			console.log ("result theta zero:  " + thetaResult);
 			//var form = {"Form":[{"Theta":"-1.91366212237115","StdError":"0.264347197084311"}]}
                         var form = thetaResult;
-			var temp = form["Form"];
+			var temp =[];
+			 temp = form["Form"];
 			
 			console.log("temp" + temp);
 
                          theta = temp[0].Theta;
 			
-			var form1 = {"Form":[{"Theta":"-1.91366212237115","StdError":"0.264347197084311"}]}
-			var temp1 = form1["Form"];
-			console.log(temp1[0].Theta);
+			
 			
 		}
 				
