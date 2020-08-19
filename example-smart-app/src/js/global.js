@@ -10,6 +10,8 @@ var getThetaForm = new FormData();
 
 var currentFormId = "";
 
+var thetaResult="";
+
 
 //getThetaForm.append("09VS_New", "A little bit difficult");
 //getThetaForm.append("21VS_New", "Good");
@@ -1461,7 +1463,7 @@ function getThetaScore(){
 //getThetaForm.append("22VS_New", "A little bit of a problem");
 //getThetaForm.append("23VS_New", "Somewhat of a problem");
 	
-	var result;
+	
 
 var settings = {
   "url": "https://calv-easiprox.med.usc.edu/AC_API_Test/2013-01/Scores/"+ currentFormId + ".json",
@@ -1478,10 +1480,10 @@ var settings = {
 
 $.ajax(settings).done(function (response) {
   console.log(response);
-	result = response;
+	thetaResult = response;
 });
 	
-	console.log ("result:  " + result);
+	
 }
 
 
@@ -1527,6 +1529,7 @@ function nextQuestion(linkId,linkId2,valueString,text,tempOID,itemId)
 		
 		
 		getThetaScore();
+		console.log ("result:  " + thetaResult);
 		
 	console.log(QRjson);
 	var theta = QRjson.extension[2].extension[0].valueDecimal;
@@ -1617,7 +1620,8 @@ function displayQuestionnaire(QR, formOID,count){
 			
 				
 				
-			getThetaScore();	
+			getThetaScore();
+			console.log ("result:  " + thetaResult);
 				
 	console.log(data);
 	console.log("status completed");			
@@ -1625,6 +1629,7 @@ function displayQuestionnaire(QR, formOID,count){
 		if (theta == 0) {
 			
 			getThetaScore();
+			console.log ("result theta zero:  " + thetaResult);
 			
 		}
 				
