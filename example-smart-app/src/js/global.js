@@ -1529,11 +1529,22 @@ function nextQuestion(linkId,linkId2,valueString,text,tempOID,itemId)
 	
 		
 		
-		getThetaScore();
-		console.log ("result:  " + thetaResult);
+		
 		
 	console.log(QRjson);
 	var theta = QRjson.extension[2].extension[0].valueDecimal;
+		
+		if (theta == 0) {
+			
+			getThetaScore();
+			console.log ("result theta zero:  " + thetaResult);
+			//var form = {"Form":[{"Theta":"-1.91366212237115","StdError":"0.264347197084311"}]}
+
+			var temp = thetaResult.Form;
+
+                         theta = temp[0].Theta;
+			
+		}
 		
 	var proID = QRjson.id;
 		var tscore;
@@ -1621,8 +1632,8 @@ function displayQuestionnaire(QR, formOID,count){
 			
 				
 				
-			getThetaScore();
-			console.log ("result:  " + thetaResult);
+			//getThetaScore();
+			//console.log ("result:  " + thetaResult);
 				
 	console.log(data);
 	console.log("status completed");			
@@ -1631,6 +1642,11 @@ function displayQuestionnaire(QR, formOID,count){
 			
 			getThetaScore();
 			console.log ("result theta zero:  " + thetaResult);
+			//var form = {"Form":[{"Theta":"-1.91366212237115","StdError":"0.264347197084311"}]}
+
+			var temp = thetaResult.Form;
+
+                         theta = temp[0].Theta;
 			
 		}
 				
