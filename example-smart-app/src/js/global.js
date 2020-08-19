@@ -1520,9 +1520,7 @@ function nextQuestion(linkId,linkId2,valueString,text,tempOID,itemId)
 	else {
 		//console.log(getThetaForm);
 		
-		for (var key of getThetaForm.entries()) {
-        console.log(key[0] + ', ' + key[1]);
-       }
+	
 		
 		
 		getThetaScore();
@@ -1610,9 +1608,9 @@ function displayQuestionnaire(QR, formOID,count){
 			
 			if(data.status == 'completed') {
 				
-				for (var key of getThetaForm.entries()) {
-        console.log(key[0] + ', ' + key[1]);
-    }
+				//for (var key of getThetaForm.entries()) {
+       // console.log(key[0] + ', ' + key[1]);
+   // }
 			
 				
 				
