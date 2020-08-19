@@ -1643,8 +1643,8 @@ function displayQuestionnaire(QR, formOID,count){
 			getThetaScore();
 			console.log ("result theta zero:  " + thetaResult);
 			//var form = {"Form":[{"Theta":"-1.91366212237115","StdError":"0.264347197084311"}]}
-
-			var temp = thetaResult.Form;
+                        var form = thetaResult;
+			var temp = form.Form;
 
                          theta = temp[0].Theta;
 			
