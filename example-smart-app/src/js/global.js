@@ -1567,11 +1567,13 @@ function nextQuestion(linkId,linkId2,valueString,text,tempOID,itemId)
 		console.log(sum);
 		console.log(cnt);
 		tscore =(sum * 25)/cnt;
+		tscore = Math.round(tscore);
 		console.log(tscore);
 
 	 }
 	 else {
 		tscore = (theta * 10) + 50;
+		 tscore = Math.round(tscore);
 		 console.log(tscore);
 	 }
 
@@ -1682,11 +1684,15 @@ function displayQuestionnaire(QR, formOID,count){
 		console.log(sum);
 		console.log(cnt);
 		tscore =(sum * 25)/cnt;
+		 
+	
+		tscore = Math.round(tscore);
 		console.log(tscore);
 
 	 }
 	 else {
 		tscore = (theta * 10) + 50;
+		tscore = Math.round(tscore);
 		 console.log(tscore);
 	 }
 
