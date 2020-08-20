@@ -1536,17 +1536,7 @@ function nextQuestion(linkId,linkId2,valueString,text,tempOID,itemId)
 	console.log(QRjson);
 	var theta = QRjson.extension[2].extension[0].valueDecimal;
 		
-		if (theta == 0) {
-			
-			getThetaScore();
-			console.log ("result theta zero:  " + thetaResult);
-			//var form = {"Form":[{"Theta":"-1.91366212237115","StdError":"0.264347197084311"}]}
-                        var form = thetaResult;
-			var temp = form["Form"];
-
-                         theta = temp[0].Theta;
-			
-		}
+		
 		
 	var proID = QRjson.id;
 		var tscore;
@@ -1572,6 +1562,17 @@ function nextQuestion(linkId,linkId2,valueString,text,tempOID,itemId)
 
 	 }
 	 else {
+		 if (theta == 0) {
+			
+			getThetaScore();
+			console.log ("result theta zero:  " + thetaResult);
+			//var form = {"Form":[{"Theta":"-1.91366212237115","StdError":"0.264347197084311"}]}
+                        var form = thetaResult;
+			var temp = form["Form"];
+
+                         theta = temp[0].Theta;
+			
+		}
 		tscore = (theta * 10) + 50;
 		 tscore = Math.round(tscore);
 		 console.log(tscore);
@@ -1642,27 +1643,7 @@ function displayQuestionnaire(QR, formOID,count){
 	console.log(data);
 	console.log("status completed");			
 	var theta = QRjson.extension[2].extension[0].valueDecimal;
-		if (theta == 0) {
-			
-			
-			var form1 = {"Form":[{"Theta":"-1.91366212237115","StdError":"0.264347197084311"}]}
-			var temp1 = form1["Form"];
-			console.log(temp1[0].Theta);
-			
-			getThetaScore();
-			console.log ("result theta zero:  " + thetaResult);
-			//var form = {"Form":[{"Theta":"-1.91366212237115","StdError":"0.264347197084311"}]}
-                        var form = thetaResult;
-			var temp =[];
-			 temp = form["Form"];
-			
-			console.log("temp" + temp);
-
-                         theta = temp[0].Theta;
-			
-			
-			
-		}
+		
 				
 		
 	var proID = QRjson.id;
@@ -1691,6 +1672,29 @@ function displayQuestionnaire(QR, formOID,count){
 
 	 }
 	 else {
+		 
+		 if (theta == 0 ) {
+			
+			
+			//var form1 = {"Form":[{"Theta":"-1.91366212237115","StdError":"0.264347197084311"}]}
+			//var temp1 = form1["Form"];
+			//console.log(temp1[0].Theta);
+			
+			getThetaScore();
+			console.log ("result theta zero:  " + thetaResult);
+			//var form = {"Form":[{"Theta":"-1.91366212237115","StdError":"0.264347197084311"}]}
+                        var form = thetaResult;
+			var temp =[];
+			 temp = form["Form"];
+			
+			console.log("temp" + temp);
+
+                         theta = temp[0].Theta;
+			
+			
+			
+		}
+		 
 		tscore = (theta * 10) + 50;
 		tscore = Math.round(tscore);
 		 console.log(tscore);
