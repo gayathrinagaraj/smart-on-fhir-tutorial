@@ -1589,6 +1589,9 @@ function nextQuestion(linkId,linkId2,valueString,text,tempOID,itemId,ques)
 		
 		var desc = QRjson.contained[0].title + ", t-score :"+ tscore;
 		QRjson["tscore"] = tscore;
+		
+		QRjson["patientResponses"] = patientResponses;
+		
 		var myJSON_01 = JSON.stringify(QRjson);
 		console.log("Encounter" + patEncounterId);
 	console.log("Practitioner"+ patPractitionerId);
@@ -1714,6 +1717,7 @@ function displayQuestionnaire(QR, formOID,count){
 		var desc = QRjson.contained[0].title + ", t-score :"+ tscore;
 				
 				QRjson["tscore"] = tscore;
+				QRjson["patientResponses"] = patientResponses;
 	
 		var myJSON_01 = JSON.stringify(QRjson);
 		console.log("Encounter" + patEncounterId);
