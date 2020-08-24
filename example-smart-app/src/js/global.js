@@ -10,6 +10,8 @@ var getThetaForm = new FormData();
 
 var currentFormId = "";
 
+var patientResponses=[];
+
 var thetaResult={};
 
 
@@ -1497,11 +1499,17 @@ function decodeHtml(html) {
 }
 
 
-function nextQuestion(linkId,linkId2,valueString,text,tempOID,itemId)
+function nextQuestion(linkId,linkId2,valueString,text,tempOID,itemId,ques)
 	{
 	 console.log(QRjson);
 		
 	 console.log(QRjson.status);
+		
+		var temp ={};
+		temp["Ques"] = ques ;
+		temp["Ans"] =  text;
+		
+		patientResponses.push(temp);
 		
 	
 	if (QRjson.status != "completed") {
@@ -1630,6 +1638,8 @@ function displayQuestionnaire(QR, formOID,count){
 			var temp = data.contained[0].item[0].item;
 			
 			if(data.status == 'completed') {
+				
+				console.log(patientResponses);
 				
 				//for (var key of getThetaForm.entries()) {
        // console.log(key[0] + ', ' + key[1]);
@@ -1762,6 +1772,8 @@ function displayQuestionnaire(QR, formOID,count){
 				var Ques01 = decodeHtml(str);
 				console.log(Ques01);
 				
+				var ques = Ques01;
+				
 
 				
 			
@@ -1794,7 +1806,7 @@ function displayQuestionnaire(QR, formOID,count){
 			
 			var temp2 = JSON.parse(tmp);
 					
-					screen += "<div style=\' margin-top: 0.5em;\'><input type=\'button\' class=\'block\' id=\'" + text + "\' name=\'" + text + "\' value=\'" + text + "\' onclick= \'nextQuestion( \"" +linkId+ "\", \"" +linkId2+ "\", \"" +valueString+ "\",\"" +text+ "\",\"" +tempOID+ "\",\"" +itemId+ "\");  \' />" + "</div>";
+					screen += "<div style=\' margin-top: 0.5em;\'><input type=\'button\' class=\'block\' id=\'" + text + "\' name=\'" + text + "\' value=\'" + text + "\' onclick= \'nextQuestion( \"" +linkId+ "\", \"" +linkId2+ "\", \"" +valueString+ "\",\"" +text+ "\",\"" +tempOID+ "\",\"" +itemId+ "\",\"" +ques+ "\");  \' />" + "</div>";
 				
 			});
 			document.getElementById("Content").innerHTML = screen;
@@ -1826,6 +1838,8 @@ function displayQuestionnaire(QR, formOID,count){
 				var Q3 = decodeHtml(Ques03 );
 				console.log(Q3);
 			
+				var ques = Ques03 + " " + Q3;
+				console.log(ques);
 			screen += "<div style=\'height: 50px; font-style: normal; font-size: 20px; margin-bottom: 5em; margin-left:3em;\'>" + Ques02 + " " + Q3 +"</div>";
 			
 			jQuery(data.contained[0].item[count].item[1].answerOption).each(function(i, item){
@@ -1850,7 +1864,7 @@ function displayQuestionnaire(QR, formOID,count){
 			
 			var temp2 = JSON.parse(tmp);
 					
-					screen += "<div style=\' margin-top: 0.5em;\'><input type=\'button\' class=\'block\' id=\'" + text+ "\' name=\'" + text + "\' value=\'" + text + "\' onclick= \'nextQuestion( \"" +linkId+ "\", \"" +linkId2+ "\", \"" +valueString+ "\",\"" +text+ "\",\"" +tempOID+ "\",\"" +itemId+ "\");  \' />" + "</div>";
+					screen += "<div style=\' margin-top: 0.5em;\'><input type=\'button\' class=\'block\' id=\'" + text+ "\' name=\'" + text + "\' value=\'" + text + "\' onclick= \'nextQuestion( \"" +linkId+ "\", \"" +linkId2+ "\", \"" +valueString+ "\",\"" +text+ "\",\"" +tempOID+ "\",\"" +itemId+ "\",\"" +ques+ "\");  \' />" + "</div>";
 				
 			});
 			
