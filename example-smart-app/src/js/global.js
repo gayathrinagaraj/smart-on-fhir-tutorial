@@ -728,7 +728,7 @@ function patientPostDR (QRjson,desc){
   "async": true,
   "crossDomain": true,
 		//https://omnibus-stage.elimuinformatics.com/omnibus-api/api/v2/usc/pro/fhir-resource-post/questionnaire-resp-2-xhtml
-  "url": "https://omnibus-stage.elimuinformatics.com/omnibus-api/api/v2/usc/pro/fhir-resource-post/questionnaire-resp-2-xhtml?patientId="+patID+"&docRefDescription="+desc+"&encounterId="+patEncounterId+"&practitionerId="+patPractitionerId,
+  "url": "https://omnibus-stage.elimuinformatics.com/omnibus-api/api/v2/elimu/pro/fhir-resource-post/questionnaire-resp-2-xhtml?patientId="+patID+"&docRefDescription="+desc+"&encounterId="+patEncounterId+"&practitionerId="+patPractitionerId,
   "method": "POST",
   "headers": {
 	  "x-api-key" : "CK9SLO4L18W2O3L3D7JN8Z447I2982X5F5ZM1J30",
