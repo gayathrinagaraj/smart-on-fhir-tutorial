@@ -213,7 +213,7 @@ function freqOrder_test(){
 			"contentType" : "application/json",                                                                           
 			"cache" : false,
 		"headers": {
-			"Authorization" : "Bearer "+ KeycloakToken,
+			//"Authorization" : "Bearer "+ KeycloakToken,
 				"Cache-Control": "no-cache"
 			},
 			"method": "GET"
@@ -300,7 +300,7 @@ $(document).ready(function(){
 			"method": "POST",
 			"contentType" : "application/json",
 			"headers": {
-				"Authorization" : "Bearer "+ KeycloakToken,
+				//"Authorization" : "Bearer "+ KeycloakToken,
 				"Access-Control-Allow-Headers": "x-requested-with",
 				"cache" : false,
 				"Cache-Control": "no-cache"
@@ -449,7 +449,7 @@ $(document).ready(function(){
 			"method": "POST",
 			"contentType" : "application/json",
 			"headers": {
-				"Authorization" : "Bearer "+ KeycloakToken,
+				//"Authorization" : "Bearer "+ KeycloakToken,
 				"Access-Control-Allow-Headers": "x-requested-with",
 				"cache" : false,
 				"Cache-Control": "no-cache"
@@ -563,7 +563,7 @@ var fdata = JSON.stringify(favdata);
 			"method": "POST",
 			"contentType" : "application/json",
 			"headers": {
-				"Authorization" : "Bearer "+ KeycloakToken,
+				//"Authorization" : "Bearer "+ KeycloakToken,
 				"Access-Control-Allow-Headers": "x-requested-with",
 				"cache" : false,
 				"Cache-Control": "no-cache"
@@ -627,7 +627,7 @@ function orderPRO(formname,formoid){
 			"method": "POST",
 			"contentType" : "application/json",
 			"headers": {
-				"Authorization" : "Bearer "+ KeycloakToken,
+				//"Authorization" : "Bearer "+ KeycloakToken,
 				"Access-Control-Allow-Headers": "x-requested-with",
 				"cache" : false,
 				"Cache-Control": "no-cache"
@@ -890,7 +890,7 @@ function orderStatus() {
 			"method": "GET",
 			"contentType" : "application/json",
 			"headers": {
-				"Authorization" : "Bearer "+ KeycloakToken,
+				//"Authorization" : "Bearer "+ KeycloakToken,
 			//	"Content-Type": "application/json",
 				"Cache-Control": "no-cache"
 			},
@@ -1077,7 +1077,7 @@ function orderStatus() {
 			"cache" : false,
 
 			"headers": {
-			"Authorization" : "Bearer "+ KeycloakToken,
+			//"Authorization" : "Bearer "+ KeycloakToken,
 
 				"Cache-Control": "no-cache"
 			},
@@ -1316,7 +1316,7 @@ function completeProcess(taskId,proId,proName,patId,patName){
 			"method": "PUT",
 			"contentType" : "application/json",
 			"headers": {
-				"Authorization" : "Bearer "+ KeycloakToken,
+				//"Authorization" : "Bearer "+ KeycloakToken,
 			//	"Content-Type": "application/json",
 			//	"Cache-Control": "no-cache"
 			},
@@ -1368,7 +1368,7 @@ function removeFav(taskId,proId,proName,patId,patName){
 			"method": "PUT",
 			"contentType" : "application/json",
 			"headers": {
-				"Authorization" : "Bearer "+ KeycloakToken,
+				//"Authorization" : "Bearer "+ KeycloakToken,
 			//	"Content-Type": "application/json",
 			//	"Cache-Control": "no-cache"
 			},
@@ -1404,7 +1404,7 @@ function cancelOrder(taskId,proId,proName,patId,patName){
 			"contentType" : "application/json",
 			"cache" : false,
 			"headers": {
-				"Authorization" : "Bearer "+ KeycloakToken,
+				//"Authorization" : "Bearer "+ KeycloakToken,
 			//	"Content-Type": "application/json",
 			//	"Cache-Control": "no-cache"
 			},
@@ -1433,7 +1433,7 @@ function postScore(taskId,proId,proName,patId,patName,tscore){
 			"method": "POST",
 			"contentType" : "application/json",
 			"headers": {
-				"Authorization" : "Bearer "+ KeycloakToken
+				//"Authorization" : "Bearer "+ KeycloakToken
 			//	"Content-Type": "application/json",
 			//	"Cache-Control": "no-cache"
 			},
@@ -1457,7 +1457,7 @@ function postQR(QRjson){
 			"method": "POST",
 			"contentType" : "application/json",
 			"headers": {
-				"Authorization" : "Bearer "+ KeycloakToken,
+				//"Authorization" : "Bearer "+ KeycloakToken,
 			//	"Content-Type": "application/json",
 			//	"Cache-Control": "no-cache"
 			},
@@ -1974,7 +1974,7 @@ function displayList(){
 			"crossDomain": true,
 			"url": baseurl+"ProcedureRequest?subject=http://hl7.org/fhir/sid/us-ssn/Patient/"+patID+"&_count=20&intent=order&status=active&_sort:desc=_lastUpdated",
 			"headers": {
-				"Authorization" : "Bearer "+ KeycloakToken,
+				//"Authorization" : "Bearer "+ KeycloakToken,
 			//	"Content-Type": "application/json",
 				"Cache-Control": "no-cache"
 			},
