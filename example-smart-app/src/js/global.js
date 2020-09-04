@@ -4,6 +4,21 @@ var pat_fname="";
 var pat_lname="";
 var gender2="";
 var dobstr2="";
+var KeycloakToken="";
+
+var getThetaForm = new FormData();
+
+var currentFormId = "";
+
+var patientResponses=[];
+
+var thetaResult={};
+
+
+//getThetaForm.append("09VS_New", "A little bit difficult");
+//getThetaForm.append("21VS_New", "Good");
+//getThetaForm.append("22VS_New", "A little bit of a problem");
+//getThetaForm.append("23VS_New", "Somewhat of a problem");
 
 //https://sapphire-demo.meliorix.com/cipfhir3/baseDstu3/  
 //var baseurl ="http://hapi.fhir.org/baseDstu3/";
@@ -14,7 +29,26 @@ var tscore;
 
 var Series1 = [];
 
+function getKeycloakToken(){
+	var callEasipro = {
+		"async": false,
+		"crossDomain": true,
+		"url": baseurl_easipro+"authenticate",
+		"method": "POST",
+		"headers": {
+			"Content-Type": "application/json"
+		},
+		"processData": false,
+		"data":  JSON.stringify(smartObject)
+}
+$.ajax(callEasipro).done(function (response) {
+	console.log(response);
+	KeycloakToken=response.result.keyCloak_token;
+	setTimeout(getKeycloakToken, 270000); 
+	
+})
 
+}
 
 function chartOld() {
 	var myWindow = window.open("", "MsgWindow", "width=1400,height=1200");
@@ -62,21 +96,178 @@ function chart() {
 	
 }
 
+
+Array.prototype.byCount= function(){
+    var itm, a= [], L= this.length, o= {};
+    for(var i= 0; i<L; i++){
+        itm= this[i];
+        if(!itm) continue;
+        if(o[itm]== undefined) o[itm]= 1;
+        else ++o[itm];
+    }
+    for(var p in o) a[a.length]= p;
+    return a.sort(function(a, b){
+        return o[b]-o[a];
+    });
+}
+
+/*
+var proNameList =[];
+var proIdList= [];
+ var freqpname=[];
+var freqpid=[];
+
+function freqOrder(){
+	console.log(practitioner_id);
+	
+	var settings31 = {
+			"async": false,
+			"crossDomain": true,
+			"url": baseurl+"ProcedureRequest?requester=http://usc.edu/Practitioner/"+practitioner_id+"&_count=100&intent=order&_sort:desc=_lastUpdated",
+			"contentType" : "application/json",                                                                           
+			"cache" : false,
+		"headers": {
+			"Authorization" : "Bearer "+ KeycloakToken,
+				"Cache-Control": "no-cache"
+			},
+			"method": "GET"
+		
+	}
+	$.ajax(settings31).done(function (response) {
+		console.log(response);	
+		jQuery(response.entry).each(function(i, item){
+			console.log(item);
+			console.log(item.resource.code.coding[0].code);
+			proIdList.push(item.resource.code.coding[0].code); 
+			console.log(item.resource.code.coding[0].display);
+			proNameList.push(item.resource.code.coding[0].display);
+		});
+		
+		
+	});
+	
+	console.log(proNameList);
+	console.log(proIdList);
+	freqpname= proNameList.byCount();
+
+	console.log(freqpname);
+	
+	jQuery(freqpname).each(function(i, item1){
+			//console.log(item1);
+		
+		jQuery(proNameList).each(function(j, item2){
+			//console.log(item2);
+			//console.log(item1);
+			
+			if (item2 == item1){
+				if (freqpid.includes(proIdList[j]))
+				{
+					console.log("already there");
+				}
+				else{
+				freqpid.push(proIdList[j]);
+				}
+				return true;
+			}
+			
+		});
+		
+	});
+	
+	console.log(freqpid);
+	
+	 var freqSelect = document.getElementById("freqlist");
+           
+            for (var i=0; i < freqpname.length; i++) {
+               
+                var opt = freqpname[i];
+                var val = freqpid[i];
+                var freqel = document.createElement("option");
+                                  
+                //Taken extra attribute to support datalist in IE7
+                freqel.textContent = opt;
+                freqel.value = val;
+                freqel.id = val;                
+                freqSelect.appendChild(freqel);    
+                                
+            }
+	
+	
+	
+	
+	
+	
+}
+
+*/
+
+function freqOrder_test(){
+	var pnlist=[];
+	var fpnlist =[];
+	//console.log(practitioner_id);
+	
+	var settings31 = {
+			"async": false,
+			"crossDomain": true,
+			"url": baseurl+"ProcedureRequest?requester=http://usc.edu/Practitioner/"+practitioner_id+"&_count=100&intent=order&_sort:desc=_lastUpdated",
+			"contentType" : "application/json",                                                                           
+			"cache" : false,
+		"headers": {
+			"Authorization" : "Bearer "+ KeycloakToken,
+				"Cache-Control": "no-cache"
+			},
+			"method": "GET"
+		
+	}
+	$.ajax(settings31).done(function (response) {
+		console.log(response);	
+		jQuery(response.entry).each(function(i, item){
+			//console.log(item);
+			//console.log(item.resource.code.coding[0].display);
+			pnlist.push(item.resource.code.coding[0].display);
+		});
+		
+		
+	});
+	
+	//console.log(pnlist);
+	
+	fpnlist= pnlist.byCount();
+
+	//console.log(fpnlist);
+	
+	
+	return fpnlist;
+	
+}
+
+
+
+
+
+
+
 $(document).ready(function(){
  
   // Initialize select2
-  $("#selectform").select2();
+  $("#selectform").select2({
+	  placeholder :"Please select an instrument from the list"
+  });
 
+  
+	
+	
   // Read selected option
   $('#but_read').click(function(){
     var formname = $('#selectform option:selected').text();
     var formid = $('#selectform').val();
-     
+	  
+     //console.log(formname + "and" + formid); 
 	var success_message = 'Order for '+formname+' is placed.';
 	var error_message = 'Order is not valid, please select from the list.'
 	
 	  
-	 console.log(form_name);
+	 //console.log(form_name);
 	var flag = 'unset';
 	var i;
 
@@ -103,17 +294,24 @@ $(document).ready(function(){
 	var prdata = "{\r\n\t\"resourceType\": \"ProcedureRequest\",\r\n\t\"status\": \"active\",\r\n\t\"intent\": \"order\",\r\n\t\"category\": [{\r\n\t\t\"coding\": [{\r\n\t\t\t\"system\": \"http://snomed.info/sct\",\r\n\t\t\t\"code\": \"386053000\",\r\n\t\t\t\"display\": \"Evaluation procedure (procedure)\"\r\n\t\t}],\r\n\t\t\"text\": \"Evaluation\"\r\n\t}],\r\n\t\"code\": {\r\n\t\t\"coding\": [{\r\n\t\t\t\"system\": \"http://loinc.org\",\r\n\t\t\t\"code\":  \""+formid+"\",\r\n\t\t\t\"display\":\""+formname+"\"\r\n\t\t}],\r\n\t\t\"text\": \""+formname+"\"\r\n\t},\r\n\t\"occurrenceDateTime\": \""+date1+"\",\r\n\t\"subject\": {\r\n\t\t\"display\": \""+pat_fname+" "+pat_lname+"\",\r\n        \"reference\": \"http://hl7.org/fhir/sid/us-ssn/Patient/"+patient_id+"\"\r\n\t},\r\n\t\"context\": {\r\n    \"reference\": \"http://usc.edu/Encounter/"+encounter_id+"\" \r\n  },\r\n\t\"requester\": {\r\n    \"agent\": {\r\n      \"reference\": \"http://usc.edu/Practitioner/"+practitioner_id+"\"\r\n    }\r\n\t}\r\n}";                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
 	
 	var settings = {
-			"async": true,
+		"async": true,
 			"crossDomain": true,
 			"url": baseurl+"ProcedureRequest",
 			"method": "POST",
 			"contentType" : "application/json",
-		        "cache" : false,
 			"headers": {
+				"Authorization" : "Bearer "+ KeycloakToken,
+				"Access-Control-Allow-Headers": "x-requested-with",
+				"cache" : false,
 				"Cache-Control": "no-cache"
+			//"headers": {
+			//	"Content-Type": "application/json",
+			//	"Cache-Control": "no-cache"
 			},
 			"processData": false,
 			"data": prdata
+		
+			
 	}
 	$.ajax(settings).done(function (response) {
 		//console.log("pro-test");
@@ -126,13 +324,71 @@ $(document).ready(function(){
 		setTimeout(function() { $("#order_successful").hide(); }, 5000);
 	
 		
-		$("#selectform").val('').trigger('change');
+		//$("#selectform").val('').trigger('change');
 		//$("#selectform").text('').trigger('change');
-		 $('#selectform option:selected').text('').trigger('change');
+		// $('#selectform option:selected').text('').trigger('change');
 		//setTimeout(function(){location.reload()},5200);
 	});  
 	  
 		  //location.reload();
+		  
+	/*	  
+		  
+	  var favdata = {
+ "resourceType": "List",
+ "status": "current",
+ "code": {
+ "coding": [
+ {
+ "system": "http://loinc.org",
+ "code": formid,
+ "display": formname
+ }
+ ],
+ "text":formname
+ },
+ "occurrenceDateTime": date1,
+ "subject": {
+ "display": "Besos Trojanmed",
+ "reference": "http://hl7.org/fhir/sid/us-ssn/Patient/" + patient_id
+ },
+ "context": {
+ "reference": "http://usc.edu/Encounter/" + encounter_id
+ },
+ "requester": {
+ "agent": {
+ "reference": "http://usc.edu/Practitioner/" + practitioner_id
+ }
+ }
+};
+var fdata = JSON.stringify(favdata);
+		  
+	var settings102 = {
+		"async": true,
+			"crossDomain": true,
+			"url": baseurl+"List",
+			"method": "POST",
+			"contentType" : "application/json",
+			"headers": {
+				"Authorization" : "Bearer "+ KeycloakToken,
+				"Access-Control-Allow-Headers": "x-requested-with",
+				"cache" : false,
+				"Cache-Control": "no-cache"
+			//"headers": {
+			//	"Content-Type": "application/json",
+			//	"Cache-Control": "no-cache"
+			},
+			"processData": false,
+			"data": fdata
+		
+			
+	}
+	$.ajax(settings102).done(function (response) {
+		
+		console.log(response);
+		
+	});   */
+	  
   } 
 	  
 	  
@@ -146,6 +402,90 @@ $(document).ready(function(){
 });
 
 
+/*
+$(document).ready(function(){
+ 
+  // Initialize select2
+   $("#freqlist").select2();
+  
+	
+	
+  // Read selected option
+  $('#f_order').click(function(){
+    var formname1 = $('#freqlist option:selected').text();
+    var formid1 = $('#freqlist').val();
+     
+	var success_message = 'Order for '+formname1+' is placed.';
+	var error_message = 'Order is not valid, please select from the list.'
+	
+	  
+	 console.log(freqpname);
+	var flag1 = 'unset';
+	var i;
+   	 for (i = 0; i < freqpname.length; i++) {
+        if(freqpname[i] == formname1){
+			flag = 'set';
+			break;
+		}
+	}
+	if(flag1 == 'unset'){
+	document.getElementById('order_successful').style.display = "none";
+	document.getElementById('order_unsuccessful').innerHTML = error_message;
+	document.getElementById('order_successful').style.display = "inline";
+	return;
+	}
+	
+	
+	  if(flag1 == 'set') {
+	
+	  
+	var date1 =new Date(new Date().toString().split('GMT')[0]+' UTC').toISOString().split('.')[0];
+	var prdata = "{\r\n\t\"resourceType\": \"ProcedureRequest\",\r\n\t\"status\": \"active\",\r\n\t\"intent\": \"order\",\r\n\t\"category\": [{\r\n\t\t\"coding\": [{\r\n\t\t\t\"system\": \"http://snomed.info/sct\",\r\n\t\t\t\"code\": \"386053000\",\r\n\t\t\t\"display\": \"Evaluation procedure (procedure)\"\r\n\t\t}],\r\n\t\t\"text\": \"Evaluation\"\r\n\t}],\r\n\t\"code\": {\r\n\t\t\"coding\": [{\r\n\t\t\t\"system\": \"http://loinc.org\",\r\n\t\t\t\"code\":  \""+formid1+"\",\r\n\t\t\t\"display\":\""+formname1+"\"\r\n\t\t}],\r\n\t\t\"text\": \""+formname1+"\"\r\n\t},\r\n\t\"occurrenceDateTime\": \""+date1+"\",\r\n\t\"subject\": {\r\n\t\t\"display\": \""+pat_fname+" "+pat_lname+"\",\r\n        \"reference\": \"http://hl7.org/fhir/sid/us-ssn/Patient/"+patient_id+"\"\r\n\t},\r\n\t\"context\": {\r\n    \"reference\": \"http://usc.edu/Encounter/"+encounter_id+"\" \r\n  },\r\n\t\"requester\": {\r\n    \"agent\": {\r\n      \"reference\": \"http://usc.edu/Practitioner/"+practitioner_id+"\"\r\n    }\r\n\t}\r\n}";                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+	
+	var settings = {
+		"async": true,
+			"crossDomain": true,
+			"url": baseurl+"ProcedureRequest",
+			"method": "POST",
+			"contentType" : "application/json",
+			"headers": {
+				"Authorization" : "Bearer "+ KeycloakToken,
+				"Access-Control-Allow-Headers": "x-requested-with",
+				"cache" : false,
+				"Cache-Control": "no-cache"
+			//"headers": {
+			//	"Content-Type": "application/json",
+			//	"Cache-Control": "no-cache"
+			},
+			"processData": false,
+			"data": prdata
+		
+			
+	}
+	$.ajax(settings).done(function (response) {
+		//console.log("pro-test");
+		//console.log(response);
+		//console.log("Posted Procedure Request");
+		orderStatus();
+		document.getElementById('order_unsuccessful').style.display = "none";
+		document.getElementById('order_successful').innerHTML = success_message;
+		$("#order_successful").show();
+		setTimeout(function() { $("#order_successful").hide(); }, 5000);
+	
+		
+		$("#freqlist").val('').trigger('change');
+		//$("#selectform").text('').trigger('change');
+		 $('#freqlist option:selected').text('').trigger('change');
+		//setTimeout(function(){location.reload()},5200);
+	});  
+	  
+		  //location.reload();
+	  }
+   });
+		  
+ });	    
+
+
 
 $(document).ready(function(){
  
@@ -153,65 +493,22 @@ $(document).ready(function(){
   $("#selectform").select2();
 
   // Read selected option
-  $('#test_func').click(function(){
+  $('#add_fav').click(function(){
     var formname = $('#selectform option:selected').text();
     var formid = $('#selectform').val();
      
-	alert(formname + "and" + formid);  
-	  var date1 =new Date(new Date().toString().split('GMT')[0]+' UTC').toISOString().split('.')[0];
-	  var favdata =" {\r\n  \"resourceType\": \"List\",\r\n  \"status\": \"current\",\r\n  \"code\": {\r\n    \"coding\": [\r\n      {\r\n        \"system\": \"http:\/\/loinc.org\",\r\n        \"code\": \"\"+formid+\"\",\r\n        \"display\": \"\"+formname+\"\"\r\n      }\r\n    ],\r\n    \"text\": \"\"+formname+\"\"\r\n  },\r\n  \"occurrenceDateTime\": \"\"+date1+\"\",\r\n  \"subject\": {\r\n    \"display\": \"\"+pat_fname+\"  \"+pat_lname+\"\",\r\n    \"reference\": \"http:\/\/hl7.org\/fhir\/sid\/us-ssn\/Patient\/\"+patient_id+\"\"\r\n  },\r\n  \"context\": {\r\n    \"reference\": \"http:\/\/usc.edu\/Encounter\/\"+encounter_id+\"\"\r\n  },\r\n  \"requester\": {\r\n    \"agent\": {\r\n      \"reference\": \"http:\/\/usc.edu\/Practitioner\/\"+practitioner_id+\"\"\r\n    }\r\n  }\r\n}";
-	  var settings = {
-		"async": true,
-			"crossDomain": true,
-			"url": baseurl+"List",
-			"method": "POST",
-			"contentType" : "application/json",
-		        "cache" : false,
-			"headers": {
-				"Cache-Control": "no-cache"
-			},
-			"processData": false,  
-		  "data" : favdata
-
-};
-
-$.ajax(settings).done(function (response) {
-  console.log(response);
-	alert(response);
-	console.log("fav added");
-});
+	//console.log(formname + "and" + formid); 
 	  
+	  var success_message = formname+' is added to favorites';
+	var error_message = 'Instrument is not valid, please select from the list.'
+	
 	  
-	   
-  });
-	
-	
-});
-
-
-
-
-
-
-
-	var el = document.getElementById("myBtn");
-
-if(el){
-  el.addEventListener("click", function(){
-	 
-
-	var e = document.getElementById("selectform");		
-	var idOfSelect = $("#selectinput").val();
-	var sformname = $('#selectform option[value="'+idOfSelect+'"]').text();
-	var sformoid = $('#selectform option[value="'+idOfSelect+'"]').attr("id")
-	var success_message = 'Order for '+sformname+' is placed.';
-	var error_message = 'Order is not valid, please select from the list.'
-	var data_inlist = document.getElementById('selectform');
+	 //console.log(form_name);
 	var flag = 'unset';
 	var i;
 
-    for (i = 0; i < data_inlist.options.length; i++) {
-        if(data_inlist.options[i].value == idOfSelect){
+   	 for (i = 0; i < form_name.length; i++) {
+        if(form_name[i] == formname){
 			flag = 'set';
 			break;
 		}
@@ -225,22 +522,102 @@ if(el){
 	}
 	
 	
+	  if(flag == 'set') {
+	  
+	  
+	  
+	  var date1 =new Date(new Date().toString().split('GMT')[0]+' UTC').toISOString().split('.')[0];
+	  var favdata = {
+ "resourceType": "List",
+ "status": "current",
+ "code": {
+ "coding": [
+ {
+ "system": "http://loinc.org",
+ "code": formid,
+ "display": formname
+ }
+ ],
+ "text":formname
+ },
+ "occurrenceDateTime": date1,
+ "subject": {
+ "display": pat_fname+" "+pat_lname,
+ "reference": "http://hl7.org/fhir/sid/us-ssn/Patient/" + patient_id
+ },
+ "context": {
+ "reference": "http://usc.edu/Encounter/" + encounter_id
+ },
+ "requester": {
+ "agent": {
+ "reference": "http://usc.edu/Practitioner/" + practitioner_id
+ }
+ }
+};
+var fdata = JSON.stringify(favdata);
+		  
+	var settings102 = {
+		"async": true,
+			"crossDomain": true,
+			"url": baseurl+"List",
+			"method": "POST",
+			"contentType" : "application/json",
+			"headers": {
+				"Authorization" : "Bearer "+ KeycloakToken,
+				"Access-Control-Allow-Headers": "x-requested-with",
+				"cache" : false,
+				"Cache-Control": "no-cache"
+			//"headers": {
+			//	"Content-Type": "application/json",
+			//	"Cache-Control": "no-cache"
+			},
+			"processData": false,
+			"data": fdata
+		
+			
+	}
+	$.ajax(settings102).done(function (response) {
+		
+		//console.log(response);
+		orderStatus();
+		document.getElementById('order_unsuccessful').style.display = "none";
+		document.getElementById('order_successful').innerHTML = success_message;
+		$("#order_successful").show();
+		setTimeout(function() { $("#order_successful").hide(); }, 5000);
+		
+	});
+		  
+		  
+	  }
+	  
+	  
+	  
+	  
+ });
+	
+	formname ='';
+	flag ='unset';
+	
+});
+
+
+
+
+function orderPRO(formname,formoid){
+	//console.log(formname);
+  	//console.log(formoid);
+	var sformname = formname;
+	var sformoid = formoid;
+	var success_message = 'Order for '+sformname+' is placed.';
+	var error_message = 'Order is not valid, please select from the list.'
+	
+	
+	
+	
 	  
 	var date1 =new Date(new Date().toString().split('GMT')[0]+' UTC').toISOString().split('.')[0];
-	//console.log(date1);
-	//console.log("patid :  " + window.patient_id);
-	//console.log("fname : " + window.pat_fname);
-	//console.log("lname : " + window.pat_lname);	
-	  //console.log("inside prdata ");    
-	//console.log(practitioner_id);  
-	//console.log(encounter_id)
-	//var prdata = "{\n\t\"resourceType\": \"ProcedureRequest\",\n\t\"status\": \"active\",\n\t\"intent\": \"order\",\n\t\"category\": [{\n\t\t\"coding\": [{\n\t\t\t\"system\": \"http://snomed.info/sct\",\n\t\t\t\"code\": \"386053000\",\n\t\t\t\"display\": \"Evaluation procedure (procedure)\"\n\t\t}],\n\t\t\"text\": \"Evaluation\"\n\t}],\n\t\"code\": {\n\t\t\"coding\": [{\n\t\t\t\"system\": \"http://loinc.org\",\n\t\t\t\"code\": \""+sformoid+"\",\n\t\t\t\"display\": \""+sformname+"\"\n\t\t}],\n\t\t\"text\": \""+sformname+"\"\n\t},\n\t\"occurrenceDateTime\": \""+date1+"\",\n\t\"subject\": {\n\t\t\"display\": \""+pat_fname+" "+pat_lname+"\",\n        \"reference\": \"http://hl7.org/fhir/sid/us-ssn/Patient/"+patient_id+"\"\n\t},\r\n\t\"encounter\": {\r\n   \"reference\": \"4269906\"\r\n },\r\n     \"orderer\": {\r\n     \"reference\": \"4464007\"\r\n }\r\n} \r\n"
-	
+
 	var prdata = "{\r\n\t\"resourceType\": \"ProcedureRequest\",\r\n\t\"status\": \"active\",\r\n\t\"intent\": \"order\",\r\n\t\"category\": [{\r\n\t\t\"coding\": [{\r\n\t\t\t\"system\": \"http://snomed.info/sct\",\r\n\t\t\t\"code\": \"386053000\",\r\n\t\t\t\"display\": \"Evaluation procedure (procedure)\"\r\n\t\t}],\r\n\t\t\"text\": \"Evaluation\"\r\n\t}],\r\n\t\"code\": {\r\n\t\t\"coding\": [{\r\n\t\t\t\"system\": \"http://loinc.org\",\r\n\t\t\t\"code\":  \""+sformoid+"\",\r\n\t\t\t\"display\":\""+sformname+"\"\r\n\t\t}],\r\n\t\t\"text\": \""+sformname+"\"\r\n\t},\r\n\t\"occurrenceDateTime\": \""+date1+"\",\r\n\t\"subject\": {\r\n\t\t\"display\": \""+pat_fname+" "+pat_lname+"\",\r\n        \"reference\": \"http://hl7.org/fhir/sid/us-ssn/Patient/"+patient_id+"\"\r\n\t},\r\n\t\"context\": {\r\n    \"reference\": \"http://usc.edu/Encounter/"+encounter_id+"\" \r\n  },\r\n\t\"requester\": {\r\n    \"agent\": {\r\n      \"reference\": \"http://usc.edu/Practitioner/"+practitioner_id+"\"\r\n    }\r\n\t}\r\n}";                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
-	//console.log("print procedure request input" + prdata);
-
-
-	
 	
 	
 	var settings = {
@@ -249,14 +626,15 @@ if(el){
 			"url": baseurl+"ProcedureRequest",
 			"method": "POST",
 			"contentType" : "application/json",
-		        "cache" : false,
 			"headers": {
+				"Authorization" : "Bearer "+ KeycloakToken,
+				"Access-Control-Allow-Headers": "x-requested-with",
+				"cache" : false,
 				"Cache-Control": "no-cache"
-			},
 			//"headers": {
 			//	"Content-Type": "application/json",
 			//	"Cache-Control": "no-cache"
-			//},
+			},
 			"processData": false,
 			"data": prdata
 	}
@@ -267,11 +645,10 @@ if(el){
 		orderStatus();
 		document.getElementById('order_unsuccessful').style.display = "none";
 		document.getElementById('order_successful').innerHTML = success_message;
-		document.getElementById('selectinput').value = '';
 		$("#order_successful").show();
 		setTimeout(function() { $("#order_successful").hide(); }, 10000);
 	});
-	  });
+	  
 	
 }
 
@@ -279,7 +656,9 @@ if(el){
 var form_oid=[];
 var form_name=[];
 
-var Server = "https://mss.fsm.northwestern.edu/AC_API";
+
+
+//var server="https://calv-easiprox.med.usc.edu/ac";
 var FormOID = "96FE494D-F176-4EFB-A473-2AB406610626";  // Sample form -- replace with your FormOID
 var promisUID="001";
 
@@ -288,16 +667,26 @@ function callback1(data){
 
 }
 function listForms() {
+	
+	var fpnlistforms = freqOrder_test();
+	var acforms=[];
+	var formoid=[];
+	var formname=[];
+	var temp_formoid=[];
+        var temp_formname=[];
+	
+	//console.log (fpnlistforms);
+	
 	$.ajax({
 		//url: Server + "/2014-01/Forms/.json",
-		url: Server + "/2018-10/Questionnaire?_Summary",
+		url: baseurl_AC_API + "2018-10/Questionnaire?_Summary",
 		cache: false,
 		type: "GET",
 		// data: "",
 		dataType: "json",
 		beforeSend: function(xhr) {
-			var username = "2F984419-5008-4E42-8210-68592B418233";
-			var pass = "21A673E8-9498-4DC2-AAB6-07395029A778";
+			var username = "08B2BC59-54F7-4A8A-8FC8-28B20D04B909";
+			var pass = "B794E66E-287E-44BF-9C82-31E3703B502C";
 			//var Token = "MkY5ODQ0MTktNTAwOC00RTQyLTgyMTAtNjg1OTJCNDE4MjMzOjIxQTY3M0U4LTk0OTgtNERDMi1BQUI2LTA3Mzk1MDI5QTc3OA==";
 
 			var base64 = btoa(username + ":" + pass);
@@ -328,25 +717,85 @@ function listForms() {
 								
 			} */
 			
-	   // var select = document.getElementById("selectform");
-	 var grp1 = document.getElementById("grptest");
+
             var forms = data.entry;
+	  acforms= data.entry;
             //console.log(data.entry);
             //console.log("all forms"+forms);
-            for (var i=0; i < forms.length; i++) {
-                form_oid[i]=forms[i].resource.id;
-                form_name[i]=forms[i].resource.title;
-                var opt = forms[i].resource.title;
-                var val = forms[i].resource.id;
-                var el = document.createElement("option");
-                                  
-                //Taken extra attribute to support datalist in IE7
-                el.textContent = opt;
-                el.value = val;
-                el.id = val;                
-                grp1.appendChild(el);    
-                                
+
+           
+	var acOption = document.getElementById("allList");
+	var freqOption = document.getElementById("freqList");	
+			
+	for (var x=0;x < fpnlistforms.length; x++)
+	{
+	    for (var j=0; j < acforms.length; j++) {
+		    var temp = acforms[j].resource.title;
+		
+                 if (fpnlistforms[x]== temp)
+		 {
+			 //console.log(temp);
+                         //console.log(acforms[j].resource.id);
+			 
+			 formoid.push(forms[j].resource.id);
+                	formname.push(forms[j].resource.title);
+			 
+			 
+		 }
+		    else{
+			    temp_formoid.push(forms[j].resource.id);
+                	   temp_formname.push(forms[j].resource.title);
+			    	    
+		    }
+		    
+
             }
+	
+	}
+			
+			
+		var form_oid_test = formoid.concat(temp_formoid);	
+		var form_name_test = formname.concat(temp_formname);
+			
+			var flnum = formname.length;
+		
+			var select = document.getElementById("selectform"); 
+			//console.log("all forms"+forms);
+			for (var i=0; i < flnum; i++) {
+				form_oid[i]=forms[i].resource.id;
+				form_name[i]=forms[i].resource.title;
+				//var opt = forms[i].resource.title;
+				//var val = forms[i].resource.id;
+				var opt = form_name_test[i];
+				var val = form_oid_test[i];
+				var el = document.createElement("option");
+                                  
+				//Taken extra attribute to support datalist in IE7
+				el.textContent = opt;
+				el.value = val;
+				el.id = val;				
+				freqOption.appendChild(el);	
+								
+			}
+			
+			for (var i=flnum; i < forms.length; i++) {
+				form_oid[i]=forms[i].resource.id;
+				form_name[i]=forms[i].resource.title;
+				//var opt = forms[i].resource.title;
+				//var val = forms[i].resource.id;
+				var opt = form_name_test[i];
+				var val = form_oid_test[i];
+				var el = document.createElement("option");
+                                  
+				//Taken extra attribute to support datalist in IE7
+				el.textContent = opt;
+				el.value = val;
+				el.id = val;				
+				acOption.appendChild(el);	
+								
+			}
+			
+			
 
 		},
 
@@ -354,6 +803,8 @@ function listForms() {
 			document.write(jqXHR.responseText + ':' + textStatus + ':' + errorThrown);
 		}
 	});
+	
+	
 }
 
 
@@ -369,7 +820,7 @@ function prorecommend() {
 	var settings = {
 			"async": true,
 			"crossDomain": true,
-			"url": "https://sapphire-stage.elimuinformatics.com/omnibus/api/v2/usc/sapphire/cds-services/pro-recommend-usc",
+			"url": "https://calv-easiprox.med.usc.edu/a2d2/api/v2/services/pro-recommend-usc",
 			"method": "POST",
 			"headers": {
 				"Content-Type": "application/json",
@@ -414,25 +865,7 @@ function prorecommend() {
 }
 
 
-function freqOrder(){
-	console.log(practitioner_id);
-	
-	var settings31 = {
-			"async": false,
-			"crossDomain": true,
-			"url": baseurl+"ProcedureRequest?requester=http://usc.edu/Practitioner/"+practitioner_id+"&_count=100&intent=order&_sort:desc=_lastUpdated",
-			"contentType" : "application/json",                                                                           
-			"cache" : false,
-		"headers": {
-				"Cache-Control": "no-cache"
-			},
-			"method": "GET"
-		
-	}
-	$.ajax(settings31).done(function (response) {
-		console.log(response);		
-	});
-}
+
 
 
 
@@ -454,20 +887,17 @@ function orderStatus() {
 			"url": baseurl+"ProcedureRequest?subject=http://hl7.org/fhir/sid/us-ssn/Patient/"+patID+"&_count=20&intent=order&status=active&_sort:desc=_lastUpdated",
 			"contentType" : "application/json",                                                                           
 			"cache" : false,
-		"headers": {
+			"method": "GET",
+			"contentType" : "application/json",
+			"headers": {
+				"Authorization" : "Bearer "+ KeycloakToken,
+			//	"Content-Type": "application/json",
 				"Cache-Control": "no-cache"
 			},
-			"method": "GET"
-			//"headers": {
-			//	"Content-Type": "application/json",
-			//	"Cache-Control": "no-cache"
-			//	
-			//}"async": false,
-			
 	}
 	$.ajax(settings31).done(function (response) {
-		console.log(response);
-		console.log("pending pro");
+		//console.log(response);
+		//console.log("pending pro");
 		document.getElementById('pending_PRO').innerHTML="";
 		//console.log(patID);
 		var str="";
@@ -488,11 +918,11 @@ function orderStatus() {
 			var temp = item.resource.subject.reference;
 			var pat_id= temp.substr(-7); 
 			
-			console.log(task_id);
-			console.log(pro_id);
-			console.log(pro_name);
-			console.log(pat_id);
-			console.log(pat_name);
+			//console.log(task_id);
+			//console.log(pro_id);
+			//console.log(pro_name);
+			//console.log(pat_id);
+			//console.log(pat_name);
 						
 			
 
@@ -521,12 +951,12 @@ function orderStatus() {
 
 	
 	var datatoday = new Date();
-	var datatodays = datatoday.setDate(new Date(datatoday).getDate() + 1);
+	var datatodays = datatoday.setDate(new Date(datatoday).getDate() + 2);
 	var todate = new Date(datatodays);
 	//console.log(todate);
 	var todayDate = todate.toISOString().slice(0,10);
 	//console.log(todayDate);
-	console.log(access_token);
+	//console.log(access_token);
 	//console.log(patID +"test");
 	document.getElementById('t02').innerHTML="";
 	var str="";
@@ -537,7 +967,7 @@ function orderStatus() {
 		//url: "https://fhir-open.sandboxcerner.com/dstu2/0b8a0111-e8e6-4c26-a91c-5069cbc6b1ca/DocumentReference?patient="+patID+"&created=ge2019-04-01&created=le"+ todayDate+"&_count=23&_limit=23",
 		//https://fhir-ehr.cerner.com/dstu2/e8a84236-c258-4952-98b7-a6ff8a9c587a/DocumentReference?patient=4342008&created=ge2019-04-01&created=le2019-12-02
 		//https://fhir-myrecord.cerner.com/dstu2/e8a84236-c258-4952-98b7-a6ff8a9c587a/DocumentReference?patient=12668019&created=ge2020-01-01&created=le2020-02-11
-		url: "https://fhir-myrecord.cerner.com/dstu2/e8a84236-c258-4952-98b7-a6ff8a9c587a/DocumentReference?patient="+patID+"&created=ge2019-04-01&created=le"+ todayDate+"&_count=23&_limit=23",
+		url: "https://fhir-ehr.sandboxcerner.com/dstu2/724d00f8-4a37-487d-82a6-822a906b86c2/DocumentReference?patient="+patID+"&created=ge2019-04-01&created=le"+ todayDate,
 		cache: false,
 		type: "GET",
 		beforeSend: function(xhr) {
@@ -636,14 +1066,19 @@ function orderStatus() {
 
 	
 	
+
 	
+
 	var settings301 = {
 			"async": false,
 			"crossDomain": true,
 			"url": baseurl+"List?subject=http://hl7.org/fhir/sid/us-ssn/Patient/"+patID+"&status=current&_sort:desc=_lastUpdated",
 			"contentType" : "application/json",                                                                           
 			"cache" : false,
-		"headers": {
+
+			"headers": {
+			"Authorization" : "Bearer "+ KeycloakToken,
+
 				"Cache-Control": "no-cache"
 			},
 			"method": "GET"
@@ -655,43 +1090,67 @@ function orderStatus() {
 			
 	}
 	$.ajax(settings301).done(function (response) {
-		console.log(response);
-		console.log("fav pro");
+
+		//console.log(response);
+		//console.log("fav pro");
+
 		//alert(response);
 		//alert("fav pro");
 		document.getElementById('fav_PRO').innerHTML="";
 		//console.log(patID);
 		var str="";
 		//str = str +"<tr><th>Event Date Time</th><th>PROs Ordered</th><th>Status</th>";
-		str = str +"<tr><th>PRO Name</th><th>Order</th><th>Remove from fav</th></tr>";
+
+		str = str +"<tr><th>PRO Name</th><th>Order</th><th>Remove from favorites</th></tr>";
+
 
 
 
 		jQuery(response.entry).each(function(i, item){
 			
-			console.log(item.resource.code.text);
+
+			//console.log(item.resource.code.text);
 			//console.log(item.resource.id);
 			//console.log(item.resource.occurrenceDateTime);
 			
+			
 			var pro_id= item.resource.code.coding[0].code;
 			var pro_name= item.resource.code.coding[0].display;
+			var task_id= item.resource.id;
+			var pat_name= item.resource.subject.display;	
+			var temp = item.resource.subject.reference;
+			var pat_id= temp.substr(-7); 
+			
+			//console.log(task_id);
+			//console.log(pro_id);
+			//console.log(pro_name);
+			//console.log(pat_id);
+			//console.log(pat_name);
 			
 			
 
 			
+
+			
 				str = str +"<tr><td>" +pro_name+"</td>";
-				str = str +"<td>Order</td>";
-				str = str +"<td>remove fav</td></tr>";	
+
+				str = str +"<td><button class='cancelbtn'; onclick='orderPRO(\"" +pro_name+"\",\"" +pro_id+"\")'; >Order</button></td>";
+				str = str +"<td><button class='cancelbtn'; onclick='removeFav(\""+task_id+"\",\"" +pro_id+"\",\"" +pro_name+"\",\"" +pat_id+"\",\"" +pat_name+ "\")'; >Remove</button></td></tr>";	
+
 			
 		
 		});		
 		document.getElementById('fav_PRO').innerHTML += str;
 	});
 	
+
+	
+
 }
 
 
-listForms();
+//listForms();
+//freqOrder();
 //formDetails(FormOID);
 //prorecommend();
 
@@ -700,7 +1159,7 @@ listForms();
 //Flow for the patient app
 
 
-var Server = "https://mss.fsm.northwestern.edu/AC_API";
+//var Server = "https://calv-easiprox.med.usc.edu/ac";
 var formOID;
 var formName;
 var answer_item =[];
@@ -722,18 +1181,21 @@ function ISODateString(d) {
 
 function patientPostDR (QRjson,desc){
 	postQR(QRjson);
+	console.log(QRjson);
 	console.log("posting final QR to Hapi FHIR Server");
 	
 	var settings = {
   "async": true,
   "crossDomain": true,
 		//https://omnibus-stage.elimuinformatics.com/omnibus-api/api/v2/usc/pro/fhir-resource-post/questionnaire-resp-2-xhtml
+
   "url": "https://omnibus-stage.elimuinformatics.com/omnibus-api/api/v2/elimu/pro/fhir-resource-post/questionnaire-resp-2-xhtml?patientId="+patID+"&docRefDescription="+desc+"&encounterId="+patEncounterId+"&practitionerId="+patPractitionerId,
+
   "method": "POST",
   "headers": {
 	  "x-api-key" : "CK9SLO4L18W2O3L3D7JN8Z447I2982X5F5ZM1J30",
     "Content-Type": "application/json",
-    "Accept": "*/*",
+    //"Accept": "*/*",
     "Cache-Control": "no-cache"
   },
   "data": QRjson
@@ -753,15 +1215,15 @@ $.ajax(settings).done(function (response) {
 
 function refreshSmartToken(){
     
-		console.log(refresh_token);
-		console.log(access_token);
-		console.log("refresh token function");
+		//console.log(refresh_token);
+		//console.log(access_token);
+		//console.log("refresh token function");
 	
 	
 	var settings200 = {
 		"async": true,
 		"crossDomain": true,	
-  		"url": "https://authorization.cerner.com/tenants/e8a84236-c258-4952-98b7-a6ff8a9c587a/protocols/oauth2/profiles/smart-v1/token",
+  		"url": "https://authorization.sandboxcerner.com/tenants/724d00f8-4a37-487d-82a6-822a906b86c2/protocols/oauth2/profiles/smart-v1/token",
  		"method": "POST",
   		"headers": {
     		
@@ -777,12 +1239,13 @@ function refreshSmartToken(){
 $.ajax(settings200).done(function (response) {
   console.log(response);
 	access_token = response.access_token;
-	console.log("RF resp");
-	console.log(access_token);
+	//console.log("RF resp");
+	//console.log(access_token);
 	
 });	
-	console.log(access_token);
-    setTimeout(refreshSmartToken, 480000);
+	//console.log(access_token);
+    setTimeout(refreshSmartToken, 270000);
+	
 	location.reload();
 	
 }
@@ -826,6 +1289,10 @@ function assignValues(task_Id,pro_Id,pro_Name,pat_Name,encounterId,practitionerI
 	patName = pat_Name;
 	
 	patEncounterId =encounterId ;
+	
+	//patEncounterId = "54280423";
+	
+	
 	patPractitionerId = practitionerId;
 }
 
@@ -848,16 +1315,16 @@ function completeProcess(taskId,proId,proName,patId,patName){
 			"url": baseurl+"ProcedureRequest/"+taskId,
 			"method": "PUT",
 			"contentType" : "application/json",
-			"cache" : false,
-			//"headers": {
+			"headers": {
+				"Authorization" : "Bearer "+ KeycloakToken,
 			//	"Content-Type": "application/json",
 			//	"Cache-Control": "no-cache"
-			//},
+			},
 			"processData": false,
 			"data": "{\n\t\"resourceType\": \"ProcedureRequest\",\n\t\"id\": \""+taskId+"\",\n\t\"status\": \"completed\",\n\t\"intent\": \"order\",\n\t\"category\": [{\n\t\t\"coding\": [{\n\t\t\t\"system\": \"http://snomed.info/sct\",\n\t\t\t\"code\": \"386053000\",\n\t\t\t\"display\": \"Evaluation procedure (procedure)\"\n\t\t}],\n\t\t\"text\": \"Evaluation\"\n\t}],\n\t\"code\": {\n\t\t\"coding\": [{\n\t\t\t\"system\": \"http://loinc.org\",\n\t\t\t\"code\": \""+proId+"\",\n\t\t\t\"display\": \""+proName+"\"\n\t\t}],\n\t\t\"text\": \""+proName+"\"\n\t},\n\t\"occurrenceDateTime\": \""+date1+"\",\n\t\"subject\": {\n\t\t\"display\": \""+patName+"\",\n        \"reference\": \"https://fhir-open.sandboxcerner.com/dstu2/0b8a0111-e8e6-4c26-a91c-5069cbc6b1ca/Patient/"+patId+"\"\n\t}\n} \n"
 	}
 	$.ajax(settings).done(function (response) {
-		console.log(response);
+		//console.log(response);
 		console.log("complete process response");
 
 		
@@ -865,6 +1332,66 @@ function completeProcess(taskId,proId,proName,patId,patName){
 	
 	
 }
+
+
+function removeFav(taskId,proId,proName,patId,patName){
+
+	var payload ={
+        "resourceType": "List",
+        "id": taskId,
+        "status": "retired",
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": proName,
+              "display": proId
+            }
+          ],
+          "text": proName
+        },
+        "subject": {
+          "reference": "http://hl7.org/fhir/sid/us-ssn/Patient/"+patId,
+          "display": patName
+        }
+}
+	
+	
+	var fdata = JSON.stringify(payload);
+	
+	
+	var date1 =new Date(new Date().toString().split('GMT')[0]+' UTC').toISOString().split('.')[0];
+	var settings = {
+			"async": false,
+			"crossDomain": true,
+			"url": baseurl+"List/"+taskId,
+			"method": "PUT",
+			"contentType" : "application/json",
+			"headers": {
+				"Authorization" : "Bearer "+ KeycloakToken,
+			//	"Content-Type": "application/json",
+			//	"Cache-Control": "no-cache"
+			},
+			"processData": false,
+			"data": fdata
+	
+	}
+	
+	$.ajax(settings).done(function (response) {
+		console.log(response);
+		console.log("Removed from fav");
+		orderStatus();
+		document.getElementById('remove_fav').innerHTML = proName + "is removed from favorites";
+		$("#remove_fav").show();
+		setTimeout(function() { $("#remove_fav").hide(); }, 10000);
+
+		
+	});
+	
+	
+}
+
+
 
 function cancelOrder(taskId,proId,proName,patId,patName){
 
@@ -876,10 +1403,11 @@ function cancelOrder(taskId,proId,proName,patId,patName){
 			"method": "PUT",
 			"contentType" : "application/json",
 			"cache" : false,
-			//"headers": {
+			"headers": {
+				"Authorization" : "Bearer "+ KeycloakToken,
 			//	"Content-Type": "application/json",
 			//	"Cache-Control": "no-cache"
-			//},
+			},
 			"processData": false,
 			"data": "{\n\t\"resourceType\": \"ProcedureRequest\",\n\t\"id\": \""+taskId+"\",\n\t\"status\": \"completed\",\n\t\"intent\": \"order\",\n\t\"category\": [{\n\t\t\"coding\": [{\n\t\t\t\"system\": \"http://snomed.info/sct\",\n\t\t\t\"code\": \"386053000\",\n\t\t\t\"display\": \"Evaluation procedure (procedure)\"\n\t\t}],\n\t\t\"text\": \"Evaluation\"\n\t}],\n\t\"code\": {\n\t\t\"coding\": [{\n\t\t\t\"system\": \"http://loinc.org\",\n\t\t\t\"code\": \""+proId+"\",\n\t\t\t\"display\": \""+proName+"\"\n\t\t}],\n\t\t\"text\": \""+proName+"\"\n\t},\n\t\"occurrenceDateTime\": \""+date1+"\",\n\t\"subject\": {\n\t\t\"display\": \""+patName+"\",\n        \"reference\": \"https://fhir-open.sandboxcerner.com/dstu2/0b8a0111-e8e6-4c26-a91c-5069cbc6b1ca/Patient/"+patId+"\"\n\t}\n} \n"
 	}
@@ -904,11 +1432,11 @@ function postScore(taskId,proId,proName,patId,patName,tscore){
 			"url": baseurl+"Observation",
 			"method": "POST",
 			"contentType" : "application/json",
-			"cache" : false,
-			//"headers": {
+			"headers": {
+				"Authorization" : "Bearer "+ KeycloakToken
 			//	"Content-Type": "application/json",
 			//	"Cache-Control": "no-cache"
-			//},
+			},
 			"processData": false,
 			"data": "{\n\t\"resourceType\": \"Observation\",\n\t\"status\": \"final\",\n\t\"code\": {\n    \t\"coding\": [\n    \t\t{\n        \t\t\"system\": \"http://loinc.org\",\n\t\t        \"code\": \"77580-9\",\n\t\t        \"display\": \""+proName+" T-score\"\n    \t\t}\n    \t]\n\t},\n\t\"category\": [{\n    \t\"coding\": [{\n        \t\"system\": \"http://hl7.org/fhir/observation-category\",\n        \t\"code\": \"survey\",\n        \t\"display\": \"Survey\"\n        }]\n    }],\n\t\"subject\": {\n\t\t\"display\": \""+patName+"\",\n        \"reference\": \"https://fhir-open.sandboxcerner.com/dstu2/0b8a0111-e8e6-4c26-a91c-5069cbc6b1ca/Patient/"+patId+"\"\n\t},\n\t\"effectiveDateTime\": \""+date1+"\",\n\t\"issued\": \""+date1+"\",\n\t\"performer\": [\n    \t{\n\t\t\t\"display\": \""+patName+"\",\n        \t\"reference\": \"https://fhir-open.sandboxcerner.com/dstu2/0b8a0111-e8e6-4c26-a91c-5069cbc6b1ca/Patient/"+patId+"\"\n\t    }\n\t],\n\t\"valueQuantity\": {\n    \t\"value\": "+tscore+"\n     \n\t},\n\n\t\"basedOn\":\t{\n\t\t\"reference\": \"ProcedureRequest/"+taskId+"\"\n\t}\n} \n"
 	}
@@ -928,11 +1456,11 @@ function postQR(QRjson){
 			"url": baseurl+"QuestionnaireResponse",
 			"method": "POST",
 			"contentType" : "application/json",
-			"cache" : false,
-			//"headers": {
+			"headers": {
+				"Authorization" : "Bearer "+ KeycloakToken,
 			//	"Content-Type": "application/json",
 			//	"Cache-Control": "no-cache"
-			//},
+			},
 			"processData": false,
 			"data": QRjson
 	}
@@ -944,168 +1472,163 @@ function postQR(QRjson){
 
 }
 
+
+function getThetaScore(){
+
+//getThetaForm.append("09VS_New", "A little bit difficult");
+//getThetaForm.append("21VS_New", "Good");
+//getThetaForm.append("22VS_New", "A little bit of a problem");
+//getThetaForm.append("23VS_New", "Somewhat of a problem");
+	
+	
+
+var settings = {
+  "url": "https://calv-easiprox.med.usc.edu/AC_API_Test/2013-01/Scores/"+ currentFormId + ".json",
+  "method": "POST",
+"async": false,
+  "timeout": 0,
+  "headers": {
+    "Authorization": "Basic MDhCMkJDNTktNTRGNy00QThBLThGQzgtMjhCMjBEMDRCOTA5OkI3OTRFNjZFLTI4N0UtNDRCRi05QzgyLTMxRTM3MDNCNTAyQw=="
+  },
+  "processData": false,
+  "mimeType": "multipart/form-data",
+  "contentType": false,
+  "data": getThetaForm
+};
+
+$.ajax(settings).done(function (response) {
+  console.log(response);
+	
+	
+	thetaResult = JSON.parse(response);
+});
+	
+	
+}
+
+
 function decodeHtml(html) {
     var txt = document.createElement("textarea");
     txt.innerHTML = html;
     return txt.value;
 }
 
-function nextQuestion(linkId,valueString,system,code,display,text,tempOID)
+
+function nextQuestion(linkId,linkId2,valueString,text,tempOID,itemId,ques)
 	{
 	 console.log(QRjson);
-	 //console.log(QRjson.status);
-	 //console.log("here");
+		
+	 console.log(QRjson.status);
+		
+		var temp ={};
+		temp["Ques"] = ques ;
+		temp["Ans"] =  text;
+		
+		patientResponses.push(temp);
+		
 	
 	if (QRjson.status != "completed") {
+        
+		getThetaForm.append(itemId, text);
 	
-	var ansItem1 =  {"extension":[{"url":"http://hl7.org/fhir/StructureDefinition/questionnaire-displayOrder","valueInteger":counter}],
-	"linkId":linkId,
-			 "answer": [
-                {
-                    "valueString": valueString,
-                    "valueCoding": {
-                        "system": system ,
-                        "code": code,
-                        "display": display,
-                    },
-                    "text": text
-                }
-            ]
+	var ansItem1 =  {"extension":[{"url":"http://hl7.org/fhir/StructureDefinition/questionnaire-displayOrder","valueInteger": counter}],
+			"linkId":linkId,
+			  "item": [{
+                     "linkId": linkId2,
+                    "text":text,
+                    "answer": [ {"valueString" : valueString}]
+                   }]
 	};
 	
 	answer_item.push(ansItem1);
-	//console.log(JSON.stringify(answer_item));
-	QRjson["item"]=answer_item;
-	//QRjson.contained[0].subjectType = "Patient";
-	//console.log(tempOID);
-	//console.log("new test");	
-	displayQuestionnaire(QRjson,tempOID);
+	QRjson["item"]=answer_item;	
+        count =count+1;
+	displayQuestionnaire(QRjson,tempOID,count);
 	counter = counter + 1 ;
-	//console.log(counter);
+	
 	}
+	
 	else {
-	//console.log(QRjson);
-	//console.log(JSON.stringify(QRjson));
-	//console.log(QRjson.extension[2].extension[0].valueDecimal);
+		//console.log(getThetaForm);
+		
+	
+		
+		
+		
+		
+	console.log(QRjson);
 	var theta = QRjson.extension[2].extension[0].valueDecimal;
-	var tscore = (theta * 10) + 50;
-	//console.log (tscore);	
-	//console.log(QRjson.contained[0].title);
-	//console.log(QRjson.extension[1].valueDate);
-		var desc = QRjson.contained[0].title + ", t-score :"+ tscore;
-		var date01 = QRjson.extension[1].valueDate;
-		
-		var msec = Date.parse(QRjson.extension[1].valueDate);
-		var d = new Date();
-		var date1 = d.toLocaleString("en-US");
-		//console.log(msec);
-		//console.log(date1);
-		
-		var questions=[];
-		var answers_temp=[];
-		var linkIds=[];
-		var answers=[];
-		
-		 
-     
-	jQuery(QRjson.contained[0].item).each(function(i, item){
-		//console.log(item);
-		if  (item.item.length==1){
-			
-			questions[i] = item.item[0].text;
-			linkIds[i] = item.linkId;	
-		}
-		else {
-			questions[i] = item.item[0].text + ", "+ item.item[1].text;
-			linkIds[i] = item.linkId;
-		}
 		
 		
-	});
 		
-	jQuery(QRjson.item).each(function(i, item){
+	var proID = QRjson.id;
+		var tscore;
+		var sum = 0;
+		var cnt = 0;
 		
-		answers_temp[i] = item.answer[0].text;
-		
-	});
-		
-		answers = answers_temp.reverse();
-		//console.log(questions);
-		//console.log(answers);
-		//console.log(linkIds);
-		
-		//console.log(pat_fname);
-		//console.log(pat_lname);
-		//console.log(patName);
-		
+		var num;
+	 if ( proID == "7DACCFC4-87F9-4C25-A8AA-53B9B677B1A7"  ||   proID == "1DC83612-CBFE-4310-A713-5802E29DFE64" )
+	 {
+		var QAlist =  QRjson.item ;
 
-    		var html01 ='';
-		    
-		html01 +='<html>';
-		html01 += '<head><title>QuestionnaireResponse</title></head>';
-		html01 += '<body><h2>PRO Result Complete</h2><p><b>Patient Name: Wilma Smart </b> </p>';
-                html01 += '<p><b>PRO Name</b>:'+ QRjson.contained[0].title +'</p>';
-		html01 += '<p><b>finishedTime</b> '+ date1 +'</p>';
-		html01 += '<p><b>theta</b>: '+ QRjson.extension[2].extension[0].valueDecimal+'</p>';
-		html01 += '<p><b>standardError</b>: '+QRjson.extension[2].extension[1].valueDecimal+' </p>';
-		html01 += '<p><b>t-score</b>'+ tscore +'</p>';
-		html01 += '<h3>Questionnaire and Responses</h3>';
-		html01 += '<table></table></body></html>';
-		
-		
-		var str='';
-			str +='<table><tr> <th>Question</th> <th style="visibility:hidden;"> space</th>  <th>Answer</th>  </tr>';
-		
-		var i;
-		for (i = 0; i < questions.length; i++) { 
+		jQuery(QAlist).each(function(i, item){
+		      num = parseInt(item.item[0].answer[0].valueString)
+		      sum = sum + num ;
+		      cnt = cnt+1;
+		 });
+
+		console.log(sum);
+		console.log(cnt);
+		tscore =(sum * 25)/cnt;
+		tscore = Math.round(tscore);
+		console.log(tscore);
+
+	 }
+	 else {
+		 if (theta == 0) {
 			
-		  str += '<tr> <td>' + questions[i] + '</td> <td style="visibility:hidden;"> space</td> <td>'+ answers[i] +'</td></tr>';
+			getThetaScore();
+			console.log ("result theta zero:  " + thetaResult);
+			//var form = {"Form":[{"Theta":"-1.91366212237115","StdError":"0.264347197084311"}]}
+                        var form = thetaResult;
+			var temp = form["Form"];
+
+                         theta = temp[0].Theta;
+			
 		}
+		tscore = (theta * 10) + 50;
+		 tscore = Math.round(tscore);
+		 console.log(tscore);
+	 }
+
 		
-		str +='</table>';
+		var desc = QRjson.contained[0].title + ", t-score :"+ tscore;
+		QRjson["tscore"] = tscore;
 		
-		/*
-		var xhtml_temp1= getxhtml(QRjson);	
-		var ts_temp1 = "t-score : "+ tscore;
-		var d_temp1 ="finishedTime </b> : " + date1 ;
-		var temp1= xhtml_temp1.replace("t-score",ts_temp1);
-		var temp2= temp1.replace("<table></table>", str);
-		var temp3= temp2.replace("finishedTime</b>", d_temp1);
+		QRjson["patientResponses"] = patientResponses;
 		
-		*/
-		var temp2= html01.replace("<table></table>", str);
-		
-		
-		//var b64xhtml = btoa(temp2);
-				
-		//console.log(b64xhtml);
 		var myJSON_01 = JSON.stringify(QRjson);
-		//postDocRef(desc,b64xhtml);
-		//console.log("Encounter" + patEncounterId);
-		//console.log("Practitioner"+ patPractitionerId);
-		 patientPostDR (myJSON_01,desc)
+		console.log("Encounter" + patEncounterId);
+	console.log("Practitioner"+ patPractitionerId);
+	patientPostDR (myJSON_01,desc)
 	document.getElementById("Content").innerHTML = "You have finished the assessment.<br /> Thank you ! <div style=\'height: 50px\' ><button type=\'button\' class='button button6'  onclick=displist() > Back </button></div>";
 	completeProcess(taskId,proId,proName,patId,patName);
 	}
 	
 	
-	}
+}
 	
 
 
-function displayQuestionnaire(QR, formOID){
+function displayQuestionnaire(QR, formOID,count){
 	
 	//console.log(QR);
 	var myjson01 = JSON.stringify(QR);
 	
-	//console.log(myjson01);
-	
-	
-
 	var temp =null;
 	$.ajax({
 		
-		url: "https://mss.fsm.northwestern.edu/AC_API/2018-10/Questionnaire/"+formOID+"/next-q",
+		url: baseurl_AC_API+"2018-10/Questionnaire/"+formOID+"/next-q",
 		cache: false,
 		async:false,
 		type: "POST",
@@ -1113,8 +1636,8 @@ function displayQuestionnaire(QR, formOID){
 		data : JSON.stringify(QR) ,
 		dataType: "json",
 		beforeSend: function(xhr) {
-			var username = "2F984419-5008-4E42-8210-68592B418233";
-			var pass = "21A673E8-9498-4DC2-AAB6-07395029A778";
+			var username = "08B2BC59-54F7-4A8A-8FC8-28B20D04B909";
+			var pass = "B794E66E-287E-44BF-9C82-31E3703B502C";
 			//var Token = "MkY5ODQ0MTktNTAwOC00RTQyLTgyMTAtNjg1OTJCNDE4MjMzOjIxQTY3M0U4LTk0OTgtNERDMi1BQUI2LTA3Mzk1MDI5QTc3OA==";
 
 			var base64 = btoa(username + ":" + pass);
@@ -1129,21 +1652,128 @@ function displayQuestionnaire(QR, formOID){
 			//console.log(data);
 			var tempOID = data.id;
 			QRjson = data;
+			currentFormId = data.id;
+			var temp = data.contained[0].item[0].item;
+			
+			if(data.status == 'completed') {
+				
+				console.log(patientResponses);
+				
+				//for (var key of getThetaForm.entries()) {
+       // console.log(key[0] + ', ' + key[1]);
+   // }
+			
+				
+				
+			//getThetaScore();
+			//console.log ("result:  " + thetaResult);
+				
+	console.log(data);
+	console.log("status completed");			
+	var theta = QRjson.extension[2].extension[0].valueDecimal;
+		
+				
+		
+	var proID = QRjson.id;
+		var tscore;
+		var sum = 0;
+		var cnt = 0;
+		
+		var num;
+	 if ( proID == "7DACCFC4-87F9-4C25-A8AA-53B9B677B1A7"  ||   proID == "1DC83612-CBFE-4310-A713-5802E29DFE64" )
+	 {
+		var QAlist =  QRjson.item ;
+
+		jQuery(QAlist).each(function(i, item){
+		      num = parseInt(item.item[0].answer[0].valueString)
+		      sum = sum + num ;
+		      cnt = cnt+1;
+		 });
+
+		console.log(sum);
+		console.log(cnt);
+		tscore =(sum * 25)/cnt;
+		 
+	
+		tscore = Math.round(tscore);
+		console.log(tscore);
+
+	 }
+	 else {
+		 
+		 if (theta == 0 ) {
+			
+			
+			//var form1 = {"Form":[{"Theta":"-1.91366212237115","StdError":"0.264347197084311"}]}
+			//var temp1 = form1["Form"];
+			//console.log(temp1[0].Theta);
+			
+			getThetaScore();
+			console.log ("result theta zero:  " + thetaResult);
+			//var form = {"Form":[{"Theta":"-1.91366212237115","StdError":"0.264347197084311"}]}
+                        var form = thetaResult;
+			var temp =[];
+			 temp = form["Form"];
+			
+			console.log("temp" + temp);
+
+                         theta = temp[0].Theta;
+			
+			
+			
+		}
+		 
+		tscore = (theta * 10) + 50;
+		tscore = Math.round(tscore);
+		 console.log(tscore);
+	 }
+
+		
+		var desc = QRjson.contained[0].title + ", t-score :"+ tscore;
+				
+				QRjson["tscore"] = tscore;
+				QRjson["patientResponses"] = patientResponses;
+	
+		var myJSON_01 = JSON.stringify(QRjson);
+		console.log("Encounter" + patEncounterId);
+	console.log("Practitioner"+ patPractitionerId);
+	patientPostDR (myJSON_01,desc)
+	document.getElementById("Content").innerHTML = "You have finished the assessment.<br /> Thank you ! <div style=\'height: 50px\' ><button type=\'button\' class='button button6'  onclick=displist() > Back </button></div>";
+	completeProcess(taskId,proId,proName,patId,patName);
+	}
+	
+		
+		
+			            else 
+{
+             console.log(count);
+			var tempOID = data.id;
+			QRjson = data;
 			
 			
 			var tmp = JSON.stringify(data);
 			//console.log(tmp);
 			
-			var temp = data.contained[0].item[0].item;
+			var temp = data.contained[0].item[count].item;
 			//console.log(temp.length);
 			
 			
-			//console.log(data.contained[0].item[0].item[0].text);
+			//console.log(data.contained[0].item[count].item[0].text);
 			
 			if (temp.length==1){
-			var linkId = data.contained[0].item[0].linkId;
 				
-			var res = data.contained[0].item[0].item[0].text;
+				
+			var itemId = data.contained[0].item[count].id;
+				
+				console.log(itemId);
+				
+				
+			var linkId = data.contained[0].item[count].linkId;
+                
+                        var linkId2 = data.contained[0].item[count].item[0].linkId;
+                
+				
+			var res = data.contained[0].item[count].item[0].text;
 				var str = res.replace("amp;", "");	
 			 var output = decodeHtml(str);
 				
@@ -1155,9 +1785,22 @@ function displayQuestionnaire(QR, formOID){
 				
 			
 			
-			screen += " <div class=\'col-12 col-lg-12 col-md-12 col-sm-12 col-xs-12' style=\'height: 50px; font-style: normal; font-size: 20px; margin-bottom: 5em; margin-left:3em;\'>" + output + "</div></br>";
+
+
+				var res = data.contained[0].item[count].item[0].text;
+				var str = res.replace("amp;", "");	
+				var Ques01 = decodeHtml(str);
+				console.log(Ques01);
+				
+				var ques = Ques01;
+				
+
+				
 			
-			jQuery(data.contained[0].item[0].item[0].answerOption).each(function(i, item){
+			screen += "<div style=\'height: 50px; font-style: normal; font-size: 20px; margin-bottom: 5em; margin-left:3em;\'>" + Ques01 + "</div>";
+
+			
+			jQuery(data.contained[0].item[count].item[0].answerOption).each(function(i, item){
 			//console.log(item.modifierExtension[0].valueString);
 			//console.log(item.text);
 			//console.log(item.valueCoding.code);
@@ -1165,70 +1808,107 @@ function displayQuestionnaire(QR, formOID){
 			//console.log(item.valueCoding.system);
 			
 			var valueString = item.modifierExtension[0].valueString;
-			var text = item.text;
-			
+                
+                if (item.valueString){
+			         var text = item.valueString;
+                    console.log(valueString);
+                    console.log(text);
+                }
+                
+			else {
 			var code = item.valueCoding.code;
-			var display = item.valueCoding.display;
+			var text = item.valueCoding.display;
 			var system = item.valueCoding.system;
-			
+                
+                
+                console.log(valueString);
+                console.log(text);
+            }
 			
 			var temp2 = JSON.parse(tmp);
 					
-					screen += "<div class=\'block\' style=\' margin-top: 0.5em;\'><input type=\'button\'  id=\'" + item.modifierExtension[0].valueString + "\' name=\'" + item.text + "\' value=\'" + item.text + "\' onclick= \'nextQuestion( \"" +linkId+ "\",\"" +valueString+ "\",\"" +system+ "\",\"" +code+ "\", \"" +display+ "\",\"" +text+ "\",\"" +tempOID+ "\");  \' />" + "</div>";
+
+					screen += "<div style=\' margin-top: 0.5em;\'><input type=\'button\' class=\'block\' id=\'" + text + "\' name=\'" + text + "\' value=\'" + text + "\' onclick= \'nextQuestion( \"" +linkId+ "\", \"" +linkId2+ "\", \"" +valueString+ "\",\"" +text+ "\",\"" +tempOID+ "\",\"" +itemId+ "\",\"" +ques+ "\");  \' />" + "</div>";
+
 				
 			});
 				
 			document.getElementById("Content").innerHTML = screen;
-			//console.log(data.contained[0].item[0].item[1].answerOption);
+			//console.log(data.contained[0].item[count].item[1].answerOption);
 			
 			}
 			
 			
 			else {
+
+			var itemId = data.contained[0].item[count].id;
 				
-			var linkId = data.contained[0].item[0].linkId;
+				console.log(itemId);	
+
 				
-			var res2 = data.contained[0].item[0].item[0].text;
-			var str2 = res2.replace("amp;", "");	
-			var output2 = decodeHtml(str2);
-				console.log(output2);	
+			var linkId = data.contained[0].item[count].linkId;
+                
+                 var linkId2 = data.contained[0].item[count].item[0].linkId;
+                
 				
-			//var str_esc2 = escape(str2);
-			//console.log(str_esc2);
-			//console.log(unescape(str_esc2));
+				var res2 = data.contained[0].item[count].item[0].text;
+				var str2 = res2.replace("amp;", "");	
+				var Ques02 = decodeHtml(str2);
+				console.log(Ques02);
 				
-			var res3 = data.contained[0].item[0].item[1].text;
-			var str3 = res3.replace("amp;", "");
-			 var output3 = decodeHtml(str3);
-				var ot3 = decodeHtml(output3);
+				var res3 = data.contained[0].item[count].item[1].text;
+				var str3 = res3.replace("amp;", "");
 				console.log(str3);
-				console.log(output3);
-				console.log(ot3);
+				var Ques03 = decodeHtml(str3);
+				console.log(Ques03);
+				var Q3 = decodeHtml(Ques03 );
+				console.log(Q3);
 			
-				
-			screen += "<div class=\'col-12 col-lg-12 col-md-12 col-sm-12 col-xs-12\' style=\'height: 50px; font-style: normal; font-size: 20px; margin-bottom: 5em; margin-left:3em;\'>" + output2 + " " + ot3 +"</div></br>";
+
+				var ques = Ques03 + " " + Q3;
+				console.log(ques);
+			screen += "<div style=\'height: 50px; font-style: normal; font-size: 20px; margin-bottom: 5em; margin-left:3em;\'>" + Ques02 + " " + Q3 +"</div>";
+
 			
-			jQuery(data.contained[0].item[0].item[1].answerOption).each(function(i, item){
+			jQuery(data.contained[0].item[count].item[1].answerOption).each(function(i, item){
 			
 			var valueString = item.modifierExtension[0].valueString;
-			var text = item.text;
-			
+			if (item.valueString){
+			         var text = item.valueString;
+                    console.log(valueString);
+                    console.log(text);
+                }
+                
+			else {
 			var code = item.valueCoding.code;
-			var display = item.valueCoding.display;
+			var text = item.valueCoding.display;
 			var system = item.valueCoding.system;
+                
+                
+                console.log(valueString);
+                console.log(text);
+            }
 			
 			
 			var temp2 = JSON.parse(tmp);
 					
-					screen += "<div class=\'block\' style=\' margin-top: 0.5em;\'><input type=\'button\' id=\'" + item.modifierExtension[0].valueString + "\' name=\'" + item.text + "\' value=\'" + item.text + "\' onclick= \'nextQuestion( \"" +linkId+ "\",\"" +valueString+ "\",\"" +system+ "\",\"" +code+ "\", \"" +display+ "\",\"" +text+ "\",\"" +tempOID+ "\");  \' />" + "</div>";
+
+					screen += "<div style=\' margin-top: 0.5em;\'><input type=\'button\' class=\'block\' id=\'" + text+ "\' name=\'" + text + "\' value=\'" + text + "\' onclick= \'nextQuestion( \"" +linkId+ "\", \"" +linkId2+ "\", \"" +valueString+ "\",\"" +text+ "\",\"" +tempOID+ "\",\"" +itemId+ "\",\"" +ques+ "\");  \' />" + "</div>";
+
 				
 			});
 			
 			document.getElementById("Content").innerHTML = screen;
-				console.log(screen);
-			//console.log(data.contained[0].item[0].item[1].answerOption);
+				//console.log(screen);
+			//console.log(data.contained[0].item[count].item[1].answerOption);
 			
 			}
+            
+            
+        }		
+			
+			
+			
 		},
 
 		error: function(jqXHR, textStatus, errorThrown) {
@@ -1238,8 +1918,11 @@ function displayQuestionnaire(QR, formOID){
 	
 }
 
+var count = 0;
 
 function setVariables(formOID,formName,date) {
+
+	
 
 
 var initialQR = {
@@ -1256,7 +1939,7 @@ var initialQR = {
 "resourceType": "Questionnaire",
 "id": formOID, 
 "meta": {"versionId": "1","lastUpdated": "2014-11-14T10:03:25","profile": ["http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-adapt"]},
-"url":"https://mss.fsm.northwestern.edu/ac_api/2018-10/Questionnaire/"+formOID,
+"url": baseurl_AC_API + "2018-10/Questionnaire/"+formOID,
 "title":formName,
 "status": "active",
 "date": date,
@@ -1269,7 +1952,7 @@ var initialQR = {
 "authored": date
 };
 
-displayQuestionnaire (initialQR,formOID);
+displayQuestionnaire (initialQR,formOID,count);
 };
 	
 	
@@ -1290,7 +1973,13 @@ function displayList(){
 			"async": false,
 			"crossDomain": true,
 			"url": baseurl+"ProcedureRequest?subject=http://hl7.org/fhir/sid/us-ssn/Patient/"+patID+"&_count=20&intent=order&status=active&_sort:desc=_lastUpdated",
+			"headers": {
+				"Authorization" : "Bearer "+ KeycloakToken,
+			//	"Content-Type": "application/json",
+				"Cache-Control": "no-cache"
+			},
 			"contentType" : "application/json",                                                                           
+
 			"cache" : false,
 			"method": "GET"
 		

@@ -1,13 +1,14 @@
-  //Global variables  
+//Global variables  
     var MyVars = {};
     var practitioner_id="";
     var pract_name="";
     var persona="";
     var patID="";
     var encounter_id="";
+
 var access_token="";
 var refresh_token="";
-
+var smartObject="";
 
 
   
@@ -23,6 +24,8 @@ var refresh_token="";
   
 
     function onReady(smart)  {
+      smartObject=smart;
+      getKeycloakToken();
       console.log(smart.tokenResponse);
 	  if (smart.tokenResponse.patient!=null){
         patID=smart.tokenResponse.patient;
@@ -33,7 +36,10 @@ var refresh_token="";
 		  refresh_token = smart.tokenResponse.refresh_token;
 		  access_token= smart.tokenResponse.access_token;
 		  console.log(refresh_token);
-		   setTimeout(refreshSmartToken, 480000);
+		   setTimeout(refreshSmartToken, 270000);
+		  setTimeout(getKeycloakToken, 270000);
+		  
+		 
 		  //refreshSmartToken();	
       }
       
@@ -44,8 +50,11 @@ var refresh_token="";
 	console.log(encounter_id);  
       var token = smart.tokenResponse.id_token;
       access_token= smart.tokenResponse.access_token;
-	    //freqOrder();
-	
+
+	    
+	   
+	//freqOrder();
+
 	    
 	  
       console.log(patID);
@@ -74,11 +83,13 @@ var refresh_token="";
 
     BrowserDetect.init();
     console.log("You are using " + BrowserDetect.browser + " with version " + BrowserDetect.version + "");
-
+ // alert("You are using " + BrowserDetect.browser + " with version " + BrowserDetect.version + "");
 
       if(persona === 'provider') {
+	      listForms();
+	      //freqOrder();
 	      orderStatus();
-	       freqOrder();
+
         $('#doctor-view').show();
         if (BrowserDetect.browser.toString()!="Explorer") {
           //if (window.location == window.parent.location ) {

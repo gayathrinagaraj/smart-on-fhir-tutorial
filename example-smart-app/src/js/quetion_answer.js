@@ -27,7 +27,7 @@ var proPostObjectDemo= {
 
 function getformData(formID){
 	$.ajax({
-		url: "https://mss.fsm.northwestern.edu/AC_API/2018-10/Questionnaire/"+formID,
+		url: baseurl_AC_API+"2018-10/Questionnaire/"+formID,
 
 		cache: false,
 		type: "GET",
@@ -35,8 +35,8 @@ function getformData(formID){
 		dataType: "json",
 
 		beforeSend: function (xhr) {
-			var username = "2F984419-5008-4E42-8210-68592B418233";
-			var pass = "21A673E8-9498-4DC2-AAB6-07395029A778";
+			var username = "08B2BC59-54F7-4A8A-8FC8-28B20D04B909";
+			var pass = "B794E66E-287E-44BF-9C82-31E3703B502C";
 
 			var base64 = btoa(username + ":" + pass);
 			xhr.setRequestHeader("Authorization", "Basic " + base64);
@@ -58,7 +58,7 @@ function getformData(formID){
 function postformData(){
 	
 	$.ajax({
-		url: "https://mss.fsm.northwestern.edu/AC_API/2018-10/Questionnaire/"+globalFormId+"/next-q",
+		url: baseurl_AC_API+"2018-10/Questionnaire/"+globalFormId+"/next-q",
 
 		cache: false,
 		type: "POST",
@@ -67,8 +67,8 @@ function postformData(){
 		dataType: "json",
 
 		beforeSend: function (xhr) {
-			var username = "2F984419-5008-4E42-8210-68592B418233";
-			var pass = "21A673E8-9498-4DC2-AAB6-07395029A778";
+			var username = "08B2BC59-54F7-4A8A-8FC8-28B20D04B909";
+			var pass = "B794E66E-287E-44BF-9C82-31E3703B502C";
 			var base64 = btoa(username + ":" + pass)
 			xhr.setRequestHeader("Authorization", "Basic " + base64);
 		},
