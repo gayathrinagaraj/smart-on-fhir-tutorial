@@ -25,7 +25,7 @@ var smartObject="";
 
     function onReady(smart)  {
       smartObject=smart;
-      getKeycloakToken();
+      //getKeycloakToken();
       console.log(smart.tokenResponse);
 	  if (smart.tokenResponse.patient!=null){
         patID=smart.tokenResponse.patient;
@@ -37,7 +37,7 @@ var smartObject="";
 		  access_token= smart.tokenResponse.access_token;
 		  console.log(refresh_token);
 		   setTimeout(refreshSmartToken, 270000);
-		  setTimeout(getKeycloakToken, 270000);
+		  //setTimeout(getKeycloakToken, 270000);
 		  
 		 
 		  //refreshSmartToken();	
