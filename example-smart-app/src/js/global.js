@@ -402,7 +402,7 @@ var fdata = JSON.stringify(favdata);
 });
 
 
-/*
+
 $(document).ready(function(){
  
   // Initialize select2
@@ -805,8 +805,8 @@ function listForms() {
 	});
 	
 	
-}
 
+}
 
 
 
