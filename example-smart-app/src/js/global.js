@@ -1973,11 +1973,7 @@ function displayList(){
 			"async": false,
 			"crossDomain": true,
 			"url": baseurl+"ProcedureRequest?subject=http://hl7.org/fhir/sid/us-ssn/Patient/"+patID+"&_count=20&intent=order&status=active&_sort:desc=_lastUpdated",
-			"headers": {
-				//"Authorization" : "Bearer "+ KeycloakToken,
-			//	"Content-Type": "application/json",
-				"Cache-Control": "no-cache"
-			},
+			
 			"contentType" : "application/json",                                                                           
 
 			"cache" : false,
