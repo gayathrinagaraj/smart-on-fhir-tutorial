@@ -212,10 +212,7 @@ function freqOrder_test(){
 			"url": baseurl+"ProcedureRequest?requester=http://usc.edu/Practitioner/"+practitioner_id+"&_count=100&intent=order&_sort:desc=_lastUpdated",
 			"contentType" : "application/json",                                                                           
 			"cache" : false,
-		"headers": {
-			//"Authorization" : "Bearer "+ KeycloakToken,
-				"Cache-Control": "no-cache"
-			},
+		
 			"method": "GET"
 		
 	}
@@ -299,15 +296,7 @@ $(document).ready(function(){
 			"url": baseurl+"ProcedureRequest",
 			"method": "POST",
 			"contentType" : "application/json",
-			"headers": {
-				//"Authorization" : "Bearer "+ KeycloakToken,
-				"Access-Control-Allow-Headers": "x-requested-with",
-				"cache" : false,
-				"Cache-Control": "no-cache"
-			//"headers": {
-			//	"Content-Type": "application/json",
-			//	"Cache-Control": "no-cache"
-			},
+			"cache": false,
 			"processData": false,
 			"data": prdata
 		
@@ -888,12 +877,8 @@ function orderStatus() {
 			"contentType" : "application/json",                                                                           
 			"cache" : false,
 			"method": "GET",
-			"contentType" : "application/json",
-			"headers": {
-				//"Authorization" : "Bearer "+ KeycloakToken,
-			//	"Content-Type": "application/json",
-				"Cache-Control": "no-cache"
-			},
+			"contentType" : "application/json"
+			
 	}
 	$.ajax(settings31).done(function (response) {
 		//console.log(response);
@@ -1076,11 +1061,7 @@ function orderStatus() {
 			"contentType" : "application/json",                                                                           
 			"cache" : false,
 
-			"headers": {
-			//"Authorization" : "Bearer "+ KeycloakToken,
-
-				"Cache-Control": "no-cache"
-			},
+			
 			"method": "GET"
 			//"headers": {
 			//	"Content-Type": "application/json",
@@ -1315,11 +1296,7 @@ function completeProcess(taskId,proId,proName,patId,patName){
 			"url": baseurl+"ProcedureRequest/"+taskId,
 			"method": "PUT",
 			"contentType" : "application/json",
-			"headers": {
-				//"Authorization" : "Bearer "+ KeycloakToken,
-			//	"Content-Type": "application/json",
-			//	"Cache-Control": "no-cache"
-			},
+			
 			"processData": false,
 			"data": "{\n\t\"resourceType\": \"ProcedureRequest\",\n\t\"id\": \""+taskId+"\",\n\t\"status\": \"completed\",\n\t\"intent\": \"order\",\n\t\"category\": [{\n\t\t\"coding\": [{\n\t\t\t\"system\": \"http://snomed.info/sct\",\n\t\t\t\"code\": \"386053000\",\n\t\t\t\"display\": \"Evaluation procedure (procedure)\"\n\t\t}],\n\t\t\"text\": \"Evaluation\"\n\t}],\n\t\"code\": {\n\t\t\"coding\": [{\n\t\t\t\"system\": \"http://loinc.org\",\n\t\t\t\"code\": \""+proId+"\",\n\t\t\t\"display\": \""+proName+"\"\n\t\t}],\n\t\t\"text\": \""+proName+"\"\n\t},\n\t\"occurrenceDateTime\": \""+date1+"\",\n\t\"subject\": {\n\t\t\"display\": \""+patName+"\",\n        \"reference\": \"https://fhir-open.sandboxcerner.com/dstu2/0b8a0111-e8e6-4c26-a91c-5069cbc6b1ca/Patient/"+patId+"\"\n\t}\n} \n"
 	}
