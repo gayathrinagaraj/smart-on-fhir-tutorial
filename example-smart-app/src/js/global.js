@@ -1579,7 +1579,7 @@ function nextQuestion(linkId,linkId2,valueString,text,tempOID,itemId,ques)
 	 }
 
 		
-		var desc = QRjson.contained[0].title + ", t-score :"+ tscore + ", LOINC! 34133-9" ;
+		var desc = QRjson.contained[0].title + "| t-score :"+ tscore + "| LOINC! 34133-9" ;
 		QRjson["tscore"] = tscore;
 		
 		QRjson["patientResponses"] = patientResponses;
@@ -1706,7 +1706,7 @@ function displayQuestionnaire(QR, formOID,count){
 	 }
 
 		
-		var desc = QRjson.contained[0].title + ", t-score :"+ tscore + ", LOINC! 34133-9"  ;
+		var desc = QRjson.contained[0].title + "| t-score :"+ tscore + "| LOINC! 34133-9"  ;
 				
 				QRjson["tscore"] = tscore;
 				QRjson["patientResponses"] = patientResponses;
