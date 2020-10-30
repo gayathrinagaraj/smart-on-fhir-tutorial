@@ -779,7 +779,7 @@ function listForms() {
 }
 
 
-
+/*
 
 function prorecommend() {	
 	patient_id="";
@@ -834,7 +834,7 @@ function prorecommend() {
 
 }
 
-
+*/
 
 
 
@@ -1441,7 +1441,7 @@ function getThetaScore(){
 	
 
 var settings = {
-  "url": "https://calv-easiprox.med.usc.edu/AC_API_Test/2013-01/Scores/"+ currentFormId + ".json",
+  "url": baseurl_AC_API+ "2013-01/Scores/"+ currentFormId + ".json",
   "method": "POST",
 "async": false,
   "timeout": 0,
