@@ -9,4 +9,6 @@ var baseurl="https://fhir3-stage.elimuinformatics.com/baseDstu3/";
 
 var baseurl_acapi ="https://assessmentcenter.net/ac_api/";
 
-var baseurl_AC_API="https://calv-easiprox.med.usc.edu/AC_API_Test/";
+//var baseurl_AC_API="https://calv-easiprox.med.usc.edu/AC_API_Test/";
+
+var baseurl_AC_API="https://assessmentcenter.net/ac_api/";
