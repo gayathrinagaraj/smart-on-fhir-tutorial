@@ -16,6 +16,7 @@
     <script src='./lib/js/fhir-client-cerner-additions-1.0.0.js'></script>
     <script>
       FHIR.oauth2.authorize({
+        alert("test");
         'client_id': '10caad09-c220-4e1a-97f4-cf7ae06434b6',
       	//'redirect_uri': 'https://gayathrinagaraj.github.io/smart-on-fhir/example-smart-app/src/views/provider/index.html',
         
@@ -27,6 +28,7 @@
         'redirect_uri':'https://sapphire-stage.elimuinformatics.com/easipro/smart-on-fhir/example-smart-app/src/views/provider/index.html',
         'scope':  'patient/Patient.read patient/Observation.read patient/DocumentReference.write patient/DocumentReference.read launch online_access openid profile'
       });
+      
     </script>
     <div class="spinner">
       <div class="bounce1"></div>
