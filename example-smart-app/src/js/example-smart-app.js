@@ -4,6 +4,7 @@
     var pract_name="";
     var persona="";
     var patID="";
+    var patient_id=""
     var encounter_id="";
 
 var access_token="";
@@ -35,6 +36,7 @@ var smartObject="";
 	    
 	  if (smart.state.tokenResponse.patient!=null){
         patID=smart.state.tokenResponse.patient;
+		  patient_id= smart.state.tokenResponse.patient;
 		MyVars.patid= smart.state.tokenResponse.patient;
 	  	  console.log(patID);
 		    displayList();
