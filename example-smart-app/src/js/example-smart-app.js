@@ -27,16 +27,22 @@ var smartObject="";
       smartObject=smart;
 	alert('onready ',smart);
       //getKeycloakToken();
-      console.log(smart.tokenResponse);
-	  if (smart.tokenResponse.patient!=null){
-        patID=smart.tokenResponse.patient;
-		MyVars.patid= smart.tokenResponse.patient;
+      console.log(smart.state.tokenResponse);
+	    
+	    console.log(smart.state.tokenResponse.patient);
+	     console.log(smart.state.tokenResponse.user);
+	     console.log(smart.state.tokenResponse.encounter);
+	    
+	  if (smart.state.tokenResponse.patient!=null){
+        patID=smart.state.tokenResponse.patient;
+		MyVars.patid= smart.state.tokenResponse.patient;
 	  	  console.log(patID);
 		    displayList();
 		  console.log("test from ex-sm-app");
-		  refresh_token = smart.tokenResponse.refresh_token;
-		  access_token= smart.tokenResponse.access_token;
+		  refresh_token = smart.state.tokenResponse.refresh_token;
+		  access_token= smart.state.tokenResponse.access_token;
 		  console.log(refresh_token);
+		  console.log(accessP_token);
 		   //setTimeout(refreshSmartToken, 270000);
 		  //setTimeout(getKeycloakToken, 270000);
 		  
@@ -44,13 +50,13 @@ var smartObject="";
 		  //refreshSmartToken();	
       }
       
-      practitioner_id = smart.tokenResponse.user;
-      encounter_id= smart.tokenResponse.encounter;
+      practitioner_id = smart.state.tokenResponse.user;
+      encounter_id= smart.state.tokenResponse.encounter;
 	console.log("inside smart app js ");    
 	console.log(practitioner_id);  
 	console.log(encounter_id);  
-      var token = smart.tokenResponse.id_token;
-      access_token= smart.tokenResponse.access_token;
+      var token = smart.state.tokenResponse.id_token;
+      access_token= smart.state.tokenResponse.access_token;
 
 	    
 	   
@@ -68,7 +74,7 @@ var smartObject="";
        var base64 = base64Url.replace('-', '+').replace('_', '/');
        //console.log(JSON.parse(window.atob(base64)));
        pract_name=(JSON.parse(window.atob(base64))).name;
-       //console.log(pract_name);
+       console.log(pract_name);
       document.getElementById("pract_name").innerHTML="Attending:"+pract_name;
       
       var base64Url1 = access_token.split('.')[1];
