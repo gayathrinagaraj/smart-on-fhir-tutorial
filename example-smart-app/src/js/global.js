@@ -671,7 +671,7 @@ function listForms() {
 		//url: baseurl_acapi + "/2014-01/Forms/.json",
 		url: baseurl_AC_API + "2018-10/Questionnaire?_Summary",
 		cache: false,
-		type: "GET",
+		type: "POST",
 		// data: "",
 		dataType: "json",
 		beforeSend: function(xhr) {
