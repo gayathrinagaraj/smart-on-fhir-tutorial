@@ -682,30 +682,30 @@ function listForms() {
 		// data: "",
 		dataType: "json",
 		beforeSend: function(xhr) {
-			//var username = "08B2BC59-54F7-4A8A-8FC8-28B20D04B909";
-			//var pass = "B794E66E-287E-44BF-9C82-31E3703B502C";
-			var Token = "MkY5ODQ0MTktNTAwOC00RTQyLTgyMTAtNjg1OTJCNDE4MjMzOjIxQTY3M0U4LTk0OTgtNERDMi1BQUI2LTA3Mzk1MDI5QTc3OA==";
+			var username = "08B2BC59-54F7-4A8A-8FC8-28B20D04B909";
+			var pass = "B794E66E-287E-44BF-9C82-31E3703B502C";
+			//var Token = "MkY5ODQ0MTktNTAwOC00RTQyLTgyMTAtNjg1OTJCNDE4MjMzOjIxQTY3M0U4LTk0OTgtNERDMi1BQUI2LTA3Mzk1MDI5QTc3OA==";
 
-			//var base64 = btoa(username + ":" + pass);
-			//xhr.setRequestHeader("Authorization", "Basic " + base64);
-			xhr.setRequestHeader("Authorization", "Basic " + Token);
+			var base64 = btoa(username + ":" + pass);
+			xhr.setRequestHeader("Authorization", "Basic " + base64);
+			//xhr.setRequestHeader("Authorization", "Basic " + Token);
 		},
 		success: function(data) { 
 
 			console.log(data);
-			console.log(data.Form);
+			//console.log(data.Form);
 			
 			
 
-           	 //var forms = data.entry;
-	  	//acforms= data.entry;
+           	 var forms = data.entry;
+	  	acforms= data.entry;
 			
-			acforms= data.Form;
+			//acforms= data.Form;
 			
 			
             //console.log(data.entry);
             //console.log("all forms"+forms);
-/*
+
            
 	var acOption = document.getElementById("allList");
 	var freqOption = document.getElementById("freqList");	
@@ -713,16 +713,16 @@ function listForms() {
 			for (var x=0;x <= fpnlistforms.length; x++)
 			{
 			    for (var j=0; j < acforms.length; j++) {
-				    //var temp = acforms[j].resource.title;
+				    var temp = acforms[j].resource.title;
 				    
-				      var temp = acforms[j].Name;
-				    //console.log(temp);
+				     // var temp = acforms[j].Name;
+				    console.log(temp);
 
 				 if (fpnlistforms[x]== temp)
 				 {
 					 console.log(temp);
-					 //console.log(acforms[j].resource.id);
-						console.log(acforms[j].OID);
+					 console.log(acforms[j].resource.id);
+						//console.log(acforms[j].OID);
 					 
 					 formoid.push(forms[j].resource.id);
 					formname.push(forms[j].resource.title);
@@ -787,7 +787,7 @@ function listForms() {
 					}
 			
 			
-*/
+
 		},
 
 		error: function(jqXHR, textStatus, errorThrown) {
