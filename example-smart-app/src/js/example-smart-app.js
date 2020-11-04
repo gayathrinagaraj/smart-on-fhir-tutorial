@@ -42,7 +42,7 @@ var smartObject="";
 		  refresh_token = smart.state.tokenResponse.refresh_token;
 		  access_token= smart.state.tokenResponse.access_token;
 		  console.log(refresh_token);
-		  console.log(accessP_token);
+		  console.log(access_token);
 		   //setTimeout(refreshSmartToken, 270000);
 		  //setTimeout(getKeycloakToken, 270000);
 		  
