@@ -686,8 +686,9 @@ function listForms() {
 			//var pass = "B794E66E-287E-44BF-9C82-31E3703B502C";
 			var Token = "MkY5ODQ0MTktNTAwOC00RTQyLTgyMTAtNjg1OTJCNDE4MjMzOjIxQTY3M0U4LTk0OTgtNERDMi1BQUI2LTA3Mzk1MDI5QTc3OA==";
 
-			var base64 = btoa(username + ":" + pass);
-			xhr.setRequestHeader("Authorization", "Basic " + base64);
+			//var base64 = btoa(username + ":" + pass);
+			//xhr.setRequestHeader("Authorization", "Basic " + base64);
+			xhr.setRequestHeader("Authorization", "Basic " + Token);
 		},
 		success: function(data) { 
 
