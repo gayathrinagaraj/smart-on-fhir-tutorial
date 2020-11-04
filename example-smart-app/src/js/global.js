@@ -218,6 +218,7 @@ function freqOrder_test(){
 	}
 	$.ajax(settings31).done(function (response) {
 		console.log(response);	
+		console.log("This worked");
 		jQuery(response.entry).each(function(i, item){
 			//console.log(item);
 			//console.log(item.resource.code.coding[0].display);
@@ -697,11 +698,11 @@ function listForms() {
 	var acOption = document.getElementById("allList");
 	var freqOption = document.getElementById("freqList");	
 			
-			for (var x=0;x < fpnlistforms.length; x++)
+			for (var x=0;x <= fpnlistforms.length; x++)
 			{
-			    for (var j=0; j < acforms.length; j++) {
+			    for (var j=0; j <= acforms.length; j++) {
 				    var temp = acforms[j].resource.title;
-				    //console.log(temp);
+				    console.log(temp);
 
 				 if (fpnlistforms[x]== temp)
 				 {
@@ -739,8 +740,8 @@ function listForms() {
 						//var val = forms[i].resource.id;
 						var opt = form_name_test[i];
 						var val = form_oid_test[i];
-						console.log(opt);
-						console.log(val);
+						//console.log(opt);
+						//console.log(val);
 						var el = document.createElement("option");
 
 						//Taken extra attribute to support datalist in IE7
@@ -758,8 +759,8 @@ function listForms() {
 						//var val = forms[i].resource.id;
 						var opt = form_name_test[i];
 						var val = form_oid_test[i];
-						console.log(opt);
-						console.log(val);
+						//console.log(opt);
+						//console.log(val);
 						var el = document.createElement("option");
 
 						//Taken extra attribute to support datalist in IE7
