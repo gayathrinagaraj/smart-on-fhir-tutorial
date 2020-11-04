@@ -731,7 +731,7 @@ function listForms() {
 			var flnum = formname.length;
 		
 			var select = document.getElementById("selectform"); 
-			console.log("all forms"+forms);
+			//console.log("all forms"+forms);
 					for (var i=0; i < flnum; i++) {
 						form_oid[i]=forms[i].resource.id;
 						form_name[i]=forms[i].resource.title;
@@ -739,6 +739,8 @@ function listForms() {
 						//var val = forms[i].resource.id;
 						var opt = form_name_test[i];
 						var val = form_oid_test[i];
+						console.log(opt);
+						console.log(val);
 						var el = document.createElement("option");
 
 						//Taken extra attribute to support datalist in IE7
@@ -756,6 +758,8 @@ function listForms() {
 						//var val = forms[i].resource.id;
 						var opt = form_name_test[i];
 						var val = form_oid_test[i];
+						console.log(opt);
+						console.log(val);
 						var el = document.createElement("option");
 
 						//Taken extra attribute to support datalist in IE7
