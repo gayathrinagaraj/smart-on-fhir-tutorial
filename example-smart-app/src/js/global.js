@@ -260,7 +260,7 @@ $(document).ready(function(){
     var formname = $('#selectform option:selected').text();
     var formid = $('#selectform').val();
 	  
-     //console.log(formname + "and" + formid); 
+     console.log(formname + "and" + formid); 
 	var success_message = 'Order for '+formname+' is placed.';
 	var error_message = 'Order is not valid, please select from the list.'
 	
