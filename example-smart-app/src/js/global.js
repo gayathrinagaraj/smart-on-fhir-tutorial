@@ -700,7 +700,7 @@ function listForms() {
 			
 			for (var x=0;x <= fpnlistforms.length; x++)
 			{
-			    for (var j=0; j <= acforms.length; j++) {
+			    for (var j=0; j < acforms.length; j++) {
 				    var temp = acforms[j].resource.title;
 				    console.log(temp);
 
