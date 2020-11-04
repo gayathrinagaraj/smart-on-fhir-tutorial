@@ -1965,8 +1965,9 @@ function displayList(){
 			
 			
 		jQuery(response.entry).each(function(i, item){
-			
+			console.log(item);
 			var check = item.resource;
+			console.log(check);
 			
 			if(check.hasOwnProperty('context')){
 
