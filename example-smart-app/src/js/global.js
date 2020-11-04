@@ -702,7 +702,7 @@ function listForms() {
 			{
 			    for (var j=0; j < acforms.length; j++) {
 				    var temp = acforms[j].resource.title;
-				    console.log(temp);
+				    //console.log(temp);
 
 				 if (fpnlistforms[x]== temp)
 				 {
