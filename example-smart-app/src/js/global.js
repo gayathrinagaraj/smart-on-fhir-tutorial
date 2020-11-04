@@ -701,11 +701,12 @@ function listForms() {
 			{
 			    for (var j=0; j < acforms.length; j++) {
 				    var temp = acforms[j].resource.title;
+				    //console.log(temp);
 
 				 if (fpnlistforms[x]== temp)
 				 {
-					 //console.log(temp);
-					 //console.log(acforms[j].resource.id);
+					 console.log(temp);
+					 console.log(acforms[j].resource.id);
 
 					 formoid.push(forms[j].resource.id);
 					formname.push(forms[j].resource.title);
@@ -730,7 +731,7 @@ function listForms() {
 			var flnum = formname.length;
 		
 			var select = document.getElementById("selectform"); 
-			//console.log("all forms"+forms);
+			console.log("all forms"+forms);
 					for (var i=0; i < flnum; i++) {
 						form_oid[i]=forms[i].resource.id;
 						form_name[i]=forms[i].resource.title;
