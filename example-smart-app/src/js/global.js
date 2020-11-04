@@ -933,7 +933,7 @@ function orderStatus() {
 	document.getElementById('t02').innerHTML="";
 	var str="";
 	str = str +"<tr><th>Event Date Time</th><th>PROs Ordered</th><th>Status</th> <th>Results</th> <th>Ref Range</th> </tr>";
-
+/*
 	$.ajax({
 		
 		//url: "https://fhir-open.sandboxcerner.com/dstu2/0b8a0111-e8e6-4c26-a91c-5069cbc6b1ca/DocumentReference?patient="+patID+"&created=ge2019-04-01&created=le"+ todayDate+"&_count=23&_limit=23",
@@ -1039,7 +1039,7 @@ function orderStatus() {
 
 	
 	
-
+*/
 	
 
 	var settings301 = {
