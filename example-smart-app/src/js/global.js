@@ -697,11 +697,15 @@ function listForms() {
 			
 			
 
-           	 var forms = data.entry;
-	  	acforms= data.entry;
+           	 //var forms = data.entry;
+	  	//acforms= data.entry;
+			
+			acforms= data.Form;
+			
+			
             //console.log(data.entry);
             //console.log("all forms"+forms);
-
+/*
            
 	var acOption = document.getElementById("allList");
 	var freqOption = document.getElementById("freqList");	
@@ -709,14 +713,17 @@ function listForms() {
 			for (var x=0;x <= fpnlistforms.length; x++)
 			{
 			    for (var j=0; j < acforms.length; j++) {
-				    var temp = acforms[j].resource.title;
+				    //var temp = acforms[j].resource.title;
+				    
+				      var temp = acforms[j].Name;
 				    //console.log(temp);
 
 				 if (fpnlistforms[x]== temp)
 				 {
 					 console.log(temp);
-					 console.log(acforms[j].resource.id);
-
+					 //console.log(acforms[j].resource.id);
+						console.log(acforms[j].OID);
+					 
 					 formoid.push(forms[j].resource.id);
 					formname.push(forms[j].resource.title);
 
@@ -780,7 +787,7 @@ function listForms() {
 					}
 			
 			
-
+*/
 		},
 
 		error: function(jqXHR, textStatus, errorThrown) {
