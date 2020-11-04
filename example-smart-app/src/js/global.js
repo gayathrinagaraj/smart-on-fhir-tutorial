@@ -285,7 +285,12 @@ $(document).ready(function(){
 	
 	
 	  if(flag == 'set') {
-	
+		  
+		  console.log(patient_id);
+		console.log(encounter_id);
+		  console.log(practitioner_id);
+		  console.log(pat_fname);
+		  console.log(pat_lname);
 	  
 	var date1 =new Date(new Date().toString().split('GMT')[0]+' UTC').toISOString().split('.')[0];
 
