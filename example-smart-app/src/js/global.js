@@ -15561,7 +15561,8 @@ function orderStatus() {
 		//url: "https://fhir-open.sandboxcerner.com/dstu2/0b8a0111-e8e6-4c26-a91c-5069cbc6b1ca/DocumentReference?patient="+patID+"&created=ge2019-04-01&created=le"+ todayDate+"&_count=23&_limit=23",
 		//https://fhir-ehr.cerner.com/dstu2/e8a84236-c258-4952-98b7-a6ff8a9c587a/DocumentReference?patient=4342008&created=ge2019-04-01&created=le2019-12-02
 		//https://fhir-myrecord.cerner.com/dstu2/e8a84236-c258-4952-98b7-a6ff8a9c587a/DocumentReference?patient=12668019&created=ge2020-01-01&created=le2020-02-11
-		url: "https://fhir-myrecord.cerner.com/dstu2/e8a84236-c258-4952-98b7-a6ff8a9c587a/DocumentReference?patient="+patID+"&created=ge2019-04-01&created=le"+ todayDate,
+		      //https://fhir-myrecord.cerner.com/dstu2/e8a84236-c258-4952-98b7-a6ff8a9c587a/DocumentReference?patient=12668019&created=ge2020-11-01&created=le2020-11-06
+		url: "https://fhir-myrecord.cerner.com/dstu2/e8a84236-c258-4952-98b7-a6ff8a9c587a/DocumentReference?patient="+patID+"&created=ge2020-04-01&created=le"+ todayDate,
 		cache: false,
 		crossDomain: true,
 		type: "GET",
@@ -16189,7 +16190,8 @@ function nextQuestion(linkId,linkId2,valueString,text,tempOID,itemId,ques)
 	 }
 
 		
-		var desc = QRjson.contained[0].title + "%7C t-score :"+ tscore + "%7C LOINC! 2572013653" ;
+		//var desc = QRjson.contained[0].title + "%7C t-score :"+ tscore + "%7C LOINC! 2572013653" ;
+		var desc = QRjson.contained[0].title + ", t-score : " + tscore;
 		QRjson["tscore"] = tscore;
 		
 		QRjson["patientResponses"] = patientResponses;
@@ -16309,8 +16311,8 @@ function displayQuestionnaire(QR, formOID,count){
 	 }
 
 		
-		var desc = QRjson.contained[0].title + "%7C t-score :"+ tscore + "%7C LOINC! 2572013653"  ;
-				
+		//var desc = QRjson.contained[0].title + "%7C t-score :"+ tscore + "%7C LOINC! 2572013653"  ;
+				var desc = QRjson.contained[0].title + ", t-score : " + tscore;
 				QRjson["tscore"] = tscore;
 				QRjson["patientResponses"] = patientResponses;
 	
