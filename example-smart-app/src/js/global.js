@@ -672,7 +672,7 @@ function listForms() {
         var temp_formname=[];
 	
 	//console.log (fpnlistforms);
-	
+	/*
 	$.ajax({
 		//url: baseurl_acapi + "/2014-01/Forms/.json",
 		url: "https://assessmentcenter.net/ac_api/2014-01/Forms/.json",
@@ -793,11 +793,11 @@ function listForms() {
 		error: function(jqXHR, textStatus, errorThrown) {
 			document.write(jqXHR.responseText + ':' + textStatus + ':' + errorThrown);
 		}
-	});
+	});  */
 	
 	
 
-}
+} 
 
 
 /*
