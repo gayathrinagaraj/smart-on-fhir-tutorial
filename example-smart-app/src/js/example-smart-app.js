@@ -95,7 +95,7 @@ var smartObject="";
  // alert("You are using " + BrowserDetect.browser + " with version " + BrowserDetect.version + "");
 
       if(persona === 'provider') {
-	      listForms();
+	      //listForms();
 	      //freqOrder();
 	      orderStatus();
 
