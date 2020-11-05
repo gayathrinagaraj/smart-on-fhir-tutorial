@@ -793,7 +793,7 @@ function listForms() {
 		error: function(jqXHR, textStatus, errorThrown) {
 			document.write(jqXHR.responseText + ':' + textStatus + ':' + errorThrown);
 		}
-	});  */
+	});  
 	
 	
 
