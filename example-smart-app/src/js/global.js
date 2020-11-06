@@ -15066,15 +15066,15 @@ var fdata = JSON.stringify(favdata);
 			"url": baseurl+"List",
 			"method": "POST",
 			"contentType" : "application/json",
-			"headers": {
+			//"headers": {
 				//"Authorization" : "Bearer "+ KeycloakToken,
-				"Access-Control-Allow-Headers": "x-requested-with",
-				"cache" : false,
-				"Cache-Control": "no-cache"
+				//"Access-Control-Allow-Headers": "x-requested-with",
+				//"cache" : false,
+				//"Cache-Control": "no-cache"
 			//"headers": {
 			//	"Content-Type": "application/json",
 			//	"Cache-Control": "no-cache"
-			},
+			//},
 			"processData": false,
 			"data": fdata
 		
@@ -15955,11 +15955,11 @@ function removeFav(taskId,proId,proName,patId,patName){
 			"url": baseurl+"List/"+taskId,
 			"method": "PUT",
 			"contentType" : "application/json",
-			"headers": {
+			//"headers": {
 				//"Authorization" : "Bearer "+ KeycloakToken,
 			//	"Content-Type": "application/json",
 			//	"Cache-Control": "no-cache"
-			},
+			//},
 			"processData": false,
 			"data": fdata
 	
