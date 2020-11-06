@@ -541,7 +541,7 @@ $(document).ready(function(){
  },
  "occurrenceDateTime": date1,
  "subject": {
- "display": pat_fname+" "+pat_lname,
+ "display": pat_fname1+" "+pat_lname1,
  "reference": "http://hl7.org/fhir/sid/us-ssn/Patient/" + patient_id
  },
  "context": {
@@ -701,7 +701,7 @@ function listForms() {
 				    var temp = acforms[j].resource.title;
 				    
 				     // var temp = acforms[j].Name;
-				    console.log(temp);
+				    //console.log(temp);
 
 				 if (fpnlistforms[x]== temp)
 				 {
@@ -1072,15 +1072,15 @@ function orderStatus() {
 		},
 		success: function(data) { 
 
-			//console.log(data);
+			console.log(data);
 			
-			//console.log("Read Doc Ref");
+			console.log("Read Doc Ref");
 
 
 			
 			jQuery(data.entry).each(function(i, item){
-				//console.log(item);
-				//console.log("completed pro list");
+				console.log(item);
+				console.log("completed pro list");
 				//console.log( item);
 				//console.log (item.resource.type.text);
 				var temp = item.resource.type.text;
@@ -1100,8 +1100,8 @@ function orderStatus() {
 						var str1= item.resource.description;
 						var proname = str1.slice(0,(str1.length-13));
 
-						//console.log(score);
-						//console.log(proname);
+						console.log(score);
+						console.log(proname);
 						var msec = Date.parse(item.resource.meta.lastUpdated);
 						var d = new Date(msec);
 						var date1 = d.toLocaleString("en-US");
