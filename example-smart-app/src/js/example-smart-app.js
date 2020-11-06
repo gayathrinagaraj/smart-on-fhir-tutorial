@@ -26,7 +26,7 @@ var smartObject="";
 
     function onReady(smart)  {
       smartObject=smart;
-	alert('onready ',smart);
+	//alert('onready ',smart);
       //getKeycloakToken();
       console.log(smart.state.tokenResponse);
 	    
