@@ -1040,26 +1040,7 @@ function orderStatus() {
 	
 
 	
-	
-var settings = {
-  "url": "https://fhir3-stage.elimuinformatics.com/baseDstu3/Observation?subject=https://fhir-open.sandboxcerner.com/dstu2/0b8a0111-e8e6-4c26-a91c-5069cbc6b1ca/Patient/12668019",
-  "method": "GET",
-  "timeout": 0,
-};
 
-$.ajax(settings).done(function (response) {
-  console.log(response);
-	
-	jQuery(response.entry).each(function(i, item){
-			console.log(item);
-			console.log(item.resource.code.coding[0].display);
-			console.log(item.resource.valueQuantity.value);
-		var msec = Date.parse(item.resource.meta.lastUpdated);
-		console.log(msec);
-		});
-	
-	
-});
 	
 	
 	var datatoday = new Date();
@@ -1073,6 +1054,72 @@ $.ajax(settings).done(function (response) {
 	document.getElementById('t02').innerHTML="";
 	var str="";
 	str = str +"<tr><th>Event Date Time</th><th>PROs Ordered</th><th>Status</th> <th>Results</th> <th>Ref Range</th> </tr>";
+	
+		
+var settings = {
+  "url": "https://fhir3-stage.elimuinformatics.com/baseDstu3/Observation?subject=https://fhir-open.sandboxcerner.com/dstu2/0b8a0111-e8e6-4c26-a91c-5069cbc6b1ca/Patient/12668019",
+  "method": "GET",
+  "timeout": 0,
+};
+
+$.ajax(settings).done(function (response) {
+  console.log(response);
+	
+	jQuery(response.entry).each(function(i, item){
+			console.log(item);
+			console.log(item.resource.code.coding[0].display);
+			console.log(item.resource.valueQuantity.value);
+		var proname= item.resource.code.coding[0].display;
+		var score = item.resource.valueQuantity.value;
+		var msec = Date.parse(item.resource.meta.lastUpdated);
+		var d = new Date(msec);
+		var date1 = d.toLocaleString("en-US");
+		console.log(msec);
+		
+		
+		var flag="";
+
+			var value = [msec,score];
+			
+			for(i=0;i<Series1.length;i++)
+			{
+				if (proname == Series1[i].key){
+					
+					Series1[i].values.push(value);
+					
+					flag="Y";	
+				}
+			}
+
+			if (flag !="Y" )
+			{
+				let temp ={
+						key  : proname,
+						values : [value] };
+
+				Series1.push(temp);
+			}
+			
+		
+			flag="";   
+
+			str = str +"<tr><td>" +date1+"</td>";
+			str = str +"<td>"+proname +"</td>";
+			str = str +"<td>Completed</td>";
+			str = str +"<td><a href =\'#\' onclick=\'chart();return false;'>"+score+"</a></td><td> 1 - 100</td> </tr>";
+
+
+		}
+				}
+		
+		
+		
+		});
+	
+	document.getElementById('t02').innerHTML += str;
+	
+});
+	/*
 
 	$.ajax({
 		
@@ -1180,7 +1227,7 @@ $.ajax(settings).done(function (response) {
 	});
 
 	
-	
+	*/
 
 	
 
