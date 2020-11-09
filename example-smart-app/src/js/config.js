@@ -65,7 +65,7 @@ var DRRdata= {
                             }
                         }
                     ],
-                    "text": "PROMIS Patient Questionnaire"
+                    "text": "PROMIS Patient Response"
                 },
                 "authenticator": {
                     "reference": "Practitioner/12720224",
