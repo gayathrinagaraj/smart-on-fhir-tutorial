@@ -1074,6 +1074,7 @@ function orderStatus() {
 
 			console.log(data);
 			
+			console.log(DRRdata);
 			console.log("Read Doc Ref");
 
 
