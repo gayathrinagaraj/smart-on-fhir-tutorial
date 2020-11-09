@@ -627,9 +627,9 @@ function orderPRO(formname,formoid){
 			"contentType" : "application/json",
 			"headers": {
 				//"Authorization" : "Bearer "+ KeycloakToken,
-				"Access-Control-Allow-Headers": "x-requested-with",
-				"cache" : false,
-				"Cache-Control": "no-cache"
+				//"Access-Control-Allow-Headers": "x-requested-with",
+				//"cache" : false,
+				//"Cache-Control": "no-cache"
 			//"headers": {
 			//	"Content-Type": "application/json",
 			//	"Cache-Control": "no-cache"
