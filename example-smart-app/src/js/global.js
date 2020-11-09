@@ -1079,7 +1079,7 @@ function orderStatus() {
 
 
 			
-			jQuery(data.entry).each(function(i, item){
+			jQuery(DRRdata.entry).each(function(i, item){
 				console.log(item);
 				console.log("completed pro list");
 				//console.log( item);
