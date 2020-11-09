@@ -10,8 +10,8 @@ var KeycloakToken="";
 
 console.log(Odata);
 
-console.log(Odata.entry[0].code[0].coding.display);
-console.log(Odata.entry[0].valueQuantity.value);
+console.log(Odata.entry[0].resource.code[0].coding.display);
+console.log(Odata.entry[0].resource.valueQuantity.value);
 
 var getThetaForm = new FormData();
 
