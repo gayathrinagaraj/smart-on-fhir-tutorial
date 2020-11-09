@@ -10,23 +10,6 @@ var KeycloakToken="";
 
 
 
-var settings = {
-  "url": "https://fhir3-stage.elimuinformatics.com/baseDstu3/Observation?subject=https://fhir-open.sandboxcerner.com/dstu2/0b8a0111-e8e6-4c26-a91c-5069cbc6b1ca/Patient/12668019",
-  "method": "GET",
-  "timeout": 0,
-};
-
-$.ajax(settings).done(function (response) {
-  console.log(response);
-	
-	jQuery(response.entry).each(function(i, item){
-			console.log(item);
-			console.log(item.resource.code.coding[0].display);
-			console.log(item.resource.valueQuantity.value);
-		});
-	
-	
-});
 
 var getThetaForm = new FormData();
 
@@ -1056,6 +1039,28 @@ function orderStatus() {
 	});
 	
 
+	
+	
+var settings = {
+  "url": "https://fhir3-stage.elimuinformatics.com/baseDstu3/Observation?subject=https://fhir-open.sandboxcerner.com/dstu2/0b8a0111-e8e6-4c26-a91c-5069cbc6b1ca/Patient/"+patID,
+  "method": "GET",
+  "timeout": 0,
+};
+
+$.ajax(settings).done(function (response) {
+  console.log(response);
+	
+	jQuery(response.entry).each(function(i, item){
+			console.log(item);
+			console.log(item.resource.code.coding[0].display);
+			console.log(item.resource.valueQuantity.value);
+		var msec = Date.parse(item.resource.meta.lastUpdated);
+		console.log(msec);
+		});
+	
+	
+});
+	
 	
 	var datatoday = new Date();
 	var datatodays = datatoday.setDate(new Date(datatoday).getDate() + 2);
