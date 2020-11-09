@@ -1698,6 +1698,7 @@ function nextQuestion(linkId,linkId2,valueString,text,tempOID,itemId,ques)
 	patientPostDR (myJSON_01,desc)
 	document.getElementById("Content").innerHTML = "You have finished the assessment.<br /> Thank you ! <div style=\'height: 50px\' ><button type=\'button\' class='button button6'  onclick=displist() > Back </button></div>";
 	completeProcess(taskId,proId,proName,patId,patName);
+	postScore(taskId,proId,proName,patId,patName,tscore);
 	}
 	
 	
@@ -1818,6 +1819,7 @@ function displayQuestionnaire(QR, formOID,count){
 	patientPostDR (myJSON_01,desc)
 	document.getElementById("Content").innerHTML = "You have finished the assessment.<br /> Thank you ! <div style=\'height: 50px\' ><button type=\'button\' class='button button6'  onclick=displist() > Back </button></div>";
 	completeProcess(taskId,proId,proName,patId,patName);
+	postScore(taskId,proId,proName,patId,patName,tscore);
 	}
 	
 		
