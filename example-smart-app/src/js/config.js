@@ -84,7 +84,7 @@ var DRRdata= {
                     ],
                     "text": "Auth (Verified)"
                 },
-                "description": "TBI-QOL Bank v1.0 - Depression, t-score: 50",
+                "description": "TBI-QOL Bank v1.0 - Depression, t-score: 60",
                 "content": [
                     {
                         "attachment": {
