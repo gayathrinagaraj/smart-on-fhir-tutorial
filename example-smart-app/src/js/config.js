@@ -50,7 +50,7 @@ var DRRdata= {
                         {
                             "system": "https://fhir.cerner.com/e8a84236-c258-4952-98b7-a6ff8a9c587a/codeSet/72",
                             "code": "2572013649",
-                            "display": "PROMIS Patient Questionnaire",
+                            "display": "PROMIS Patient Response",
                             "userSelected": true
                         },
                         {
@@ -84,7 +84,7 @@ var DRRdata= {
                     ],
                     "text": "Auth (Verified)"
                 },
-                "description": "TBI-QOL Bank v1.0 - Depression",
+                "description": "TBI-QOL Bank v1.0 - Depression, t-score: 76",
                 "content": [
                     {
                         "attachment": {
