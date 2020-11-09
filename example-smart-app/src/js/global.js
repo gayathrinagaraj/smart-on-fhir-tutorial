@@ -1107,11 +1107,6 @@ $.ajax(settings).done(function (response) {
 			str = str +"<td>"+proname +"</td>";
 			str = str +"<td>Completed</td>";
 			str = str +"<td><a href =\'#\' onclick=\'chart();return false;'>"+score+"</a></td><td> 1 - 100</td> </tr>";
-
-
-		}
-				}
-		
 		
 		
 		});
