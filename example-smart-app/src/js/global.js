@@ -1044,7 +1044,7 @@ function orderStatus() {
 	var todate = new Date(datatodays);
 	//console.log(todate);
 	var todayDate = todate.toISOString().slice(0,10);
-	console.log(todayDate);
+	//console.log(todayDate);
 	//console.log(access_token);
 	//console.log(patID +"test");
 	document.getElementById('t02').innerHTML="";
@@ -1072,16 +1072,16 @@ function orderStatus() {
 		},
 		success: function(data) { 
 
-			console.log(data);
+			//console.log(data);
 			
-			console.log(DRRdata);
-			console.log("Read Doc Ref");
+			//console.log(DRRdata);
+			//console.log("Read Doc Ref");
 
 
 			
 			jQuery(data.entry).each(function(i, item){
-				console.log(item);
-				console.log("completed pro list");
+				//console.log(item);
+				//console.log("completed pro list");
 				//console.log( item);
 				//console.log (item.resource.type.text);
 				var temp = item.resource.type.text;
@@ -1101,8 +1101,8 @@ function orderStatus() {
 						var str1= item.resource.description;
 						var proname = str1.slice(0,(str1.length-13));
 
-						console.log(score);
-						console.log(proname);
+						//console.log(score);
+						//console.log(proname);
 						var msec = Date.parse(item.resource.meta.lastUpdated);
 						var d = new Date(msec);
 						var date1 = d.toLocaleString("en-US");
