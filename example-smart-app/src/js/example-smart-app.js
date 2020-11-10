@@ -7,6 +7,9 @@
     var patient_id=""
     var encounter_id="";
 
+var fname = 'Test';
+var lname = 'Zzztest';
+
 var access_token="";
 var refresh_token="";
 var smartObject="";
