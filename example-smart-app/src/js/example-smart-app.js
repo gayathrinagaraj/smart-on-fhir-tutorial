@@ -61,17 +61,24 @@ var smartObject="";
 	console.log(practitioner_id);  
 	console.log(encounter_id);  
       var token = smart.state.tokenResponse.id_token;
-      access_token= smart.state.tokenResponse.access_token;
-
-	    
-	   
-	//freqOrder();
-
-	    
-	  
+      access_token= smart.state.tokenResponse.access_token;  
       console.log(patID);
 	   
       //document.getElementById("pract_id").innerHTML="<b>ID: </b>" + practitioner_id;
+	    
+	    var settings89 = {
+  "url": "https://fhir-myrecord.cerner.com/dstu2/e8a84236-c258-4952-98b7-a6ff8a9c587a/Patient/"+patID,
+  "method": "GET",
+  "headers": {
+    "Authorization": "Bearer "+ access_token,
+    "Accept": "application/json+fhir"
+  },
+};
+
+$.ajax(settings89).done(function (response) {
+  console.log(response);
+	console.log("patient read");
+});
      
      
       
