@@ -1751,8 +1751,8 @@ function nextQuestion(linkId,linkId2,valueString,text,tempOID,itemId,ques)
 	 }
 
 		
-		//var desc = QRjson.contained[0].title + "%7C t-score :"+ tscore + "%7C LOINC! 2572013653" ;
-		var desc = QRjson.contained[0].title + ", t-score : " + tscore;
+		var desc = QRjson.contained[0].title + "%7C t-score :"+ tscore + "%7C LOINC! 2572013653" ;
+		//var desc = QRjson.contained[0].title + ", t-score : " + tscore;
 		QRjson["tscore"] = tscore;
 		
 		QRjson["patientResponses"] = patientResponses;
@@ -1873,8 +1873,8 @@ function displayQuestionnaire(QR, formOID,count){
 	 }
 
 		
-		//var desc = QRjson.contained[0].title + "%7C t-score :"+ tscore + "%7C LOINC! 2572013653"  ;
-				var desc = QRjson.contained[0].title + ", t-score : " + tscore;
+		var desc = QRjson.contained[0].title + "%7C t-score :"+ tscore + "%7C LOINC! 2572013653"  ;
+				//var desc = QRjson.contained[0].title + ", t-score : " + tscore;
 				QRjson["tscore"] = tscore;
 				QRjson["patientResponses"] = patientResponses;
 	
