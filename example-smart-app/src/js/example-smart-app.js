@@ -78,6 +78,11 @@ var smartObject="";
 $.ajax(settings89).done(function (response) {
   console.log(response);
 	console.log("patient read");
+	
+	console.log(response.name[0].family[0]);
+	console.log(response.name[0].given[0]);
+	
+	
 });
      
      
