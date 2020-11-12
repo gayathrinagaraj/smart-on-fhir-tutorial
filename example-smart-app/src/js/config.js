@@ -12,6 +12,252 @@ var baseurl_acapi ="https://assessmentcenter.net/ac_api/";
 var baseurl_AC_API="https://calv-easiprox.med.usc.edu/AC_API_Test/";
 
 //var baseurl_AC_API="https://assessmentcenter.net/ac_api/";
+
+var Pdata ={
+    "resourceType": "Patient",
+    "id": "12720085",
+    "meta": {
+        "versionId": "4",
+        "lastUpdated": "2020-02-25T16:46:36.000Z"
+    },
+    "text": {
+        "status": "generated",
+        "div": "<div><p><b>Patient</b></p><p><b>Name</b>: PROMIS, EASIPRO</p><p><b>DOB</b>: Aug 13, 1985</p><p><b>Administrative Gender</b>: Male</p><p><b>Marital Status</b>: Single</p><p><b>Status</b>: Active</p></div>"
+    },
+    "extension": [
+        {
+            "url": "http://fhir.org/guides/argonaut/StructureDefinition/argo-race",
+            "extension": [
+                {
+                    "url": "ombCategory",
+                    "valueCoding": {
+                        "system": "http://hl7.org/fhir/v3/Race",
+                        "code": "2028-9",
+                        "display": "Asian",
+                        "userSelected": false
+                    }
+                },
+                {
+                    "url": "text",
+                    "valueString": "Asian"
+                }
+            ]
+        },
+        {
+            "url": "http://fhir.org/guides/argonaut/StructureDefinition/argo-ethnicity",
+            "extension": [
+                {
+                    "url": "ombCategory",
+                    "valueCoding": {
+                        "system": "http://hl7.org/fhir/v3/Ethnicity",
+                        "code": "2186-5",
+                        "display": "Not Hispanic or Latino",
+                        "userSelected": false
+                    }
+                },
+                {
+                    "url": "text",
+                    "valueString": "Not Hispanic, Latino, or Spanish Origin"
+                }
+            ]
+        }
+    ],
+    "identifier": [
+        {
+            "use": "usual",
+            "type": {
+                "coding": [
+                    {
+                        "system": "http://hl7.org/fhir/v2/0203",
+                        "code": "MR",
+                        "display": "Medical record number",
+                        "userSelected": false
+                    }
+                ],
+                "text": "MRN"
+            },
+            "system": "urn:oid:2.16.840.1.113883.3.0.0.5",
+            "value": "6929",
+            "_value": {
+                "extension": [
+                    {
+                        "url": "http://hl7.org/fhir/StructureDefinition/rendered-value",
+                        "valueString": "MX00006929"
+                    }
+                ]
+            },
+            "period": {
+                "start": "2020-02-19T17:53:50.000Z"
+            }
+        }
+    ],
+    "active": true,
+    "name": [
+        {
+            "use": "official",
+            "text": "PROMIS, EASIPRO",
+            "family": [
+                "PROMIS"
+            ],
+            "given": [
+                "EASIPRO"
+            ],
+            "period": {
+                "start": "2020-02-19T17:53:50.000Z"
+            }
+        }
+    ],
+    "telecom": [
+        {
+            "system": "phone",
+            "value": "3873273289",
+            "use": "home",
+            "period": {
+                "start": "2020-02-19T17:53:50.000Z"
+            }
+        },
+        {
+            "system": "email",
+            "value": "nick.mckenzie@cerner.com",
+            "use": "home",
+            "period": {
+                "start": "2020-02-19T17:55:46.000Z"
+            }
+        }
+    ],
+    "gender": "male",
+    "birthDate": "1985-08-13",
+    "deceasedBoolean": false,
+    "address": [
+        {
+            "use": "home",
+            "text": "1234 Anywhere\nOverland Park, KS 66223\nUS",
+            "line": [
+                "1234 Anywhere"
+            ],
+            "city": "Overland Park",
+            "state": "KS",
+            "postalCode": "66223",
+            "country": "US",
+            "period": {
+                "start": "2020-02-19T17:58:19.000Z"
+            }
+        }
+    ],
+    "maritalStatus": {
+        "coding": [
+            {
+                "system": "http://hl7.org/fhir/marital-status",
+                "code": "U",
+                "display": "Unmarried",
+                "userSelected": false
+            }
+        ],
+        "text": "Single"
+    },
+    "contact": [
+        {
+            "relationship": [
+                {
+                    "text": "Authorized Representative"
+                }
+            ],
+            "name": {
+                "use": "official",
+                "text": "PROMIS, EASIPRO",
+                "family": [
+                    "PROMIS"
+                ],
+                "given": [
+                    "EASIPRO"
+                ],
+                "period": {
+                    "start": "2020-02-19T21:43:54.000Z"
+                }
+            },
+            "telecom": [
+                {
+                    "system": "email",
+                    "value": "nick.mckenzie@cerner.com",
+                    "use": "home",
+                    "period": {
+                        "start": "2020-02-19T21:43:54.000Z"
+                    }
+                }
+            ],
+            "period": {
+                "start": "2020-02-19T21:43:54.000Z"
+            }
+        },
+        {
+            "relationship": [
+                {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/patient-contact-relationship",
+                            "code": "emergency",
+                            "display": "Emergency",
+                            "userSelected": false
+                        }
+                    ],
+                    "text": "Emergency Contact"
+                }
+            ],
+            "name": {
+                "use": "official",
+                "text": "WHOCARES, ABOUTTHIS",
+                "family": [
+                    "WHOCARES"
+                ],
+                "given": [
+                    "ABOUTTHIS"
+                ],
+                "period": {
+                    "start": "2020-02-19T18:12:05.000Z"
+                }
+            },
+            "telecom": [
+                {
+                    "system": "phone",
+                    "value": "9983389391",
+                    "use": "home",
+                    "period": {
+                        "start": "2020-02-19T18:12:05.000Z"
+                    }
+                }
+            ],
+            "period": {
+                "start": "2020-02-19T18:12:05.000Z"
+            }
+        }
+    ],
+    "communication": [
+        {
+            "language": {
+                "coding": [
+                    {
+                        "extension": [
+                            {
+                                "url": "http://hl7.org/fhir/StructureDefinition/data-absent-reason",
+                                "valueCode": "unknown"
+                            }
+                        ]
+                    }
+                ],
+                "text": "English"
+            },
+            "preferred": true
+        }
+    ],
+    "careProvider": [
+        {
+            "reference": "Practitioner/11938004",
+            "display": "Bradford, MD, Michael Cerner"
+        }
+    ]
+};
+
+
 var Odata={
     "resourceType": "Bundle",
     "id": "8a786e4b-d353-475e-a306-92da83cf6b55",
