@@ -72,6 +72,7 @@ var smartObject="";
       //document.getElementById("pract_id").innerHTML="<b>ID: </b>" + practitioner_id;
 	    
 	    var settings89 = {
+  "async": false,
   "url": "https://fhir-myrecord.cerner.com/dstu2/e8a84236-c258-4952-98b7-a6ff8a9c587a/Patient/"+patID,
   "method": "GET",
   "headers": {
