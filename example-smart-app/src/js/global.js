@@ -9,7 +9,7 @@ var dobstr2="";
 var KeycloakToken="";
 
 
-
+console.log(Pdata);
 
 var getThetaForm = new FormData();
 
