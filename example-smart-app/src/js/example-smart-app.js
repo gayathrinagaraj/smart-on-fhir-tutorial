@@ -10,6 +10,10 @@
 var fname = '';
 var lname = '';
 
+var pat_fname = '';
+var pat_lname = '';
+
+
 
 var access_token="";
 var refresh_token="";
@@ -85,6 +89,8 @@ $.ajax(settings89).done(function (response) {
 	
 	fname = response.name[0].given[0];
 	lname = response.name[0].family[0];
+	pat_fname = response.name[0].given[0];
+	pat_lname = response.name[0].family[0];
 	console.log(fname);
 	console.log(lname);
 	
@@ -94,6 +100,9 @@ $.ajax(settings89).done(function (response) {
 	    
 	    console.log(fname);
 	console.log(lname);
+	    
+	    console.log(pat_fname);
+	console.log(pat_lname);
 	    document.getElementById("firstname").innerHTML= fname;
 	document.getElementById("lastname").innerHTML= lname;
      
