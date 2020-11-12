@@ -7,8 +7,9 @@
     var patient_id=""
     var encounter_id="";
 
-var fname = 'Test';
-var lname = 'Zzztest';
+var fname = '';
+var lname = '';
+
 
 var access_token="";
 var refresh_token="";
@@ -81,6 +82,9 @@ $.ajax(settings89).done(function (response) {
 	
 	console.log(response.name[0].family[0]);
 	console.log(response.name[0].given[0]);
+	
+	fname = response.name[0].given[0];
+	lname = response.name[0].family[0];
 	
 	
 });
