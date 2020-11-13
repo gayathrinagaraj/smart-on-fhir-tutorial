@@ -10,8 +10,8 @@
 var fname = '';
 var lname = '';
 
-var pat_fname = '';
-var pat_lname = '';
+var pat_fname = 'Test';
+var pat_lname = 'Promistwo';
 
 
 
