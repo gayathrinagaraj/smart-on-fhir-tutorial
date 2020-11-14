@@ -1079,6 +1079,9 @@ $.ajax(settings).done(function (response) {
 		var date1 = d.toLocaleString("en-US");
 		console.log(msec);
 		
+		var x =["1584774000000","78"];
+		
+		
 		
 		var flag="";
 
@@ -1089,7 +1092,7 @@ $.ajax(settings).done(function (response) {
 				if (proname == Series1[i].key){
 					
 					Series1[i].values.push(value);
-					
+					Series1[i].values.push(x);
 					flag="Y";	
 				}
 			}
