@@ -1060,8 +1060,8 @@ function orderStatus() {
 	
 		
 var settings = {
-  //"url": "https://fhir3-stage.elimuinformatics.com/baseDstu3/Observation?subject=https://fhir-open.sandboxcerner.com/dstu2/0b8a0111-e8e6-4c26-a91c-5069cbc6b1ca/Patient/"+patient_id+"&_count=15&_sort:desc=_lastUpdated",
-	"url": "https://fhir3-stage.elimuinformatics.com/baseDstu3/Observation?subject=https://fhir-open.sandboxcerner.com/dstu2/0b8a0111-e8e6-4c26-a91c-5069cbc6b1ca/Patient/"+patient_id+"&_count=15&_sort:desc=_id",
+  "url": "https://fhir3-stage.elimuinformatics.com/baseDstu3/Observation?subject=https://fhir-open.sandboxcerner.com/dstu2/0b8a0111-e8e6-4c26-a91c-5069cbc6b1ca/Patient/"+patient_id+"&_count=15&_sort:desc=_lastUpdated",
+	//"url": "https://fhir3-stage.elimuinformatics.com/baseDstu3/Observation?subject=https://fhir-open.sandboxcerner.com/dstu2/0b8a0111-e8e6-4c26-a91c-5069cbc6b1ca/Patient/"+patient_id+"&_count=15&_sort:desc=_id",
   "method": "GET",
   "timeout": 0,
 };
@@ -1075,9 +1075,9 @@ $.ajax(settings).done(function (response) {
 			//console.log(item.resource.valueQuantity.value);
 		var proname= item.resource.code.coding[0].display;
 		var score = item.resource.valueQuantity.value;
-		//var msec = Date.parse(item.resource.meta.lastUpdated);
+		var msec = Date.parse(item.resource.meta.lastUpdated);
 		
-		var msec = Date.parse(item.resource.effectiveDateTime);
+		//var msec = Date.parse(item.resource.effectiveDateTime);
 		
 		var d = new Date(msec);
 		var date1 = d.toLocaleString("en-US");
