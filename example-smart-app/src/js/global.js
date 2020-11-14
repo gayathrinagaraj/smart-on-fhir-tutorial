@@ -2,8 +2,8 @@
 //var patient_id="";
 var pat_fname="Test";
 var pat_fname1="Test";
-var pat_lname1="Zzztest";
-var pat_lname="Zzztest";
+var pat_lname1="Promistwo";
+var pat_lname="Promistwo";
 var gender2="";
 var dobstr2="";
 var KeycloakToken="";
