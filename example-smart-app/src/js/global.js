@@ -1082,7 +1082,7 @@ $.ajax(settings).done(function (response) {
 		var x =["1584774000000","78"];
 		
 		
-		Series1["PROMIS Bank v1.2 - Mobility T-score"].values.push(x);
+		
 		
 		var flag="";
 
@@ -1096,7 +1096,15 @@ $.ajax(settings).done(function (response) {
 					
 					flag="Y";	
 				}
+				
 			}
+		
+		 for(i=0;i<Series1.length;i++)
+		{
+		
+		Series1[i].values.push(x);
+			
+		}
 
 			if (flag !="Y" )
 			{
