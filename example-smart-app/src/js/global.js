@@ -1,9 +1,9 @@
 //Global Varibales
 //var patient_id="";
-pat_fname="Test";
+var pat_fname="Test";
 var pat_fname1="Test";
 var pat_lname1="Zzztest";
-pat_lname="Zzztest";
+var pat_lname="Zzztest";
 var gender2="";
 var dobstr2="";
 var KeycloakToken="";
