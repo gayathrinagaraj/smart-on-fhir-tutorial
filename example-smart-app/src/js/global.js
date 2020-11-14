@@ -8,11 +8,11 @@ var gender2="";
 var dobstr2="";
 var KeycloakToken="";
 
-console.log(pat_fname);
-console.log(pat_lname);
+//console.log(pat_fname);
+//console.log(pat_lname);
 
 
-console.log(Pdata);
+//console.log(Pdata);
 
 var getThetaForm = new FormData();
 
@@ -225,8 +225,8 @@ function freqOrder_test(){
 		
 	}
 	$.ajax(settings31).done(function (response) {
-		console.log(response);	
-		console.log("This worked");
+		//console.log(response);	
+		//console.log("This worked");
 		jQuery(response.entry).each(function(i, item){
 			//console.log(item);
 			//console.log(item.resource.code.coding[0].display);
@@ -294,11 +294,11 @@ $(document).ready(function(){
 	
 	  if(flag == 'set') {
 		  
-		  console.log(patient_id);
-		console.log(encounter_id);
-		  console.log(practitioner_id);
-		  console.log(pat_fname);
-		  console.log(pat_lname);
+		  //console.log(patient_id);
+		//console.log(encounter_id);
+		//  console.log(practitioner_id);
+		 // console.log(pat_fname);
+		  //console.log(pat_lname);
 	  
 	var date1 =new Date(new Date().toString().split('GMT')[0]+' UTC').toISOString().split('.')[0];
 
@@ -1069,9 +1069,9 @@ $.ajax(settings).done(function (response) {
   console.log(response);
 	
 	jQuery(response.entry).each(function(i, item){
-			console.log(item);
-			console.log(item.resource.code.coding[0].display);
-			console.log(item.resource.valueQuantity.value);
+			//console.log(item);
+			//console.log(item.resource.code.coding[0].display);
+			//console.log(item.resource.valueQuantity.value);
 		var proname= item.resource.code.coding[0].display;
 		var score = item.resource.valueQuantity.value;
 		var msec = Date.parse(item.resource.meta.lastUpdated);
@@ -1099,7 +1099,7 @@ $.ajax(settings).done(function (response) {
 				}
 				
 			}
-		
+		/*
 		 for(i=0;i<Series1.length;i++)
 		{
 		
@@ -1114,7 +1114,7 @@ $.ajax(settings).done(function (response) {
 		}
 			
 			
-		}
+		}*/
 
 			if (flag !="Y" )
 			{
@@ -1359,8 +1359,8 @@ function ISODateString(d) {
 
 function patientPostDR (QRjson,desc){
 	postQR(QRjson);
-	console.log(QRjson);
-	console.log("posting final QR to Hapi FHIR Server");
+	//console.log(QRjson);
+	//console.log("posting final QR to Hapi FHIR Server");
 	
 	var settings = {
   "async": true,
