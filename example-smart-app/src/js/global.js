@@ -1074,9 +1074,9 @@ $.ajax(settings).done(function (response) {
 			//console.log(item.resource.valueQuantity.value);
 		var proname= item.resource.code.coding[0].display;
 		var score = item.resource.valueQuantity.value;
-		//var msec = Date.parse(item.resource.meta.lastUpdated);
+		var msec = Date.parse(item.resource.meta.lastUpdated);
 		
-		var msec = Date.parse(item.resource.effectiveDateTime);
+		//var msec = Date.parse(item.resource.effectiveDateTime);
 		
 		var d = new Date(msec);
 		var date1 = d.toLocaleString("en-US");
