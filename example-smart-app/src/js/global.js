@@ -1080,6 +1080,7 @@ $.ajax(settings).done(function (response) {
 		console.log(msec);
 		
 		var x =["1584774000000","78"];
+		var y =["1593586800000","63"];
 		
 		
 		
@@ -1102,7 +1103,16 @@ $.ajax(settings).done(function (response) {
 		 for(i=0;i<Series1.length;i++)
 		{
 		
-		Series1[i].values.push(x);
+		if(Series1[i].key == "PROMIS Bank v1.2 - Mobility T-score")
+		   {
+		   Series1[i].values.push(x);
+		}
+			
+			if(Series1[i].key == "PROMIS SF v2.0 - Physical Function 10a T-score")
+		   {
+		   Series1[i].values.push(y);
+		}
+			
 			
 		}
 
