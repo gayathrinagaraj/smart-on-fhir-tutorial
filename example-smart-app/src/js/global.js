@@ -1060,7 +1060,7 @@ function orderStatus() {
 	
 		
 var settings = {
-  "url": "https://fhir3-stage.elimuinformatics.com/baseDstu3/Observation?subject=https://fhir-open.sandboxcerner.com/dstu2/0b8a0111-e8e6-4c26-a91c-5069cbc6b1ca/Patient/"+patient_id+"&_count=30&_sort:desc=_lastUpdated,
+  "url": "https://fhir3-stage.elimuinformatics.com/baseDstu3/Observation?subject=https://fhir-open.sandboxcerner.com/dstu2/0b8a0111-e8e6-4c26-a91c-5069cbc6b1ca/Patient/"+patient_id+"&_count=30&_sort:desc=_lastUpdated",
   "method": "GET",
   "timeout": 0,
 };
