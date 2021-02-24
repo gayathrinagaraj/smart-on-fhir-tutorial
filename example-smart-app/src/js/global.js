@@ -36,7 +36,7 @@ var patEncounterId, patPractitionerId;
 var tscore;
 
 var Series1 = [];
-/*
+
 function getKeycloakToken(){
 	var callEasipro = {
 		"async": false,
@@ -56,7 +56,7 @@ $.ajax(callEasipro).done(function (response) {
 	
 })
 
-} */
+} 
 
 function chartOld() {
 	var myWindow = window.open("", "MsgWindow", "width=1400,height=1200");
