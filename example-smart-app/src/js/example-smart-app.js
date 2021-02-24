@@ -35,7 +35,7 @@ var smartObject="";
     function onReady(smart)  {
       smartObject=smart;
 	//alert('onready ',smart);
-      //getKeycloakToken();
+      getKeycloakToken();
       console.log(smart.state.tokenResponse);
 	    
 	    console.log(smart.state.tokenResponse.patient);
