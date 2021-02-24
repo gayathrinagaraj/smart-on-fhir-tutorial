@@ -2176,11 +2176,10 @@ function displayList(){
 			"contentType" : "application/json",  
 		
 		
-"headers": {
+                        "headers": {
 			"Authorization" : "Bearer "+ KeycloakToken,
-				"Cache-Control": "no-cache"
-			},			
-		"cache" : false,
+				//"Cache-Control": "no-cache"
+			},	
 			"method": "GET"
 		
 		
