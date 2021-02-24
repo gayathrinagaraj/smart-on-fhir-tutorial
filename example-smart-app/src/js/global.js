@@ -220,7 +220,10 @@ function freqOrder_test(){
 			"url": baseurl+"ProcedureRequest?requester=http://usc.edu/Practitioner/"+practitioner_id+"&_count=100&intent=order&_sort:desc=_lastUpdated",
 			"contentType" : "application/json",                                                                           
 			"cache" : false,
-		
+		        "headers": {
+			"Authorization" : "Bearer "+ KeycloakToken,
+				"Cache-Control": "no-cache"
+			},		
 			"method": "GET"
 		
 	}
@@ -311,6 +314,10 @@ $(document).ready(function(){
 			"method": "POST",
 			"contentType" : "application/json",
 			"cache": false,
+		        "headers": {
+			"Authorization" : "Bearer "+ KeycloakToken,
+				"Cache-Control": "no-cache"
+			},		
 			"processData": false,
 			"data": prdata
 		
@@ -455,12 +462,12 @@ $(document).ready(function(){
 				//"Authorization" : "Bearer "+ KeycloakToken,
 				"Access-Control-Allow-Headers": "x-requested-with",
 				"cache" : false,
+				"Cache-Control": "no-cache",
+		        "headers": {
+			"Authorization" : "Bearer "+ KeycloakToken,
 				"Cache-Control": "no-cache"
-			//"headers": {
-			//	"Content-Type": "application/json",
-			//	"Cache-Control": "no-cache"
-			},
-			"processData": false,
+			},			
+		        "processData": false,
 			"data": prdata
 		
 			
@@ -565,6 +572,10 @@ var fdata = JSON.stringify(favdata);
 			"url": baseurl+"List",
 			"method": "POST",
 			"contentType" : "application/json",
+		        "headers": {
+			"Authorization" : "Bearer "+ KeycloakToken,
+				"Cache-Control": "no-cache"
+			},		
 			//"headers": {
 				//"Authorization" : "Bearer "+ KeycloakToken,
 				//"Access-Control-Allow-Headers": "x-requested-with",
@@ -630,10 +641,10 @@ function orderPRO(formname,formoid){
 			"method": "POST",
 			"contentType" : "application/json",
 			"headers": {
-				//"Authorization" : "Bearer "+ KeycloakToken,
+				"Authorization" : "Bearer "+ KeycloakToken,
 				//"Access-Control-Allow-Headers": "x-requested-with",
 				//"cache" : false,
-				//"Cache-Control": "no-cache"
+				"Cache-Control": "no-cache"
 			//"headers": {
 			//	"Content-Type": "application/json",
 			//	"Cache-Control": "no-cache"
@@ -984,6 +995,11 @@ function orderStatus() {
 			"url": baseurl+"ProcedureRequest?subject=http://hl7.org/fhir/sid/us-ssn/Patient/"+patID+"&_count=20&intent=order&status=active&_sort:desc=_lastUpdated",
 			"contentType" : "application/json",                                                                           
 			"cache" : false,
+		"headers": {
+			"Authorization" : "Bearer "+ KeycloakToken,
+				"Cache-Control": "no-cache"
+			},		
+		
 			"method": "GET",
 			"contentType" : "application/json"
 			
@@ -1262,7 +1278,10 @@ $.ajax(settings).done(function (response) {
 			"contentType" : "application/json",                                                                           
 			"cache" : false,
 
-			
+		"headers": {
+			"Authorization" : "Bearer "+ KeycloakToken,
+				"Cache-Control": "no-cache"
+			},			
 			"method": "GET"
 			//"headers": {
 			//	"Content-Type": "application/json",
@@ -1496,6 +1515,10 @@ function completeProcess(taskId,proId,proName,patId,patName){
 			"crossDomain": true,
 			"url": baseurl+"ProcedureRequest/"+taskId,
 			"method": "PUT",
+		"headers": {
+			"Authorization" : "Bearer "+ KeycloakToken,
+				"Cache-Control": "no-cache"
+			},		
 			"contentType" : "application/json",
 			
 			"processData": false,
@@ -1545,6 +1568,10 @@ function removeFav(taskId,proId,proName,patId,patName){
 			"url": baseurl+"List/"+taskId,
 			"method": "PUT",
 			"contentType" : "application/json",
+		"headers": {
+			"Authorization" : "Bearer "+ KeycloakToken,
+				"Cache-Control": "no-cache"
+			},		
 			//"headers": {
 				//"Authorization" : "Bearer "+ KeycloakToken,
 			//	"Content-Type": "application/json",
@@ -1582,7 +1609,7 @@ function cancelOrder(taskId,proId,proName,patId,patName){
 			"contentType" : "application/json",
 			"cache" : false,
 			"headers": {
-				//"Authorization" : "Bearer "+ KeycloakToken,
+				"Authorization" : "Bearer "+ KeycloakToken,
 			//	"Content-Type": "application/json",
 			//	"Cache-Control": "no-cache"
 			},
@@ -1611,7 +1638,7 @@ function postScore(taskId,proId,proName,patId,patName,tscore){
 			"method": "POST",
 			"contentType" : "application/json",
 			"headers": {
-				//"Authorization" : "Bearer "+ KeycloakToken
+				"Authorization" : "Bearer "+ KeycloakToken
 			//	"Content-Type": "application/json",
 			//	"Cache-Control": "no-cache"
 			},
@@ -1635,7 +1662,7 @@ function postQR(QRjson){
 			"method": "POST",
 			"contentType" : "application/json",
 			"headers": {
-				//"Authorization" : "Bearer "+ KeycloakToken,
+				"Authorization" : "Bearer "+ KeycloakToken,
 			//	"Content-Type": "application/json",
 			//	"Cache-Control": "no-cache"
 			},
@@ -2148,9 +2175,14 @@ function displayList(){
 			"crossDomain": true,
 			"url": baseurl+"ProcedureRequest?subject=http://hl7.org/fhir/sid/us-ssn/Patient/"+patID+"&_count=20&intent=order&status=active&_sort:desc=_lastUpdated",
 			
-			"contentType" : "application/json",                                                                           
-
-			"cache" : false,
+			"contentType" : "application/json",  
+		
+		
+"headers": {
+			"Authorization" : "Bearer "+ KeycloakToken,
+				"Cache-Control": "no-cache"
+			},			
+		"cache" : false,
 			"method": "GET"
 		
 		
