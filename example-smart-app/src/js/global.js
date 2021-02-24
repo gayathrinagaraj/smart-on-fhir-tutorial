@@ -459,14 +459,12 @@ $(document).ready(function(){
 			"method": "POST",
 			"contentType" : "application/json",
 			"headers": {
-				//"Authorization" : "Bearer "+ KeycloakToken,
+				"Authorization" : "Bearer "+ KeycloakToken,
 				"Access-Control-Allow-Headers": "x-requested-with",
-				"cache" : false,
-				"Cache-Control": "no-cache",
-		        "headers": {
-			"Authorization" : "Bearer "+ KeycloakToken,
+				"cache" : false,	
 				"Cache-Control": "no-cache"
-			},			
+			},
+		  			
 		        "processData": false,
 			"data": prdata
 		
