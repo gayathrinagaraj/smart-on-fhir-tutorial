@@ -220,10 +220,10 @@ function freqOrder_test(){
 			"url": baseurl+"ProcedureRequest?requester=http://usc.edu/Practitioner/"+practitioner_id+"&_count=100&intent=order&_sort:desc=_lastUpdated",
 			"contentType" : "application/json",                                                                           
 			"cache" : false,
-		        "headers": {
+		       /* "headers": {
 			"Authorization" : "Bearer "+ KeycloakToken,
 				"Cache-Control": "no-cache"
-			},		
+			},*/		
 			"method": "GET"
 		
 	}
@@ -314,10 +314,10 @@ $(document).ready(function(){
 			"method": "POST",
 			"contentType" : "application/json",
 			"cache": false,
-		        "headers": {
+		       /* "headers": {
 			"Authorization" : "Bearer "+ KeycloakToken,
 				"Cache-Control": "no-cache"
-			},		
+			},	*/	
 			"processData": false,
 			"data": prdata
 		
@@ -458,12 +458,12 @@ $(document).ready(function(){
 			"url": baseurl+"ProcedureRequest",
 			"method": "POST",
 			"contentType" : "application/json",
-			"headers": {
+			/* "headers": {
 				"Authorization" : "Bearer "+ KeycloakToken,
 				"Access-Control-Allow-Headers": "x-requested-with",
 				"cache" : false,	
 				"Cache-Control": "no-cache"
-			},
+			}, */
 		  			
 		        "processData": false,
 			"data": prdata
@@ -638,7 +638,7 @@ function orderPRO(formname,formoid){
 			"url": baseurl+"ProcedureRequest",
 			"method": "POST",
 			"contentType" : "application/json",
-			"headers": {
+			/* "headers": {
 				"Authorization" : "Bearer "+ KeycloakToken,
 				//"Access-Control-Allow-Headers": "x-requested-with",
 				//"cache" : false,
@@ -646,7 +646,7 @@ function orderPRO(formname,formoid){
 			//"headers": {
 			//	"Content-Type": "application/json",
 			//	"Cache-Control": "no-cache"
-			},
+			}, */
 			"processData": false,
 			"data": prdata
 	}
@@ -993,10 +993,10 @@ function orderStatus() {
 			"url": baseurl+"ProcedureRequest?subject=http://hl7.org/fhir/sid/us-ssn/Patient/"+patID+"&_count=20&intent=order&status=active&_sort:desc=_lastUpdated",
 			"contentType" : "application/json",                                                                           
 			"cache" : false,
-		"headers": {
+		        /* headers": {
 			"Authorization" : "Bearer "+ KeycloakToken,
 				"Cache-Control": "no-cache"
-			},		
+			},	*/	
 		
 			"method": "GET",
 			"contentType" : "application/json"
@@ -1276,10 +1276,10 @@ $.ajax(settings).done(function (response) {
 			"contentType" : "application/json",                                                                           
 			"cache" : false,
 
-		"headers": {
+		        /*"headers": {
 			"Authorization" : "Bearer "+ KeycloakToken,
 				"Cache-Control": "no-cache"
-			},			
+			},	*/		
 			"method": "GET"
 			//"headers": {
 			//	"Content-Type": "application/json",
@@ -1513,10 +1513,10 @@ function completeProcess(taskId,proId,proName,patId,patName){
 			"crossDomain": true,
 			"url": baseurl+"ProcedureRequest/"+taskId,
 			"method": "PUT",
-		"headers": {
+		        /*"headers": {
 			"Authorization" : "Bearer "+ KeycloakToken,
 				"Cache-Control": "no-cache"
-			},		
+			},		*/
 			"contentType" : "application/json",
 			
 			"processData": false,
@@ -1566,10 +1566,10 @@ function removeFav(taskId,proId,proName,patId,patName){
 			"url": baseurl+"List/"+taskId,
 			"method": "PUT",
 			"contentType" : "application/json",
-		"headers": {
+		        /*"headers": {
 			"Authorization" : "Bearer "+ KeycloakToken,
 				"Cache-Control": "no-cache"
-			},		
+			},	*/	
 			//"headers": {
 				//"Authorization" : "Bearer "+ KeycloakToken,
 			//	"Content-Type": "application/json",
@@ -1606,11 +1606,11 @@ function cancelOrder(taskId,proId,proName,patId,patName){
 			"method": "PUT",
 			"contentType" : "application/json",
 			"cache" : false,
-			"headers": {
+			/*"headers": {
 				"Authorization" : "Bearer "+ KeycloakToken,
 			//	"Content-Type": "application/json",
 			//	"Cache-Control": "no-cache"
-			},
+			}, */
 			"processData": false,
 			"data": "{\n\t\"resourceType\": \"ProcedureRequest\",\n\t\"id\": \""+taskId+"\",\n\t\"status\": \"completed\",\n\t\"intent\": \"order\",\n\t\"category\": [{\n\t\t\"coding\": [{\n\t\t\t\"system\": \"http://snomed.info/sct\",\n\t\t\t\"code\": \"386053000\",\n\t\t\t\"display\": \"Evaluation procedure (procedure)\"\n\t\t}],\n\t\t\"text\": \"Evaluation\"\n\t}],\n\t\"code\": {\n\t\t\"coding\": [{\n\t\t\t\"system\": \"http://loinc.org\",\n\t\t\t\"code\": \""+proId+"\",\n\t\t\t\"display\": \""+proName+"\"\n\t\t}],\n\t\t\"text\": \""+proName+"\"\n\t},\n\t\"occurrenceDateTime\": \""+date1+"\",\n\t\"subject\": {\n\t\t\"display\": \""+patName+"\",\n        \"reference\": \"https://fhir-open.sandboxcerner.com/dstu2/0b8a0111-e8e6-4c26-a91c-5069cbc6b1ca/Patient/"+patId+"\"\n\t}\n} \n"
 	}
@@ -1635,11 +1635,11 @@ function postScore(taskId,proId,proName,patId,patName,tscore){
 			"url": baseurl+"Observation",
 			"method": "POST",
 			"contentType" : "application/json",
-			"headers": {
+			/*"headers": {
 				"Authorization" : "Bearer "+ KeycloakToken
 			//	"Content-Type": "application/json",
 			//	"Cache-Control": "no-cache"
-			},
+			}, */
 			"processData": false,
 			"data": "{\n\t\"resourceType\": \"Observation\",\n\t\"status\": \"final\",\n\t\"code\": {\n    \t\"coding\": [\n    \t\t{\n        \t\t\"system\": \"http://loinc.org\",\n\t\t        \"code\": \"77580-9\",\n\t\t        \"display\": \""+proName+" T-score\"\n    \t\t}\n    \t]\n\t},\n\t\"category\": [{\n    \t\"coding\": [{\n        \t\"system\": \"http://hl7.org/fhir/observation-category\",\n        \t\"code\": \"survey\",\n        \t\"display\": \"Survey\"\n        }]\n    }],\n\t\"subject\": {\n\t\t\"display\": \""+patName+"\",\n        \"reference\": \"https://fhir-open.sandboxcerner.com/dstu2/0b8a0111-e8e6-4c26-a91c-5069cbc6b1ca/Patient/"+patId+"\"\n\t},\n\t\"effectiveDateTime\": \""+date1+"\",\n\t\"issued\": \""+date1+"\",\n\t\"performer\": [\n    \t{\n\t\t\t\"display\": \""+patName+"\",\n        \t\"reference\": \"https://fhir-open.sandboxcerner.com/dstu2/0b8a0111-e8e6-4c26-a91c-5069cbc6b1ca/Patient/"+patId+"\"\n\t    }\n\t],\n\t\"valueQuantity\": {\n    \t\"value\": "+tscore+"\n     \n\t},\n\n\t\"basedOn\":\t{\n\t\t\"reference\": \"ProcedureRequest/"+taskId+"\"\n\t}\n} \n"
 	}
@@ -1659,11 +1659,11 @@ function postQR(QRjson){
 			"url": baseurl+"QuestionnaireResponse",
 			"method": "POST",
 			"contentType" : "application/json",
-			"headers": {
+			/*"headers": {
 				"Authorization" : "Bearer "+ KeycloakToken,
 			//	"Content-Type": "application/json",
 			//	"Cache-Control": "no-cache"
-			},
+			}, */
 			"processData": false,
 			"data": QRjson
 	}
@@ -2176,10 +2176,10 @@ function displayList(){
 			"contentType" : "application/json",  
 		
 		
-                        "headers": {
+                        /*"headers": {
 			"Authorization" : "Bearer "+ KeycloakToken,
 				//"Cache-Control": "no-cache"
-			},	
+			},	*/
 			"method": "GET"
 		
 		
