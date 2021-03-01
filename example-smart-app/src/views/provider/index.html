@@ -21,6 +21,7 @@
 	<link rel='stylesheet' type='text/css' href='../../../lib/css/cerner-smart-embeddable-lib-1.0.0.min.css'>
 	<link rel="stylesheet" href="../../../src/css/nv.d3.css">
 	<link rel='stylesheet' type='text/css' href='../../css/tab.css'>
+	
 
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -31,6 +32,7 @@
 	
 	<script src='../../js/bootstrap_min.js'></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
 	
 	
 	
@@ -149,7 +151,9 @@
 	<div>
 		<h3>Order a new PRO</h3>
 		<!-- for creating combo-box with datalist.. -->
+
 		<div style="position:relative;width:100%;height:25px;border:0;padding:0;margin:0;display:inline;">
+
 			
 				<!--
 		    	<input id="selectinput" type="text" list="selectform"  style="width: 300%;">
@@ -162,6 +166,7 @@
 			 -->
 			
 			<select id="selectform"  style="width: 50%;">
+
     			 <optgroup id="freqList"  label="Frequently Ordered Instruments">
 				 <option>Please select an instrument </option>
 			</optgroup>
@@ -184,6 +189,7 @@
 		 -->
 			<br/>
 			<div id='result'></div>
+
 			
 			
 		</div>
@@ -227,10 +233,12 @@
 				<div id="tab3" class="tab">
 					<table id="fav_PRO">
 					</table>
+
 				</div>
 		
 				<div id="tab4" class="tab">
 					Recommended PRO
+
 				</div>
 			</div>
 		</div>
@@ -275,8 +283,12 @@
     <script src='../../../src/js/polyfill.js'></script>
     <script src='../../../lib/js/cerner-smart-embeddable-lib-1.0.0.min.js'></script>
 
-    <!-- FHIR Client JS Library -->
-    <script src='../../../lib/js/fhir-client-v0.1.12.js'></script>
+    <!-- FHIR Client JS Library 
+    <script src='../../../lib/js/fhir-client-v2.3.10.js'></script> 
+
+<script src='./lib/js/fhir-client-v0.1.12.js'></script> -->
+
+<script src='../../../lib/js/fhir-client-v2.3.10.js'></script>
 
     <!-- Prevent session bleed caused by single threaded embedded browser and sessionStorage API -->
     <!-- https://github.com/cerner/fhir-client-cerner-additions -->

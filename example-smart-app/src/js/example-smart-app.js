@@ -4,7 +4,16 @@
     var pract_name="";
     var persona="";
     var patID="";
+    var patient_id=""
     var encounter_id="";
+
+var fname = '';
+var lname = '';
+
+var pat_fname = 'Test';
+var pat_lname = 'Promistwo';
+
+
 
 var access_token="";
 var refresh_token="";
@@ -25,39 +34,78 @@ var smartObject="";
 
     function onReady(smart)  {
       smartObject=smart;
+	//alert('onready ',smart);
       getKeycloakToken();
-      console.log(smart.tokenResponse);
-	  if (smart.tokenResponse.patient!=null){
-        patID=smart.tokenResponse.patient;
-		MyVars.patid= smart.tokenResponse.patient;
+      console.log(smart.state.tokenResponse);
+	    
+	    console.log(smart.state.tokenResponse.patient);
+	     console.log(smart.state.tokenResponse.user);
+	     console.log(smart.state.tokenResponse.encounter);
+	    
+	  if (smart.state.tokenResponse.patient!=null){
+        patID=smart.state.tokenResponse.patient;
+		  patient_id= smart.state.tokenResponse.patient;
+		MyVars.patid= smart.state.tokenResponse.patient;
 	  	  console.log(patID);
 		    displayList();
 		  console.log("test from ex-sm-app");
-		  refresh_token = smart.tokenResponse.refresh_token;
-		  access_token= smart.tokenResponse.access_token;
+		  refresh_token = smart.state.tokenResponse.refresh_token;
+		  access_token= smart.state.tokenResponse.access_token;
 		  console.log(refresh_token);
-		   setTimeout(refreshSmartToken, 270000);
+		  console.log(access_token);
+		   //setTimeout(refreshSmartToken, 270000);
 		  setTimeout(getKeycloakToken, 270000);
 		  
 		 
 		  //refreshSmartToken();	
       }
       
-      practitioner_id = smart.tokenResponse.user;
-      encounter_id= smart.tokenResponse.encounter;
+      practitioner_id = smart.state.tokenResponse.user;
+      encounter_id= smart.state.tokenResponse.encounter;
 	console.log("inside smart app js ");    
 	console.log(practitioner_id);  
 	console.log(encounter_id);  
-      var token = smart.tokenResponse.id_token;
-      access_token= smart.tokenResponse.access_token;
-	    
-	   
-	//freqOrder();
-	    
-	  
+      var token = smart.state.tokenResponse.id_token;
+      access_token= smart.state.tokenResponse.access_token;  
       console.log(patID);
 	   
       //document.getElementById("pract_id").innerHTML="<b>ID: </b>" + practitioner_id;
+	    
+	    var settings89 = {
+  "async": false,
+  "url": "https://fhir-myrecord.cerner.com/dstu2/e8a84236-c258-4952-98b7-a6ff8a9c587a/Patient/"+patID,
+  "method": "GET",
+  "headers": {
+    "Authorization": "Bearer "+ access_token,
+    "Accept": "application/json+fhir"
+  },
+};
+
+$.ajax(settings89).done(function (response) {
+  console.log(response);
+	console.log("patient read");
+	
+	console.log(response.name[0].family[0]);
+	console.log(response.name[0].given[0]);
+	
+	fname = response.name[0].given[0];
+	lname = response.name[0].family[0];
+	pat_fname = response.name[0].given[0];
+	pat_lname = response.name[0].family[0];
+	console.log(fname);
+	console.log(lname);
+	
+	
+	
+});
+	    
+	    console.log(fname);
+	console.log(lname);
+	    
+	    console.log(pat_fname);
+	console.log(pat_lname);
+	    document.getElementById("firstname").innerHTML= fname;
+	document.getElementById("lastname").innerHTML= lname;
      
      
       
@@ -65,7 +113,7 @@ var smartObject="";
        var base64 = base64Url.replace('-', '+').replace('_', '/');
        //console.log(JSON.parse(window.atob(base64)));
        pract_name=(JSON.parse(window.atob(base64))).name;
-       //console.log(pract_name);
+       console.log(pract_name);
       document.getElementById("pract_name").innerHTML="Attending:"+pract_name;
       
       var base64Url1 = access_token.split('.')[1];
@@ -87,7 +135,7 @@ var smartObject="";
 	      listForms();
 	      //freqOrder();
 	      orderStatus();
-	      
+
         $('#doctor-view').show();
         if (BrowserDetect.browser.toString()!="Explorer") {
           //if (window.location == window.parent.location ) {
@@ -106,92 +154,6 @@ var smartObject="";
 
 }
       
-      
-      
-      if (smart.hasOwnProperty('patient')) {
-        //console.log(smart.tokenResponse);
-        var patient = smart.patient;
-        var pt = patient.read();
-        var obv = smart.patient.api.fetchAll({
-                    type: 'Observation',
-                    query: {
-                      code: {
-                        $or: ['http://loinc.org|8302-2', 'http://loinc.org|8462-4',
-                              'http://loinc.org|8480-6', 'http://loinc.org|2085-9',
-                              'http://loinc.org|2089-1', 'http://loinc.org|55284-4']
-                      }
-                    }
-                  });
-       // Search for conditions added today
-    
-
-        $.when(pt, obv).fail(onError);
-
-        $.when(pt, obv).done(function(patient, obv) {
-          var byCodes = smart.byCodes(obv, 'code');
-          var gender = patient.gender;
-	  window.gender2 = patient.gender;
-          var id = patient.id;
-	  window.patient_id = patient.id;
-		
-		
-		
-          var dob = new Date(patient.birthDate);
-          var day = dob.getDate();
-          var monthIndex = dob.getMonth() + 1;
-          var year = dob.getFullYear();
-		
-		
-
-          var dobStr = monthIndex + '/' + day + '/' + year;
-	  window.dobstr2 = year  + '-' + monthIndex  + '-' + day;
-          var fname = '';
-          var lname = '';
-		
-
-          if (typeof patient.name[0] !== 'undefined') {
-            fname = patient.name[0].given.join(' ');
-            lname = patient.name[0].family.join(' ');
-          }
-
-          var height = byCodes('8302-2');
-          var systolicbp = getBloodPressureValue(byCodes('55284-4'),'8480-6');
-          var diastolicbp = getBloodPressureValue(byCodes('55284-4'),'8462-4');
-          var hdl = byCodes('2085-9');
-          var ldl = byCodes('2089-1');
-		
-           window.pat_fname = fname;
-	   window.pat_lname = lname;
-		console.log(window.pat_fname + "testtt");
-		console.log(window.pat_lname + "testttt");
-		
-	document.getElementById("firstname").innerHTML= fname;
-	document.getElementById("lastname").innerHTML= lname;	
-          var p = defaultPatient();
-          p.birthdate = dobStr;
-          p.gender = gender;
-          p.fname = fname;
-          p.lname = lname;
-          p.id = id;
-          p.age = parseInt(calculateAge(dob));
-          p.height = getQuantityValueAndUnit(height[0]);
-
-          if (typeof systolicbp != 'undefined')  {
-            p.systolicbp = systolicbp;
-          }
-
-          if (typeof diastolicbp != 'undefined') {
-            p.diastolicbp = diastolicbp;
-          }
-
-          p.hdl = getQuantityValueAndUnit(hdl[0]);
-          p.ldl = getQuantityValueAndUnit(ldl[0]);
-
-          ret.resolve(p);
-        });
-      } else {
-        onError();
-      }
     }
 
     FHIR.oauth2.ready(onReady, onError);

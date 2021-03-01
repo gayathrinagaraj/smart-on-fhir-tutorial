@@ -8,15 +8,23 @@
   <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> 
 
   <link rel="stylesheet" href="../../../src/css/SOFCSS.css">
-  <link rel="stylesheet" href="../../../lib/css/bootstrap.min.css">
+ 
   <link rel="stylesheet" href="../../../lib/css/font-awesome.min.css">  
   <link rel='stylesheet' type='text/css' href='../../../lib/css/cerner-smart-embeddable-lib-1.0.0.min.css'>
   <link rel='stylesheet' type='text/css' href='../../css/example-smart-app.css'>
+  
+   <link rel="stylesheet" href="../../../lib/css/bootstrap.min.css">
 
+  
+  
        <!-- Application-level javascript-->
   <script src='../../js/example-smart-app.js'></script>
   <script src='../../js/jquery_min.js'></script>
+  
+
+  
   <script src='../../js/bootstrap_min.js'></script>
+
 
   <title>SMART APP</title>
   <link rel='stylesheet' type='text/css' href='../../css/example-smart-app.css'>
@@ -66,8 +74,8 @@
       <div class="row">
         <div id="pat-header" class="col-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
           </br>
-          <P style="margin-left:1em; text-align: left; font-size: 28px;">Welcome <strong> <span id='firstname'></span> <span
-                id='lastname'></span></strong>!</P></br></br>
+          <P style="margin-left:1em; text-align: left; font-size: 28px;">Welcome <strong> <span id='firstname'> </span> <span
+                id='lastname'> </span></strong>!</P></br></br>
         </div>
       </div>
       <div id="list">
@@ -85,8 +93,10 @@
       </div>
 
 
-      <div id="Content" class="row">
+      <div id="Content" class ="row">
       </div>
+  
+ 
 
     </div>
 
@@ -100,14 +110,19 @@
   <script src='../../../src/js/polyfill.js'></script>
   <script src='../../../lib/js/cerner-smart-embeddable-lib-1.0.0.min.js'></script>
 
- <!-- FHIR Client JS Library -->
-  <script src='../../../lib/js/fhir-client-v0.1.12.js'></script>
+ <!-- FHIR Client JS Library 
+  <script src='../../../lib/js/fhir-client-v2.3.10.js'></script> 
+
+<script src='./lib/js/fhir-client-v0.1.12.js'></script> -->
+
+<script src='../../../lib/js/fhir-client-v2.3.10.js'></script>
 
   <!-- Prevent session bleed caused by single threaded embedded browser and sessionStorage API -->
   <!-- https://github.com/cerner/fhir-client-cerner-additions -->
   <script src='../../../lib/js/fhir-client-cerner-additions-1.0.0.js'></script>
 
   <script src='../../../src/js/ajax_jquery.js'></script>
+   
 
   <script src='../../../src/js/jQuery.XDomainRequest.js'></script>
   <script src='../../../src/js/jquery.xdomainrequest.min.js'></script>
